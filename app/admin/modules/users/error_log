@@ -1,0 +1,8 @@
+[03-Jul-2024 04:19:04 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting end of file in /home/lvzstcnxokig/public_html/app/admin/modules/users/listing.php on line 90
+[03-Jul-2024 04:19:31 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting end of file in /home/lvzstcnxokig/public_html/app/admin/modules/users/listing.php on line 90
+[03-Jul-2024 04:20:53 UTC] PHP Notice:  Undefined variable: use_sale in /home/lvzstcnxokig/public_html/app/admin/modules/users/add.php on line 56
+[03-Jul-2024 04:21:13 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting end of file in /home/lvzstcnxokig/public_html/app/admin/modules/users/listing.php on line 90
+[03-Jul-2024 04:21:31 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting end of file in /home/lvzstcnxokig/public_html/app/admin/modules/users/listing.php on line 90
+[03-Jul-2024 04:21:32 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting end of file in /home/lvzstcnxokig/public_html/app/admin/modules/users/listing.php on line 90
+[03-Jul-2024 04:21:33 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting end of file in /home/lvzstcnxokig/public_html/app/admin/modules/users/listing.php on line 90
+[03-Jul-2024 04:21:34 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL), expecting end of file in /home/lvzstcnxokig/public_html/app/admin/modules/users/listing.php on line 90

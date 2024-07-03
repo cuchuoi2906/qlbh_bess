@@ -1,0 +1,12 @@
+/installer
+composer.phar
+/vendor
+/libraries
+.env
+.env.server
+public/admin
+.gitmodules
+.DS_Store
+.idea/
+/nbproject/private/
+/app/admin/nbproject/private/
