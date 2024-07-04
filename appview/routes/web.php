@@ -68,3 +68,4 @@ Route::get(['register/{referer_id}', 'register'], [\AppView\Controllers\Auth\Aut
 Route::post(['register', 'post.register'], [\AppView\Controllers\Auth\AuthController::class, 'postRegister']);
 
 Route::get('/chat', [ChatController::class, 'index']);
+Route::get(['/bai-viet/{type}-{id}', 'post.listing'], [\AppView\Controllers\PostController::class, 'postListing']);

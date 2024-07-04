@@ -39,9 +39,22 @@ class PostController extends FrontEndController
     public function detail($slug, $id)
     {
         $detail = $this->post->getByID($id);
-
+        $categoryId = $detail->category->id;
+        $postCategory = $this->post->allByCat($categoryId,'');
+        $postCategory = $postCategory->data;
         return view('posts/detail')->render([
-            'item' => $detail
+            'item' => $detail,
+            'postCategory'=>$postCategory
         ]);
+    }
+    public function postListing($type,$id){
+        $postAll = $this->post->allByType($type,16);
+        if (!$postAll) {
+            return redirect(url('index'));
+        }
+        $items = $postAll->data;
+        $pagination = $postAll->meta->pagination;
+
+        return view('posts/listing')->render(compact('items', 'pagination'));    
     }
 }

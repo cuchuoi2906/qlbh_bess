@@ -15,6 +15,11 @@
     border-radius: 20px;
 }
 
+.news-category a.active {
+    background-color: var(--main-color);
+    color: #fff;
+}
+
 .news-feature-1 {
     position: relative;
     border-radius: 8px;
@@ -119,4 +124,35 @@
 
 h2.news-title {
     font-size: 22px;
+}
+
+.artical-title,
+.sidebar-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.news-similar-item .news-title {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.news-similar-item .date {
+    font-size: 12px;
+    color: rgba(158, 164, 183, 1);
+}
+
+.article {
+    font-size: 14px;
+}
+
+
+@media (max-width: 640px) {
+    .news-similar-item .news-title {
+        font-size: 16px;
+    }
 }

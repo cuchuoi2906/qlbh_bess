@@ -572,4 +572,70 @@ if (!function_exists('compare_user')) {
         return count($all_level);
     }
 }
+if (!function_exists('pre')) {
+    function pre( $array)
+    {
+        echo '<pre>';
+        print_r($array);
+        echo '</pre>';
+    }
+}
+if (!function_exists('renderPagination')) {
+    function renderPagination($pagination) {
+        // Kiểm tra sự tồn tại của các phần tử trước khi truy cập
+        $total_pages = intval($pagination->total_pages) > 0 ? $pagination->total_pages : 0;
+        $current_page = intval($pagination->current_page) > 0 ? $pagination->current_page : 0;
+        $next_link = $pagination->links->next != '' ? $pagination->links->next : null;
 
+        $total_pages = $total_pages > 10 ? 10 : $total_pages;
+        $html = '<div class="pagination">';
+        $html .= '<nav aria-label="Page navigation example">';
+        $html .= '<ul class="pagination gap-1 m-0">';
+
+        // Nút Previous
+        if ($current_page > 0) {
+            $prev_page = $current_page - 1;
+            $html .= '<li class="page-item">
+                        <a class="page-link" href="?page=' . $prev_page . '" aria-label="Previous">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.33332 12L8.27332 11.06L5.21998 8L8.27331 4.94L7.33331 4L3.33332 8L7.33332 12Z" fill="#1C274C" />
+                            </svg>
+                        </a>
+                    </li>';
+        }
+
+        // Các nút số trang
+        for ($page = 1; $page <= $total_pages; $page++) {
+            $active = ($page - 1) == $current_page ? ' active' : '';
+            $html .= '<li class="page-item' . $active . '">
+                        <a class="page-link" href="?page=' . ($page - 1) . '">' . $page . '</a>
+                    </li>';
+        }
+
+        // Nút Next
+        if ($current_page+1 < $total_pages && $next_link) {
+            $html .= '<li class="page-item">
+                        <a class="page-link" href="' . $next_link . '" aria-label="Next">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.94 4L6 4.94L9.05333 8L6 11.06L6.94 12L10.94 8L6.94 4Z" fill="#1C274C"></path>
+                            </svg>
+                        </a>
+                    </li>';
+        }
+
+        $html .= '</ul>';
+        $html .= '</nav>';
+        $html .= '</div>';
+
+        return $html;
+    }
+}
+if (!function_exists('check_array')) {
+    function check_array($p_array){
+        if(is_array($p_array) and sizeof($p_array)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}

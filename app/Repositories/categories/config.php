@@ -10,7 +10,7 @@ return [
     'categories/get_by_id' => [
         'title' => 'Lấy chi tiết danh mục',
         'input' => [
-            'cat' => [
+            'id' => [
                 'title' => 'ID danh mục',
                 'rule' => 'required|integer'
             ]

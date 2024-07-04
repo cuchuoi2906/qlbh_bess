@@ -39,4 +39,13 @@ class CategoryRepository
         return $result['vars'] ? collect_recursive($result['vars']) : null;
     }
 
+    public function getCategoryByID($id)
+    {
+        $result = model('categories/get_by_id')->load([
+            'id' => (int)$id
+        ]);
+
+        return $result['vars'] ? collect_recursive($result['vars']) : null;
+    }
+
 }
