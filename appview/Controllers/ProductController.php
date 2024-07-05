@@ -34,7 +34,10 @@ class ProductController extends FrontEndController
 
         $data = model('products/index')->load($params);
 
-        return $data['vars'];
+        return view('posts/detail')->render([
+            'item' => $detail,
+            'postCategory'=>$postCategory
+        ]);
     }
 
     public function getProductDetail($pro_id)
