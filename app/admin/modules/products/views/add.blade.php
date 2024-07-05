@@ -1,5 +1,5 @@
 @extends('module-master')
-
+<script type="text/javascript" src="../../resource/ckeditor/ckeditor.js?t=D03G5XL"></script>
 @section('content')
     <div class="container-fluid">
         <?php
@@ -65,7 +65,7 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
 
-                        <?= $form->select("Thương hiệu", "pro_brand_id", "pro_brand_id", [0 => 'Không chọn'] + $brands, $pro_brand_id ?? 0, "",1) ?>
+                        <?= $form->select("Thương hiệu", "pro_brand_id", "pro_brand_id", [0 => 'Không chọn'] + $brands, $pro_brand_id ?? 0, "",0) ?>
 
                         <?= $form->number("Giá", "pro_price", "pro_price", $pro_price, "Giá", 1, "", "", 255, "", "", "") ?>
                         <?= $form->text("Giá khuyến mại", "pro_discount_price", "pro_discount_price", $pro_discount_price, "Giá khuyến mại", 1, "", "", 255, "", "", "") ?>

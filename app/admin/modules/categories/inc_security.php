@@ -59,10 +59,15 @@ $fs_extension = "gif,jpg,jpe,jpeg,png";
 $fs_filesize = 1000;
 //
 $types = [
-    'PRODUCT' => 'PRODUCT',
+    'FUNCTIONIAL' => 'Thực Phẩm Chức Năng',
+    'COSMECEUTICALS'=>'Dược Mỹ Phẩm',
+    'PERSONALCARE'=>'Chăm Sóc Cá Nhân',
+    'PRODUCTCOMPANY'=>'Sản Phẩm Vua Dược',
+    'MEDICALDEVICES'=>'Thiết bị Y Tế',
+//    'PRODUCT' => 'PRODUCT',
 //    'ABOUT' => 'ABOUT',
 //    'BLOG' => 'BLOG',
-    'NEWS'=>'NEWS',
+    'NEWS'=>'Bài viết',
 //    'COMMUNITY' => 'COMMUNITY'
 ];
 

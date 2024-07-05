@@ -53,8 +53,6 @@
                         <?= $form->select("Trạng thái", "use_active", "use_active", $status_arr, $use_active ?? 0, "Trạng thái", 1) ?>
                         <?= $form->select("Premium", "use_premium", "use_premium", $premium_arr, $use_premium ?? 0, "Premium", 1) ?>
                         <?= $form->text("% hưởng hoa hồng", "use_premium_commission", "use_premium_commission", $use_premium_commission ?? 80, "% hưởng hoa hồng", 0, "", "", 255, "", "", "") ?>
-                        <?= $form->checkbox("Nhân viên sale", 'use_sale', 'use_sale', 1, $use_sale, '') ?>
-                        <?= $form->select("Sale phụ trách", "user_sale_id", "user_sale_id", $sale_user, $user_sale_id ?? 0, "", 0) ?>
                         <?=$form->select('Tỉnh/Thành Phố', 'use_province_id', 'use_province_id', $province, $use_province_id,"",1)?>
                         <?=$form->select('Quận/Huyện', 'use_district_id', 'use_district_id', [], $use_district_id,"",1)?>
                         <?=$form->select('Xã Phường', 'use_ward_id', 'use_ward_id', [], $use_ward_id,"",1)?>

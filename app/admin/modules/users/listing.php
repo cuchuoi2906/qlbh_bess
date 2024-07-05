@@ -17,11 +17,6 @@ if ($use_referral_id) {
     $sqlWhere .= ' AND use_referral_id = ' . $use_referral_id;
 }
 
-$user_sale_id = getValue('user_sale_id', 'int', 'GET', 0);
-if ($user_sale_id) {
-    $sqlWhere .= ' AND user_sale_id = ' . $user_sale_id;
-}
-
 
 $use_name = getValue('use_name', 'str', 'GET', '', 3);
 if ($use_name) {
@@ -87,14 +82,6 @@ $dataGrid->deleteLabel = 'hủy';
 
 $dataGrid->column('use_id', 'ID', 'number', [], true)->addExport();
 $dataGrid->column('use_referral_id', 'ID người giới thiệu', 'number', [], true)->addExport();
-<<<<<<< HEAD
-$dataGrid->column('user_sale_id', 'ID sale phụ trách', 'number', [], true)->addExport();
-=======
-$dataGrid->column('user_sale_id', 'ID sale phụ trách',function ($row) {
-    $user_sale_id = intval($row['user_sale_id']) > 0 ? $row['user_sale_id'] : '';
-    return $user_sale_id;
-}, [], true)->addExport();
->>>>>>> 8b127c4c576b94cc4f54762f9c4ff9abd4028924
 $dataGrid->column('username_referral', 'Tên người giới thiệu', 'string', [], false)->addExport();
 $dataGrid->column('use_created_at', 'Ngày đăng ký', 'datetime', [], false)->addExport();
 $dataGrid->column('use_name', 'Tên', ['string', 'trim'], [], true)->addExport();

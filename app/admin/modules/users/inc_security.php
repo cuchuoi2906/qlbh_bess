@@ -103,18 +103,17 @@ $survey_busines_desired_arr = [
 
 $use_job = [
   0=>'--Lựa chọn thông tin--' 
-  ,1=>'Kinh doanh Online' 
-  ,2=>'Chủ cửa hàng' 
-  ,2=>'Nhân viên văn phòng' 
-  ,3=>'Giáo viên' 
-  ,4=>'Bảo hiểm' 
-  ,5=>'Ngân hàng' 
-  ,6=>'Y dược' 
-  ,7=>'Công nhân' 
-  ,8=>'Viên chức nhà nước' 
-  ,9=>'Kỹ sư, kỹ thuật viên' 
-  ,10=>'Nông - lâm - ngư nghiệp' 
-  ,12=>'Khác' 
+  ,1=>'Quầy thuốc' 
+  ,2=>'Nhà thuốc' 
+  ,3=>'Phòng khám' 
+  ,4=>'Công ty dược phẩm' 
+  ,5=>'Bệnh viện' 
+  ,6=>'Nha khoa' 
+  ,7=>'Thẩm mỹ viện' 
+  ,8=>'Trung tâm y tế' 
+  ,9=>'Bệnh nhân' 
+  ,10=>'Dược sĩ' 
+  ,11=>'Khác' 
 ];
 
 $sourceUser = [

@@ -19,25 +19,11 @@ include 'includes/header.html.php';
                             <div class="swiper-button-prev"></div>
                         </div>
                     </div>
-                    <div class="col-xl-5">
-                        <form action="" class="form-order">
+                    <div class="col-xl-5" id="formdangky">
+                        <?php \VatGia\Helpers\Facade\FlashMessage::display(); ?>
+                        <form action="<?= url('post.register') ?>" method="POST" class="form-order">
                             <div class="form-content">
                                 <h2 class="form-title">Liên hệ đặt hàng</h2>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-search">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5" />
-                                            <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round" />
-                                        </svg>
-                                    </span>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Bạn đang tìm sản phẩm gì"
-                                        aria-label="basic-search"
-                                        aria-describedby="basic-search"
-                                    />
-                                </div>
                                 <div class="input-group">
                                     <span class="input-group-text" id="input-fullname">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,6 +41,8 @@ include 'includes/header.html.php';
                                         placeholder="Họ và tên*"
                                         aria-label="input-fullname"
                                         aria-describedby="input-fullname"
+                                        name="name"
+                                        id="name"
                                     />
                                 </div>
                                 <div class="input-group">
@@ -74,7 +62,14 @@ include 'includes/header.html.php';
                                         placeholder="Số điện thoại*"
                                         aria-label="input-phone"
                                         aria-describedby="input-phone"
+                                        name="phone" id="phone"
                                     />
+                                </div>
+                                <div class="input-group">
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu*">
+                                </div>
+                                <div class="input-group">
+                                    <input type="password" name="re_password" class="form-control" id="re_password" placeholder="Nhập lại mật khẩu*">
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-text" id="input-phone">
@@ -87,18 +82,14 @@ include 'includes/header.html.php';
                                             <path d="M12 14.4L12 16.8" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
                                         </svg>
                                     </span>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="job_code" id="job_code">
                                         <option selected>Bạn là...</option>
-                                        <option value="1">Quầy thuốc</option>
-                                        <option value="2">Nhà thuốc</option>
-                                        <option value="3">Phòng khám</option>
-                                        <option value="4">Bệnh viện</option>
-                                        <option value="5">Công ty dược phẩm</option>
-                                        <option value="6">Nha khoa</option>
-                                        <option value="7">Thẩm mỹ viện</option>
-                                        <option value="8">Trung tâm y tế</option>
-                                        <option value="9">Bệnh nhân</option>
-                                        <option value="10">Dược sĩ</option>
+                                        <?php 
+                                        for($i=1;$i<count($use_job);$i++){
+                                        ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $use_job[$i]; ?></option>
+                                        <?php 
+                                        }?>
                                     </select>
                                 </div>
                                 <div class="input-group">
@@ -123,69 +114,13 @@ include 'includes/header.html.php';
                                     </span>
                                     <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                         <option selected>Tỉnh/Thành phố</option>
-                                        <option value="1">Thành phố Hà Nội</option>
-                                        <option value="2">Thành phố Hải Phòng</option>
-                                        <option value="3">Thành phố Đà Nẵng</option>
-                                        <option value="4">Thành phố Cần Thơ</option>
-                                        <option value="5">Thành phố Hồ Chí Minh</option>
-                                        <option value="6">An Giang</option>
-                                        <option value="7">Bà Rịa – Vũng Tàu</option>
-                                        <option value="8">Bắc Giang</option>
-                                        <option value="9">Bắc Kạn</option>
-                                        <option value="10">Bạc Liêu</option>
-                                        <option value="11">Bắc Ninh</option>
-                                        <option value="12">Bến Tre</option>
-                                        <option value="13">Bình Định</option>
-                                        <option value="14">Bình Dương</option>
-                                        <option value="15">Bình Phước</option>
-                                        <option value="16">Bình Thuận</option>
-                                        <option value="17">Cà Mau</option>
-                                        <option value="18">Cao Bằng</option>
-                                        <option value="19">Đắk Lắk</option>
-                                        <option value="20">Đắk Nông</option>
-                                        <option value="21">Điện Biên</option>
-                                        <option value="22">Đồng Nai</option>
-                                        <option value="23">Đồng Tháp</option>
-                                        <option value="24">Gia Lai</option>
-                                        <option value="25">Hà Giang</option>
-                                        <option value="26">Hà Nam</option>
-                                        <option value="27">Hà Tĩnh</option>
-                                        <option value="28">Hải Dương</option>
-                                        <option value="29">Hậu Giang</option>
-                                        <option value="30">Hòa Bình</option>
-                                        <option value="31">Hưng Yên</option>
-                                        <option value="32">Khánh Hòa</option>
-                                        <option value="33">Kiên Giang</option>
-                                        <option value="34">Kon Tum</option>
-                                        <option value="35">Lai Châu</option>
-                                        <option value="36">Lâm Đồng</option>
-                                        <option value="37">Lạng Sơn</option>
-                                        <option value="38">Lào Cai</option>
-                                        <option value="39">Long An</option>
-                                        <option value="40">Nam Định</option>
-                                        <option value="41">Nghệ An</option>
-                                        <option value="42">Ninh Bình</option>
-                                        <option value="43">Ninh Thuận</option>
-                                        <option value="44">Phú Thọ</option>
-                                        <option value="45">Phú Yên</option>
-                                        <option value="46">Quảng Bình</option>
-                                        <option value="47">Quảng Nam</option>
-                                        <option value="48">Quảng Ngãi</option>
-                                        <option value="49">Quảng Ninh</option>
-                                        <option value="50">Quảng Trị</option>
-                                        <option value="51">Sóc Trăng</option>
-                                        <option value="52">Sơn La</option>
-                                        <option value="53">Tây Ninh</option>
-                                        <option value="54">Thái Bình</option>
-                                        <option value="55">Thái Nguyên</option>
-                                        <option value="56">Thanh Hóa</option>
-                                        <option value="57">Thừa Thiên Huế</option>
-                                        <option value="58">Tiền Giang</option>
-                                        <option value="59">Trà Vinh</option>
-                                        <option value="60">Tuyên Quang</option>
-                                        <option value="61">Vĩnh Long</option>
-                                        <option value="62">Vĩnh Phúc</option>
-                                        <option value="63">Yên Bái</option>
+                                        <?php 
+                                        foreach($province as $key=>$items){
+                                            ?>
+                                            <option value="<?php echo $items->id; ?>"><?php echo $items->name; ?></option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="input-group">
@@ -208,10 +143,11 @@ include 'includes/header.html.php';
                                     />
                                 </div>
                                 <div class="d-grid">
-                                    <button class="btn btn-primary" type="button">Liên hệ ngay</button>
+                                    <button class="btn btn-primary" type="submit">Liên hệ ngay</button>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

@@ -131,10 +131,10 @@ return [
                 'title' => 'Số điện thoại',
                 'rule' => 'required|phone_number'
             ],
-            'email' => [
+            /*'email' => [
                 'title' => 'Email',
                 'rule' => 'valid_email'
-            ],
+            ],*/
             'name' => [
                 'title' => 'Tên',
                 'rule' => 'required'
@@ -147,11 +147,11 @@ return [
                 'title' => 'Mật khẩu xác thực',
                 'rule' => 'required|min_len,6'
             ],
-            'gender' => [
+            /*'gender' => [
                 'title' => 'Giới tính',
                 'rule' => 'integer',
                 'default' => 0
-            ]
+            ]*/
         ]
     ],
     'users/confirm_register_code' => [

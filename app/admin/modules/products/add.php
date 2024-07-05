@@ -76,7 +76,7 @@ $myform->add('pro_point', 'pro_point', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GL
 $pro_point = getValue('pro_point', 'int', 'POST', 0);
 
 $pro_brand_id = getValue('pro_brand_id', 'int', 'POST', 0);
-$myform->add('pro_brand_id', 'pro_brand_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, 1,1,'Bạn chưa nhập thương hiệu');
+$myform->add('pro_brand_id', 'pro_brand_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, 1,0,'Bạn chưa nhập thương hiệu');
 
 //Sort
 $max = \App\Models\Product::fields('MAX(pro_order) AS max_order')->first();

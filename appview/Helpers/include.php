@@ -639,3 +639,11 @@ if (!function_exists('check_array')) {
         }
     }
 }
+if (!function_exists('checkLoginFe')) {
+    function checkLoginFe(){
+        if(isset($_SESSION["loggedFe"]) && intval($_SESSION["loggedFe"]) ==1){
+            return true;
+        }
+        return false;
+    }
+}

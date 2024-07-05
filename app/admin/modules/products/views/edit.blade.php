@@ -1,5 +1,5 @@
 @extends('module-master')
-
+<script type="text/javascript" src="../../resource/ckeditor/ckeditor.js?t=D03G5XL"></script>
 @section('content')
     <div class="container-fluid">
         <?php

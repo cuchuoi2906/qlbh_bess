@@ -62,7 +62,6 @@
                         <?= $form->select("Premium", "use_premium", "use_premium", $premium_arr, $use_premium ?? 0, "Premium", 1) ?>
                         <?= $form->text("% hưởng hoa hồng", "use_premium_commission", "use_premium_commission", $use_premium_commission ?? 80, "% hưởng hoa hồng", 0, "", "", 255, "", "", "") ?>
                         <?= $form->checkbox("Nhân viên sale", 'use_sale', 'use_sale', 1, $use_sale, '') ?>
-                        <?= $form->select("Sale phụ trách", "user_sale_id", "user_sale_id", $sale_user, $user_sale_id ?? 0, "", 0) ?>
                         <?= $form->select("Nguồn khách hàng", "use_source", "use_source", $sourceUser, $use_source ?? 0) ?>
                     </div>
                     {{--<div class="box-footer">--}}

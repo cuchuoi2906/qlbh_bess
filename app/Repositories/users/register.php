@@ -9,7 +9,7 @@
 $vars = false;
 
 //Đếm số user
-$user_count = \App\Models\Users\Users::count();
+/*$user_count = \App\Models\Users\Users::count();
 if ($user_count > 0) {
     if(!empty(input('referral_code'))){
         if (input('referral_code') ?? false) {
@@ -26,7 +26,7 @@ if ($user_count > 0) {
         throw new RuntimeException('Mã giới thiệu không hợp lệ', 400);
     }
 }
-
+*/
 
 if (input('password') != input('re_password')) {
     throw new RuntimeException('Mật khẩu xác thực không khớp', 400);
@@ -88,6 +88,8 @@ $user = [
     'use_ward_id' => (int)input('ward_id'),
     'use_address_register' => input('address_register'),
     'use_job_code' => (int)input('job_code'),
+    'use_referer_code'=>'',
+    'use_partner_note'=>''
 ];
 $user_id = \App\Models\Users\Users::insert($user);
 

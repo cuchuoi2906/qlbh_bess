@@ -3,12 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="stylesheet" href="<?php echo asset('libs/bootstrap/css/bootstrap.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('/libs/swiper/swiper-bundle.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/font.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/style.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/home.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/news.css') ?>" />
+        <link rel="stylesheet" href="<?php echo asset('css/login.css') ?>" />
+        
+        
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -22,7 +26,7 @@
         <title>Vua Dược</title>
     </head>
     <body>
-        <header id="header">
+        <header id="header" class="header-1">
             <div class="container">
                 <div class="main-header align-items-center justify-content-between d-xl-flex d-none">
                     <div class="logo">
@@ -31,15 +35,33 @@
                     <div class="main-menu d-flex align-items-center">
                         <ul class="d-flex align-items-center m-0 p-0">
                             <li><a class="active" href="/">Trang chủ</a></li>
-                            <li><a href="/">Sản phẩm</a></li>
-                            <li><a href="/">Tin tức</a></li>
+                            <li><a href="">Sản phẩm</a></li>
+                            <li><a href="<?php echo url('post.listing', ['news',0]) ?>">Tin tức</a></li>
                             <li><a href="/">Khách hàng thân thiết</a></li>
                             <li><a href="/">Hướng dẫn đặt hàng</a></li>
                         </ul>
                     </div>
-                    <div class="btn-right">
-                        <button class="btn-custom"><a href="/login">Đăng nhập</a></button>
-                    </div>
+                    <?php 
+                    if(checkLoginFe()){
+                        ?>
+                        <div class="user-btn d-flex align-items-center justify-content-center gap-2 rounded-pill">
+                            <div class="avatar">
+                                <img width="37" height="37" class="rounded-circle" src="<?= asset('/images/avatar.png') ?>" alt="avatar">
+                            </div>
+                            <div class="name"><?php echo isset($_SESSION["userNameFe"]) ? $_SESSION["userNameFe"] : ""; ?></div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.6 9.60001L12 14.4L6.40002 9.60001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <?php
+                    }else{
+                        ?>
+                        <div class="btn-right">
+                            <button class="btn-custom"><a href="/login">Đăng nhập</a></button>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <div class="main-header-mb d-flex d-xl-none flex-column">
                     <div class="justify-content-between align-items-center d-flex d-xl-none">

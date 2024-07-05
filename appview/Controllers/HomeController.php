@@ -4,6 +4,7 @@ namespace AppView\Controllers;
 use AppView\Repository\CategoryRepository;
 use AppView\Repository\PostRepository;
 use AppView\Repository\PostRepositoryInterface;
+use AppView\Repository\ProvinceRepository;
 
 
 class HomeController extends FrontEndController
@@ -20,23 +21,32 @@ class HomeController extends FrontEndController
     protected $categoryRepository;
     /**
      * PostController constructor.
-     * @param PostRepositoryInterface $post
+     * @param ProvinceRepository $post
      */
-    public function __construct(PostRepositoryInterface $post,CategoryRepository $category_repository)
+
+    protected $provinceRepository;
+
+    public function __construct(PostRepositoryInterface $post,CategoryRepository $category_repository,ProvinceRepository $provinceRepository)
     {
         parent::__construct();
         $this->post = $post;
         $this->categoryRepository = $category_repository;
+        $this->provinceRepository = $provinceRepository;
     }
 
     public function render()
     {
         $postAll = $this->post->allByCat(85,'NEWS');
         $category =$this->categoryRepository->getCategoryByID(60);
+        $province = $this->provinceRepository->all();
+
+        $use_job = config('users.use_job');
         
         return view('welcome')->render([
             'postAll' => $postAll,
-            'category'=>$category
+            'category'=>$category,
+            'province'=>$province,
+            'use_job'=>$use_job
         ]);
     }
 

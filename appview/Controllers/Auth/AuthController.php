@@ -13,6 +13,7 @@ use AppView\Repository\UserRepository;
 use VatGia\ControllerBase;
 use VatGia\Helpers\Facade\FlashMessage;
 use VatGia\Helpers\IDVGHelpers;
+use AppView\Helpers\User;
 
 /**
  * Class AuthController
@@ -124,6 +125,26 @@ class AuthController extends ControllerBase
             $result['suscess'] = 0;
             $result['message'] = 'Bạn phải chọn recaptcha';
             echo json_encode($result);die;
+        }
+    }
+    public function postLogin(){
+        try {
+            if (!$_POST['username'] || !$_POST['password']) {
+                return FlashMessage::error('Thông tin đăng nhập không đúng', url_back());
+            }
+            $user = new User($_POST['username'], $_POST['password']);
+            if ($user->logged == 1) {
+                $_SESSION["loggedFe"] = 1;
+                $_SESSION["userIdFe"] = $user->u_id;
+                $_SESSION["userNameFe"] = $user->use_name;
+                $_SESSION["userLoginFe"] = $user->login_name;
+                return FlashMessage::error('Đăng nhập thành công', '/');
+                //$_SESSION["password"] = md5($password);
+            }else{
+                return FlashMessage::error('Bạn nhập sai tên đăng nhập hoặc mật khẩu', url_back());
+            }
+        } catch (\Exception $e) {
+            return FlashMessage::error($e->getMessage(), url_back());
         }
     }
 }

@@ -875,3 +875,13 @@ footer .phone_calling a img {
         font-size: 20px;
     }
 }
+.header-1 .user-btn {
+    background: #349b94;
+    height: 44px;
+}
+
+.header-1 .user-btn .name {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}

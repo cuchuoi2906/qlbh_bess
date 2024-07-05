@@ -52,8 +52,9 @@ $myform->add('use_referral_id', 'use_referral_id', FORM_ADD_TYPE_INT, FORM_ADD_V
 $use_content = getValue('use_content', 'str', 'POST', '');
 $myform->add('use_content', 'use_content', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $use_content);
 
-$use_leader = getValue('use_sale', 'int', 'POST', 0);
+/*$use_leader = getValue('use_sale', 'int', 'POST', 0);
 $myform->add('use_sale', 'use_sale', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $use_sale);
+*/
 
 $user_sale_id = getValue('user_sale_id', 'int', 'POST', 0);
 $myform->add('user_sale_id', 'user_sale_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $user_sale_id);
@@ -134,13 +135,13 @@ if ($action == "execute") {
     }//End if($fs_errorMsg == "")
 
 }//End if($action == "insert")
-$sale_user = [];
+/*$sale_user = [];
 $sale_user_model = \App\Models\Users\Users::where('use_sale', 1)->all();
 foreach ($sale_user_model as $items) {
     $sale_user[$items->id] = $items->id.' - '.$items->name . ' - ' . $items->phone;
 }
 $sale_user[0] = 'Chọn sale phụ trách';
-
+*/
 $users = \App\Models\Users\Users::where('use_active', 1)->where('use_type', '!=', 1)->all();
 $users_info = $users;
 $users = $users->lists('use_id', 'use_name');
