@@ -8,9 +8,23 @@
 
 namespace AppView\Controllers;
 
+use AppView\Repository\CategoryRepository;
+
 
 class ProductController extends FrontEndController
 {
+    protected $categoryRepository;
+
+    /**
+     * ProductController constructor.
+     * @param categoryRepository $post
+     */
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        parent::__construct();
+        $this->categoryRepository = $categoryRepository;
+    }
+
     public function getProducts($type = '')
     {
 
@@ -38,14 +52,20 @@ class ProductController extends FrontEndController
         ];
 
         $data = model('products/index')->load($params);
-        $productList  = $data['vars']['data'];
-        $pagination  = collect_recursive($data['vars']['meta']);
-        pre($pagination);
-        pre($productList);
+        $productList = [];
+        $pagination = [];
+        if($data && isset($data['vars']['data'])){
+            $productList  = $data['vars']['data'];
+            $pagination  = collect_recursive($data['vars']['meta']);
+        }
+        
+        $categoryByType = $this->categoryRepository->getCategoryByType($type);
+        pre($categoryByType);
 
         return view('products/listing')->render([
             'productList' => $productList,
-            'pagination'=>$pagination
+            'pagination'=>$pagination,
+            'categoryByType'=>$categoryByType
         ]);
     }
 

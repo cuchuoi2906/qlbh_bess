@@ -47,7 +47,7 @@ if ($is_hot >= 0) {
 }
 
 if($type != ''){
-    $conditions .= ' AND pro_type = ' . $type;
+    $conditions .= ' AND pro_type = "' . $type.'"';
 }
 
 

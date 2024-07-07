@@ -16,6 +16,15 @@ return [
             ]
         ]
     ],
+    'categories/get_by_type' => [
+        'title' => 'Lấy chi tiết danh mục theo loại',
+        'input' => [
+            'type' => [
+                'title' => 'loại danh mục',
+                'rule' => 'required'
+            ]
+        ]
+    ],
     'categories/index' => [
         'title' => 'Danh sách danh mục theo loại',
         'input' => [
