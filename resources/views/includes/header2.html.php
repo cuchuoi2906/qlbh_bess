@@ -30,7 +30,7 @@
                 <div class="main-header-2 align-items-center justify-content-between ga-3 d-xl-flex d-none">
                     <div class="logo">
                         <a href="/">
-                            <img src="./images/logo-4.png" alt="logo">
+                            <img src="<?= asset('/images/logo-4.png') ?>" alt="logo">
                         </a>
                     </div>
                     <div class="main-search-pc">
@@ -80,7 +80,7 @@
                         </button>
                         <div class="logo">
                             <a href="/">
-                                <img src="./images/logo.png" alt="logo">
+                                <img src="<?= asset('/images/logo.png') ?>" alt="logo">
                             </a>
                         </div>
                         <div class="" style="width: 32px"></div>
@@ -103,7 +103,7 @@
                     <div class="sidebar-top">
                         <div class="d-flex align-items-center justify-content-between py-4 px-3">
                             <div class="logo">
-                                <img height="46" src="./images/logo.png" alt="logo">
+                                <img height="46" src="<?= asset('/images/logo.png') ?>" alt="logo">
                             </div>
                             <button id="close-sidebar">
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

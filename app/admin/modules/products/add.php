@@ -57,7 +57,10 @@ $pro_commission = ($pro_commission >= 0 && $pro_commission < $pro_price) ? $pro_
 
 
 $pro_category_id = getValue('pro_category_id', 'int', 'POST', 0);
-
+$cate_type = App\Models\Categories\Category::findByID($pro_category_id);
+if($cate_type){
+    $myform->add('pro_type', 'pro_type', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $cate_type->cat_type,0);
+}
 $myform->add('pro_category_id', 'pro_category_id', FORM_ADD_TYPE_DOUBLE, 1, 0, 1, 'Chưa chọn danh mục');
 $myform->add('pro_quantity', 'pro_quantity', FORM_ADD_TYPE_INT, 1, 0);
 $myform->add('pro_commission', 'pro_commission', FORM_ADD_TYPE_INT, 1, 0);

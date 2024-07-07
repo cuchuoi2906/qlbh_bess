@@ -40,7 +40,7 @@ $fs_filepath_video = ROOT . "/public/upload/products/";
 $locales = collect(config('app.locales'))->lists('code', 'name');
 
 
-$categories = get_categories_for_select(0, '', 'PRODUCT');
+$categories = get_categories_for_select(0, '', 'NEWS');
 
 $commission_plans = \App\Models\CommissionPlan::all();
 $commission_plans->map(function ($item) {

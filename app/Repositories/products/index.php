@@ -16,7 +16,7 @@ $vars = [];
 $page = input('page') ?? getValue('page', 'int', 'GET', 1);
 $page_size = input('page_size') ?? 10;
 $category_id = input('category_id') ?? 0;
-
+$type = input('type') ?? getValue('type', 'int', 'GET', '');
 
 $keyword = input('keyword') ?? '';
 $is_hot = input('is_hot') ?? -1;
@@ -44,6 +44,10 @@ if ($keyword) {
 
 if ($is_hot >= 0) {
     $conditions .= ' AND pro_is_hot = ' . $is_hot;
+}
+
+if($type != ''){
+    $conditions .= ' AND pro_type = ' . $type;
 }
 
 

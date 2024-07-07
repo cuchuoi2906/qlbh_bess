@@ -11,8 +11,12 @@ namespace AppView\Controllers;
 
 class ProductController extends FrontEndController
 {
-    public function getProducts()
+    public function getProducts($type = '')
     {
+
+        if (!checkLoginFe()) {
+            return redirect(url('login'));
+        }
         $page = getValue('page', 'int', 'GET', 1, 0);
         $keyword = getValue('keyword', 'str', 'GET', '', 0);
         $is_hot = getValue('is_hot', 'int', 'GET', -1);
@@ -24,6 +28,7 @@ class ProductController extends FrontEndController
 
         $params = [
             'page' => $page,
+            'type'=>$type,
             'sort_by' => getValue('sort_by', 'str', 'GET', '', 2),
             'sort_type' => getValue('sort_type', 'str', 'GET', 'DESC', 2),
             'category_id' => getValue('category_id', 'int', 'GET', 0, 0),
@@ -33,10 +38,14 @@ class ProductController extends FrontEndController
         ];
 
         $data = model('products/index')->load($params);
+        $productList  = $data['vars']['data'];
+        $pagination  = collect_recursive($data['vars']['meta']);
+        pre($pagination);
+        pre($productList);
 
-        return view('posts/detail')->render([
-            'item' => $detail,
-            'postCategory'=>$postCategory
+        return view('products/listing')->render([
+            'productList' => $productList,
+            'pagination'=>$pagination
         ]);
     }
 

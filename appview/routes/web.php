@@ -70,4 +70,5 @@ Route::post(['register', 'post.register'], [\AppView\Controllers\Auth\AuthContro
 Route::get('/chat', [ChatController::class, 'index']);
 Route::get(['/bai-viet/{type}-{id}', 'post.listing'], [\AppView\Controllers\PostController::class, 'postListing']);
 Route::post(['web/login', 'post.login'], [\AppView\Controllers\Auth\AuthController::class, 'postLogin']);
-Route::get('/products', [\AppView\Controllers\ProductController::class, 'products']);
+Route::get('/products', [\AppView\Controllers\ProductController::class, 'getProducts']);
+Route::get('/products/{type}', [\AppView\Controllers\ProductController::class, 'getProducts']);

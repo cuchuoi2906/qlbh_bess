@@ -10,7 +10,7 @@ function get_categories_for_select($deep = 0, $pre_label = '|__', $type = 'PRODU
 {
     $categories = \App\Models\Categories\Category::where('cat_active', 1)
         ->where('cat_parent_id = 0')
-        ->where('cat_type', $type)
+        ->where('cat_type != "'.$type.'"')
         ->with(['childs'])
         ->order_by('cat_order', 'DESC')
         ->all();

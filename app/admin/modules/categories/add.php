@@ -41,10 +41,10 @@ $cat_active = getValue('cat_active', 'int', 'POST', 1);
 
 //Call Class generate_form();
 
-$myform->add('cat_type', 'type', 0, 1, $type ?? '');
+//$myform->add('cat_type', 'type', 0, 1, $cat_type ?? '');
 
 $myform->add('cat_parent_id', 'cat_parent_id', 1, 1, 0);
-//$myform->add('cat_type', 'cat_type', 0, 1, '', 1, 'Chưa chọn loại danh mục');
+$myform->add('cat_type', 'cat_type', 0, 1, '', 1, 'Chưa chọn loại danh mục');
 //$myform->add('cat_has_child', 'cat_has_child', 1, 1, 0);
 $myform->add('cat_active', 'cat_active', 1, 1, 0);
 $myform->add('cat_order', 'cat_order', 1, 1, 0);

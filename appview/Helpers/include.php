@@ -585,7 +585,6 @@ if (!function_exists('renderPagination')) {
         // Kiểm tra sự tồn tại của các phần tử trước khi truy cập
         $total_pages = intval($pagination->total_pages) > 0 ? $pagination->total_pages : 0;
         $current_page = intval($pagination->current_page) > 0 ? $pagination->current_page : 0;
-        $next_link = $pagination->links->next != '' ? $pagination->links->next : null;
 
         $total_pages = $total_pages > 10 ? 10 : $total_pages;
         $html = '<div class="pagination">';
@@ -613,9 +612,9 @@ if (!function_exists('renderPagination')) {
         }
 
         // Nút Next
-        if ($current_page+1 < $total_pages && $next_link) {
+        if ($current_page+1 < $total_pages) {
             $html .= '<li class="page-item">
-                        <a class="page-link" href="' . $next_link . '" aria-label="Next">
+                        <a class="page-link" href="?page=' . ($current_page  + 1) . '" aria-label="Next">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.94 4L6 4.94L9.05333 8L6 11.06L6.94 12L10.94 8L6.94 4Z" fill="#1C274C"></path>
                             </svg>
