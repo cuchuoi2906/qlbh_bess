@@ -9,6 +9,7 @@
 namespace AppView\Controllers;
 
 use AppView\Repository\CategoryRepository;
+use VatGia\ControllerBase;
 
 
 class ProductController extends FrontEndController
@@ -25,15 +26,15 @@ class ProductController extends FrontEndController
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function getProducts($type = '')
+    public function getProducts($type = '',$id = '')
     {
-
         if (!checkLoginFe()) {
             return redirect(url('login'));
         }
         $page = getValue('page', 'int', 'GET', 1, 0);
         $keyword = getValue('keyword', 'str', 'GET', '', 0);
         $is_hot = getValue('is_hot', 'int', 'GET', -1);
+        $sort_type = getValue('sort_type', 'str', 'GET', 'DESC', 2);
         if ($page < 1) {
             $page = 1;
         } elseif ($page > 999999999) {
@@ -44,8 +45,8 @@ class ProductController extends FrontEndController
             'page' => $page,
             'type'=>$type,
             'sort_by' => getValue('sort_by', 'str', 'GET', '', 2),
-            'sort_type' => getValue('sort_type', 'str', 'GET', 'DESC', 2),
-            'category_id' => getValue('category_id', 'int', 'GET', 0, 0),
+            'sort_type' => $sort_type,
+            'category_id' => $id,
             'page_size' => 10,
             'keyword' => $keyword,
             'is_hot' => $is_hot
@@ -59,13 +60,17 @@ class ProductController extends FrontEndController
             $pagination  = collect_recursive($data['vars']['meta']);
         }
         
-        $categoryByType = $this->categoryRepository->getCategoryByType($type);
-        pre($categoryByType);
-
+        $categoryByType = [];
+        if($type != ''){
+            $categoryByType = $this->categoryRepository->getCategoryByType($type);
+        }
         return view('products/listing')->render([
             'productList' => $productList,
             'pagination'=>$pagination,
-            'categoryByType'=>$categoryByType
+            'categoryByType'=>$categoryByType,
+            'keyword'=>$keyword,
+            'type'=>$type,
+            'sort_type'=>$sort_type
         ]);
     }
 
@@ -114,5 +119,14 @@ class ProductController extends FrontEndController
         ]);
 
         return $result['vars'];
+    }
+    public function getProductsCart($type = '',$id = '')
+    {
+        if (!checkLoginFe()) {
+            return redirect(url('login'));
+        }
+        $page = getValue('page', 'int', 'GET', 1, 0);
+
+        return view('products/cart')->render();
     }
 }

@@ -166,4 +166,78 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('drawer-overlay').addEventListener('click', toggleVoucherDrawer);
         document.getElementById('drawer-close').addEventListener('click', toggleVoucherDrawer);
     }
+    // Function to submit the input value
+    function submitInputSearchProduct() {
+        const inputElement = document.getElementById('keyword');
+        let inputValue = inputElement.value;
+        if(inputValue == ''){
+            inputElementm = document.getElementById('keywordm');
+            inputValue = inputElementm.value;
+        }
+        const baseUrl = window.location.origin + window.location.pathname;
+
+        // Append the input value as a query parameter
+        const fullUrl = `${baseUrl}?keyword=${encodeURIComponent(inputValue)}`;
+
+        // Redirect to the new URL
+        window.location.href = fullUrl;
+    }
+
+    const button = document.getElementById('main-search');
+    button.addEventListener('click', submitInputSearchProduct);
+
+    // Event listener for the Enter key
+    const inputElement = document.getElementById('keyword');
+    inputElement.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission if within a form
+            submitInputSearchProduct();
+        }
+    });
+    // Event listener for the Enter key
+    let inputElementm = document.getElementById('keywordm');
+    inputElementm.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission if within a form
+            submitInputSearchProduct();
+        }
+    });
+    $('.btn-increment').click(function() {
+        var productId = $(this).data('product-id');
+        let productCount = $("#productCount"+productId).val();
+        $.ajax({
+            url: '/increment_product',
+            method: 'POST',
+            //contentType: 'application/json',
+            data: {
+                product_id: productId,
+                product_count: productCount
+            },
+            success: function(response) {
+                response = parseInt(response);
+                $('#cartCount').text(response);
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
 });
+
+// Function to submit the input value
+function sortProductList(sort) {
+    const inputElement = document.getElementById('keyword');
+    let inputValue = inputElement.value;
+    if(inputValue == ''){
+        inputElementm = document.getElementById('keywordm');
+        inputValue = inputElementm.value;
+    }
+    const baseUrl = window.location.origin + window.location.pathname;
+
+
+    // Append the input value as a query parameter
+    const fullUrl = `${baseUrl}?sort_by=price&sort_type=`+sort;
+
+    // Redirect to the new URL
+    window.location.href = fullUrl;
+}

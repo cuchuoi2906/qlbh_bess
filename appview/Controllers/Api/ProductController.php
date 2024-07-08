@@ -83,4 +83,16 @@ class ProductController extends ApiController
 
         return $result['vars'];
     }
+    public function incrementProduct(){
+        $product_id = getValue('product_id', 'int', 'POST', 0, 0);
+        $product_count = getValue('product_count', 'int', 'POST', 0, 0);
+
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+        $_SESSION['cart'][$product_id] = $product_count;
+        $data['vars'] = count($_SESSION['cart']);
+
+        return $data['vars'];
+    }
 }

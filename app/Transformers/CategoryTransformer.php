@@ -24,6 +24,8 @@ class CategoryTransformer extends TransformerAbstract
         return [
             'id' => (int)$item->id,
             'name' => $item->name,
+            'parent_id'=>$item->parent_id,
+            'count_pro'=>$item->count_pro_id,
             'rewrite' => $item->rewrite,
             'description' => $item->description,
             'icon' => url() . '/upload/categories/' . $item->icon,

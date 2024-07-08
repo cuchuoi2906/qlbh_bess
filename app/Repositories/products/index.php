@@ -27,14 +27,8 @@ if ((int)app('auth')->u_id === 1234) {
 }
 
 if ($category_id) {
-    $category = App\Models\Categories\Category::findByID($category_id);
-    if (!$category) {
-        throw new RuntimeException('Danh mục không tồn tại', 404);
-    }
+    $type = '';
     $field = 'pro_category_id';
-    if ($category->type == 'BRAND') {
-        $field = 'pro_brand_id';
-    }
     $conditions .= ' AND ' . $field . ' = ' . (int)$category_id;
 }
 

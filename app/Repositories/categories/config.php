@@ -21,7 +21,7 @@ return [
         'input' => [
             'type' => [
                 'title' => 'loại danh mục',
-                'rule' => 'required'
+                'rule' => ''
             ]
         ]
     ],

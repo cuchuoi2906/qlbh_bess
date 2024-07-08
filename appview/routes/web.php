@@ -71,4 +71,12 @@ Route::get('/chat', [ChatController::class, 'index']);
 Route::get(['/bai-viet/{type}-{id}', 'post.listing'], [\AppView\Controllers\PostController::class, 'postListing']);
 Route::post(['web/login', 'post.login'], [\AppView\Controllers\Auth\AuthController::class, 'postLogin']);
 Route::get('/products', [\AppView\Controllers\ProductController::class, 'getProducts']);
-Route::get('/products/{type}', [\AppView\Controllers\ProductController::class, 'getProducts']);
+//Route::get('/products/{type}', [\AppView\Controllers\ProductController::class, 'getProducts']);
+Route::get('/products/{type}-{id}', [\AppView\Controllers\ProductController::class, 'getProducts']);
+Route::post('/increment_product', [\AppView\Controllers\Api\ProductController::class, 'incrementProduct']);
+Route::get('/loyal-client', [\AppView\Controllers\Auth\AuthController::class, 'loyalClient']);
+Route::get('/cart', [\AppView\Controllers\ProductController::class, 'getProductsCart']);
+
+
+
+

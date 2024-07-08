@@ -646,3 +646,12 @@ if (!function_exists('checkLoginFe')) {
         return false;
     }
 }
+if (!function_exists('formatCurrencyVND')) {
+    function formatCurrencyVND($number) {
+        // Format number with comma as thousand separator and no decimals
+        $formattedNumber = number_format($number, 0, ',', '.');
+        
+        // Append the currency symbol for Vietnamese Dong
+        return $formattedNumber . ' đ';
+    }
+}

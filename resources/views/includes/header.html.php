@@ -37,7 +37,7 @@
                             <li><a class="active" href="/">Trang chủ</a></li>
                             <li><a href="/products">Sản phẩm</a></li>
                             <li><a href="<?php echo url('post.listing', ['news',0]) ?>">Tin tức</a></li>
-                            <li><a href="/">Khách hàng thân thiết</a></li>
+                            <li><a href="/loyal-client">Khách hàng thân thiết</a></li>
                             <li><a href="/">Hướng dẫn đặt hàng</a></li>
                         </ul>
                     </div>

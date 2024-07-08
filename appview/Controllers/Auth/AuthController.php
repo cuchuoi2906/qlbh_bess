@@ -147,4 +147,7 @@ class AuthController extends ControllerBase
             return FlashMessage::error($e->getMessage(), url_back());
         }
     }
+    public function loyalClient(){
+        return view('auth/loyalclient')->render();
+    }
 }
