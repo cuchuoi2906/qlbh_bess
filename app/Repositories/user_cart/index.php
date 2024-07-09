@@ -31,6 +31,7 @@ if ($items->count()) {
     $total_commission = 0;
     $total_direct_commission = 0;
     $total_point = 0;
+    $total_product_cart = 0;
     // lặp giỏ hảng tính mix giá
     foreach ($items as $key => $item) {
         if (!($item->product ?? false)) {
@@ -281,11 +282,12 @@ if ($items->count()) {
         'shipping_fee' => (int)$ship_fee,
         'shipping_fee_display' => number_format($ship_fee),
         'total_point' => $total_point,
-        'is_whole_sale' => $is_wholesale
+        'is_whole_sale' => $is_wholesale,
+        'total_product_cart'=>$items->count()
     ]);
     // Xu ly lay discount_price de hiên thi lai tren app
     for($i=0;$i<50;$i++){
-        if(!check_array($vars[$i]['product'])){
+        if(!isset($vars[$i]['product']) || !check_array($vars[$i]['product'])){
             break;
         }
         $vars[$i]['product']['discount_price'] = (!intval($vars[$i]['product']['is_discount']) && !intval($vars[$i]['product']['discount_price'])) ? $vars[$i]['product']['price'] : $vars[$i]['product']['discount_price'];

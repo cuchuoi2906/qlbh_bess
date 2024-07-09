@@ -8,13 +8,14 @@
 
 $vars = [];
 
-$user = \App\Models\Users\Users::findByID((int)input('id'));
+$user = \App\Models\Users\Users::findByID((int)input('id'))->with(['provice']);
+
 if (!$user) {
     throw new RuntimeException('Người dùng không tồn tại', 404);
 }
 if ($user) {
 
-    $vars = transformer_item($user, new \App\Transformers\UserTransformer(), getValue('with', 'str') . ',parent', [
+    $vars = transformer_item($user, new \App\Transformers\UserTransformer(), getValue('with', 'str') . ',parent,addresses', [
         'direct' => [
             'total' => $user->use_total_direct_refer,
             'total_display' => number_format($user->use_total_direct_refer)

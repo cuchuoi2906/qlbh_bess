@@ -290,4 +290,13 @@ class Users extends Model {
 
         return $value->swe_value_vn ?? 0;
     }
+    public function provice() {
+
+        return $this->hasMany(
+            __FUNCTION__,
+            Province::class,
+            'prov_id',
+            'use_province_id'
+        );
+    }
 }

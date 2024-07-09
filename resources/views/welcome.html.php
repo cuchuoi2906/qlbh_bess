@@ -112,7 +112,7 @@ include 'includes/header.html.php';
                                             <path d="M7.19995 13.6H12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
                                         </svg>
                                     </span>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="province_id" id="province_id">
                                         <option selected>Tỉnh/Thành phố</option>
                                         <?php 
                                         foreach($province as $key=>$items){
@@ -137,6 +137,8 @@ include 'includes/header.html.php';
                                     <input
                                         type="text"
                                         class="form-control"
+                                        name="address_register"
+                                        id="address_register"
                                         placeholder="Địa chỉ cụ thể"
                                         aria-label="input-address"
                                         aria-describedby="input-address"

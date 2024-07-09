@@ -75,7 +75,7 @@ $myform->add('pro_commission_plan_id', 'pro_commission_plan_id', FORM_ADD_TYPE_I
 $pro_brand_id = getValue('pro_brand_id', 'int', 'POST', 0);
 //$myform->add('pro_name_' . $locale, 'pro_name_' . $locale, FORM_ADD_TYPE_STRING, 1, '', 1, 'Chưa nhập tên');
 
-$myform->add('pro_brand_id', 'pro_brand_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, 1,1,'Bạn chưa nhập thương hiệu');
+$myform->add('pro_brand_id', 'pro_brand_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, 1);
 
 $pro_point = getValue('pro_point', 'int', 'POST', 0);
 $myform->add('pro_point', 'pro_point', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $pro_point);

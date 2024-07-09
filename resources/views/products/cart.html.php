@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__) . '/../includes/header.html.php';
+include dirname(__FILE__) . '/../includes/header2.html.php';
 ?>
 <div class="main-content">
     <div class="container">
@@ -15,298 +15,83 @@ include dirname(__FILE__) . '/../includes/header.html.php';
         </div>
         <div class="row">
             <div class="col-xl-8">
-                <div class="content-box mb-4">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="form-check check-all">
-                            <input class="form-check-input" type="checkbox" value="" id="check-all" />
-                            <label class="form-check-label" for="check-all"> Chọn tất cả </label>
-                        </div>
-                        <button type="button" class="btn btn-light delete-all">Xóa</button>
-                    </div>
-                </div>
-                <div class="content-box mb-3">
-                    <div class="cart-item d-flex align-items-start justify-content-between">
-                        <div class="left d-flex align-items-center gap-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />
-                            </div>
-                            <div class="thumb">
-                                <img width="100" height="100" src="./images/prod-item-1.png" alt="prod-item-1" />
-                            </div>
-                            <div class="info d-flex flex-column">
-                                <h3 class="cart-item-title">12B Ginseng Linzhi nhân sâm 100 viên Vinaphar</h3>
-                                <div class="price">38.000 đ</div>
-                                <div class="input-group number-input">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-decrement" type="button" disabled>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path
-                                                    d="M5 10H15"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <input type="number" class="form-control inputNumber" value="0" min="0" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-increment" type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path
-                                                    d="M5 10H15"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path
-                                                    d="M10 15V5"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </button>
+                 <input type="hidden" id="pageCart" name="pageCart" value="1">
+                <?php 
+                if(check_array($result['vars'])){
+                    $productsList = $result['vars'];
+                    $meta = $productsList['meta'];
+                    unset($productsList['meta']);
+                    foreach($productsList as $items){
+                        $product = $items['product'];
+                        $quantity = $items['quantity'];
+                ?>
+                    <div class="content-box mb-3">
+                        <div class="cart-item d-flex align-items-start justify-content-between">
+                            <div class="left d-flex align-items-center gap-3">
+                                <div class="thumb">
+                                    <img width="100" height="100" src="<?php echo $product['avatar']['url']; ?>" alt="prod-item-1" />
+                                </div>
+                                <div class="info d-flex flex-column">
+                                    <h3 class="cart-item-title">12B Ginseng Linzhi nhân sâm 100 viên Vinaphar</h3>
+                                    <div class="price"><?php echo formatCurrencyVND($product['price']); ?></div>
+                                    <div class="input-group number-input">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-decrement" type="button" data-product-id="<?php echo $product['id']; ?>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M5 10H15"
+                                                        stroke="#1C274C"
+                                                        stroke-width="1.5"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <input type="number" id="productCount<?php echo intval($product['id']); ?>" class="form-control inputNumber" value="<?php echo $quantity; ?>" min="0" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-increment" type="button" data-product-id="<?php echo $product['id']; ?>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path
+                                                        d="M5 10H15"
+                                                        stroke="#1C274C"
+                                                        stroke-width="1.5"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                    />
+                                                    <path
+                                                        d="M10 15V5"
+                                                        stroke="#1C274C"
+                                                        stroke-width="1.5"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="right h-100">
-                            <div class="cta d-flex justify-content-start flex-column text-end h-100 align-items-end h-100">
-                                <div class="total-price">76.000 đ</div>
-                                <div class="close d-sm-none d-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
-                                        <path
-                                            fill-rule="evenodd"
-                                            clip-rule="evenodd"
-                                            d="M16.5299 6.21195C16.7252 6.01678 16.7252 5.70033 16.5299 5.50515C16.3345 5.30998 16.0178 5.30998 15.8224 5.50515L11.0199 10.3035L6.21735 5.50515C6.02201 5.30998 5.70529 5.30998 5.50994 5.50515C5.31459 5.70033 5.31459 6.01678 5.50994 6.21195L10.3125 11.0103L5.50994 15.8087C5.31459 16.0038 5.31459 16.3203 5.50994 16.5155C5.70529 16.7106 6.02201 16.7106 6.21735 16.5155L11.0199 11.7171L15.8224 16.5155C16.0178 16.7106 16.3345 16.7106 16.5299 16.5155C16.7252 16.3203 16.7252 16.0038 16.5299 15.8087L11.7273 11.0103L16.5299 6.21195Z"
-                                            fill="#1C274C"
-                                        />
-                                    </svg>
-                                </div>
-                                <div class="d-sm-flex d-none align-items-center">
-                                    <button><img src="./images/icons/Delete.svg" alt="heart" />Xóa</button>
+                            <div class="right h-100">
+                                <div class="cta d-flex justify-content-start flex-column text-end h-100 align-items-end h-100">
+                                    <div class="total-price" id="total-price-product<?php echo intval($product['id']); ?>"><?php echo formatCurrencyVND($product['price']*$quantity); ?></div>
+                                    <div class="close d-sm-none d-block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+                                            <path
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M16.5299 6.21195C16.7252 6.01678 16.7252 5.70033 16.5299 5.50515C16.3345 5.30998 16.0178 5.30998 15.8224 5.50515L11.0199 10.3035L6.21735 5.50515C6.02201 5.30998 5.70529 5.30998 5.50994 5.50515C5.31459 5.70033 5.31459 6.01678 5.50994 6.21195L10.3125 11.0103L5.50994 15.8087C5.31459 16.0038 5.31459 16.3203 5.50994 16.5155C5.70529 16.7106 6.02201 16.7106 6.21735 16.5155L11.0199 11.7171L15.8224 16.5155C16.0178 16.7106 16.3345 16.7106 16.5299 16.5155C16.7252 16.3203 16.7252 16.0038 16.5299 15.8087L11.7273 11.0103L16.5299 6.21195Z"
+                                                fill="#1C274C"
+                                            />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="content-box mb-3">
-                    <div class="cart-item d-flex align-items-start justify-content-between">
-                        <div class="left d-flex align-items-center gap-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />
-                            </div>
-                            <div class="thumb">
-                                <img width="100" height="100" src="./images/prod-item-1.png" alt="prod-item-1" />
-                            </div>
-                            <div class="info d-flex flex-column">
-                                <h3 class="cart-item-title">12B Ginseng Linzhi nhân sâm 100 viên Vinaphar</h3>
-                                <div class="price">38.000 đ</div>
-                                <div class="input-group number-input">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-decrement" type="button" disabled>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path
-                                                    d="M5 10H15"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <input type="number" class="form-control inputNumber" value="0" min="0" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-increment" type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path
-                                                    d="M5 10H15"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path
-                                                    d="M10 15V5"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right h-100">
-                            <div class="cta d-flex justify-content-start flex-column text-end h-100 align-items-end h-100">
-                                <div class="total-price">76.000 đ</div>
-                                <div class="close d-sm-none d-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
-                                        <path
-                                            fill-rule="evenodd"
-                                            clip-rule="evenodd"
-                                            d="M16.5299 6.21195C16.7252 6.01678 16.7252 5.70033 16.5299 5.50515C16.3345 5.30998 16.0178 5.30998 15.8224 5.50515L11.0199 10.3035L6.21735 5.50515C6.02201 5.30998 5.70529 5.30998 5.50994 5.50515C5.31459 5.70033 5.31459 6.01678 5.50994 6.21195L10.3125 11.0103L5.50994 15.8087C5.31459 16.0038 5.31459 16.3203 5.50994 16.5155C5.70529 16.7106 6.02201 16.7106 6.21735 16.5155L11.0199 11.7171L15.8224 16.5155C16.0178 16.7106 16.3345 16.7106 16.5299 16.5155C16.7252 16.3203 16.7252 16.0038 16.5299 15.8087L11.7273 11.0103L16.5299 6.21195Z"
-                                            fill="#1C274C"
-                                        />
-                                    </svg>
-                                </div>
-                                <div class="d-sm-flex d-none align-items-center">
-                                    <button><img src="./images/icons/heart-cart.svg" alt="heart" />Yêu thích</button>
-                                    <button><img src="./images/icons/Delete.svg" alt="heart" />Xóa</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-box mb-3">
-                    <div class="cart-item d-flex align-items-start justify-content-between">
-                        <div class="left d-flex align-items-center gap-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />
-                            </div>
-                            <div class="thumb">
-                                <img width="100" height="100" src="./images/prod-item-1.png" alt="prod-item-1" />
-                            </div>
-                            <div class="info d-flex flex-column">
-                                <h3 class="cart-item-title">12B Ginseng Linzhi nhân sâm 100 viên Vinaphar</h3>
-                                <div class="price">38.000 đ</div>
-                                <div class="input-group number-input">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-decrement" type="button" disabled>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path
-                                                    d="M5 10H15"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <input type="number" class="form-control inputNumber" value="0" min="0" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-increment" type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path
-                                                    d="M5 10H15"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path
-                                                    d="M10 15V5"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right h-100">
-                            <div class="cta d-flex justify-content-start flex-column text-end h-100 align-items-end h-100">
-                                <div class="total-price">76.000 đ</div>
-                                <div class="close d-sm-none d-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
-                                        <path
-                                            fill-rule="evenodd"
-                                            clip-rule="evenodd"
-                                            d="M16.5299 6.21195C16.7252 6.01678 16.7252 5.70033 16.5299 5.50515C16.3345 5.30998 16.0178 5.30998 15.8224 5.50515L11.0199 10.3035L6.21735 5.50515C6.02201 5.30998 5.70529 5.30998 5.50994 5.50515C5.31459 5.70033 5.31459 6.01678 5.50994 6.21195L10.3125 11.0103L5.50994 15.8087C5.31459 16.0038 5.31459 16.3203 5.50994 16.5155C5.70529 16.7106 6.02201 16.7106 6.21735 16.5155L11.0199 11.7171L15.8224 16.5155C16.0178 16.7106 16.3345 16.7106 16.5299 16.5155C16.7252 16.3203 16.7252 16.0038 16.5299 15.8087L11.7273 11.0103L16.5299 6.21195Z"
-                                            fill="#1C274C"
-                                        />
-                                    </svg>
-                                </div>
-                                <div class="d-sm-flex d-none align-items-center">
-                                    <button><img src="./images/icons/heart-cart.svg" alt="heart" />Yêu thích</button>
-                                    <button><img src="./images/icons/Delete.svg" alt="heart" />Xóa</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-box mb-4">
-                    <div class="cart-item d-flex align-items-start justify-content-between">
-                        <div class="left d-flex align-items-center gap-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" />
-                            </div>
-                            <div class="thumb">
-                                <img width="100" height="100" src="./images/prod-item-1.png" alt="prod-item-1" />
-                            </div>
-                            <div class="info d-flex flex-column">
-                                <h3 class="cart-item-title">12B Ginseng Linzhi nhân sâm 100 viên Vinaphar</h3>
-                                <div class="price">38.000 đ</div>
-                                <div class="input-group number-input">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-decrement" type="button" disabled>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path
-                                                    d="M5 10H15"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <input type="number" class="form-control inputNumber" value="0" min="0" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-increment" type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path
-                                                    d="M5 10H15"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                                <path
-                                                    d="M10 15V5"
-                                                    stroke="#1C274C"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right h-100">
-                            <div class="cta d-flex justify-content-start flex-column text-end h-100 align-items-end h-100">
-                                <div class="total-price">76.000 đ</div>
-                                <div class="close d-sm-none d-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
-                                        <path
-                                            fill-rule="evenodd"
-                                            clip-rule="evenodd"
-                                            d="M16.5299 6.21195C16.7252 6.01678 16.7252 5.70033 16.5299 5.50515C16.3345 5.30998 16.0178 5.30998 15.8224 5.50515L11.0199 10.3035L6.21735 5.50515C6.02201 5.30998 5.70529 5.30998 5.50994 5.50515C5.31459 5.70033 5.31459 6.01678 5.50994 6.21195L10.3125 11.0103L5.50994 15.8087C5.31459 16.0038 5.31459 16.3203 5.50994 16.5155C5.70529 16.7106 6.02201 16.7106 6.21735 16.5155L11.0199 11.7171L15.8224 16.5155C16.0178 16.7106 16.3345 16.7106 16.5299 16.5155C16.7252 16.3203 16.7252 16.0038 16.5299 15.8087L11.7273 11.0103L16.5299 6.21195Z"
-                                            fill="#1C274C"
-                                        />
-                                    </svg>
-                                </div>
-                                <div class="d-sm-flex d-none align-items-center">
-                                    <button><img src="./images/icons/heart-cart.svg" alt="heart" />Yêu thích</button>
-                                    <button><img src="./images/icons/Delete.svg" alt="heart" />Xóa</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php 
+                    }
+                }?>
                 <div class="box-info mb-4">
                     <h2 class="info-title">Thông Tin Người Nhận Hàng</h2>
                     <ul class="d-flex flex-column list-style-none m-0 p-0 gap-2">
@@ -315,7 +100,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                 <circle cx="11.9998" cy="7.2" r="3.2" stroke="#1C274C" />
                                 <ellipse cx="11.9999" cy="16" rx="5.6" ry="3.2" stroke="#1C274C" />
                             </svg>
-                            <span>Duong Viet Hung</span>
+                            <span><?php echo $user->name; ?></span>
                         </li>
                         <li class="d-flex align-items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -325,7 +110,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                     stroke-linecap="round"
                                 />
                             </svg>
-                            <span>0862 499 466</span>
+                            <span><?php echo $user->phone; ?></span>
                         </li>
                         <li class="d-flex align-items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -335,28 +120,18 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                 />
                                 <circle cx="12.0001" cy="10.4" r="2.4" stroke="#1C274C" />
                             </svg>
-                            <span>Toa nha FS - Goldseason, 47 Nguyen Tuan, Thanh Xuan Trung, Thanh Pho Ha Noi, Quan Thanh Xuan</span>
+                            <span><?php echo $user->address_register; ?></span>
                         </li>
                     </ul>
                 </div>
                 <div class="row mb-xl-4 mb-4">
-                    <div class="col-xl-6 mb-4 mb-xl-0">
-                        <div class="box-info h-100">
-                            <h2 class="info-title">Hình Thức Vận Chuyển</h2>
-                            <div class="delivery">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
-                                    <label class="form-check-label" for="flexRadioDefault1"> Khác </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-xl-6">
                         <div class="box-info">
                             <h2 class="info-title">Ghi Chú Giao Hàng</h2>
                             <textarea
                                 class="form-control"
                                 id="exampleFormControlTextarea1"
+                                name="note"
                                 rows="3"
                                 placeholder="Thêm ghi chú về đơn hàng để được hỗ trợ. Vd: Hãy gọi điện trước khi giao hàng"
                             ></textarea>
@@ -394,15 +169,15 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                     <ul class="d-flex flex-column gap-2 m-0 p-0">
                         <li class="d-flex justify-content-between align-items-center">
                             <div class="label">Tổng số lượng</div>
-                            <div class="value fw-bold">6</div>
+                            <div class="value fw-bold" id="totalProduct"><?php echo isset($meta['total_product']) ? $meta['total_product'] : 0; ?></div>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
                             <div class="label">Giảm giá trực tiếp</div>
-                            <div class="value fw-bold">0 đ</div>
+                            <div class="value fw-bold"><?php echo isset($meta['total_discount']) ? formatCurrencyVND($meta['total_discount']) : 0; ?></div>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
                             <div class="label">Giảm giá Voucher</div>
-                            <div class="value fw-bold">0 đ</div>
+                            <div class="value fw-bold"><?php echo isset($meta['total_discount']) ? formatCurrencyVND($meta['total_discount']) : 0; ?></div>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
                             <div class="label">Tiết kiệm được</div>
@@ -410,14 +185,14 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
                             <div class="label">Tổng tiền</div>
-                            <div class="value fw-bold total">228.000 đ</div>
+                            <div class="value fw-bold total" id="totalMoney"><?php echo isset($meta['total_money']) ? formatCurrencyVND($meta['total_money']) : 0; ?></div>
                         </li>
                     </ul>
                     <div class="form-check policy-check mt-2 mb-3">
                         <input class="form-check-input" type="checkbox" value="" id="policy" />
                         <label class="form-check-label" for="policy"> Tôi đồng ý với <a href="/">Điều khoản sử dụng</a> </label>
                     </div>
-                    <div class="btn-custom d-flex gap-2 align-items-center">
+                    <div class="btn-custom d-flex gap-2 align-items-center" id="btnOrder">
                         <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M16.8 33.6C18.1255 33.6 19.2 34.6745 19.2 36C19.2 37.3255 18.1255 38.4 16.8 38.4C15.4745 38.4 14.4 37.3255 14.4 36C14.4 34.6745 15.4745 33.6 16.8 33.6Z"

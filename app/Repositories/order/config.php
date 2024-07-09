@@ -93,6 +93,19 @@ return [
             ]
         ],
     ],
+    'order/post_order_v3' => [
+        'title' => 'Tạo đơn hàng',
+        'input' => [
+            'note' => [
+                'title' => 'Ghi chú khi mua hàng',
+                'rule' => ''
+            ],
+            'user_id' => [
+                'title' => 'ID user đang đăng nhập',
+                'rule' => 'required|integer'
+            ]
+        ],
+    ],
     'order/orders' => [
         'title' => 'lấy danh sách đơn hàng của user',
         'input' => [

@@ -75,8 +75,18 @@ Route::get('/products', [\AppView\Controllers\ProductController::class, 'getProd
 Route::get('/products/{type}-{id}', [\AppView\Controllers\ProductController::class, 'getProducts']);
 Route::post('/increment_product', [\AppView\Controllers\Api\ProductController::class, 'incrementProduct']);
 Route::get('/loyal-client', [\AppView\Controllers\Auth\AuthController::class, 'loyalClient']);
-Route::get('/cart', [\AppView\Controllers\ProductController::class, 'getProductsCart']);
+//Route::get('/cart', [\AppView\Controllers\ProductController::class, 'getProductsCart']);
 
+Route::group([
+    'prefix' => 'cart'
+], function () {
+
+    Route::get('/', [\AppView\Controllers\UserCartController::class, 'index']);
+
+    Route::post('/', [\AppView\Controllers\Api\UserCartController::class, 'add']);
+
+});
+Route::post('/order', [\AppView\Controllers\Api\OrderController::class, 'order']);
 
 
 

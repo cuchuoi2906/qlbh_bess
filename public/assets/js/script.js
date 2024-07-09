@@ -1,3 +1,12 @@
+function formatCurrencyVND(number) {
+    // Sử dụng Intl.NumberFormat để định dạng số
+    return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        minimumFractionDigits: 0
+    }).format(number);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     var swiper_1 = new Swiper('.slide-banner', {
         navigation: {
@@ -163,8 +172,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewVoucher = document.getElementById('view-voucher');
     if (viewVoucher) {
         document.getElementById('view-voucher').addEventListener('click', toggleVoucherDrawer);
-        document.getElementById('drawer-overlay').addEventListener('click', toggleVoucherDrawer);
-        document.getElementById('drawer-close').addEventListener('click', toggleVoucherDrawer);
+        if(document.getElementById('drawer-overlay')){
+            document.getElementById('drawer-overlay').addEventListener('click', toggleVoucherDrawer);
+        }
+        if(document.getElementById('drawer-close')){
+            document.getElementById('drawer-close').addEventListener('click', toggleVoucherDrawer);
+        }
     }
     // Function to submit the input value
     function submitInputSearchProduct() {
@@ -202,20 +215,62 @@ document.addEventListener('DOMContentLoaded', () => {
             submitInputSearchProduct();
         }
     });
-    $('.btn-increment').click(function() {
+    $('.btn-increment, .btn-decrement').click(function() {
         var productId = $(this).data('product-id');
         let productCount = $("#productCount"+productId).val();
         $.ajax({
-            url: '/increment_product',
+            url: '/cart',
             method: 'POST',
             //contentType: 'application/json',
             data: {
                 product_id: productId,
-                product_count: productCount
+                quantity: productCount
             },
             success: function(response) {
-                response = parseInt(response);
-                $('#cartCount').text(response);
+                if(document.getElementById('pageCart')){
+                    let total_money = parseInt(response.meta.total_money);
+                    let total_product = parseInt(response.meta.total_product);
+                    if(response.data.length > 0){
+                        for(i=0;i<response.data.length;i++){
+                            let id = response.data[i].product.id;
+                            let quantity = parseInt(response.data[i].quantity);
+                            let price = parseInt(response.data[i].product.price);
+                            if(document.getElementById('total-price-product'+id)){
+                                $('#total-price-product'+id).text(formatCurrencyVND(quantity*price));
+                            }
+                        }
+                    }
+                    $('#totalMoney').text(formatCurrencyVND(total_money));
+                    $('#totalProduct').text(formatCurrencyVND(total_product));
+                    
+                }
+                totalProduct = parseInt(response.meta.total_product_cart);
+                $('#cartCount').text(totalProduct);
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+
+    $('#btnOrder').click(function() {
+        var productId = $(this).data('product-id');
+        let productCount = $("#productCount"+productId).val();
+        $.ajax({
+            url: '/order',
+            method: 'POST',
+            //contentType: 'application/json',
+            data: {
+                product_id: productId,
+                quantity: productCount
+            },
+            success: function(response) {
+                if(response.code == 200){
+                    alert(response.error);
+                    window.location.href = '/';
+                }else{
+                    alert(response.error);
+                }
             },
             error: function(error) {
                 console.error('Error:', error);
@@ -234,10 +289,10 @@ function sortProductList(sort) {
     }
     const baseUrl = window.location.origin + window.location.pathname;
 
-
     // Append the input value as a query parameter
     const fullUrl = `${baseUrl}?sort_by=price&sort_type=`+sort;
 
     // Redirect to the new URL
     window.location.href = fullUrl;
 }
+

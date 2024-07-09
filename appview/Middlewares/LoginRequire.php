@@ -15,7 +15,7 @@ class LoginRequire
     public function __invoke()
     {
         // TODO: Implement __invoke() method.
-        if (app()->has('auth') && app('auth')->logged) {
+        if (checkLoginFe()) {
             return;
         }
         throw new \Exception('Access Token required', 403);

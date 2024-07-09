@@ -12,20 +12,12 @@ class OrderController extends ApiController
 {
     public function postOrder()
     {
-        if (config('api.version') == 2) {
-            $data = model('order/post_order_v2')->load(
-                ['user_id' => app('auth')->u_id]
-                + $this->input
-            );
-        } else {
-            $data = model('order/post_order')->load(
-                ['user_id' => app('auth')->u_id]
-                + $this->input
-            );
-        }
+        $data = model('order/post_order_v3')->load(
+            ['user_id' => $_SESSION['userIdFe']]
+            + $this->input
+        );
 
-
-        return $data['vars'];
+        return $data;
     }
 
     public function getOrders()

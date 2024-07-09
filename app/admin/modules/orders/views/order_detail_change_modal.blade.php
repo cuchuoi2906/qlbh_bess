@@ -33,12 +33,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Người giới thiệu:</td>
-                                    <td>
-										{{($row->user->parent->use_phone ? $row->user->parent->use_phone : $row->user->parent->use_email). ' / ' .  $row->user->parent->name .' / '.($row->user->parent->id)}}
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td>Người nhận:</td>
                                     <td>
                                         <input class="form-control" name="ord_ship_name" id="ord_ship_name"

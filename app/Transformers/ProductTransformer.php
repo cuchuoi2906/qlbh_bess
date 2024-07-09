@@ -70,7 +70,8 @@ class ProductTransformer extends TransformerAbstract {
             'active_inventory' => (int)$product->active_inventory,
             'video_url' => ($product->pro_video_file_name != '') ? url() . '/upload/products/' . $product->pro_video_file_name : '',
         ];
-        $item['min_price_policy'] = transformer_item($product->minPricePolicy, new ProductPricePolicyTransformer($product));
+        $item['min_price_policy'] = [];
+        //$item['min_price_policy'] = transformer_item($product->minPricePolicy, new ProductPricePolicyTransformer($product));
         //  [
         //     'price' => (int)($product->minPricePolicy->price ?? 0),
         //     'quantity' => (int)($product->minPricePolicy->quantity ?? 0)
