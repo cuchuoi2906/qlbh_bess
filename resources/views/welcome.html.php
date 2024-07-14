@@ -9,10 +9,10 @@ include 'includes/header.html.php';
                         <div class="swiper slide-banner">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img src="<?= asset('/images/slide-banner-img.png') ?>" alt="" />
+                                    <img src="<?= asset('/images/banner_top.jpg') ?>" alt="" />
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="<?= asset('/images/slide-banner-img.png') ?>" alt="" />
+                                    <img src="<?= asset('/images/banner_top.jpg') ?>" alt="" />
                                 </div>
                             </div>
                             <div class="swiper-button-next"></div>
@@ -24,6 +24,22 @@ include 'includes/header.html.php';
                         <form action="<?= url('post.register') ?>" method="POST" class="form-order">
                             <div class="form-content">
                                 <h2 class="form-title">Liên hệ đặt hàng</h2>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-search">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5" />
+                                            <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round" />
+                                        </svg>
+                                    </span>
+                                    <input
+                                        name="user_content"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Bạn đang tìm sản phẩm gì"
+                                        aria-label="basic-search"
+                                        aria-describedby="basic-search"
+                                    />
+                                </div>
                                 <div class="input-group">
                                     <span class="input-group-text" id="input-fullname">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,12 +80,6 @@ include 'includes/header.html.php';
                                         aria-describedby="input-phone"
                                         name="phone" id="phone"
                                     />
-                                </div>
-                                <div class="input-group">
-                                    <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu*">
-                                </div>
-                                <div class="input-group">
-                                    <input type="password" name="re_password" class="form-control" id="re_password" placeholder="Nhập lại mật khẩu*">
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-text" id="input-phone">
@@ -245,12 +255,11 @@ include 'includes/header.html.php';
                         <h2 class="title-reason">LÝ DO VUADUOC.COM</h2>
                         <h3 class="title-reason">Là Sự Lựa Chọn Hàng Đầu Của Bạn</h3>
                         <div class="reason-desc">
-                            Với sứ mệnh "MANG ĐẾN SỰ AN TÂM CHO KHÁCH HÀNG" – An tâm về chất lượng – An tâm về giá cả - An tâm về dịch vụ. Dược An
-                            Khang tôn trọng khách hàng như những người thân, không ngừng nỗ lực để mang lại giá trị vượt trội, tư vấn tận tâm,
-                            giúp khách hàng tìm ra sự lựa chọn hoàn hảo.
+                            Với sứ mệnh "MANG ĐẾN SỰ AN TÂM CHO KHÁCH HÀNG" - An tâm về chất lượng – An tâm về giá cả - An tâm về dịch vụ. Dược An 
+                            Khang tôn trọng quý khách hàng, không ngừng nỗ lực để mang lại giá trị vượt trội, tư vấn tận tâm, giúp khách hàng tìm ra sự lựa chọn hoàn hảo.
                         </div>
                         <button class="btn-custom">
-                            <a href="">Xem thêm</a>
+                            <a href="/gioi-thieu-vua-duoc">Xem thêm</a>
                         </button>
                         <div class="video d-none d-xl-block">
                             <!-- <img src="./images/section-3-5.png" alt="section-3-5.png" />  -->
@@ -300,7 +309,10 @@ include 'includes/header.html.php';
                 <div class="section-4-desc text-center">Đăng nhập để xem thêm 10.000 sản phẩm của hơn 500 nhà cung cấp trên vuaduoc.com</div>
                 <div class="d-flex justify-content-center">
                     <button class="btn-custom">
-                        <a href="">Khám phá ngay</a>
+                        <?php 
+                        $url = (checkLoginFe()) ? '/products' : '/login';
+                        ?>
+                        <a href="<?php echo $url; ?>">Khám phá ngay</a>
                     </button>
                 </div>
             </div>
@@ -432,8 +444,8 @@ include 'includes/header.html.php';
                                         Đăng ký ngay để xem thêm hơn 10.000 sản phẩm và nhận ưu đãi <br />dành riêng cho bạn!
                                     </div>
                                     <button class="btn-custom">
-                                        <a href=""
-                                            >Đăng ký miễn phí ngay
+                                        <a href="#formdangky">
+                                            Đăng ký miễn phí ngay
                                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     fill-rule="evenodd"
@@ -460,19 +472,6 @@ include 'includes/header.html.php';
                                         thông tin đã cung cấp và kích hoạt tài khoản. <br /><br />Nếu bạn có thắc mắc, vui lòng liên hệ hotline:
                                         0342.342.366 để được hỗ trợ trực tiếp.
                                     </div>
-                                    <button class="btn-custom">
-                                        <a href=""
-                                            >Đăng ký miễn phí ngay
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M17.5677 9.03436C17.8801 8.72194 18.3867 8.72194 18.6991 9.03436L25.0991 15.4344C25.4115 15.7468 25.4115 16.2533 25.0991 16.5657L18.6991 22.9657C18.3867 23.2782 17.8801 23.2782 17.5677 22.9657C17.2553 22.6533 17.2553 22.1468 17.5677 21.8344L22.602 16.8H7.46675C7.02492 16.8 6.66675 16.4419 6.66675 16C6.66675 15.5582 7.02492 15.2 7.46675 15.2H22.602L17.5677 10.1657C17.2553 9.85331 17.2553 9.34678 17.5677 9.03436Z"
-                                                    fill="white"
-                                                />
-                                            </svg>
-                                        </a>
-                                    </button>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -488,19 +487,6 @@ include 'includes/header.html.php';
                                         Đặt hàng ngay và nhận voucher cho đơn hàng đầu tiên, giao hàng miễn phí trên toàn quốc. <br /><br />
                                         Nếu bạn có thắc mắc, vui lòng liên hệ hotline: 0342.342.366 để được hỗ trợ trực tiếp.
                                     </div>
-                                    <button class="btn-custom">
-                                        <a href=""
-                                            >Đăng ký miễn phí ngay
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M17.5677 9.03436C17.8801 8.72194 18.3867 8.72194 18.6991 9.03436L25.0991 15.4344C25.4115 15.7468 25.4115 16.2533 25.0991 16.5657L18.6991 22.9657C18.3867 23.2782 17.8801 23.2782 17.5677 22.9657C17.2553 22.6533 17.2553 22.1468 17.5677 21.8344L22.602 16.8H7.46675C7.02492 16.8 6.66675 16.4419 6.66675 16C6.66675 15.5582 7.02492 15.2 7.46675 15.2H22.602L17.5677 10.1657C17.2553 9.85331 17.2553 9.34678 17.5677 9.03436Z"
-                                                    fill="white"
-                                                />
-                                            </svg>
-                                        </a>
-                                    </button>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -545,7 +531,7 @@ include 'includes/header.html.php';
                                 </div>
                                 <div class="d-flex gap-4">
                                     <div class="avt">
-                                        <img src="<?= asset('/images/section-6-1.png') ?>" alt="section-7-1.png" />
+                                        <img src="<?= asset('/images/section-7-1.png') ?>" alt="section-7-1.png" />
                                     </div>
                                     <div class="info d-flex flex-column">
                                         <div class="name">Chị Phạm Thị Vân Anh</div>
@@ -578,7 +564,7 @@ include 'includes/header.html.php';
                             <div class="comment-item">
                                 <h4 class="title-quote">Sản phẩm phong phú</h4>
                                 <div class="quote-desc">
-                                    Từ ngày biết đến website Vua Dược tôi không còn phải mất công đến chợ sỉ để nhặt hàng nữa. Sản phẩm ở đây rất
+                                    Từ ngày biết đến website vuaduoc.com tôi không còn phải mất công đến chợ sỉ để nhặt hàng nữa. Sản phẩm ở đây rất
                                     đa dạng, đáp ứng được hầu hết các nhu cầu của quầy thuốc.
                                 </div>
                                 <div class="d-flex gap-4">
@@ -616,7 +602,7 @@ include 'includes/header.html.php';
                             <div class="comment-item">
                                 <h4 class="title-quote">Đặt hàng dễ dàng</h4>
                                 <div class="quote-desc">
-                                    Thao tác tìm kiếm sản phẩm, đặt hàng ở website Vua Dược rất đơn giản, hiệu quả và giá hợp lý. Muốn mua gì cũng
+                                    Thao tác tìm kiếm sản phẩm, đặt hàng ở website vuaduoc.com rất đơn giản, hiệu quả và giá hợp lý. Muốn mua gì cũng
                                     có , sản phẩm ở đây rất đa dạng và nhiều chương trình khuyến mãi hấp dẫn.
                                 </div>
                                 <div class="d-flex gap-4">

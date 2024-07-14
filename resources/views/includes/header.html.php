@@ -30,7 +30,9 @@
             <div class="container">
                 <div class="main-header align-items-center justify-content-between d-xl-flex d-none">
                     <div class="logo">
-                        <img src="<?= asset('/images/logo.png') ?>" alt="logo" />
+                        <a href="/" title="Vua Dược">
+                            <img src="<?= asset('/images/logo.png') ?>" alt="logo" />
+                        </a>
                     </div>
                     <div class="main-menu d-flex align-items-center">
                         <ul class="d-flex align-items-center m-0 p-0">
@@ -38,7 +40,7 @@
                             <li><a href="/products">Sản phẩm</a></li>
                             <li><a href="<?php echo url('post.listing', ['news',0]) ?>">Tin tức</a></li>
                             <li><a href="/loyal-client">Khách hàng thân thiết</a></li>
-                            <li><a href="/">Hướng dẫn đặt hàng</a></li>
+                            <li><a href="/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>
                         </ul>
                     </div>
                     <?php 

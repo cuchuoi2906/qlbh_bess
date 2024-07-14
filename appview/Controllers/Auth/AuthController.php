@@ -100,7 +100,7 @@ class AuthController extends ControllerBase
 
         try {
             $result = repository('users/register')->post($_POST);
-            return FlashMessage::success('Đăng ký tài khoản thành công', url('invite.success'));
+            return FlashMessage::success('Đăng ký tài khoản thành công', url('/products'));
         } catch (\Exception $e) {
             return FlashMessage::error($e->getMessage(), url_back());
         }
@@ -149,5 +149,29 @@ class AuthController extends ControllerBase
     }
     public function loyalClient(){
         return view('auth/loyalclient')->render();
+    }
+    public function introduce(){
+        return view('static/introduce')->render();
+    }
+    public function companion(){
+        return view('static/companion')->render();
+    }
+    public function guideOrder(){
+        return view('auth/guideOrder')->render();
+    }
+    public function dieuKhoanSuDung(){
+        return view('static/dieukhoansudung')->render();
+    }
+    public function chinhSachBaoMat(){
+        return view('static/chinhSachBaoMat')->render();
+    }
+    public function chinhSachVanChuyen(){
+        return view('static/chinhSachVanChuyen')->render();
+    }
+    public function chinhSachkhieuNai(){
+        return view('static/chinhsachkhieunai')->render();
+    }
+    public function kiemHangVaDoiTra(){
+        return view('static/kiemhangvadoitra')->render();
     }
 }
