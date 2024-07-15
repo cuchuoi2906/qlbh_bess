@@ -34,9 +34,9 @@
                             <h2 class="ft-title">VỀ VUADUOC.COM</h2>
                             <div class="ft-content mb-3">
                                 <ul>
-                                    <li><a href="">Giới Thiệu Vua Dược</a></li>
-                                    <li><a href="">Tin tức</a></li>
-                                    <li><a href="">Đồng Hành Nhà Thuốc</a></li>
+                                    <li><a href="/gioi-thieu-vua-duoc">Giới Thiệu Vua Dược</a></li>
+                                    <li><a href="/bai-viet/news-0">Tin tức</a></li>
+                                    <li><a href="/dong-hanh-vua-duoc">Đồng Hành Nhà Thuốc</a></li>
                                 </ul>
                             </div>
                             <h2 class="ft-title">LIÊN HỆ NHANH</h2>
@@ -50,12 +50,12 @@
                             <h2 class="ft-title">ĐIỀU KHOẢN VÀ CHÍNH SÁCH</h2>
                             <div class="ft-content">
                                 <ul>
-                                    <li><a href="">Điều Khoản Sử Dụng</a></li>
-                                    <li><a href="">Chính Sách Bảo Mật</a></li>
-                                    <li><a href="">Chính Sách Vận Chuyển</a></li>
-                                    <li><a href="">Chính Sách Giải Quyết Khiếu Nại</a></li>
-                                    <li><a href="">Chính Sách Kiểm Hàng Và Đổi Trả</a></li>
-                                    <li><a href="">Chính Sách Khách Hàng Thân Thiết</a></li>
+                                    <li><a href="/dieu-khoan-su-dung">Điều Khoản Sử Dụng</a></li>
+                                    <li><a href="/chinh-sach-bao-mat">Chính Sách Bảo Mật</a></li>
+                                    <li><a href="/chinh-sach-van-chuyen">Chính Sách Vận Chuyển</a></li>
+                                    <li><a href="/chinh-sach-giai-quyet-khieu-nai">Chính Sách Giải Quyết Khiếu Nại</a></li>
+                                    <li><a href="/chinh-sach-kiem-hang-va-doi-tra">Chính Sách Kiểm Hàng Và Đổi Trả</a></li>
+                                    <li><a href="/loyal-client">Chính Sách Khách Hàng Thân Thiết</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                             <h2 class="ft-title">HỖ TRỢ KHÁCH HÀNG</h2>
                             <div class="ft-content mb-3">
                                 <ul>
-                                    <li><a href="">Hướng Dẫn Đặt Hàng</a></li>
+                                    <li><a href="/huong-dan-dat-hang">Hướng Dẫn Đặt Hàng</a></li>
                                     <li><a href="">Câu Hỏi Thường Gặp</a></li>
                                 </ul>
                             </div>

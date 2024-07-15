@@ -87,6 +87,14 @@ Route::group([
 
 });
 Route::post('/order', [\AppView\Controllers\Api\OrderController::class, 'order']);
+Route::get('/gioi-thieu-vua-duoc', [\AppView\Controllers\Auth\AuthController::class, 'introduce']);
+Route::get('/dong-hanh-vua-duoc', [\AppView\Controllers\Auth\AuthController::class, 'companion']);
+Route::get('/huong-dan-dat-hang', [\AppView\Controllers\Auth\AuthController::class, 'guideOrder']);
+Route::get('/dieu-khoan-su-dung', [\AppView\Controllers\Auth\AuthController::class, 'dieuKhoanSuDung']);
+Route::get('/chinh-sach-bao-mat', [\AppView\Controllers\Auth\AuthController::class, 'chinhSachBaoMat']);
+Route::get('/chinh-sach-van-chuyen', [\AppView\Controllers\Auth\AuthController::class, 'chinhSachVanChuyen']);
+Route::get('/chinh-sach-giai-quyet-khieu-nai', [\AppView\Controllers\Auth\AuthController::class, 'chinhSachkhieuNai']);
+Route::get('/chinh-sach-kiem-hang-va-doi-tra', [\AppView\Controllers\Auth\AuthController::class, 'kiemHangVaDoiTra']);
 
 
 

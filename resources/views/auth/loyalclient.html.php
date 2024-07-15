@@ -2,8 +2,8 @@
 include dirname(__FILE__) . '/../includes/header.html.php';
 ?>
 <div class="main-content">
-    <div class="container">
-        <div class="page-title">Chính Sách Khách Hàng Thân Thiết</div>
+    <div class="container content-html-static">
+        <div class="page-title">Chính sách khách hàng thân thiết</div>
         <div class="artical">
             <p class="mt-4" style="font-size: 14px;">
                 Với mong muốn đem lại nhiều quyền lợi thiết thực dành cho khách hàng khi đặt hàng tại website vuaduoc.com. Vua dược hân hạnh giới
@@ -87,7 +87,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
             <p>Mọi thắc mắc Quý khách hàng vui lòng liên hệ Hotline: <strong>0342.342.366 (hỗ trợ tư vấn 24/7).</strong></p>
         </div>
         <div class="d-none d-lg-block mt-4 mb-5">
-            <img src="./images/customer-lvl.png" alt="">
+            <img src="<?= asset('/images/customer-lvl.png') ?>" alt="">
         </div>
         <div class="d-block d-lg-none right-block mt-4 mb-5">
             <div class="title">Quyền lợi</div>
@@ -100,7 +100,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                     <div class="list">
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/silver.svg" alt="">
+                                <img src="<?= asset('/images/icons/silver.svg') ?>" alt="">
                                 <span>Bạc</span>
                             </div>
                             <div class="value">10tr - 20tr</div>
@@ -108,7 +108,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </div>
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/Gold.svg" alt="">
+                                <img src="<?= asset('/images/icons/Gold.svg') ?>" alt="">
                                 <span>Vàng</span>
                             </div>
                             <div class="value">20tr - 40tr</div>
@@ -116,7 +116,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </div>
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/Platinum.svg" alt="">
+                                <img src="<?= asset('/images/icons/Platinum.svg') ?>" alt="">
                                 <span>Bạch kim</span>
                             </div>
                             <div class="value">40tr - 80tr</div>
@@ -124,7 +124,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </div>
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/Diamond.svg" alt="">
+                                <img src="<?= asset('/images/icons/Diamond.svg') ?>" alt="">
                                 <span>Kim cương</span>
                             </div>
                             <div class="value">80tr - 160tr</div>
@@ -132,7 +132,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </div>
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/Emerald.svg" alt="">
+                                <img src="<?= asset('/images/icons/Emerald.svg') ?>" alt="">
                                 <span>Lục bảo</span>
                             </div>
                             <div class="value">160tr trở lên</div>
@@ -148,7 +148,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                     <div class="list">
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/silver.svg" alt="">
+                                <img src="<?= asset('/images/icons/silver.svg') ?>" alt="">
                                 <span>Bạc</span>
                             </div>
                             <div class="value">1 NT/QT</div>
@@ -156,7 +156,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </div>
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/Gold.svg" alt="">
+                                <img src="<?= asset('/images/icons/Gold.svg') ?>" alt="">
                                 <span>Vàng</span>
                             </div>
                             <div class="value">2 NT/QT</div>
@@ -164,7 +164,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </div>
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/Platinum.svg" alt="">
+                                <img src="<?= asset('/images/icons/Platinum.svg') ?>" alt="">
                                 <span>Bạch kim</span>
                             </div>
                             <div class="value">3 NT/QT</div>
@@ -172,7 +172,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </div>
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/Diamond.svg" alt="">
+                                <img src="<?= asset('/images/icons/Diamond.svg') ?>" alt="">
                                 <span>Kim cương</span>
                             </div>
                             <div class="value">4 NT/QT</div>
@@ -180,7 +180,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                         </div>
                         <div class="d-flex">
                             <div class="icon d-flex flex-column">
-                                <img src="./images/icons/Emerald.svg" alt="">
+                                <img src="<?= asset('/images/icons/Emerald.svg') ?>" alt="">
                                 <span>Lục bảo</span>
                             </div>
                             <div class="value">5 NT/QT</div>

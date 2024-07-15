@@ -139,14 +139,14 @@ return [
                 'title' => 'Tên',
                 'rule' => 'required'
             ],
-            'password' => [
+            /*'password' => [
                 'title' => 'Mật khẩu',
                 'rule' => 'required|min_len,6'
             ],
             're_password' => [
                 'title' => 'Mật khẩu xác thực',
                 'rule' => 'required|min_len,6'
-            ],
+            ],*/
             /*'gender' => [
                 'title' => 'Giới tính',
                 'rule' => 'integer',

@@ -28,9 +28,9 @@ if ($user_count > 0) {
 }
 */
 
-if (input('password') != input('re_password')) {
+/*if (input('password') != input('re_password')) {
     throw new RuntimeException('Mật khẩu xác thực không khớp', 400);
-}
+}*/
 
 
 $email = '';
@@ -76,7 +76,7 @@ $user = [
     'use_loginname' => input('phone'),
     'use_mobile' => $phone,
     'use_phone' => $phone,
-    'use_password' => md5(input('password')),
+    'use_password' => md5($phone), // mặc định passwork là sdt đăng ký
     'use_gender' => (int)input('gender'),
     'use_email' => $email,
     'use_name' => input('name'),
@@ -89,7 +89,8 @@ $user = [
     'use_address_register' => input('address_register'),
     'use_job_code' => (int)input('job_code'),
     'use_referer_code'=>'',
-    'use_partner_note'=>''
+    'use_partner_note'=>'',
+    'use_content'=>input('user_content')
 ];
 $user_id = \App\Models\Users\Users::insert($user);
 

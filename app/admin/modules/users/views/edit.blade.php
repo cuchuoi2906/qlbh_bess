@@ -72,7 +72,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Nội dung</h3>
+                        <h3 class="box-title">Sản phẩm user muốn tìm</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="nav-tabs-custom">

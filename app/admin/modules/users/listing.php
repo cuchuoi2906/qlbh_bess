@@ -81,36 +81,37 @@ $dataGrid->model = $model;
 $dataGrid->deleteLabel = 'hủy';
 
 $dataGrid->column('use_id', 'ID', 'number', [], true)->addExport();
-$dataGrid->column('use_referral_id', 'ID người giới thiệu', 'number', [], true)->addExport();
-$dataGrid->column('username_referral', 'Tên người giới thiệu', 'string', [], false)->addExport();
+/*$dataGrid->column('use_referral_id', 'ID người giới thiệu', 'number', [], true)->addExport();
+$dataGrid->column('username_referral', 'Tên người giới thiệu', 'string', [], false)->addExport();*/
 $dataGrid->column('use_created_at', 'Ngày đăng ký', 'datetime', [], false)->addExport();
 $dataGrid->column('use_name', 'Tên', ['string', 'trim'], [], true)->addExport();
 //$dataGrid->column(['use_gender', [0 => 'Female', 1 => 'Male']], 'Giới tính', 'select');
-$dataGrid->column('use_email', 'Email', 'string', [], true)->addExport();
+//$dataGrid->column('use_email', 'Email', 'string', [], true)->addExport();
 $dataGrid->column('use_phone', 'Số điện thoại', 'string', [], true)->addExport();
-$dataGrid->column(false, 'Ví nạp', function ($row) {
+/*$dataGrid->column(false, 'Ví nạp', function ($row) {
     return $row->wallet ? number_format($row->wallet->charge) : 0;
 })->addExport();
 $dataGrid->column(false, 'Ví Hoa hồng', function ($row) {
     return $row->wallet ? number_format($row->wallet->commission) : 0;
 })->addExport();
 $dataGrid->column('use_level', 'Cấp độ hiện tại', 'number', [], true)->addExport();
-$dataGrid->column('use_active', 'Active', 'activeDisabled|center', [], true)->addExport();
 $dataGrid->column('use_premium', 'Premium', 'active|center', [], true)->addExport();
 $dataGrid->column('use_premium_commission', 'Premium Commission', 'number|center', [], false)->addExport();
-
-$dataGrid->column('use_family', 'Đặc biệt (Mua hàng ưu đãi)', 'active|center', [], true)->addExport();
-$dataGrid->column('use_is_seller', 'Mua hàng chiết khẩu max', 'active|center', [], true)->addExport();
+*/
+$dataGrid->column('use_active', 'Active', 'active|center', [], true)->addExport();
+//$dataGrid->column('use_family', 'Đặc biệt (Mua hàng ưu đãi)', 'active|center', [], true)->addExport();
+//$dataGrid->column('use_is_seller', 'Mua hàng chiết khẩu max', 'active|center', [], true)->addExport();
 
 
 //Tổng số thành viên
-$dataGrid->column('total_direct_refer', 'F1', 'number', [], [])->addExport();
-$dataGrid->column('total_refer', 'Tổng số F', 'number', [], [])->addExport();
+//$dataGrid->column('total_direct_refer', 'F1', 'number', [], [])->addExport();
+//$dataGrid->column('total_refer', 'Tổng số F', 'number', [], [])->addExport();
 
 
-$dataGrid->column(false, 'Chi tiết point', function ($row) use ($blade) {
+/*$dataGrid->column(false, 'Chi tiết point', function ($row) use ($blade) {
     return '<a href="point.php?user_id=' . $row->id . '">Chi tiết Point</a>';
 });
+*/
 
 $dataGrid->column(false, 'Chi tiết', function ($row) use ($blade) {
     return $blade->view()->make('user_detail_modal', compact('row'))->render();
@@ -118,6 +119,7 @@ $dataGrid->column(false, 'Chi tiết', function ($row) use ($blade) {
 $dataGrid->column(false, 'Đơn hàng', function ($row) use ($blade) {
     return $blade->view()->make('order_modal', compact('row'))->render();
 });
+/*
 $dataGrid->column(false, 'Giao dịch', function ($row) use ($blade) {
     return $blade->view()->make('money_modal', compact('row'))->render();
 });
@@ -128,7 +130,7 @@ $dataGrid->column('use_sale', 'Nhân viên sale', 'activeDisabled|center', [], t
 $dataGrid->column(uniqid(), 'Link giới thiệu', function ($row) {
     return url('invite', ['base64' => base64_encode($row->id)]);
 })->addExport();
-
+*/
 $dataGrid->column(uniqid(), 'Địa Chỉ', function ($row) {
     $v_address = $row->use_address_register;
     if($row->use_ward_id > 0 && $row->use_district_id > 0 && $row->use_province_id > 0){
@@ -140,7 +142,7 @@ $dataGrid->column(uniqid(), 'Địa Chỉ', function ($row) {
     return $v_address;
 })->addExport();
 
-$dataGrid->column(['use_source', ['Tất cả'] + $sourceUser], 'Nguồn khách hàng', 'selectShow', [], true)->addExport();
+//$dataGrid->column(['use_source', ['Tất cả'] + $sourceUser], 'Nguồn khách hàng', 'selectShow', [], true)->addExport();
 
 $dataGrid->column(uniqid(), 'Nghề Nghiệp', function ($row) use ($use_job) {
     if(isset($use_job[$row->use_job_code])){
@@ -182,7 +184,7 @@ $dataGrid->column('', 'Phục hồi', function($row){
     </a>';
 });
 //$dataGrid->column('', 'Phục hồi', 'restore|center');
-
+/*
 if (
     //false &&
     $is_admin ?? false
@@ -193,7 +195,7 @@ if (
         ], config('app.jwt_key'), 'HS256');
     });
 }
-
+*/
 echo $blade->view()->make('listing', [
     'data_table' => $dataGrid->render()
 ] + get_defined_vars())->render();
