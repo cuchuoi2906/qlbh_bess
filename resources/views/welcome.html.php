@@ -662,9 +662,6 @@ include 'includes/header.html.php';
                                                 echo $item->title;
                                                 ?>
                                             </h3>
-                                            <div class="view-more">
-                                                <img src="<?= asset('/images/icons/news-icon.svg') ?>" alt="" />
-                                            </div>
                                         </a>
                                     </div>
                                 </div>

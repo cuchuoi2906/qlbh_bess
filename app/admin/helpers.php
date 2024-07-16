@@ -15,7 +15,7 @@ function get_categories_for_select($deep = 0, $pre_label = '|__', $type = 'PRODU
         if($type == 'NEWS'){
             $categories->where('cat_type = "'.$type.'"');
         }else{
-            $categories->where('cat_type != "'.$type.'"');
+            $categories->where('cat_type != "NEWS"');
         }
     $categories = $categories->all();
 

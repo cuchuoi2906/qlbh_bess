@@ -35,13 +35,13 @@
                     </div>
                     <div class="main-search-pc">
                         <div class="input-group rounded-pill">
+                            <input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Bạn đang muốn tìm sản phẩm gì?" aria-label="basic-search" aria-describedby="basic-search">
                             <span class="input-group-text" id="main-search-pc">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
                                     <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg>
                             </span>
-                            <input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Bạn đang muốn tìm sản phẩm gì?" aria-label="basic-search" aria-describedby="basic-search">
                         </div>
                     </div>
                     <div class="cart">

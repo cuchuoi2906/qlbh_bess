@@ -199,6 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('main-search');
     button.addEventListener('click', submitInputSearchProduct);
 
+    const buttonPc = document.getElementById('main-search-pc');
+    buttonPc.addEventListener('click', submitInputSearchProduct);
+
     // Event listener for the Enter key
     const inputElement = document.getElementById('keyword');
     inputElement.addEventListener('keypress', function(event) {
