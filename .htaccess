@@ -7,11 +7,19 @@ RewriteRule ^(.*)$ /app/admin/ [L,R=301]
 # Allow access to specific file types directly
 RewriteCond %{REQUEST_URI} !\.(gif|jpe?g|png|ico|css|js|swf|woff|woff2|txt)$
 
+# Redirect /upload to /public/upload
+RewriteCond %{REQUEST_URI} ^/upload/
+RewriteRule ^upload/(.*)$ public/upload/$1 [L]
+
+# Allow access to assets in /public/assets
+RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+# Allow access to upload in /public/upload
+RewriteRule ^upload/(.*)$ public/upload/$1 [L]
+
 # Redirect anything else to public/index.php, but allow /assets to map to /public/assets
 RewriteCond %{REQUEST_URI} !^/app/admin
 RewriteCond %{REQUEST_URI} !^/public/index\.php$
 RewriteCond %{REQUEST_URI} !^/assets/
+RewriteCond %{REQUEST_URI} !^/upload/
 RewriteRule ^(.*)$ public/index.php [L]
-
-# Allow access to assets in /public/assets
-RewriteRule ^assets/(.*)$ public/assets/$1 [L]

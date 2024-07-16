@@ -3,21 +3,26 @@ include dirname(__FILE__) . '/../includes/header.html.php';
 ?>
     <div class="main-content">
         <div class="container">
-            <div class="news-category">
-                <div class="swiper news-tag-slide">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><a href="/">Phòng & Chữa Bệnh</a></div>
-                        <div class="swiper-slide"><a href="/">Dinh Dưỡng</a></div>
-                        <div class="swiper-slide"><a href="/">Mẹ Và Bé</a></div>
-                        <div class="swiper-slide"><a class="active" href="/">Tin Khuyến Mãi</a></div>
-                        <div class="swiper-slide"><a href="/">Người Cao Tuổi</a></div>
-                        <div class="swiper-slide"><a href="/">Khỏe Đẹp</a></div>
-                        <div class="swiper-slide"><a href="/">Giới Tính</a></div>
-                        <div class="swiper-slide"><a href="/">Tin Tức Sức Khỏe</a></div>
-                        <div class="swiper-slide"><a href="/">Truyền Thông</a></div>
+            <?php 
+            if($cateogryChildren){
+            ?>
+                <div class="news-category">
+                    <div class="swiper news-tag-slide">
+                        <div class="swiper-wrapper">
+                            <?php 
+                            foreach($cateogryChildren as $cate){
+                                $class = ($categoryId == $cate->id) ? 'class="active"' : "";
+                            ?>
+                                <div class="swiper-slide">
+                                    <a href="/bai-viet/news-<?php echo $cate->id; ?>" <?php echo $class; ?>><?php echo $cate->name; ?></a>
+                                </div>
+                            <?php 
+                            }?>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php
+            }?>
             <div class="row">
                 <div class="col-xl-8">
                     <h1 class="artical-title"><?php echo $item->title; ?></h1>

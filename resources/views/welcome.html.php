@@ -8,12 +8,12 @@ include 'includes/header.html.php';
                     <div class="col-xl-7 mb-3 mb-xl-0">
                         <div class="swiper slide-banner">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="<?= asset('/images/banner_top.jpg') ?>" alt="" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="<?= asset('/images/banner_top.jpg') ?>" alt="" />
-                                </div>
+                                <?php for($i=1;$i<7;$i++){ ?>
+                                    <div class="swiper-slide">
+                                        <img src="<?= asset('/images/banner_top'.$i.'.png') ?>" alt="" />
+                                    </div>
+                                <?php 
+                                }?>
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
@@ -625,14 +625,14 @@ include 'includes/header.html.php';
             </div>
         </div>
         <?php
-        if(sizeof($postAll->data) > 0){
+        if($postAll && sizeof($postAll->data) > 0){
         ?>
             <div id="section-8">
                 <div class="container">
                     <div class="d-flex justify-content-between mb-4 mb-md-3">
                         <h3 class="title-news">Tin Tức</h3>
                         <button class="btn-custom-outline d-none d-md-inline-block">
-                            <a href="<?php echo url('post.listing', ['news',0]) ?>"
+                            <a href="<?php echo url('post.listing', ['news',82]) ?>"
                                 >Xem thêm
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -655,7 +655,7 @@ include 'includes/header.html.php';
                                     <div class="news-item">
                                         <a href="<?php echo url('post.detail', [$item->rewrite,$item->id]) ?>">
                                             <div class="thumb">
-                                                <img src="<?php echo $item->image; ?>" alt="section-8-1.png" />
+                                                <img src="<?php echo $item->image; ?>" alt="<?php echo $item->title; ?>" />
                                             </div>
                                             <h3 class="news-title">
                                                 <?php 

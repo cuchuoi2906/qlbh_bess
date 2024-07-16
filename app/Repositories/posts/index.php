@@ -13,7 +13,7 @@ use VatGia\Helpers\Transformer\TransformerPaginatorAdapter;
 $vars = [];
 $page = input('page') ?? getValue('page', 'int', 'GET', 1);
 $page_size = input('page_size') ?? 10;
-$category_id = input('pos_category_id') ?? 0;
+$category_id = input('category_id') ?? 0;
 $type = replaceMQ(input('type')) ?? '';
 
 $conditions = 'pos_active = 1';

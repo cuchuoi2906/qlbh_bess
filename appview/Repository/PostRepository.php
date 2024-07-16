@@ -12,9 +12,10 @@ namespace AppView\Repository;
 class PostRepository implements PostRepositoryInterface
 {
 
-    public function allByType($type, $page_size = 3)
+    public function allByType($type, $page_size = 3,$category_id = 82)
     {
         $result = model('posts/index')->load([
+            'category_id' =>(int)$category_id,
             'pos_type' => $type,
             'page' => getValue('page'),
             'page_size' => (int)$page_size

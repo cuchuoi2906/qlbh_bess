@@ -36,7 +36,7 @@ class HomeController extends FrontEndController
 
     public function render()
     {
-        $postAll = $this->post->allByCat(85,'NEWS');
+        $postAll = $this->post->allByCat(82,'NEWS');
         $category =$this->categoryRepository->getCategoryByID(60);
         $province = $this->provinceRepository->all();
 

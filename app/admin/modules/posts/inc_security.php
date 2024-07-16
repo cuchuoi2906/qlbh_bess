@@ -74,7 +74,6 @@ if ($pos_type == 'DRIVER') {
     $fs_redirect = 'listing.php?type=' . $pos_type ?? '';
 }
 
-
 $categories_arr = get_categories_for_select(0, '|___', $pos_type);
 
 

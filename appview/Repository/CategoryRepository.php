@@ -47,5 +47,15 @@ class CategoryRepository
 
         return $result['vars'] ? collect_recursive($result['vars']) : null;
     }
+    
+    public function getCategoryByIdAndType($type,$parent_id){
+        $type = $type ?? 'NEWS';
+
+        $result = model('categories/get_list_by_parent')->load([
+            'type' => $type,
+            'parent_id'=>$parent_id
+        ]);
+        return $result['vars'] ? collect_recursive($result['vars']) : null;
+    }
 
 }

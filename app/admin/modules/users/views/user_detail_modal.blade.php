@@ -30,6 +30,10 @@
                                 <td>{{ $row->email }}</td>
                             </tr>
                             <tr>
+                                <td>Sản phẩm tìm kiếm:</td>
+                                <td>{{ $row->content }}</td>
+                            </tr>
+                            <!--<tr>
                                 <td>Ví nạp:</td>
                                 <td>{{ $row->wallet ? number_format($row->wallet->charge) : 0 . ' đ'}}</td>
                             </tr>
@@ -58,12 +62,12 @@
                                     }
                                     ?>
                                 </td>
-                            </tr>
+                            </tr>-->
 
                         </table>
                     </div>
 
-                    <div class="col-md-12">
+                    <!--<div class="col-md-12">
                         <h3>Cấp duới</h3>
                         <table class="table table-bordered">
                             <tr>
@@ -131,7 +135,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="modal-footer">

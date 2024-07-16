@@ -96,23 +96,39 @@
                             </button>
                         </div>
                         <div class="user-cta py-4 px-3">
-                            <div class="desc mb-2">Đăng nhập để hưởng đặc quyền cho thành viên</div>
-                            <div class="cta d-flex gap-2">
-                                <button>
-                                    <a href="/login">Đăng nhập</a>
-                                </button>
-                                <button>
-                                    <a href="/register">Đăng ký</a>
-                                </button>
-                            </div>
+                            <?php
+                            if(checkLoginFe()){
+                                ?>
+                                <div class="user-btn d-flex align-items-center justify-content-center gap-2 rounded-pill">
+                                    <div class="avatar">
+                                        <img width="37" height="37" class="rounded-circle" src="<?= asset('/images/avatar.png') ?>" alt="avatar">
+                                    </div>
+                                    <div class="name"><?php echo isset($_SESSION["userNameFe"]) ? $_SESSION["userNameFe"] : ""; ?></div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.6 9.60001L12 14.4L6.40002 9.60001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <?php
+                            }else{?>
+                                <div class="desc mb-2">Đăng nhập để hưởng đặc quyền cho thành viên</div>
+                                <div class="cta d-flex gap-2">
+                                    <button>
+                                        <a href="/login">Đăng nhập</a>
+                                    </button>
+                                    <button>
+                                        <a href="/?1#formdangky">Đăng ký</a>
+                                    </button>
+                                </div>
+                            <?php 
+                            }?>
                         </div>
                         <div class="sidebar-menu py-4 px-3">
                             <ul class="d-flex flex-column gap-3">
-                                <li><a href="">Trang chủ</a></li>
-                                <li><a href="">Sản phẩm</a></li>
-                                <li><a href="">Tin tức</a></li>
-                                <li><a href="">Khách hàng thân thiết</a></li>
-                                <li><a href="">Hướng dẫn đặt hàng</a></li>
+                                <li><a href="/">Trang chủ</a></li>
+                                <li><a href="/products">Sản phẩm</a></li>
+                                <li><a href="<?php echo url('post.listing', ['news',82]) ?>">Tin tức</a></li>
+                                <li><a href="/loyal-client">Khách hàng thân thiết</a></li>
+                                <li><a href="/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>
                             </ul>
                         </div>
                     </div>

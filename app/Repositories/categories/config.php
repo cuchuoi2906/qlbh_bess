@@ -33,5 +33,18 @@ return [
                 'rule' => ''
             ]
         ]
+    ],
+    'categories/get_list_by_parent' => [
+        'title' => 'Danh sách danh mục theo chuyên mục id cha',
+        'input' => [
+            'parent_id' => [
+                'title' => 'ID chuyên mục cha',
+                'rule' => ''
+            ],
+            'type' => [
+                'title' => 'Loại danh mục',
+                'rule' => ''
+            ]
+        ]
     ]
 ];

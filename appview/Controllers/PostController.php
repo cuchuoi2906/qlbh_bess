@@ -10,6 +10,7 @@ namespace AppView\Controllers;
 
 
 use AppView\Repository\PostRepository;
+use AppView\Repository\CategoryRepository;
 use AppView\Repository\PostRepositoryInterface;
 use VatGia\Cache\Facade\Cache;
 
@@ -20,15 +21,17 @@ class PostController extends FrontEndController
      * @var PostRepositoryInterface
      */
     protected $post;
+    protected $category;
 
     /**
      * PostController constructor.
      * @param PostRepositoryInterface $post
      */
-    public function __construct(PostRepositoryInterface $post)
+    public function __construct(PostRepositoryInterface $post,CategoryRepository $category)
     {
         parent::__construct();
         $this->post = $post;
+        $this->category = $category;
     }
 
     /**
@@ -42,19 +45,20 @@ class PostController extends FrontEndController
         $categoryId = $detail->category->id;
         $postCategory = $this->post->allByCat($categoryId,'');
         $postCategory = $postCategory->data;
+        $cateogryChildren = $this->category->getCategoryByIdAndType('NEWS',60);
         return view('posts/detail')->render([
             'item' => $detail,
-            'postCategory'=>$postCategory
+            'categoryId'=>$categoryId,
+            'postCategory'=>$postCategory,
+            'cateogryChildren'=>$cateogryChildren
         ]);
     }
     public function postListing($type,$id){
-        $postAll = $this->post->allByType($type,16);
-        if (!$postAll) {
-            return redirect(url('index'));
-        }
-        $items = $postAll->data;
-        $pagination = $postAll->meta->pagination;
+        $idCate = !$id ? 82 : $id;
+        $postAll = $this->post->allByType($type,4,$idCate);
 
-        return view('posts/listing')->render(compact('items', 'pagination'));    
+        $cateogryChildren = $this->category->getCategoryByIdAndType('NEWS',60);
+
+        return view('posts/listing')->render(compact('postAll','cateogryChildren','idCate'));    
     }
 }
