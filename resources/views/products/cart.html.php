@@ -140,7 +140,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                 </div>
             </div>
             <div class="col-xl-4 mb-4">
-                <div class="content-box mb-4">
+                <!--<div class="content-box mb-4">
                     <h2 class="content-title">Mã giảm giá</h2>
                     <div id="view-voucher" class="view-voucher d-flex align-items-center mb-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -163,7 +163,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                     </div>
                     <input type="text" class="form-control mb-3" id="voucher-code" placeholder="Nhập mã ưu đãi" />
                     <div class="btn-custom">Áp Dụng Ngay</div>
-                </div>
+                </div>-->
                 <div class="content-box">
                     <h2 class="content-title">Thông tin đơn hàng</h2>
                     <ul class="d-flex flex-column gap-2 m-0 p-0">
@@ -175,14 +175,14 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                             <div class="label">Giảm giá trực tiếp</div>
                             <div class="value fw-bold"><?php echo isset($meta['total_discount']) ? formatCurrencyVND($meta['total_discount']) : 0; ?></div>
                         </li>
-                        <li class="d-flex justify-content-between align-items-center">
+                        <!--<li class="d-flex justify-content-between align-items-center">
                             <div class="label">Giảm giá Voucher</div>
                             <div class="value fw-bold"><?php echo isset($meta['total_discount']) ? formatCurrencyVND($meta['total_discount']) : 0; ?></div>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
                             <div class="label">Tiết kiệm được</div>
                             <div class="value fw-bold">0 đ</div>
-                        </li>
+                        </li>-->
                         <li class="d-flex justify-content-between align-items-center">
                             <div class="label">Tổng tiền</div>
                             <div class="value fw-bold total" id="totalMoney"><?php echo isset($meta['total_money']) ? formatCurrencyVND($meta['total_money']) : 0; ?></div>

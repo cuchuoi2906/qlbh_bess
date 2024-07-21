@@ -77,6 +77,7 @@ Route::post('/increment_product', [\AppView\Controllers\Api\ProductController::c
 Route::get('/loyal-client', [\AppView\Controllers\Auth\AuthController::class, 'loyalClient']);
 //Route::get('/cart', [\AppView\Controllers\ProductController::class, 'getProductsCart']);
 
+
 Route::group([
     'prefix' => 'cart'
 ], function () {
@@ -95,6 +96,5 @@ Route::get('/chinh-sach-bao-mat', [\AppView\Controllers\Auth\AuthController::cla
 Route::get('/chinh-sach-van-chuyen', [\AppView\Controllers\Auth\AuthController::class, 'chinhSachVanChuyen']);
 Route::get('/chinh-sach-giai-quyet-khieu-nai', [\AppView\Controllers\Auth\AuthController::class, 'chinhSachkhieuNai']);
 Route::get('/chinh-sach-kiem-hang-va-doi-tra', [\AppView\Controllers\Auth\AuthController::class, 'kiemHangVaDoiTra']);
-
-
+Route::get('/payment/{id}', [\AppView\Controllers\PaymentController::class, 'getBanksByOrderId']);
 

@@ -231,6 +231,11 @@ if ($order_id) {
     
     // Xóa sản phẩm ở giỏ hàng
     UserCart::where('usc_user_id', $user->id)->delete();
-    throw new RuntimeException("Đặt hàng thành công quản trị viên sẽ liên hệ với bạn sớm nhất", 200);
+    //throw new RuntimeException("Đặt hàng thành công quản trị viên sẽ liên hệ với bạn sớm nhất", 200);
     //\AppView\Helpers\Notification::to($user->id, 'Đặt hàng thành công', 'Chúc mừng bạn đã đặt hàng thành công. Chúng tôi sẽ xử lý đơn hàng sớm nhất.');
+    $current_order = \App\Models\Order::findByID($order_id);
+    $vars = transformer_item($current_order, new \App\Transformers\OrderTransformer());
 }
+return [
+    'vars' => $vars
+];

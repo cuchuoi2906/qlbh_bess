@@ -13,6 +13,122 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                 <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
             </div>
         </div>
+        <?php 
+        if(intval($is_hot) > 0 && $productList){
+            $v_date_start = '2024-07-20T00:00:00';
+            $v_date_end = '2024-07-25T00:00:00';
+            $productList10items = array_slice($productList,0,10);
+            $productList = array_slice($productList,10);
+        ?>
+            <script>
+                function getTimeRemaining(startDate, endDate) {
+                    const now = new Date();
+                    const start = new Date(startDate);
+                    const end = new Date(endDate);
+
+                    if (now < start) {
+                        return { error: "Promotion has not started yet" };
+                    }
+
+                    if (now > end) {
+                        return { error: "Promotion has ended" };
+                    }
+
+                    const timeDiff = end - now;
+
+                    const seconds = Math.floor((timeDiff / 1000) % 60);
+                    const minutes = Math.floor((timeDiff / 1000 / 60) % 60);
+                    const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+                    return {
+                        days: days,
+                        hours: hours,
+                        minutes: minutes,
+                        seconds: seconds
+                    };
+                }
+
+                function updateTimer() {
+                    const startDate = "<?php echo $v_date_start; ?>";
+                    const endDate = "<?php echo $v_date_end; ?>";
+                    const timerDiv = document.getElementById("timeHot");
+
+                    const remainingTime = getTimeRemaining(startDate, endDate);
+
+                    if (remainingTime.error) {
+                        timerDiv.textContent = remainingTime.error;
+                    } else {
+                        timerDiv.innerHTML = '<span>Còn</span><div class="hour">'+remainingTime.days+'</div>Ngày<div class="hour">'+remainingTime.hours+'</div>Giờ<div class="minutes">'+remainingTime.minutes+'</div><span>Phút</span><div class="second">'+remainingTime.seconds+'</div><span>Giây</span>';
+                    }
+                }
+
+                // Update the timer every second
+                setInterval(updateTimer, 1000);
+
+                // Initial update
+                updateTimer();
+            </script>
+            <div class="flash-sale">
+                <div class="top-flash-sale">
+                    <img src="<?= asset('/images/flash-sale.png') ?>" alt="flash-sale"><br />
+                    <div class="flash-sale-left">    
+                        <div class="count-down d-flex gap-2 align-items-center" id="timeHot">
+                        </div>
+                    </div>
+                    <div class="flash-sale-right">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <span>Từ ngày</span>
+                            <div class="date"><?php echo date('d/m/Y',strtotime($v_date_start)); ?></div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <span>Đến ngày</span>
+                            <div class="date"><?php echo date('d/m/Y',strtotime($v_date_end)); ?></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-flash-sale">
+                    <div class="swiper flash-sale-slide swiper-initialized swiper-horizontal swiper-backface-hidden">
+                        <div class="swiper-wrapper" id="swiper-wrapper-863ad8227b1e233f" aria-live="polite">
+                            <?php 
+                            foreach($productList10items as $items){ 
+                            ?>
+                                <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 6" style="width: 212px; margin-right: 24px;">
+                                    <div class="prod-item">
+                                        <div class="thumb">
+                                            <img src="<?php echo $items['avatar']['url']; ?>" alt="product">
+                                        </div>
+                                        <h3 class="prod-title"><a href="/"><?php echo $items['name']; ?></a></h3>
+                                        <div class="price"><?php echo formatCurrencyVND($items['price']); ?></div>
+                                        <div class="input-group number-input">
+                                            <div class="input-group-prepend">
+                                                <button data-product-id="<?php echo $items['id']; ?>" class="btn btn-decrement" type="button" disabled="">
+                                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="16" cy="16" r="10.6667" stroke="#C3CCEC" stroke-width="1.5"></circle>
+                                                        <path d="M19.2 16H12.8" stroke="#C3CCEC" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <input id="productCount<?php echo $items['id']; ?>" type="number" class="form-control inputNumber" value="0" min="0">
+                                            <div class="input-group-append">
+                                                <button data-product-id="<?php echo $items['id']; ?>" class="btn btn-increment" type="button">
+                                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="16" cy="16" r="10.6667" stroke="#1C274C" stroke-width="1.5"></circle>
+                                                        <path d="M19.2 16L16 16M16 16L12.8 16M16 16L16 12.8M16 16L16 19.2" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php 
+                            }?>
+                        </div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                </div>
+            </div>
+        <?php 
+        }?>
     </div>
     <div class="container d-none d-md-block">
         <?php 
@@ -198,14 +314,6 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                     <div class="thumb">
                                         <img src="<?php echo $items['avatar']['url']; ?>" alt="product" />
                                     </div>
-                                    <!--<div class="btn-favorite">
-                                        <div class="outline">
-                                            <img src="<?= asset('/images/icons/heart.svg') ?>" />
-                                        </div>
-                                        <div class="fill">
-                                            <img src="<?= asset('/images/icons/heart-fill.svg') ?>" />
-                                        </div>
-                                    </div>-->
                                     <h3 class="prod-title">
                                         <a href="/"><?php echo $items['name']; ?></a>
                                     </h3>

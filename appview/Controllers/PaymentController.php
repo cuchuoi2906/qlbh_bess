@@ -135,4 +135,18 @@ class PaymentController
             redirect_after(url('payment'), 1);
         }
     }
+    public function getBanksByOrderId($id = 0)
+    {
+        if(intval($id) <= 0){
+            return;
+        }
+        $result = model('order/get_order_by_id')->load([
+            'id' => (int)$id,
+        ]);
+
+        return view('products/checkout')->render([
+            'id' => $id,
+            'orderData'=>$result['vars']
+        ]);
+    }
 }

@@ -17,27 +17,27 @@ $items = [];
 
 //
 $categories = \App\Models\Categories\Category::where($sqlWhere)
-//    ->with(['childs'])
+    ->with(['childs'])
     ->pagination(getValue('page'), $per_page)
     ->order_by('cat_order', 'DESC')
     ->all();
 $total = \App\Models\Categories\Category::where($sqlWhere)->count();
 $items = $categories;
 
-//foreach ($categories as $category) {
-//    $items[$category->id] = $category;
-//    if ($category->childs) {
-//        foreach ($category->childs as $child) {
-////            $child->{'name_' . locale()} = '|__' . $child->{'name_' . locale()};
-//            $child->{'name_' . locale()} = '|__' . $child->{'name_' . locale()};
-//            $items[$child->id] = $child;
-//            foreach ($child->childs as $child1) {
-//                $child1->{'name_' . locale()} = '|___|__' . $child1->{'name_' . locale()};
-//                $items[$child1->id] = $child1;
-//            }
-//        }
-//    }
-//}
+foreach ($categories as $category) {
+    $items[$category->id] = $category;
+    if ($category->childs) {
+        foreach ($category->childs as $child) {
+            $child->{'name_' . locale()} = '|__' . $child->{'name_' . locale()};
+            $child->{'name_' . locale()} = '|__' . $child->{'name_' . locale()};
+            $items[$child->id] = $child;
+            foreach ($child->childs as $child1) {
+                $child1->{'name_' . locale()} = '|___|__' . $child1->{'name_' . locale()};
+                $items[$child1->id] = $child1;
+            }
+        }
+    }
+}
 
 //$categories = collect([]);
 //$total = 0;

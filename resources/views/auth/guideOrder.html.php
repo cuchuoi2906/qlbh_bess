@@ -9,7 +9,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
 
         <p><span style="font-size:14px;">Sau đó, quý khách vui lòng thực hiện theo 6 bước sau:</span></p>
 
-        <p><span style="font-size:14px;"><strong>Bước 1:</strong> Truy cập website <a style="color:#0d6efd;" href="https://vuaduoc.com/">vuaduoc.com</a></span></p>
+        <p><span style="font-size:14px;"><strong>Bước 1:</strong> Truy cập website vuaduoc.com</span></p>
 
         <p><span style="font-size:14px;"><strong>Bước 2:</strong> Click vào một trong các menu sau :</span></p>
 
@@ -17,13 +17,13 @@ include dirname(__FILE__) . '/../includes/header.html.php';
 
         <p><span style="font-size:14px;"><strong>Bước 3:</strong> Tìm kiếm sản phẩm cần mua ,chọn sản phẩm kèm số lượng</span></p>
 
-        <p><span style="font-size:14px;"><strong>Bước 4:</strong> Click vào "<a style="color:#0d6efd;" href="https://vuaduoc.com/cart">Xem giỏ hàng</a>"</span></p>
+        <p><span style="font-size:14px;"><strong>Bước 4:</strong> Click vào " Xem giỏ hàng"</span></p>
 
         <p><span style="font-size:14px;"><strong>Bước 5:</strong> Kiểm tra lại đơn hàng, Thông tin nhận hàng, Ghi chú ( nếu có ) và click vào nút "Đặt hàng ngay"</span></p>
 
         <p><span style="font-size:14px;"><strong>Bước 6:</strong> Kiểm tra lại lần cuối Thông tin nhận hàng và quét QR code để thanh toán đơn hàng</span></p>
 
-        <p><span style="font-size:14px;">Nếu quý khách hàng chưa biết cách đặt hàng vui lòng liên hệ theo số <a style="color:#0d6efd;" href="tel:0878929789">0342.342.366</a> để được hướng dẫn chi tiết.</span></p>
+        <p><span style="font-size:14px;">Nếu quý khách hàng chưa biết cách đặt hàng vui lòng liên hệ theo số <b>0342.342.366</b> để được hướng dẫn chi tiết.</span></p>
 
         <p><span style="color:#FF0000;"><span style="font-size:14px;"><strong>CHÍNH SÁCH THANH TOÁN</strong></span></span></p>
 
@@ -43,7 +43,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
 
         <p><span style="font-size:14px;">Tại Ngân hàng : TMCP Ngoại thương Việt Nam (Vietcombank)</span></p>
 
-        <p><span style="font-size:14px;">Sau khi chuyển tiền, Quý khách vui lòng email hoặc điện thoại cho chúng tôi theo số: <a style="color:#0d6efd;" href="tel:0878929789">0342.342.366</a>, thông báo việc chuyển tiền và số tài khoản của quý khách để tiện trong việc kiểm tra.</span></p>
+        <p><span style="font-size:14px;">Sau khi chuyển tiền, Quý khách vui lòng email hoặc điện thoại cho chúng tôi theo số: <b>0342.342.366</b>, thông báo việc chuyển tiền và số tài khoản của quý khách để tiện trong việc kiểm tra.</span></p>
     </div>
 </div>
 <?php

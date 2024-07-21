@@ -140,7 +140,7 @@ if ($items->count()) {
 
     }
     $reprice = false;
-    if($leverPrice > 0){
+    /*if($leverPrice > 0){
         $i=0;
         foreach ($items as $key => &$item) {
             //pre($item);die;
@@ -168,7 +168,7 @@ if ($items->count()) {
             }
             $i++;
         }
-    }
+    }*/
     if($reprice){
 		$total_money = 0;
 		$total_money_origin = 0;

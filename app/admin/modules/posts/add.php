@@ -75,6 +75,9 @@ if ($action == "execute") {
     if ($upload->common_error == '') {
         $file_name = $upload->file_name;
         $myform->add('pos_image', 'file_name', 0, 1, '');
+    }else{
+        $fs_errorMsg .= 'Bạn phải chọn ảnh đại diện <br/>';
+        $myform->add('pos_image', 'file_name', 0, 1, 'Bạn phải chọn ảnh đại diện');
     }
     unset($upload);
     if ($fs_errorMsg == '') {

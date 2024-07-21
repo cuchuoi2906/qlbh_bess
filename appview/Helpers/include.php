@@ -583,8 +583,8 @@ if (!function_exists('pre')) {
 if (!function_exists('renderPagination')) {
     function renderPagination($pagination) {
         // Kiểm tra sự tồn tại của các phần tử trước khi truy cập
-        $total_pages = intval($pagination->total_pages) > 0 ? $pagination->total_pages : 0;
-        $current_page = intval($pagination->current_page) > 0 ? $pagination->current_page : 0;
+        $total_pages = intval($pagination->total_pages) > 1 ? $pagination->total_pages : 1;
+        $current_page = intval($pagination->current_page) > 1 ? $pagination->current_page : 1;
 
         $total_pages = $total_pages > 10 ? 10 : $total_pages;
         $html = '<div class="pagination">';
@@ -592,7 +592,7 @@ if (!function_exists('renderPagination')) {
         $html .= '<ul class="pagination gap-1 m-0">';
 
         // Nút Previous
-        if ($current_page > 0) {
+        if ($current_page > 1) {
             $prev_page = $current_page - 1;
             $html .= '<li class="page-item">
                         <a class="page-link" href="?page=' . $prev_page . '" aria-label="Previous">
@@ -605,14 +605,14 @@ if (!function_exists('renderPagination')) {
 
         // Các nút số trang
         for ($page = 1; $page <= $total_pages; $page++) {
-            $active = ($page - 1) == $current_page ? ' active' : '';
-            $html .= '<li class="page-item' . $active . '">
-                        <a class="page-link" href="?page=' . ($page - 1) . '">' . $page . '</a>
+            $active = ($page == $current_page) ? ' active' : '';
+            $html .= '<li class="page-item">
+                        <a class="page-link ' . $active . '" href="?page=' . $page . '">' . $page . '</a>
                     </li>';
         }
 
         // Nút Next
-        if ($current_page+1 < $total_pages) {
+        if ($current_page < $total_pages) {
             $html .= '<li class="page-item">
                         <a class="page-link" href="?page=' . ($current_page  + 1) . '" aria-label="Next">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

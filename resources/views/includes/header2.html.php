@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="<?php echo asset('css/home.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/thuc-pham-chuc-nang.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/cart.css') ?>" />
+        <link rel="stylesheet" href="<?php echo asset('css/flash-sale.css') ?>" />
 
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -22,14 +23,14 @@
         <script src="<?php echo asset('/libs/bootstrap/js/bootstrap.min.js') ?>"></script>
         <script src="<?php echo asset('/libs/swiper/swiper-bundle.min.js') ?>"></script>
 
-        <title>Vua Dược</title>
+        <title>Vua dược - Thuốc tốt , Giá tốt , Đa dạng chủng loại , Tư vấn nhiệt tình, Đặt hàng nhanh chóng.</title>
     </head>
     <body>
         <header class="header-2">
             <div class="container">
                 <div class="main-header-2 align-items-center justify-content-between ga-3 d-xl-flex d-none">
                     <div class="logo">
-                        <a href="/">
+                        <a href="/" title="Vua dược - Thuốc tốt , Giá tốt , Đa dạng chủng loại , Tư vấn nhiệt tình, Đặt hàng nhanh chóng.">
                             <img src="<?= asset('/images/logo-4.png') ?>" alt="logo">
                         </a>
                     </div>
@@ -79,7 +80,7 @@
                             </svg>
                         </button>
                         <div class="logo">
-                            <a href="/">
+                            <a href="/" title="Vua dược - Thuốc tốt , Giá tốt , Đa dạng chủng loại , Tư vấn nhiệt tình, Đặt hàng nhanh chóng.">
                                 <img src="<?= asset('/images/logo.png') ?>" alt="logo">
                             </a>
                         </div>

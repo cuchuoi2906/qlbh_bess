@@ -44,7 +44,8 @@ class OrderTransformer extends TransformerAbstract
             Order::RECEIVED => 'Đã nhận hàng'
         ];
         $products = $item->products;
-        
+        $leverPrice = 0;
+        /*
         // lặp giỏ hảng tính mix giá
         foreach ($products as $product) {
             $product->leverPrice = 0;
@@ -55,8 +56,7 @@ class OrderTransformer extends TransformerAbstract
         foreach($configData as $item1){
             $arrconfigData[] = $item1->swe_value_vn;
         }
-        $leverPrice = 0;
-        if($total_money_percent_wholesale > 0 && $total_money_percent_wholesale >= $arrconfigData[count($arrconfigData)-1]){
+        /*if($total_money_percent_wholesale > 0 && $total_money_percent_wholesale >= $arrconfigData[count($arrconfigData)-1]){
             $leverPrice = count($arrconfigData);
         }else{
             for($i=0;$i<count($arrconfigData);$i++){
@@ -64,7 +64,7 @@ class OrderTransformer extends TransformerAbstract
                     $leverPrice = $i+1;
                 }
             }
-        }
+        }*/
         $total_point = 0;
         $total_product = 0;
         $total_money = 0;

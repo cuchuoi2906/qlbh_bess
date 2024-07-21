@@ -8,7 +8,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
 
         <p><span>Thời gian quý khách thực hiện các vấn đề về khiếu nại đơn hàng và được chấp nhận trong vòng 3 ngày (72 giờ), kể từ ngày khách hàng nhận được đơn đặt hàng.</span></p>
 
-        <p><span>Để thực hiện khiếu nại quý khách hàng vui lòng liên hệ bộ phận Chăm sóc khách hàng qua số Hotline: <a href="tel:0878929789">0342.342.366</a> hoặc gửi phản hồi trực tiếp tới nhân viên đang phụ trách đơn hàng của quý khách hàng.</span></p>
+        <p><span>Để thực hiện khiếu nại quý khách hàng vui lòng liên hệ bộ phận Chăm sóc khách hàng qua số Hotline: <b>0342.342.366</b> hoặc gửi phản hồi trực tiếp tới nhân viên đang phụ trách đơn hàng của quý khách hàng.</span></p>
 
         <p><span>Đội ngũ CSKH hoặc nhân viên phụ trách sẽ tiếp nhận hồ sơ trong 24 giờ và xử lý tối đa trong vòng 07 ngày đối với trường hợp thu hồi sản phẩm.</span></p>
 

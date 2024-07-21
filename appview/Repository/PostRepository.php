@@ -30,7 +30,7 @@ class PostRepository implements PostRepositoryInterface
             'category_id' => (int)$category_id,
             'pos_type' => $category_type,
             'page' => getValue('page'),
-            'page_size' => 4
+            'page_size' => 11
         ]);
 
         return $result['vars'] ? collect_recursive($result['vars']) : false;

@@ -48,6 +48,7 @@ class PostController extends FrontEndController
         $cateogryChildren = $this->category->getCategoryByIdAndType('NEWS',60);
         return view('posts/detail')->render([
             'item' => $detail,
+            'id'=>$id,
             'categoryId'=>$categoryId,
             'postCategory'=>$postCategory,
             'cateogryChildren'=>$cateogryChildren
@@ -55,7 +56,7 @@ class PostController extends FrontEndController
     }
     public function postListing($type,$id){
         $idCate = !$id ? 82 : $id;
-        $postAll = $this->post->allByType($type,4,$idCate);
+        $postAll = $this->post->allByType($type,16,$idCate);
 
         $cateogryChildren = $this->category->getCategoryByIdAndType('NEWS',60);
 

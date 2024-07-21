@@ -112,7 +112,8 @@ if ($action == "execute") {
         if ($fs_errorMsg == '') {
 
             $sqlUpdate = $myform->generate_update_SQL('pro_id', $record_id);
-            // _debug($sqlUpdate);die;
+            //var_Dump($sqlUpdate);die;
+            _debug($sqlUpdate);die;
             $db_excute = new db_execute($sqlUpdate);
             unset($db_excute);
 

@@ -41,6 +41,9 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                             <div class="row">
                                 <?php 
                                 foreach($postCategory as $items){
+                                    if($items->id == $id){
+                                        continue;
+                                    }
                                 ?>
                                     <div class="col-12 col-xl-12 col-md-6 news-similar-item mb-3">
                                         <div class="row align-items-center">

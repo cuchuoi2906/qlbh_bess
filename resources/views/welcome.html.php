@@ -670,7 +670,7 @@ include 'includes/header.html.php';
                         </div>
                     </div>
                     <button class="btn-custom-outline d-md-none d-block w-100 mt-3">
-                        <a href="/"
+                        <a href="<?php echo url('post.listing', ['news',82]) ?>"
                             >Xem thêm
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path

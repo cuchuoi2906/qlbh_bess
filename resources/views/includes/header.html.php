@@ -23,14 +23,14 @@
         <script src="<?php echo asset('/libs/bootstrap/js/bootstrap.min.js') ?>"></script>
         <script src="<?php echo asset('/libs/swiper/swiper-bundle.min.js') ?>"></script>
 
-        <title>Vua Dược</title>
+        <title>Vua dược - Thuốc tốt , Giá tốt , Đa dạng chủng loại , Tư vấn nhiệt tình, Đặt hàng nhanh chóng.</title>
     </head>
     <body>
         <header id="header" class="header-1">
             <div class="container">
                 <div class="main-header align-items-center justify-content-between d-xl-flex d-none">
                     <div class="logo">
-                        <a href="/" title="Vua Dược">
+                        <a href="/" title="Vua dược - Thuốc tốt , Giá tốt , Đa dạng chủng loại , Tư vấn nhiệt tình, Đặt hàng nhanh chóng">
                             <img src="<?= asset('/images/logo.png') ?>" alt="logo" />
                         </a>
                     </div>
@@ -75,7 +75,9 @@
                             </svg>
                         </button>
                         <div class="logo">
-                            <img src="<?= asset('/images/logo.png') ?>" alt="logo" />
+                            <a href="/" title="Vua dược - Thuốc tốt , Giá tốt , Đa dạng chủng loại , Tư vấn nhiệt tình, Đặt hàng nhanh chóng">
+                                <img src="<?= asset('/images/logo.png') ?>" alt="logo" />
+                            </a>
                         </div>
                         <div class="" style="width: 32px"></div>
                     </div>

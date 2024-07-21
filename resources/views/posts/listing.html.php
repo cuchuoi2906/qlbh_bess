@@ -28,7 +28,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                     $pagination = $postAll->meta->pagination;
                     $postAll = $items->toArray();
                     $fristNews = $postAll[0];
-                    $news_3_next = array_slice($postAll,1,4);
+                    $news_3_next = array_slice($postAll,1,3);
                     $NextNews = array_slice($postAll,4);
                     ?>
                     <div id="news-feature" class="mb-3">
@@ -41,17 +41,10 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                         </a>
                                     </div>
                                     <div class="inner">
-                                        <div class="category"><a href="<?php echo url('post.listing', ['news',$fristNews['category']['id']]); ?>"><?php echo $fristNews['category']['name']; ?></a></div>
+                                        <!--<div class="category"><a href="<?php echo url('post.listing', ['news',$fristNews['category']['id']]); ?>"><?php echo $fristNews['category']['name']; ?></a></div>-->
                                         <a href="<?php echo url('post.detail', [$fristNews['rewrite'],$fristNews['id']]) ?>"
-                                            ><h3 class="news-title"><?php echo $fristNews['title']; ?></h3></a
-                                        >
-                                        <?php 
-                                        $creatAtt = '';
-                                        if($fristNews['created_at'] instanceof DateTime){
-                                            $creatAtt = $fristNews['created_at']->format('H:i:s d-m-Y'); // Định dạng ngày giờ theo ý muốn
-                                        }
-                                        ?>
-                                        <div class="date"><?php echo $creatAtt; ?></div>
+                                            ><h3 class="news-title"><?php echo $fristNews['title']; ?></h3>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +52,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                 <?php 
                                 foreach($news_3_next as $items){
                                 ?>
-                                    <div class="news-feature-r mb-3">
+                                    <div class="news-feature-r mb-3 news-line-items">
                                         <div class="row">
                                             <div class="col-md-5 pe-md-4">
                                                 <a href="<?php echo url('post.detail', [$items['rewrite'],$items['id']]) ?>">
@@ -73,13 +66,6 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                                         <?php echo $items['title']; ?>
                                                     </h3>
                                                 </a>
-                                                <?php 
-                                                $creatAt = '';
-                                                if($items['created_at'] instanceof DateTime){
-                                                    $creatAtt = $items['created_at']->format('H:i:s d-m-Y'); // Định dạng ngày giờ theo ý muốn
-                                                }
-                                                ?>
-                                                <div class="date"><?php echo $creatAt; ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +84,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                 foreach($NextNews as $items){
                                 ?>
                                     <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
-                                        <div class="news-item">
+                                        <div class="news-item news-line-items">
                                             <div class="thumb">
                                                 <a href="<?php echo url('post.detail', [$items['rewrite'],$items['id']]) ?>">
                                                     <img src="<?php echo $items['image']; ?>" />
@@ -112,13 +98,6 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                                 <div class="desc">
                                                     <?php echo $items['teaser']; ?>
                                                 </div>
-                                                <?php 
-                                                $creatAt = '';
-                                                if($items['created_at'] instanceof DateTime){
-                                                    $creatAtt = $items['created_at']->format('H:i:s d-m-Y'); // Định dạng ngày giờ theo ý muốn
-                                                }
-                                                ?>
-                                                <div class="date"><?php echo $creatAtt; ?></div>
                                             </div>
                                         </div>
                                     </div>

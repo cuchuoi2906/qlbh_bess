@@ -1,5 +1,5 @@
 <?php
-use App\Transformers\ProductTransformer;
+use App\Transformers\OrderTransformer;
 use App\Models\Order;
 
 $vars = [];
@@ -10,7 +10,7 @@ if ($order_id) {
     $order = Order::findByID($order_id);
 
     if ($order) {
-        $vars = transformer_item($product, new ProductTransformer(), ['images', 'category']);
+        $vars = transformer_item($order, new OrderTransformer(),['user']);
     }
 }
 

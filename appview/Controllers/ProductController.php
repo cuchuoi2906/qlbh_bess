@@ -33,21 +33,28 @@ class ProductController extends FrontEndController
         }
         $page = getValue('page', 'int', 'GET', 1, 0);
         $keyword = getValue('keyword', 'str', 'GET', '', 0);
-        $is_hot = getValue('is_hot', 'int', 'GET', -1);
-        $sort_type = getValue('sort_type', 'str', 'GET', 'DESC', 2);
+        $is_hot = getValue('is_hot', 'int', 'GET', 1);
+        $sort_type = getValue('sort_type', 'str', 'GET', 'ASC');
         if ($page < 1) {
             $page = 1;
         } elseif ($page > 999999999) {
             $page = 999999999;
         }
+        $page_size = 28;
+        //var_dump($type);
+        //var_dump(empty($type));
+        if(!empty($type)){
+            $is_hot = -1;
+            $page_size = 18;
+        }
 
         $params = [
             'page' => $page,
             'type'=>$type,
-            'sort_by' => getValue('sort_by', 'str', 'GET', '', 2),
+            'sort_by' => getValue('sort_by', 'str', 'GET', 'price'),
             'sort_type' => $sort_type,
             'category_id' => $id,
-            'page_size' => 10,
+            'page_size' => $page_size,
             'keyword' => $keyword,
             'is_hot' => $is_hot
         ];
@@ -70,7 +77,8 @@ class ProductController extends FrontEndController
             'categoryByType'=>$categoryByType,
             'keyword'=>$keyword,
             'type'=>$type,
-            'sort_type'=>$sort_type
+            'sort_type'=>$sort_type,
+            'is_hot'=>$is_hot
         ]);
     }
 

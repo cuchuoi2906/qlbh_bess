@@ -13,7 +13,6 @@ $fs_title = "Sửa thông tin danh mục";
 $fs_action = getURL();
 $fs_errorMsg = "";
 
-
 // Lấy giá trị từ POST
 foreach ($locales as $locale => $locale_name):
     ${'pos_title_' . $locale} = getValue('pos_title_' . $locale, 'str', 'POST', '');
@@ -23,8 +22,21 @@ foreach ($locales as $locale => $locale_name):
     $myform->add('pos_teaser_' . $locale, 'pos_teaser_' . $locale, FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, '', 1, 'Chưa nhập mô tả ngắn');
 
     ${'pos_content_' . $locale} = getValue('pos_content_' . $locale, 'str', 'POST', '');
+
+    preg_match_all('/<figure\s+class="image"[^>]*>.*?<\/figure>/is',${'pos_content_' . $locale},$imgs);
+    if (sizeof($imgs[0]))
+    {
+        foreach($imgs[0] as $img_key => $img) {
+            $img_cut = preg_replace('/(style|height|width) *=.*".*"/msU', '', $img);
+            ${'pos_content_' . $locale} = str_replace($img, $img_cut,${'pos_content_' . $locale});
+        }
+    }
     $myform->add('pos_content_' . $locale, 'pos_content_' . $locale, FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, '', 1, 'Chưa nhập nội dung');
 endforeach;
+// $pattern = '/(<img\b[^>]*?)(?:\s*(?:style|width|height)=(["\']?).*?\2)*(?=[^>]*>)/i';
+
+// Replace the matched patterns with the img tag without the unwanted attributes
+//$img_cut = preg_replace('/(<img\b[^>]*?)(?:\s*(?:style|width|height)=(["\']?).*?\2)*(?=[^>]*>)/i', '$1>', $content);
 
 $pos_category_id = getValue('pos_category_id', 'int', 'POST', 0);
 
