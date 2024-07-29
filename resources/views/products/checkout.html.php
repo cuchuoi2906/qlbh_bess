@@ -78,8 +78,10 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                 </li>
                             </ul>
                         </div> <br>
-                        <div> QUAY LẠI </div>
-                        <div> HOÀN THÀNH </div>
+                        <div class="btn-custom d-flex gap-2 align-items-center" id="btnOrderSuscess">
+						
+							<a href="/products" class="text-white">Mua tiếp đơn hàng mới</a>
+						</div>
                     </div>
                 </div>
             </div>

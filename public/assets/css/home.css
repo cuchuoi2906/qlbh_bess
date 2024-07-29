@@ -14,6 +14,11 @@
 #section-1 {
     margin-top: 20px;
 }
+#section-1 img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius);
+}
 
 #section-1 .slide-banner .swiper-button-next {
     transform: rotate(180deg);
@@ -24,7 +29,7 @@
     height: 100%;
     border-radius: var(--radius);
     position: relative;
-    padding: 35px;
+    padding: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,7 +110,7 @@
 #section-2 .utils {
     position: relative;
     padding-top: 40px;
-    padding-right: 10px;
+    /* padding-right: 10px; */
 }
 
 #section-2 .utils .util-icon {
@@ -419,25 +424,29 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, rgba(28, 39, 76, 0) 61.06%, #1c274c 100%);
+    /*background: linear-gradient(180deg, rgba(28, 39, 76, 0) 61.06%, #1c274c 100%);*/
     border-radius: var(--radius);
 }
 
 #section-8 .news-item .news-title {
-    position: absolute;
     bottom: 20px;
     left: 15px;
     width: calc(100% - 20px);
-    color: #fff;
     font-size: 16px;
     font-weight: 500;
-    padding-left: 15px;
-    border-left: 2px solid #fff;
     margin: 0;
+	display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+	width: 100%;
 }
 
 #section-8 .news-item .thumb img {
     border-radius: var(--radius);
+	width: 100%;
+    height: auto;
+    max-height: 200px;
+	min-height: 200px;
 }
 
 #section-8 .news-item .view-more {

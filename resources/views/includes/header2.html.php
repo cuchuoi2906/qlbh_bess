@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="SHORTCUT ICON" href="<?= asset('/images/logo-shortcut.jpg') ?>" type="image/x-icon" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="noindex, nofollow" />
@@ -12,6 +13,13 @@
         <link rel="stylesheet" href="<?php echo asset('css/thuc-pham-chuc-nang.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/cart.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/flash-sale.css') ?>" />
+        <title>Vua Dược đồng hành cùng sự phát triển của Nhà Thuốc -  Vuaduoc.com</title>
+        <meta name="keywords" content="Nhà thuốc An Khang, Dược An Khang, Tiệm thuốc An Khang, nhà thuốc, An Khang" />
+        <meta name="description" content="Vua dược chuyên bán lẻ thuốc, dược phẩm, thực phẩm chức năng, thiết bị y tế. Đồng thời cung cấp thông tin hữu ích về cách phòng ngừa, nhận biết các dấu hiệu mắc bệnh để đưa ra các giải pháp trị bệnh kịp thời." />
+
+        <meta content="<?= asset('/images/og-img-header.jpg') ?>" property="og:image" itemprop="thumbnailUrl" />
+        <meta property="og:title" itemprop="name" content="Vua Dược đồng hành cùng sự phát triển của Nhà Thuốc -  Vuaduoc.com" />
+        <meta property="og:description" content="Vua dược chuyên bán lẻ thuốc, dược phẩm, thực phẩm chức năng, thiết bị y tế. Đồng thời cung cấp thông tin hữu ích về cách phòng ngừa, nhận biết các dấu hiệu mắc bệnh để đưa ra các giải pháp trị bệnh kịp thời." />
 
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -22,8 +30,6 @@
         <script src="<?php echo asset('js/script.js') ?>"></script>
         <script src="<?php echo asset('/libs/bootstrap/js/bootstrap.min.js') ?>"></script>
         <script src="<?php echo asset('/libs/swiper/swiper-bundle.min.js') ?>"></script>
-
-        <title>Vua dược - Thuốc tốt , Giá tốt , Đa dạng chủng loại , Tư vấn nhiệt tình, Đặt hàng nhanh chóng.</title>
     </head>
     <body>
         <header class="header-2">

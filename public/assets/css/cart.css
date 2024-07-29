@@ -237,9 +237,6 @@ input#voucher-code::placeholder {
 }
 
 @media (max-width: 640px) {
-    .menu-prod {
-        display: none;
-    }
 
     .content-box {
         padding: 12px;

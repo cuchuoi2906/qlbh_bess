@@ -459,7 +459,7 @@ include 'includes/header.html.php';
                                 </div>
                             </div>
                             <div class="col-xl-6">
-                                <img src="<?= asset('/images/section-4-4.png') ?>" alt="section-5-1" />
+                                <img src="<?= asset('/images/pills-tabcontent-1.png'); ?>" alt="section-5-1" />
                             </div>
                         </div>
                     </div>
@@ -475,7 +475,7 @@ include 'includes/header.html.php';
                                 </div>
                             </div>
                             <div class="col-xl-6">
-                                <img src="<?= asset('/images/section-5-1.png') ?>" alt="section-5-1" />
+                                <img src="<?= asset('/images/pills-tabcontent-2.png') ?>" alt="section-5-1" />
                             </div>
                         </div>
                     </div>
@@ -490,7 +490,7 @@ include 'includes/header.html.php';
                                 </div>
                             </div>
                             <div class="col-xl-6">
-                                <img src="<?= asset('/images/section-5-1.png') ?>" alt="section-5-1" />
+                                <img src="<?= asset('/images/pills-tabcontent-3.png') ?>" alt="section-5-1" />
                             </div>
                         </div>
                     </div>

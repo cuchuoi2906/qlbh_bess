@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         spaceBetween: 24,
         autoplay: {
-            delay: 2500,
+            delay: 4000,
             disableOnInteraction: false,
         },
     });
@@ -269,8 +269,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             success: function(response) {
                 if(response.code == 200){
-                    alert(response.error);
-                    window.location.href = '/';
+                    alert("Đơn hàng đặt thành công. Bạn vui lòng chuyển khoản để Hoàn thành.");
+					orderId = response.data.vars.id;
+                    window.location.href = '/payment/'+orderId;
                 }else{
                     alert(response.error);
                 }

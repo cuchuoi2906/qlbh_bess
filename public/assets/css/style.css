@@ -19,6 +19,12 @@ a:hover {
     color: #fff;
 }
 
+a,
+a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
 img {
     max-width: 100%;
     max-height: 100%;
@@ -61,10 +67,6 @@ button {
     font-size: 18px;
     padding: 0 16px;
     border: 1px solid var(--main-color);
-}
-
-.btn-custom a {
-    color: #fff;
 }
 
 .btn-custom-outline a {
@@ -567,13 +569,14 @@ footer .phone_calling a img {
     border-color: #bbc3dd;
     width: 42px;
     height: 42px;
-    color: var(--text-color);
+    color: #1c274c;
     font-size: 13px;
     font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+	/*background-color: #018279 !important;*/
 }
 
 .grid-bottom .page-item .page-link.active {
@@ -801,6 +804,9 @@ footer .phone_calling a img {
     text-align: center;
 }
 
+.footer-mb {
+    display: none;
+}
 @media (max-width: 1200px) {
     .header-2 {
         background-color: #fff;
@@ -874,6 +880,53 @@ footer .phone_calling a img {
     .page-title {
         font-size: 20px;
     }
+	.footer-mb {
+        display: block;
+        padding-bottom: 70px;
+        .ft-menu-mb {
+            position: fixed;
+            width: 100vw;
+            height: 70px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--main-color);
+            z-index: 9999;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 5px;
+
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                width: 25%;
+                span {
+                    color: rgba(142, 188, 188, 1);
+                    font-size: 14px;
+                }
+
+                &.active {
+                    position: relative;
+                    span {
+                        color: #fff;
+                    }
+
+                    &::before {
+                        content: '';
+                        width: 10px;
+                        height: 2px;
+                        border-radius: 10px;
+                        background-color: #fff;
+                        position: absolute;
+                        bottom: -10px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                }
+            }
+        }
+    }
 }
 .header-1 .user-btn {
     background: #349b94;
@@ -884,4 +937,14 @@ footer .phone_calling a img {
     color: #fff;
     font-size: 14px;
     font-weight: 600;
+}
+
+.content-html-static a {
+    color: #0d6efd;
+}
+.content-html-static{
+	text-align: justify;
+}
+.input-group-text{
+	cursor:pointer;
 }
