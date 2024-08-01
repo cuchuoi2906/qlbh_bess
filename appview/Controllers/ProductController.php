@@ -84,12 +84,14 @@ class ProductController extends FrontEndController
 
     public function getProductDetail($pro_id)
     {
+        if (!checkLoginFe()) {
+            return redirect(url('login'));
+        }
         $pro_id = (int)$pro_id;
 
         $data = model('products/get_by_id')->load([
             'id' => $pro_id
         ]);
-        pre($data);
 
         if (!$data['vars']) {
             throw new \Exception('Sản phẩm không tồn tại', 404);

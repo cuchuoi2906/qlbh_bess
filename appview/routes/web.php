@@ -97,4 +97,4 @@ Route::get('/chinh-sach-van-chuyen', [\AppView\Controllers\Auth\AuthController::
 Route::get('/chinh-sach-giai-quyet-khieu-nai', [\AppView\Controllers\Auth\AuthController::class, 'chinhSachkhieuNai']);
 Route::get('/chinh-sach-kiem-hang-va-doi-tra', [\AppView\Controllers\Auth\AuthController::class, 'kiemHangVaDoiTra']);
 Route::get('/payment/{id}', [\AppView\Controllers\PaymentController::class, 'getBanksByOrderId']);
-Route::get('/chi-tiet-san-pham/{pro_id}', [\AppView\Controllers\ProductController::class, 'getProductDetail']);
+Route::get('/san-pham/{rewrite}-{pro_id}', [\AppView\Controllers\ProductController::class, 'getProductDetail']);

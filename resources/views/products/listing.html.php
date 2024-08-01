@@ -98,7 +98,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                         <div class="thumb">
                                             <img src="<?php echo $items['avatar']['url']; ?>" alt="product">
                                         </div>
-                                        <h3 class="prod-title"><a href="/"><?php echo $items['name']; ?></a></h3>
+                                        <h3 class="prod-title"><a href="<?php echo '/san-pham/'.$items['rewrite'].'-'.$items['id']; ?>"><?php echo $items['name']; ?></a></h3>
                                         <div class="price"><?php echo formatCurrencyVND($items['price']); ?></div>
                                         <div class="input-group number-input">
                                             <div class="input-group-prepend">
@@ -137,7 +137,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
         ?>
             <div class="category">
                 <div class="row">
-                    <?php 
+                    <?php
                     foreach($categoryByType as $items){
                         $childsArr = $items->childs;
                         $typeCat = $items->type;
@@ -306,7 +306,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
             ?>
                 <div class="prod-list">
                     <div class="row">
-                        <?php 
+                        <?php
                         foreach($productList as $items){
                         ?>
                             <div class="col-xl-2 col-6 col-md-4 mb-4">
@@ -315,7 +315,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                         <img src="<?php echo $items['avatar']['url']; ?>" alt="product" />
                                     </div>
                                     <h3 class="prod-title">
-                                        <a href="/"><?php echo $items['name']; ?></a>
+                                        <a href="<?php echo '/san-pham/'.$items['rewrite'].'-'.$items['id']; ?>"><?php echo $items['name']; ?></a>
                                     </h3>
                                     <div class="price"><?php echo formatCurrencyVND($items['price']); ?></div>
                                     <div class="input-group number-input">
