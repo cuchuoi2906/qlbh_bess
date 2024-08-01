@@ -88,13 +88,15 @@ class ProductController extends FrontEndController
 
         $data = model('products/get_by_id')->load([
             'id' => $pro_id
-        ] + $this->input);
+        ]);
+        pre($data);
 
         if (!$data['vars']) {
             throw new \Exception('Sản phẩm không tồn tại', 404);
         }
-
-        return $data['vars'];
+        return view('products/detail')->render([
+            'product'=>$data['vars']
+        ]);
     }
 
     public function postLike($product_id)
