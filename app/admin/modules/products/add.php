@@ -104,7 +104,8 @@ if ($action == "execute") {
     $fs_errorMsg .= $myform->checkdata();
 
     if ($fs_errorMsg == '') {
-        $upload = new upload('images', $fs_filepath, $fs_extension, $fs_filesize);
+        //$upload = new upload('images', $fs_filepath, $fs_extension, $fs_filesize);
+        $upload = new upload('images', $fs_filepath, $fs_extension, $fs_filesize,0,"",0,[375,375]);
         if ($upload->common_error == '') {
             $db_excute = new db_execute_return();
             $pro_id = $db_excute->db_execute($myform->generate_insert_SQL());

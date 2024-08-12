@@ -15,8 +15,14 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
         </div>
         <?php 
         if(intval($is_hot) > 0 && $productList){
-            $v_date_start = '2024-07-20T00:00:00';
-            $v_date_end = '2024-07-25T00:00:00';
+            $now = time();
+            // Trừ 15 ngày
+            $start = strtotime('-15 days', $now);
+            $end = strtotime('+15 days', $now);
+
+
+            $v_date_start = date('Y-m-d\TH:i:s', $start);
+            $v_date_end = date('Y-m-d\TH:i:s', $end);
             $productList10items = array_slice($productList,0,10);
             $productList = array_slice($productList,10);
         ?>
@@ -216,14 +222,14 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                         $typeCat = $items->type;
                     ?>
                         <div class="accordion-item mb-2">
-                            <h2 class="accordion-header" id="category-1">
+                            <h2 class="accordion-header" id="category-1<?php echo $items->id; ?>">
                                 <button
                                     class="accordion-button collapsed"
                                     type="button"
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-category-1"
+                                    data-bs-target="#panelsStayOpen-category-1<?php echo $items->id; ?>"
                                     aria-expanded="false"
-                                    aria-controls="panelsStayOpen-category-1"
+                                    aria-controls="panelsStayOpen-category-1<?php echo $items->id; ?>"
                                 >
                                     <div class="d-flex">
                                         <div class="icon">
@@ -239,7 +245,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                             <?php 
                             if($childsArr){
                             ?>
-                                <div id="panelsStayOpen-category-1" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-category-1">
+                                <div id="panelsStayOpen-category-1<?php echo $items->id; ?>" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-category-1">
                                     <div class="accordion-body">
                                         <div class="cat-child">
                                             <ul>
@@ -268,37 +274,36 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
             <div class="grid-header d-flex justify-content-between align-items-center">
                 <div class="hd-left d-flex align-items-center gap-2">
                     <span>Sắp xếp theo</span>
-                    <button type="button" class="btn btn-outline-primary <?php echo ($sort_type == 'ASC') ? 'active' : '';  ?>" onclick="sortProductList('ASC');" >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.6 8.79999H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path d="M7.2 12.8H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path d="M8.8 16.8H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path
-                                d="M16 18.4V5.59998L18.4 8.79998"
-                                stroke="#018279"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
-                        Giá từ thấp đến cao
-                    </button>
-                    <button type="button" class="btn btn-outline-primary <?php echo ($sort_type == 'DESC') ? 'active' : '';  ?>" onclick="sortProductList('DESC');">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.60001 15.2L12.8 15.2" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path d="M7.20001 11.2H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path d="M8.79999 7.20001L12.8 7.20001" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path
-                                d="M16 5.60002L16 18.4L18.4 15.2"
-                                stroke="#018279"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
-
-                        Giá từ cao đến thấp
-                    </button>
+                    <div class="d-flex">
+                        <button type="button" class="d-flex btn btn-outline-primary <?php echo ($sort_type == 'ASC') ? 'active' : '';  ?>" onclick="sortProductList('ASC');" >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.6 8.79999H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.2 12.8H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M8.8 16.8H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M16 18.4V5.59998L18.4 8.79998"
+                                    stroke="#018279"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>Giá thấp đến cao
+                        </button>
+                        <button style="margin-left:2px;" type="button" class="d-flex btn btn-outline-primary <?php echo ($sort_type == 'DESC') ? 'active' : '';  ?>" onclick="sortProductList('DESC');">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.60001 15.2L12.8 15.2" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.20001 11.2H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M8.79999 7.20001L12.8 7.20001" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M16 5.60002L16 18.4L18.4 15.2"
+                                    stroke="#018279"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>Giá cao đến thấp
+                        </button>
+                    </div>
                 </div>
             </div>
             <?php 

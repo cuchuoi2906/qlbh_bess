@@ -85,10 +85,12 @@ $action = getValue("action", "str", "POST", "");
 if ($action == "execute") {
     $fs_errorMsg .= $myform->checkdata();
 
-    $upload = new upload('pos_image', $fs_filepath, $fs_extension, $fs_filesize);
+    $upload = new upload('pos_image', $fs_filepath, $fs_extension, $fs_filesize,0,"",0,[680,408]);
     if ($upload->common_error == '') {
         $file_name = $upload->file_name;
         $myform->add('pos_image', 'file_name', 0, 1, '');
+    }else{
+        $fs_errorMsg = $upload->common_error;
     }
     unset($upload);
     if ($fs_errorMsg == '') {

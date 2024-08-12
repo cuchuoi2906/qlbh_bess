@@ -39,7 +39,6 @@ h2.form-title {
 
 @media (max-width: 640px) {
     .login-page {
-        margin: 0 0 100px;
         border: none;
         padding: 0;
     }
@@ -47,4 +46,11 @@ h2.form-title {
     .login-page img {
         display: none;
     }
+	.mobile-login{
+		display: block !important;
+		border-radius: 16px;
+	}
+	.alert-danger{
+		padding: 0px !important;
+	}
 }

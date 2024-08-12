@@ -180,10 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     // Function to submit the input value
-    function submitInputSearchProduct() {
+    function submitInputSearchProduct(type) {
         const inputElement = document.getElementById('keyword');
         let inputValue = inputElement.value;
-        if(inputValue == ''){
+        if(inputValue == '' || type == 2){
             inputElementm = document.getElementById('keywordm');
             inputValue = inputElementm.value;
         }
@@ -197,7 +197,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const button = document.getElementById('main-search');
-    button.addEventListener('click', submitInputSearchProduct);
+    button.addEventListener('click', function(){
+		submitInputSearchProduct(2);
+	});
 
     const buttonPc = document.getElementById('main-search-pc');
     buttonPc.addEventListener('click', submitInputSearchProduct);
@@ -215,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     inputElementm.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault(); // Prevent form submission if within a form
-            submitInputSearchProduct();
+            submitInputSearchProduct(2);
         }
     });
     $('.btn-increment, .btn-decrement').click(function() {

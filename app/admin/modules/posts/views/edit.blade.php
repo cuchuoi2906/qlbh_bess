@@ -129,7 +129,6 @@
                 <div class="">
                     <div class="" style="text-align: center;">
                         <?= $form->button("submit" . $form->ec . "reset", "submit" . $form->ec . "reset", "submit" . $form->ec . "reset", "Cập nhật" . $form->ec . "Làm lại", "Cập nhật" . $form->ec . "Làm lại", ""); ?>
-                        <?= $form->hidden("action", "action", "execute", ""); ?>
                         <?= $form->hidden("valradio", "valradio", 0) ?>
                     </div>
                 </div>

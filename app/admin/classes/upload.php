@@ -20,13 +20,13 @@ class upload{
 	var $file_size			= 0;
 	var $original_name	= "";
 
-	function __construct($upload_name, $upload_path, $extension_list, $limit_size, $check_image=0, $prefix="", $zip=0){
+	function __construct($upload_name, $upload_path, $extension_list, $limit_size, $check_image=0, $prefix="", $zip=0,$array_size_check = []){
 
 		// Nếu $upload_name == "" thì return luôn để phục vụ resize image
 		if($upload_name == "")
             return;
 		if( is_array($_FILES[$upload_name]['name'] )){
-            $this->upload_multi($upload_name,$upload_path,$extension_list,$limit_size,$check_image,$prefix,$zip);
+            $this->upload_multi($upload_name,$upload_path,$extension_list,$limit_size,$check_image,$prefix,$zip,$array_size_check);
             return;
         }
 		//Validate upload file
@@ -56,6 +56,11 @@ class upload{
 				$this->warning_error	= $this->common_error;
 				return;
 			}
+		}
+		if(check_array($array_size_check) && !$this->check_image_size($_FILES[$upload_name]['tmp_name'],"", $array_size_check[0], $array_size_check[1],1)){
+			$this->common_error	= "Bạn phải nhập kích thước ".$array_size_check[0]." x ".$array_size_check[1]."!.<br />";
+			$this->warning_error	= $this->common_error;
+			return;
 		}
 
 		//Generate new filename
@@ -97,7 +102,7 @@ class upload{
 
 
 	}
-	function upload_multi($upload_name, $upload_path, $extension_list, $limit_size,$check_image=0, $prefix="", $zip=0){
+	function upload_multi($upload_name, $upload_path, $extension_list, $limit_size,$check_image=0, $prefix="", $zip=0,$array_size_check = []){
 
 		// Nếu $upload_name == "" thì return luôn để phục vụ resize image
 		if($upload_name == "") return;
@@ -120,6 +125,11 @@ class upload{
     			$this->warning_error		= $this->common_error;
     			return;
     		}
+			if(check_array($array_size_check) && !$this->check_image_size($_FILES[$upload_name]['tmp_name'][$i],"", $array_size_check[0], $array_size_check[1],1)){
+				$this->common_error	= "Bạn phải nhập kích thước ".$array_size_check[0]." x ".$array_size_check[1]."!.<br />";
+				$this->warning_error	= $this->common_error;
+				return;
+			}
     		//Generate new filename
     		$new_filename					= $this->generate_name($_FILES[$upload_name]['name'][$i], $prefix);
 
@@ -279,7 +289,9 @@ class upload{
 		if($type == 0){
 			if($width <= $widthCheck && $height <= $heightCheck) return 1;
 		}
-		else{
+		else if($type == 1){
+			if($width == $widthCheck && $height == $heightCheck) return 1;
+		}else{
 			if($width >= $widthCheck && $height >= $heightCheck) return 1;
 		}
 		return 0;

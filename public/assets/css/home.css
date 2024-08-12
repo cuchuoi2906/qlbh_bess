@@ -445,8 +445,6 @@
     border-radius: var(--radius);
 	width: 100%;
     height: auto;
-    max-height: 200px;
-	min-height: 200px;
 }
 
 #section-8 .news-item .view-more {
