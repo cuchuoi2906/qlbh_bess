@@ -878,9 +878,9 @@ footer {
         display: none !important;
     }
 	#chat-bot {
-		width: 60px;
-		height: 60px;
-		bottom: 86px;
+		width: 50px;
+        height: 50px;
+        bottom: 70px;
 	}
 
     .page-title {
