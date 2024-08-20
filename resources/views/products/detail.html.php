@@ -58,6 +58,7 @@ if($type == 'ORDERFAST'){
                 <!--<button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
             </div>
         </div>
+<<<<<<< HEAD
 		<?php 
 		if(!empty($type)){
 		?>
@@ -80,6 +81,8 @@ if($type == 'ORDERFAST'){
 			</nav>
         <?php 
 		}?>
+=======
+>>>>>>> 94db92f6dd1d3359b657dbda950f44ba25abc89c
         <div class="row menu-prod">
             <div class="col-md-5">
                 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">

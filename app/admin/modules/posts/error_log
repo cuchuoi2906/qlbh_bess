@@ -1,0 +1,6 @@
+[05-Aug-2024 15:24:56 UTC] PHP Notice:  Undefined variable: module_id in /home/oo91mah3s4eq/public_html/app/admin/modules/posts/inc_security.php on line 38
+[05-Aug-2024 15:37:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function check_image_size() in /home/oo91mah3s4eq/public_html/app/admin/classes/upload.php:60
+Stack trace:
+#0 /home/oo91mah3s4eq/public_html/app/admin/modules/posts/edit.php(88): upload->__construct('pos_image', '/home/oo91mah3s...', 'gif,jpg,jpe,jpe...', 2000, 0, '', 0, Array)
+#1 {main}
+  thrown in /home/oo91mah3s4eq/public_html/app/admin/classes/upload.php on line 60

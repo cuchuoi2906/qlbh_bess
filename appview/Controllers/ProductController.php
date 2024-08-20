@@ -48,6 +48,25 @@ class ProductController extends FrontEndController
             $page_size = 18;
         }
 
+		$categoryByType = [];
+        if($type != ''){
+            $categoryByType = $this->categoryRepository->getCategoryByType($type);
+        }
+		$categoryById = [];
+		$categoryByParentId = [];
+		$arrIdsCate = [];
+		if(intval($id) >0){
+			$categoryById = $this->categoryRepository->getCategoryByID($id);
+			if($categoryById->parent_id > 0){
+				$categoryByParentId = $this->categoryRepository->getCategoryByID($categoryById->parent_id);
+			}
+			$type = $categoryById->type;
+			if(!$categoryById->parent_id){
+				$subcategoryIds = $categoryById->childs->toArray();
+				$arrIdsCate = array_column($subcategoryIds, 'id');
+				$arrIdsCate[] = $categoryById->id;
+			}
+		}
         $params = [
             'page' => $page,
             'type'=>$type,
@@ -56,7 +75,8 @@ class ProductController extends FrontEndController
             'category_id' => $id,
             'page_size' => $page_size,
             'keyword' => $keyword,
-            'is_hot' => $is_hot
+            'is_hot' => $is_hot,
+            'arrIdsCate' => $arrIdsCate,
         ];
 
         $data = model('products/index')->load($params);
@@ -64,13 +84,9 @@ class ProductController extends FrontEndController
         $pagination = [];
         if($data && isset($data['vars']['data'])){
             $productList  = $data['vars']['data'];
-            $pagination  = collect_recursive($data['vars']['meta']);
+            $pagination  = collect_recursive($data['vars']['meta']['pagination']);
         }
-        
-        $categoryByType = [];
-        if($type != ''){
-            $categoryByType = $this->categoryRepository->getCategoryByType($type);
-        }
+		
         return view('products/listing')->render([
             'productList' => $productList,
             'pagination'=>$pagination,
@@ -78,7 +94,9 @@ class ProductController extends FrontEndController
             'keyword'=>$keyword,
             'type'=>$type,
             'sort_type'=>$sort_type,
-            'is_hot'=>$is_hot
+            'is_hot'=>$is_hot,
+			'categoryById' => $categoryById,
+            'categoryByParentId' => $categoryByParentId
         ]);
     }
 
@@ -94,10 +112,27 @@ class ProductController extends FrontEndController
         ]);
 
         if (!$data['vars']) {
-            throw new \Exception('Sản phẩm không tồn tại', 404);
+            return redirect(url('products'));
         }
+		$categoryById = [];
+		$categoryByParentId = [];
+		$type = '';
+		if(check_array($data['vars']['category'])){
+			$id = $data['vars']['category']['id'];
+			if(intval($id) >0){
+				$categoryById = $this->categoryRepository->getCategoryByID($id);
+				if($categoryById->parent_id > 0){
+					$categoryByParentId = $this->categoryRepository->getCategoryByID($categoryById->parent_id);
+				}
+				$type = $categoryById->type;
+			}
+		}
+		
         return view('products/detail')->render([
-            'product'=>$data['vars']
+            'product'=>$data['vars'],
+			'categoryById'=>$categoryById,
+			'categoryByParentId'=>$categoryByParentId,
+			'type'=>$type,
         ]);
     }
 

@@ -17,6 +17,7 @@ $page = input('page') ?? getValue('page', 'int', 'GET', 1);
 $page_size = input('page_size') ?? 10;
 $category_id = input('category_id') ?? 0;
 $type = input('type') ?? getValue('type', 'int', 'GET', '');
+$arrIdsCate = input('arrIdsCate') ?? [];
 
 $keyword = input('keyword') ?? '';
 $is_hot = input('is_hot') ?? -1;
@@ -26,10 +27,16 @@ if ((int)app('auth')->u_id === 1234) {
     $conditions = '1 ';
 }
 
-if ($category_id) {
+if ($category_id && !check_array($arrIdsCate)) {
     $type = '';
     $field = 'pro_category_id';
     $conditions .= ' AND ' . $field . ' = ' . (int)$category_id;
+}
+if(check_array($arrIdsCate)){
+	$type = '';
+	$field = 'pro_category_id';
+	$IdsCate = implode(',',$arrIdsCate);
+    $conditions .= ' AND ' . $field . ' IN ('.$IdsCate.')';
 }
 
 if ($keyword) {

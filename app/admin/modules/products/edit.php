@@ -119,8 +119,8 @@ if ($action == "execute") {
 
             admin_log($admin_id, ADMIN_LOG_ACTION_EDIT, $record_id, 'Đã sửa thông tin của sản phẩm ' . $pro_name_vn);
 
-            $upload = new upload('images', $fs_filepath, $fs_extension, $fs_filesize);
-
+            //$upload = new upload('images', $fs_filepath, $fs_extension, $fs_filesize);
+            $upload = new upload('images', $fs_filepath, $fs_extension, $fs_filesize,0,"",0,[375,375]);
             if ($upload->common_error == '') {
 
                 $product = Product::findByID($record_id);
@@ -146,7 +146,7 @@ if ($action == "execute") {
                     $db_excute->db_execute($myform->generate_insert_SQL());
                 }
             } else {
-//                $fs_errorMsg = $upload->common_error;
+               $fs_errorMsg = $upload->common_error;
             }
             # upload file video
              

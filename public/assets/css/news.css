@@ -59,7 +59,7 @@
 }
 
 .news-feature-1 .news-title {
-    font-size: 16px;
+    font-size: 18px;
     /*color: #fff;*/
     font-weight: 600;
     margin-top: 10px;
@@ -125,7 +125,7 @@
 }
 
 h2.news-title {
-    font-size: 22px;
+    font-size: 26px;
 }
 
 .artical-title,
@@ -155,15 +155,12 @@ h2.news-title {
 }
 
 .news-feature-1 img{
-	height: 382px;
     width: 100%;
 }
 .news-feature-r img{
-	height: 114px;
     width: 100%;
 }
 .news-item img{
-	height: 186px;
     width: 100%;
 }
 @media (max-width: 640px) {

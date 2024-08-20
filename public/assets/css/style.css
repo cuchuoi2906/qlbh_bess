@@ -284,13 +284,6 @@ header .logo {
     font-weight: 500;
 }
 
-footer {
-    background-image: url(../images/bg-footer.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 .ft-top {
     padding: 30px 0 0px;
 }
@@ -807,6 +800,12 @@ footer .phone_calling a img {
 .footer-mb {
     display: none;
 }
+footer {
+    background-image: url(../images/bg-footer.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 @media (max-width: 1200px) {
     .header-2 {
         background-color: #fff;
@@ -826,6 +825,9 @@ footer .phone_calling a img {
 }
 
 @media (max-width: 640px) {
+	footer {
+		background-image: none;
+	}
     .menu-prod {
         margin: 20px 0;
     }
@@ -872,10 +874,14 @@ footer .phone_calling a img {
         margin-bottom: 20px;
     }
 
-    #back-to-top,
-    #chat-bot {
+    #back-to-top{
         display: none !important;
     }
+	#chat-bot {
+		width: 60px;
+		height: 60px;
+		bottom: 86px;
+	}
 
     .page-title {
         font-size: 20px;
@@ -947,4 +953,14 @@ footer .phone_calling a img {
 }
 .input-group-text{
 	cursor:pointer;
+}
+.breadcrumb-container {
+    background-color: #f1f3f9;
+    border-radius: 24px;
+    padding: 12px 22px 1px;
+    margin-bottom: 30px;
+    height: 100%;
+}
+.breadcrumb-container a {
+    color: #0d6efd;
 }

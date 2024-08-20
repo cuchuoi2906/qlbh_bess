@@ -16,7 +16,7 @@ $items = \App\Models\Categories\Category::where('cat_type', input('type'))
     ->all();
 
 if ($items->count()) {
-    $vars = transformer_collection($items, new \App\Transformers\CategoryTransformer());
+    $vars = transformer_collection($items, new \App\Transformers\CategoryTransformer(),['childs']);
 }
 
 return [
