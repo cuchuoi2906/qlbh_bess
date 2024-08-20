@@ -54,12 +54,12 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                                 ?>
                                     <div class="news-feature-r mb-3 news-line-items">
                                         <div class="row">
-                                            <div class="col-md-5 pe-md-4">
+                                            <div class="col-md-6 pe-md-4">
                                                 <a href="<?php echo url('post.detail', [$items['rewrite'],$items['id']]) ?>">
                                                     <img src="<?php echo $items['image']; ?>" alt="news-2" />
                                                 </a>
                                             </div>
-                                            <div class="col-md-7 ps-md-0">
+                                            <div class="col-md-6 ps-md-0">
                                                 <div class="category mt-2 mt-md-0"><a href="<?php echo url('post.listing', ['news',$fristNews['category']['id']]); ?>"><?php echo $fristNews['category']['name']; ?></a></div>
                                                 <a href="<?php echo url('post.detail', [$items['rewrite'],$items['id']]) ?>">
                                                     <h3 class="news-title">

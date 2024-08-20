@@ -24,7 +24,7 @@
                                     <span>Sở Kế hoạch và Đầu tư Thành phố Hà Nội</span>
                                 </div>
 								<br />
-                                <div class="ft-ct-item">
+                                <!--<div class="ft-ct-item">
                                     <strong>Số giấy chứng nhận đủ điều kiện kinh doanh thuốc: </strong>
                                     <span>01-0780/ĐKKĐ-HNO/ĐC</span>
                                 </div>
@@ -33,14 +33,15 @@
                                     <span>05/07/2024 - </span>
 									<strong>Nơi cấp:</strong>
 									<span>Sở Y tế TP Hà Nội</span>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="ft-content d-flex" style="height: 40px;">
                                 <!-- <img src="./images/bct.png" alt="bo cong thuong" height="60" />  -->
-                                <div><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></div>
+                                <!--<div><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></div>-->
 								<div style="    background-color: #ffff;margin-left: 10px;height: 31px;margin-top: 5px;border-radius: 7px;">
-									<a href="//www.dmca.com/Protection/Status.aspx?ID=8fc375bc-32e3-48f6-8986-42e896931d4f" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/DMCA_logo-green150w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
-								</div>
+                                    <a href="//www.dmca.com/Protection/Status.aspx?ID=8fc375bc-32e3-48f6-8986-42e896931d4f" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+                                </div>
+                                
 							</div>
                         </div>
                         <div class="col-md-2">

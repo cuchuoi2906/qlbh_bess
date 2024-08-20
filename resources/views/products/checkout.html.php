@@ -9,7 +9,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                 <button ><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
                 <button ><a href="/products/COSMECEUTICALS-0">Dược Mỹ Phẩm</a></button>
                 <button ><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
-                <button ><a href="/products/PRODUCTCOMPANY-0">Sản Phẩm Vua Dược</a></button>
+                <!--<button ><a href="/products/PRODUCTCOMPANY-0">Sản Phẩm Vua Dược</a></button>-->
                 <button ><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
             </div>
         </div>
@@ -26,13 +26,13 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                 <div class="row">
                     <div class="col-md-5">
                         <img src="<?= asset('/images/qr-code.png') ?>" alt="qr-code" class="w-100">
-                        <button class="d-block">
+                        <a href="<?= asset('/images/qr-code.png') ?>" download class="d-block qrdownload">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M4.7998 14.4C4.7998 16.6628 4.7998 17.7941 5.50275 18.4971C6.20569 19.2 7.33706 19.2 9.5998 19.2H14.3998C16.6625 19.2 17.7939 19.2 18.4969 18.4971C19.1998 17.7941 19.1998 16.6628 19.1998 14.4" stroke="#018279" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                 <path d="M11.9998 4.80001V15.2M11.9998 15.2L15.1998 11.7M11.9998 15.2L8.7998 11.7" stroke="#018279" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                             <span>Tải mã ảnh QR xuống</span>
-                        </button>
+                        </a>
                     </div>
                     <div class="col-md-7">
                         <div class="d-flex flex-column mb-4 gap-2">

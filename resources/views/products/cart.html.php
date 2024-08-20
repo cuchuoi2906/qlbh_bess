@@ -9,7 +9,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                 <button ><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
                 <button ><a href="/products/COSMECEUTICALS-0">Dược Mỹ Phẩm</a></button>
                 <button ><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
-                <button ><a href="/products/PRODUCTCOMPANY-0">Sản Phẩm Vua Dược</a></button>
+                <!--<button ><a href="/products/PRODUCTCOMPANY-0">Sản Phẩm Vua Dược</a></button>-->
                 <button ><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
             </div>
         </div>

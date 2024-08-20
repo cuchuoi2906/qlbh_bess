@@ -500,7 +500,7 @@ include 'includes/header.html.php';
         <div id="section-6">
             <div class="container">
                 <div class="d-flex">
-                    <div class="content">
+                    <div class="content col-xl-5 align-content-center text-center">
                         <h3 class="title-partner">Các Đối Tác Của</h3>
                         <h2 class="title-partner">VuaDuoc.com</h2>
                         <div class="partner-desc">
@@ -509,7 +509,7 @@ include 'includes/header.html.php';
                             hơn <strong>50+</strong> đối tác trong và ngoài nước
                         </div>
                     </div>
-                    <div class="img">
+                    <div class="img col-xl-7">
                         <img src="<?= asset('/images/section-6-1.png') ?>" alt="section-6-1.png" />
                     </div>
                 </div>

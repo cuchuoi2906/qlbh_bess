@@ -1,22 +1,76 @@
 <?php
 include dirname(__FILE__) . '/../includes/header2.html.php';
+$v_text_cate = '';
+$v_link_cate = '';
+if($type == 'FUNCTIONIAL'){
+	$v_text_cate = 'Thực Phẩm Chức Năng';
+	$v_link_cate = '/products/FUNCTIONIAL-0';
+}
+if($type == 'COSMECEUTICALS'){
+	$v_text_cate = 'Hóa Mỹ phẩm';
+	$v_link_cate = '/products/COSMECEUTICALS-0';
+}
+if($type == 'PERSONALCARE'){
+	$v_text_cate = 'Chăm Sóc Cá Nhân';
+	$v_link_cate = '/products/PERSONALCARE-0';
+}
+if($type == 'PRODUCTCOMPANY'){
+	$v_text_cate = 'TPCN NichieiAsia';
+	$v_link_cate = '/products/PRODUCTCOMPANY-0';
+}
+if($type == 'MEDICALDEVICES'){
+	$v_text_cate = 'Thiết Bị Y Tế';
+	$v_link_cate = '/products/MEDICALDEVICES-0';
+}
+if($type == 'ORDERFAST'){
+	$v_text_cate = 'Đặt hàng nhanh';
+	$v_link_cate = '/products/ORDERFAST-0';
+}
 ?>
 <div class="main-content">
     <div class="container">
         <div class="menu-prod">
             <div class="d-flex align-items-center gap-2">
                 <button <?php echo ($type == '') ? 'class="active"' : ''; ?>><a href="/products">FLASH SALE</a></button>
+                <!--<button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Đặt hàng nhanh</a></button>-->
                 <button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
-                <button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Dược Mỹ Phẩm</a></button>
-                <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
-                <button <?php echo ($type == 'PRODUCTCOMPANY') ? 'class="active"' : ''; ?>><a href="/products/PRODUCTCOMPANY-0">Sản Phẩm Vua Dược</a></button>
-                <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
+                <!--<button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
+                <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>-->
+                <button <?php echo ($type == 'PRODUCTCOMPANY') ? 'class="active"' : ''; ?>><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
+                <!--<button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
             </div>
         </div>
+		<?php 
+		if(!empty($type)){
+		?>
+			<nav aria-label="breadcrumb" class="breadcrumb-container">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item active"><a href="/">Trang chủ</a></li>
+					<li class="breadcrumb-item"><a href="<?php echo $v_link_cate; ?>"><?php echo $v_text_cate; ?></a></li>
+					<?php 
+					if($categoryByParentId){
+					?>
+						<li class="breadcrumb-item"><a href="<?php echo '/products/'.$categoryByParentId->rewrite.'-'.$categoryByParentId->id; ?>"><?php echo $categoryByParentId->name ?></a></li>
+					<?php 
+					}
+					if($categoryById){
+						?>
+							<li class="breadcrumb-item active" aria-current="page"><?php echo $categoryById->name ?></li>
+						<?php
+					}?>
+				</ol>
+			</nav>
         <?php 
+		}
         if(intval($is_hot) > 0 && $productList){
-            $v_date_start = '2024-07-20T00:00:00';
-            $v_date_end = '2024-07-25T00:00:00';
+            $now = time();
+            // Trừ 15 ngày
+            $start = strtotime('-15 days', $now);
+            $end = strtotime('+15 days', $now);
+
+
+            $v_date_start = date('Y-m-d\TH:i:s', $start);
+            $v_date_end = date('Y-m-d\TH:i:s', $end);
             $productList10items = array_slice($productList,0,10);
             $productList = array_slice($productList,10);
         ?>
@@ -133,7 +187,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
     <div class="container d-none d-md-block">
         <?php 
         $typeCat = '';
-        if($categoryByType){
+        if($categoryByType && !in_array($type,['PRODUCTCOMPANY','ORDERFAST'])){
         ?>
             <div class="category">
                 <div class="row">
@@ -153,7 +207,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                             <h2 class="cat-title">
                                                 <?php echo $items->name; ?>
                                             </h2>
-                                            <div class="count"><?php echo $items->count_pro; ?> sản phẩm</div>
+                                            <div class="count"><?php echo $items->total_product; ?> sản phẩm</div>
                                         </div>
                                     </div>
                                     <div class="col-xl-7">
@@ -184,7 +238,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
         }?>
     </div>
     <?php 
-    if($categoryByType){
+    if($categoryByType && !in_array($type,['PRODUCTCOMPANY','ORDERFAST'])){
         $v_text_cat = '';
         switch ($typeCat) {
             case 'FUNCTIONIAL':
@@ -216,14 +270,14 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                         $typeCat = $items->type;
                     ?>
                         <div class="accordion-item mb-2">
-                            <h2 class="accordion-header" id="category-1">
+                            <h2 class="accordion-header" id="category-1<?php echo $items->id; ?>">
                                 <button
                                     class="accordion-button collapsed"
                                     type="button"
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-category-1"
+                                    data-bs-target="#panelsStayOpen-category-1<?php echo $items->id; ?>"
                                     aria-expanded="false"
-                                    aria-controls="panelsStayOpen-category-1"
+                                    aria-controls="panelsStayOpen-category-1<?php echo $items->id; ?>"
                                 >
                                     <div class="d-flex">
                                         <div class="icon">
@@ -231,7 +285,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                         </div>
                                         <div class="info">
                                             <h3 class="category-title"><?php echo $items->name; ?></h3>
-                                            <div class="count"><?php echo $items->count_pro; ?> sản phẩm</div>
+                                            <div class="count"><?php echo $items->total_product; ?> sản phẩm</div>
                                         </div>
                                     </div>
                                 </button>
@@ -239,7 +293,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                             <?php 
                             if($childsArr){
                             ?>
-                                <div id="panelsStayOpen-category-1" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-category-1">
+                                <div id="panelsStayOpen-category-1<?php echo $items->id; ?>" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-category-1">
                                     <div class="accordion-body">
                                         <div class="cat-child">
                                             <ul>
@@ -268,37 +322,36 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
             <div class="grid-header d-flex justify-content-between align-items-center">
                 <div class="hd-left d-flex align-items-center gap-2">
                     <span>Sắp xếp theo</span>
-                    <button type="button" class="btn btn-outline-primary <?php echo ($sort_type == 'ASC') ? 'active' : '';  ?>" onclick="sortProductList('ASC');" >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.6 8.79999H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path d="M7.2 12.8H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path d="M8.8 16.8H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path
-                                d="M16 18.4V5.59998L18.4 8.79998"
-                                stroke="#018279"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
-                        Giá từ thấp đến cao
-                    </button>
-                    <button type="button" class="btn btn-outline-primary <?php echo ($sort_type == 'DESC') ? 'active' : '';  ?>" onclick="sortProductList('DESC');">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.60001 15.2L12.8 15.2" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path d="M7.20001 11.2H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path d="M8.79999 7.20001L12.8 7.20001" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
-                            <path
-                                d="M16 5.60002L16 18.4L18.4 15.2"
-                                stroke="#018279"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
-
-                        Giá từ cao đến thấp
-                    </button>
+                    <div class="d-flex">
+                        <button type="button" class="d-flex btn btn-outline-primary <?php echo ($sort_type == 'ASC') ? 'active' : '';  ?>" onclick="sortProductList('ASC');" >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.6 8.79999H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.2 12.8H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M8.8 16.8H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M16 18.4V5.59998L18.4 8.79998"
+                                    stroke="#018279"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>Giá thấp đến cao
+                        </button>
+                        <button style="margin-left:2px;" type="button" class="d-flex btn btn-outline-primary <?php echo ($sort_type == 'DESC') ? 'active' : '';  ?>" onclick="sortProductList('DESC');">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.60001 15.2L12.8 15.2" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.20001 11.2H12.8" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M8.79999 7.20001L12.8 7.20001" stroke="#018279" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M16 5.60002L16 18.4L18.4 15.2"
+                                    stroke="#018279"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>Giá cao đến thấp
+                        </button>
+                    </div>
                 </div>
             </div>
             <?php 
@@ -350,7 +403,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                 </div>
             <?php 
             }?>
-            <div class="grid-bottom d-flex justify-content-between align-items-center">
+            <div class="grid-bottom d-flex justify-content-center align-items-center">
                 <?php
                 if($pagination){
                     echo renderPagination($pagination);

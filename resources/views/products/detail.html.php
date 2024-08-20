@@ -1,5 +1,31 @@
 <?php
 include dirname(__FILE__) . '/../includes/header2.html.php';
+$v_text_cate = '';
+$v_link_cate = '';
+if($type == 'FUNCTIONIAL'){
+	$v_text_cate = 'Thực Phẩm Chức Năng';
+	$v_link_cate = '/products/FUNCTIONIAL-0';
+}
+if($type == 'COSMECEUTICALS'){
+	$v_text_cate = 'Hóa Mỹ phẩm';
+	$v_link_cate = '/products/COSMECEUTICALS-0';
+}
+if($type == 'PERSONALCARE'){
+	$v_text_cate = 'Chăm Sóc Cá Nhân';
+	$v_link_cate = '/products/PERSONALCARE-0';
+}
+if($type == 'PRODUCTCOMPANY'){
+	$v_text_cate = 'TPCN NichieiAsia';
+	$v_link_cate = '/products/PRODUCTCOMPANY-0';
+}
+if($type == 'MEDICALDEVICES'){
+	$v_text_cate = 'Thiết Bị Y Tế';
+	$v_link_cate = '/products/MEDICALDEVICES-0';
+}
+if($type == 'ORDERFAST'){
+	$v_text_cate = 'Đặt hàng nhanh';
+	$v_link_cate = '/products/ORDERFAST-0';
+}
 ?>
 <style>
     .swiper-container {
@@ -23,66 +49,56 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
     <div class="container">
         <div class="menu-prod">
             <div class="d-flex align-items-center gap-2">
-                <button><a href="/products">FLASH SALE</a></button>
-                <button><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
-                <button><a href="/products/COSMECEUTICALS-0">Dược Mỹ Phẩm</a></button>
-                <button><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
-                <button><a href="/products/PRODUCTCOMPANY-0">Sản Phẩm Vua Dược</a></button>
-                <button><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
+                <button <?php echo ($type == '') ? 'class="active"' : ''; ?>><a href="/products">FLASH SALE</a></button>
+                <!--<button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Đặt hàng nhanh</a></button>-->
+                <button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
+                <!--<button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
+                <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>-->
+                <button <?php echo ($type == 'PRODUCTCOMPANY') ? 'class="active"' : ''; ?>><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
+                <!--<button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
             </div>
-        </div>    
+        </div>
+		<?php 
+		if(!empty($type)){
+		?>
+			<nav aria-label="breadcrumb" class="breadcrumb-container">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item active"><a href="/">Trang chủ</a></li>
+					<li class="breadcrumb-item"><a href="<?php echo $v_link_cate; ?>"><?php echo $v_text_cate; ?></a></li>
+					<?php 
+					if($categoryByParentId){
+					?>
+						<li class="breadcrumb-item"><a href="<?php echo '/products/'.$categoryByParentId->rewrite.'-'.$categoryByParentId->id; ?>"><?php echo $categoryByParentId->name ?></a></li>
+					<?php 
+					}
+					if($categoryById){
+						?>
+							<li class="breadcrumb-item active" aria-current="page"><?php echo $categoryById->name ?></li>
+						<?php
+					}?>
+				</ol>
+			</nav>
+        <?php 
+		}?>
         <div class="row menu-prod">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="swiper-container main-slider">
                             <div class="swiper-wrapper">
-                                <?php 
-                                $images = $product['images'];
-                                foreach($images as $items){
-                                ?>
-                                    <div class="square-image swiper-slide">
-                                        <img src="<?php echo $items['url'] ?>" class="thumbnail-image" alt="Thumbnail Image">
+                                    <div class="square-image mx-auto">
+                                        <img src="<?php echo $product['avatar']['url'] ?>" class="thumbnail-image" alt="Thumbnail Image">
                                     </div>
-                                <?php 
-                                }?>
                             </div>  
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev swiper-button-prev" type="button" data-bs-target="#carouselExample" 
-                            data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next swiper-button-next" type="button" data-bs-target="#carouselExample" 
-                            data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <div class="row">
-                    <div class="thumbnail-container">
-                        <div class="swiper-container thumbnail-slider thumbnail-container">
-                            <div class="swiper-wrapper">
-                                <?php 
-                                $images = $product['images'];
-                                foreach($images as $items){
-                                ?>
-                                    <div class="thumbnail-item swiper-slide">
-                                        <img src="<?php echo $items['url'] ?>" class="thumbnail-image" alt="Thumbnail Image">
-                                    </div>
-                                <?php 
-                                }?>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 prod-item">
+            <div class="col-md-7 prod-item">
                 <div class="product-details">
                 <h2><?php echo $product['name'] ?></h2>
                 <p><?php echo $product['teaser'] ?></p>
-                <p>Giá: <?php echo formatCurrencyVND($product['price']); ?></p>
+                <div class="price">Giá: <?php echo formatCurrencyVND($product['price']); ?></div>
 
                 <div class="input-group number-input w-50">
                     <div class="input-group-prepend">
@@ -108,13 +124,6 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                         </button>
                     </div>
                 </div>
-                <div class="product-quantity">
-                    <div class="border-wrapper">
-                    <button (click)="decreaseQuantity()">-</button>
-                    <input type="text" [value]="quantity">
-                    <button (click)="increaseQuantity()">+</button>
-                    </div>
-                </div>
                 </div>
             </div>      
         </div>    
@@ -132,11 +141,6 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
             </div>-->
         <?php 
         }?>
-        <div class="row">
-            <div class="col-xl-8">
-                <?php echo $product['specifications']; ?>   
-            </div>                
-        </div>
     </div>
 </div>
 <script>
