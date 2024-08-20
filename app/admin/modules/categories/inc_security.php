@@ -59,10 +59,11 @@ $fs_extension = "gif,jpg,jpe,jpeg,png";
 $fs_filesize = 1000;
 //
 $types = [
+    'ORDERFAST'=>'Đặt hàng nhanh',
     'FUNCTIONIAL' => 'Thực Phẩm Chức Năng',
-    'COSMECEUTICALS'=>'Dược Mỹ Phẩm',
+    'COSMECEUTICALS'=>'Hóa Mỹ Phẩm',
     'PERSONALCARE'=>'Chăm Sóc Cá Nhân',
-    'PRODUCTCOMPANY'=>'Sản Phẩm Vua Dược',
+    'PRODUCTCOMPANY'=>'TPCN NichieiAsia',
     'MEDICALDEVICES'=>'Thiết bị Y Tế',
 //    'PRODUCT' => 'PRODUCT',
 //    'ABOUT' => 'ABOUT',

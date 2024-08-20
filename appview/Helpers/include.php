@@ -582,16 +582,14 @@ if (!function_exists('pre')) {
 }
 if (!function_exists('renderPagination')) {
     function renderPagination($pagination) {
-        // Kiểm tra sự tồn tại của các phần tử trước khi truy cập
-        $total_pages = intval($pagination->total_pages) > 1 ? $pagination->total_pages : 1;
-        $current_page = intval($pagination->current_page) > 1 ? $pagination->current_page : 1;
-
-        $total_pages = $total_pages > 10 ? 10 : $total_pages;
+        $total_pages = max(1, intval($pagination->total_pages));
+        $current_page = max(1, intval($pagination->current_page));
+    
         $html = '<div class="pagination">';
         $html .= '<nav aria-label="Page navigation example">';
         $html .= '<ul class="pagination gap-1 m-0">';
-
-        // Nút Previous
+    
+        // Previous button
         if ($current_page > 1) {
             $prev_page = $current_page - 1;
             $html .= '<li class="page-item">
@@ -602,32 +600,52 @@ if (!function_exists('renderPagination')) {
                         </a>
                     </li>';
         }
-
-        // Các nút số trang
-        for ($page = 1; $page <= $total_pages; $page++) {
-            $active = ($page == $current_page) ? ' active' : '';
-            $html .= '<li class="page-item">
-                        <a class="page-link ' . $active . '" href="?page=' . $page . '">' . $page . '</a>
-                    </li>';
+    
+        // Always show first page
+        $html .= '<li class="page-item"><a class="page-link' . ($current_page == 1 ? ' active' : '') . '" href="?page=1">1</a></li>';
+    
+        // Add ellipsis if needed
+        if ($current_page > 3) {
+            $html .= '<li class="page-item"><span class="page-link">...</span></li>';
         }
-
-        // Nút Next
+    
+        // Pages around the current page
+        $start = max(2, $current_page - 1);
+        $end = min($current_page + 1, $total_pages - 1);
+    
+        for ($page = $start; $page <= $end; $page++) {
+            $active = ($page == $current_page) ? ' active' : '';
+            $html .= '<li class="page-item"><a class="page-link' . $active . '" href="?page=' . $page . '">' . $page . '</a></li>';
+        }
+    
+        // Add ellipsis if needed before the last page
+        if ($current_page < $total_pages - 2) {
+            $html .= '<li class="page-item"><span class="page-link">...</span></li>';
+        }
+    
+        // Always show last page
+        if ($total_pages > 1) {
+            $html .= '<li class="page-item"><a class="page-link' . ($current_page == $total_pages ? ' active' : '') . '" href="?page=' . $total_pages . '">' . $total_pages . '</a></li>';
+        }
+    
+        // Next button
         if ($current_page < $total_pages) {
+            $next_page = $current_page + 1;
             $html .= '<li class="page-item">
-                        <a class="page-link" href="?page=' . ($current_page  + 1) . '" aria-label="Next">
+                        <a class="page-link" href="?page=' . $next_page . '" aria-label="Next">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.94 4L6 4.94L9.05333 8L6 11.06L6.94 12L10.94 8L6.94 4Z" fill="#1C274C"></path>
                             </svg>
                         </a>
                     </li>';
         }
-
+    
         $html .= '</ul>';
         $html .= '</nav>';
         $html .= '</div>';
-
+    
         return $html;
-    }
+    }    
 }
 if (!function_exists('check_array')) {
     function check_array($p_array){

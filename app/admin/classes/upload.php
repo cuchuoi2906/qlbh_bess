@@ -57,7 +57,7 @@ class upload{
 				return;
 			}
 		}
-		if(check_array($array_size_check) && !$this->check_image_size($_FILES[$upload_name]['tmp_name'],"", $array_size_check[0], $array_size_check[1],1)){
+		if(check_array($array_size_check) && !$this->check_image_size($_FILES[$upload_name]['tmp_name'],"", $array_size_check[0], $array_size_check[1],2)){
 			$this->common_error	= "Bạn phải nhập kích thước ".$array_size_check[0]." x ".$array_size_check[1]."!.<br />";
 			$this->warning_error	= $this->common_error;
 			return;
@@ -125,7 +125,7 @@ class upload{
     			$this->warning_error		= $this->common_error;
     			return;
     		}
-			if(check_array($array_size_check) && !$this->check_image_size($_FILES[$upload_name]['tmp_name'][$i],"", $array_size_check[0], $array_size_check[1],1)){
+			if(check_array($array_size_check) && !$this->check_image_size($_FILES[$upload_name]['tmp_name'][$i],"", $array_size_check[0], $array_size_check[1],2)){
 				$this->common_error	= "Bạn phải nhập kích thước ".$array_size_check[0]." x ".$array_size_check[1]."!.<br />";
 				$this->warning_error	= $this->common_error;
 				return;
@@ -291,7 +291,13 @@ class upload{
 		}
 		else if($type == 1){
 			if($width == $widthCheck && $height == $heightCheck) return 1;
-		}else{
+		}
+		else if($type == 2){
+			$ratio = round($width / $height);
+			$ratioCheck = round($widthCheck / $heightCheck);
+			if($ratio == $ratioCheck) return 1;
+		}
+		else{
 			if($width >= $widthCheck && $height >= $heightCheck) return 1;
 		}
 		return 0;
