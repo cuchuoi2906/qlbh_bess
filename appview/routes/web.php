@@ -10,7 +10,7 @@ use VatGia\Helpers\Facade\Route;
 
 Route::get(
     ['/', 'index'],
-    [\AppView\Controllers\HomeController::class, 'render']
+    [\AppView\Controllers\HomeController::class, 'renderProduct']
 );
 Route::get(
     ['/dang-ky', 'index'],
