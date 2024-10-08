@@ -593,7 +593,7 @@ if (!function_exists('renderPagination')) {
         if ($current_page > 1) {
             $prev_page = $current_page - 1;
             $html .= '<li class="page-item">
-                        <a class="page-link" href="?page=' . $prev_page . '" aria-label="Previous">
+                        <a class="page-link" data-page="'.$page.'" href="?page=' . $prev_page . '" aria-label="Previous" onclick="loadPagePagination(this);">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.33332 12L8.27332 11.06L5.21998 8L8.27331 4.94L7.33331 4L3.33332 8L7.33332 12Z" fill="#1C274C" />
                             </svg>
@@ -602,7 +602,7 @@ if (!function_exists('renderPagination')) {
         }
     
         // Always show first page
-        $html .= '<li class="page-item"><a class="page-link' . ($current_page == 1 ? ' active' : '') . '" href="?page=1">1</a></li>';
+        $html .= '<li class="page-item"><a class="page-link' . ($current_page == 1 ? ' active' : '') . '" href="javascript:void(null)" onclick="loadPagePagination(this);">1</a></li>';
     
         // Add ellipsis if needed
         if ($current_page > 3) {
@@ -615,7 +615,7 @@ if (!function_exists('renderPagination')) {
     
         for ($page = $start; $page <= $end; $page++) {
             $active = ($page == $current_page) ? ' active' : '';
-            $html .= '<li class="page-item"><a class="page-link' . $active . '" href="?page=' . $page . '">' . $page . '</a></li>';
+            $html .= '<li class="page-item"><a class="page-link' . $active . '" data-page="'.$page.'" href="javascript:void(null)" onclick="loadPagePagination(this);">' . $page . '</a></li>';
         }
     
         // Add ellipsis if needed before the last page
@@ -625,14 +625,14 @@ if (!function_exists('renderPagination')) {
     
         // Always show last page
         if ($total_pages > 1) {
-            $html .= '<li class="page-item"><a class="page-link' . ($current_page == $total_pages ? ' active' : '') . '" href="?page=' . $total_pages . '">' . $total_pages . '</a></li>';
+            $html .= '<li class="page-item"><a data-page="'.$total_pages.'" class="page-link' . ($current_page == $total_pages ? ' active' : '') . '" href="javascript:void(null)" onclick="loadPagePagination(this);">' . $total_pages . '</a></li>';
         }
     
         // Next button
         if ($current_page < $total_pages) {
             $next_page = $current_page + 1;
             $html .= '<li class="page-item">
-                        <a class="page-link" href="?page=' . $next_page . '" aria-label="Next">
+                        <a class="page-link" data-page="'.$page.'" href="javascript:void(null)" aria-label="Next" onclick="loadPagePagination(this);">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.94 4L6 4.94L9.05333 8L6 11.06L6.94 12L10.94 8L6.94 4Z" fill="#1C274C"></path>
                             </svg>

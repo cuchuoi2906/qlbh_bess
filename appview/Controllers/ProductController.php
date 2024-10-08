@@ -40,12 +40,12 @@ class ProductController extends FrontEndController
         } elseif ($page > 999999999) {
             $page = 999999999;
         }
-        $page_size = 28;
+        $page_size = 46;
         //var_dump($type);
         //var_dump(empty($type));
         if(!empty($type)){
             $is_hot = -1;
-            $page_size = 18;
+            $page_size = 36;
         }
 
 		$categoryByType = [];
@@ -67,10 +67,16 @@ class ProductController extends FrontEndController
 				$arrIdsCate[] = $categoryById->id;
 			}
 		}
+		$sort_by = getValue('sort_by', 'str', 'GET', 'price');
+		
+		if($is_hot && !isset($_GET['sort_by'])){
+			$sort_by = 'updated_at';
+			$sort_type = 'DESC';
+		}
         $params = [
             'page' => $page,
             'type'=>$type,
-            'sort_by' => getValue('sort_by', 'str', 'GET', 'price'),
+            'sort_by' => $sort_by,
             'sort_type' => $sort_type,
             'category_id' => $id,
             'page_size' => $page_size,
@@ -175,5 +181,37 @@ class ProductController extends FrontEndController
         $page = getValue('page', 'int', 'GET', 1, 0);
 
         return view('products/cart')->render();
+    }
+	public function getProductDetail2($pro_id)
+    {
+        $pro_id = (int)$pro_id;
+
+        $data = model('products/get_by_id')->load([
+            'id' => $pro_id
+        ]);
+
+        if (!$data['vars']) {
+            return redirect(url('products'));
+        }
+		$categoryById = [];
+		$categoryByParentId = [];
+		$type = '';
+		if(check_array($data['vars']['category'])){
+			$id = $data['vars']['category']['id'];
+			if(intval($id) >0){
+				$categoryById = $this->categoryRepository->getCategoryByID($id);
+				if($categoryById->parent_id > 0){
+					$categoryByParentId = $this->categoryRepository->getCategoryByID($categoryById->parent_id);
+				}
+				$type = $categoryById->type;
+			}
+		}
+		
+        return view('products/detail2')->render([
+            'product'=>$data['vars'],
+			'categoryById'=>$categoryById,
+			'categoryByParentId'=>$categoryByParentId,
+			'type'=>$type,
+        ]);
     }
 }

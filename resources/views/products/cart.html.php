@@ -5,12 +5,13 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
     <div class="container">
         <div class="menu-prod">
             <div class="d-flex align-items-center gap-2">
-                <button ><a href="/products">FLASH SALE</a></button>
-                <button ><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
-                <button ><a href="/products/COSMECEUTICALS-0">Dược Mỹ Phẩm</a></button>
-                <button ><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
-                <!--<button ><a href="/products/PRODUCTCOMPANY-0">Sản Phẩm Vua Dược</a></button>-->
-                <button ><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
+                <button><a href="/products">FLASH SALE</a></button>
+                <button><a href="/products/ORDERFAST-0">Đặt hàng nhanh</a></button>
+                <button><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
+                <button><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
+                <button><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
+                <button><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
+                <button><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
             </div>
         </div>
         <div class="row">
@@ -32,7 +33,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                     <img width="100" height="100" src="<?php echo $product['avatar']['url']; ?>" alt="prod-item-1" />
                                 </div>
                                 <div class="info d-flex flex-column">
-                                    <h3 class="cart-item-title">12B Ginseng Linzhi nhân sâm 100 viên Vinaphar</h3>
+                                    <h3 class="cart-item-title"><?php echo $product['name']; ?></h3>
                                     <div class="price"><?php echo formatCurrencyVND($product['price']); ?></div>
                                     <div class="input-group number-input">
                                         <div class="input-group-prepend">
@@ -75,7 +76,10 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                             <div class="right h-100">
                                 <div class="cta d-flex justify-content-start flex-column text-end h-100 align-items-end h-100">
                                     <div class="total-price" id="total-price-product<?php echo intval($product['id']); ?>"><?php echo formatCurrencyVND($product['price']*$quantity); ?></div>
-                                    <div class="close d-sm-none d-block">
+									<div class="d-sm-flex d-none align-items-center btn-product-delete" data-product-id="<?php echo intval($product['id']); ?>"> 
+										<button><img src="<?= asset('/images/icons/Delete.svg') ?>" alt="heart">Xóa</button>
+									</div>
+                                    <div class="close d-sm-none d-block btn-product-delete" data-product-id="<?php echo intval($product['id']); ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
                                             <path
                                                 fill-rule="evenodd"
@@ -92,7 +96,9 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                 <?php 
                     }
                 }?>
-                <div class="box-info mb-4">
+            </div>
+            <div class="col-xl-4 mb-4">
+				<div class="box-info mb-4">
                     <h2 class="info-title">Thông Tin Người Nhận Hàng</h2>
                     <ul class="d-flex flex-column list-style-none m-0 p-0 gap-2">
                         <li class="d-flex align-items-center gap-2">
@@ -123,23 +129,17 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                             <span><?php echo $user->address_register; ?></span>
                         </li>
                     </ul>
+					<div class="mt-2">
+						<h2 class="info-title">Ghi Chú Giao Hàng</h2>
+						<textarea
+							class="form-control"
+							id="exampleFormControlTextarea1"
+							name="note"
+							rows="3"
+							placeholder="Thêm ghi chú về đơn hàng để được hỗ trợ. Vd: Hãy gọi điện trước khi giao hàng"
+						></textarea>
+					</div>
                 </div>
-                <div class="row mb-xl-4 mb-4">
-                    <div class="col-xl-6">
-                        <div class="box-info">
-                            <h2 class="info-title">Ghi Chú Giao Hàng</h2>
-                            <textarea
-                                class="form-control"
-                                id="exampleFormControlTextarea1"
-                                name="note"
-                                rows="3"
-                                placeholder="Thêm ghi chú về đơn hàng để được hỗ trợ. Vd: Hãy gọi điện trước khi giao hàng"
-                            ></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 mb-4">
                 <!--<div class="content-box mb-4">
                     <h2 class="content-title">Mã giảm giá</h2>
                     <div id="view-voucher" class="view-voucher d-flex align-items-center mb-3">
@@ -189,8 +189,8 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                         </li>
                     </ul>
                     <div class="form-check policy-check mt-2 mb-3">
-                        <input class="form-check-input" type="checkbox" value="" id="policy" />
-                        <label class="form-check-label" for="policy"> Tôi đồng ý với <a href="/">Điều khoản sử dụng</a> </label>
+                        <input class="form-check-input" type="checkbox" value="" id="policy" checked />
+                        <label class="form-check-label" for="policy"> Tôi đồng ý với <a href="/dieu-khoan-su-dung">Điều khoản sử dụng</a> </label>
                     </div>
                     <div class="btn-custom d-flex gap-2 align-items-center" id="btnOrder">
                         <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

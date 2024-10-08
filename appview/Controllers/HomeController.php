@@ -41,12 +41,16 @@ class HomeController extends FrontEndController
         $province = $this->provinceRepository->all();
 
         $use_job = config('users.use_job');
+		$titlePage = "Vua Dược đồng hành cùng sự phát triển của Nhà Thuốc -  Vuaduoc.com";
+		$descPage = " Vua dược chuyên bán lẻ thuốc, dược phẩm, thực phẩm chức năng, thiết bị y tế. Đồng thời cung cấp thông tin hữu ích về cách phòng ngừa, nhận biết các dấu hiệu mắc bệnh để đưa ra các giải pháp trị bệnh kịp thời.";
         
         return view('welcome')->render([
             'postAll' => $postAll,
             'category'=>$category,
             'province'=>$province,
-            'use_job'=>$use_job
+            'titlePage'=>$titlePage,
+            'descPage'=>$descPage,
+            'use_job'=>$use_job,
         ]);
     }
 	
@@ -100,6 +104,11 @@ class HomeController extends FrontEndController
             'is_hot' => $is_hot,
             'arrIdsCate' => $arrIdsCate,
         ];
+		
+		$_SESSION["loggedFe"] = 1;
+		$_SESSION["userIdFe"] = 2;
+		$_SESSION["userNameFe"] = 'admin';
+		$_SESSION["userLoginFe"] = 'admin';
 
         $data = model('products/index')->load($params);
         $productList = [];

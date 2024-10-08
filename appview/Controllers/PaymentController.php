@@ -143,8 +143,21 @@ class PaymentController
         $result = model('order/get_order_by_id')->load([
             'id' => (int)$id,
         ]);
-
+		
         return view('products/checkout')->render([
+            'id' => $id,
+            'orderData'=>$result['vars']
+        ]);
+    }
+	public function getBanksByOrderId2($id = 0)
+    {
+        if(intval($id) <= 0){
+            return;
+        }
+        $result = model('order/get_order_by_id')->load([
+            'id' => (int)$id,
+        ]);
+        return view('products/checkout2')->render([
             'id' => $id,
             'orderData'=>$result['vars']
         ]);

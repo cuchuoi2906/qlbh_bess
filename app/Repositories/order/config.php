@@ -100,6 +100,14 @@ return [
                 'title' => 'Ghi chú khi mua hàng',
                 'rule' => ''
             ],
+			'username' => [
+                'title' => 'Tên ship',
+                'rule' => ''
+            ],
+			'phone' => [
+                'title' => 'Số điện thoại nhận hàng',
+                'rule' => ''
+            ],
             'user_id' => [
                 'title' => 'ID user đang đăng nhập',
                 'rule' => 'required|integer'

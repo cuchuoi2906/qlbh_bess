@@ -102,7 +102,7 @@ if (!isset($_SESSION["logged"])) {
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
+                    <!--<li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success">4</span>
@@ -110,9 +110,8 @@ if (!isset($_SESSION["logged"])) {
                         <ul class="dropdown-menu">
                             <li class="header">You have 4 messages</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
-                                    <li><!-- start message -->
+                                    <li>
                                         <a href="#">
                                             <div class="pull-left">
                                                 <img src="resource/adminlte/dist/img/user2-160x160.jpg"
@@ -126,14 +125,13 @@ if (!isset($_SESSION["logged"])) {
                                             <p>Why not buy a new awesome theme?</p>
                                         </a>
                                     </li>
-                                    <!-- end message -->
                                 </ul>
                             </li>
                             <li class="footer"><a href="#">See All Messages</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- Notifications: style can be found in dropdown.less -->
-                    <li class="dropdown notifications-menu">
+                    <!--<li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-warning">10</span>
@@ -141,7 +139,6 @@ if (!isset($_SESSION["logged"])) {
                         <ul class="dropdown-menu">
                             <li class="header">You have 10 notifications</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
                                     <li>
                                         <a href="#">
@@ -152,40 +149,22 @@ if (!isset($_SESSION["logged"])) {
                             </li>
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- Tasks: style can be found in dropdown.less -->
+					<?php 
+					$db_menu = new db_query("SELECT count(ord_id) as orderCountNew
+						FROM orders WHERE ord_status_code = 'NEW' LIMIT 1");
+					$modules = $db_menu->fetch();
+					?>
                     <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a id="order_new" onclick="return false;" href="modules/orders/listing.php?status=NEW">
                             <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
+                            <span class="label label-danger"><?php echo $modules[0]['orderCountNew']; ?></span>
                         </a>
-                        <ul class="dropdown-menu">
+                        <!--<ul class="dropdown-menu">
                             <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                     aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
+                            
+                        </ul>-->
                     </li>
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
@@ -830,6 +809,7 @@ if (!isset($_SESSION["logged"])) {
             run_waitMe($('#tabs_content'), 1, 'bounce');
 
             var tab_id = $(this).attr('id-tab');
+			console.log($('#tab_' + tab_id).length);
             if ($('#tab_' + tab_id).length) {
 
                 $('#tab_' + tab_id).find('a').click();
@@ -854,6 +834,37 @@ if (!isset($_SESSION["logged"])) {
                 new_tab.find('a').click();
             }
         });
+		$('#order_new').click(function () {
+			$('.left-menu, .treeview').removeClass('active');
+			run_waitMe($('#tabs_content'), 1, 'bounce');
+			var tab_id = 3;
+			if ($('#tab_' + tab_id).length) {
+				
+                //$('#tab_' + tab_id).find('a').click();
+				$('#nav_tabs').find('li').removeClass('active');
+				$('#content_tab_'+tab_id).addClass('active');
+                var source = $(this).attr('href');
+                $('#content_tab_' + tab_id + ' iframe').attr('src', source);
+            } else {
+                //nav
+                var new_tab = $('#tab_1000').clone();
+                new_tab.attr('id', 'tab_' + tab_id);
+                new_tab.find('a').attr('href', '#content_tab_' + tab_id);
+                new_tab.find('a span').html($(this).attr('title-tab'));
+                $('#nav_tabs').append(new_tab);
+                $('#nav_tabs').find('li').removeClass('active');
+
+                //Content
+                var new_content = $('#content_tab_1000').clone();
+                new_content.attr('id', 'content_tab_' + tab_id);
+
+                var source = $(this).attr('href');
+                new_content.html("<iframe id='idframe_" + tab_id + "' src='" + source + "' frameborder='0' width='100%' onLoad=\"calcHeight('idframe_" + tab_id + "');\"></iframe>");
+                $('#tabs_content').append(new_content);
+                new_tab.find('a').click();
+            }
+
+		});
     });
 
     $('#profile_button').click(function () {

@@ -76,11 +76,16 @@ class AuthController extends ControllerBase
 
     public function logout()
     {
-        app('user')->logout();
-
-        return redirect($this->idvgHelper->logoutLink());
+		//@session_start();
+		if (isset($_SESSION["loggedFe"])) unset($_SESSION["loggedFe"]);
+		if (isset($_SESSION["userIdFe"])) unset($_SESSION["userIdFe"]);
+		if (isset($_SESSION["userNameFe"])) unset($_SESSION["userNameFe"]);
+		if (isset($_SESSION["userLoginFe"])) unset($_SESSION["userLoginFe"]);
+		//session_destroy();
+		//session_unset();
+		//$_SESSION["productHungdv"] = 1;
+		return redirect(url('login'));
     }
-
     public function showProfile()
     {
         return redirect('https://id.vatgia.com/v2/thiet-lap');
@@ -173,5 +178,25 @@ class AuthController extends ControllerBase
     }
     public function kiemHangVaDoiTra(){
         return view('static/kiemhangvadoitra')->render();
+    }
+	public function van_chuyen_va_giao_nhan(){
+        return view('static/van_chuyen_va_giao_nhan')->render();
+    }
+	public function chinh_sach_bao_mat_thong_tin(){
+        return view('static/chinh_sach_bao_mat_thong_tin')->render();
+    }
+	public function xu_ly_khieu_nai(){
+        return view('static/xu_ly_khieu_nai')->render();
+    }
+	public function chinh_sach_kiem_hang(){
+        return view('static/chinh_sach_kiem_hang')->render();
+    }
+	
+	public function chinh_sach_doi_tra(){
+        return view('static/chinh_sach_doi_tra')->render();
+    }
+	
+	public function chinh_sach_thanh_toan(){
+        return view('static/chinh_sach_thanh_toan')->render();
     }
 }

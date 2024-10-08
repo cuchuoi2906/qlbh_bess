@@ -105,6 +105,9 @@ class OrderTransformer extends TransformerAbstract
             'total_money' => $total_money,
             'total_money_origin' => $total_money_origin,
             'total_discount' => $total_discount,
+			'note' => $item->note,
+			'ship_name' => $item->ord_ship_name,
+			'ship_phone' => $item->ord_ship_phone,
         ];
     }
 

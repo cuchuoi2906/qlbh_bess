@@ -32,12 +32,12 @@ if($type == 'ORDERFAST'){
         <div class="menu-prod">
             <div class="d-flex align-items-center gap-2">
                 <button <?php echo ($type == '') ? 'class="active"' : ''; ?>><a href="/products">FLASH SALE</a></button>
-                <!--<button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Đặt hàng nhanh</a></button>-->
+                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Đặt hàng nhanh</a></button>
                 <button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
-                <!--<button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
-                <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>-->
+                <button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
+                <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
                 <button <?php echo ($type == 'PRODUCTCOMPANY') ? 'class="active"' : ''; ?>><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
-                <!--<button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
+                <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
             </div>
         </div>
 		<?php 
@@ -153,8 +153,17 @@ if($type == 'ORDERFAST'){
                                             <img src="<?php echo $items['avatar']['url']; ?>" alt="product">
                                         </div>
                                         <h3 class="prod-title"><a href="<?php echo '/san-pham/'.$items['rewrite'].'-'.$items['id']; ?>"><?php echo $items['name']; ?></a></h3>
-                                        <div class="price"><?php echo formatCurrencyVND($items['price']); ?></div>
-                                        <div class="input-group number-input">
+										<?php 
+										if(intval($items['price'])>0){
+										?>
+											<div class="price text-end"><?php echo formatCurrencyVND($items['price']); ?></div>
+										<?php 
+										}else{
+											?>
+											<span class="badge badge-success">Giá ưu đãi</span>
+											<?php
+										}?>
+                                        <!--<div class="input-group number-input">
                                             <div class="input-group-prepend">
                                                 <button data-product-id="<?php echo $items['id']; ?>" class="btn btn-decrement" type="button" disabled="">
                                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -172,7 +181,7 @@ if($type == 'ORDERFAST'){
                                                     </svg>
                                                 </button>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             <?php 
@@ -370,8 +379,18 @@ if($type == 'ORDERFAST'){
                                     <h3 class="prod-title">
                                         <a href="<?php echo '/san-pham/'.$items['rewrite'].'-'.$items['id']; ?>"><?php echo $items['name']; ?></a>
                                     </h3>
-                                    <div class="price"><?php echo formatCurrencyVND($items['price']); ?></div>
-                                    <div class="input-group number-input">
+									<?php 
+									if(intval($items['price'])>0){
+									?>
+                                    <div class="price text-end"><?php echo formatCurrencyVND($items['price']); ?></div>
+									<?php 
+									}else{
+										?>
+										<span class="badge rounded-pill bg-success text-end">GIÁ ƯU ĐÃI</span>
+										<?php
+									}
+									?>
+                                    <!--<div class="input-group number-input">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-decrement" type="button" data-product-id="<?php echo $items['id']; ?>" disabled>
                                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -394,7 +413,7 @@ if($type == 'ORDERFAST'){
                                                 </svg>
                                             </button>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         <?php  

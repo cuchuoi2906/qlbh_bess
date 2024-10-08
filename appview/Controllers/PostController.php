@@ -46,12 +46,17 @@ class PostController extends FrontEndController
         $postCategory = $this->post->allByCat($categoryId,'');
         $postCategory = $postCategory->data;
         $cateogryChildren = $this->category->getCategoryByIdAndType('NEWS',60);
+		$titlePage = $detail->title;
+		$descPage = $detail->teaser;
+		
         return view('posts/detail')->render([
             'item' => $detail,
             'id'=>$id,
             'categoryId'=>$categoryId,
             'postCategory'=>$postCategory,
-            'cateogryChildren'=>$cateogryChildren
+            'cateogryChildren'=>$cateogryChildren,
+            'titlePage'=>$titlePage,
+            'descPage'=>$descPage
         ]);
     }
     public function postListing($type,$id){
@@ -60,6 +65,12 @@ class PostController extends FrontEndController
 
         $cateogryChildren = $this->category->getCategoryByIdAndType('NEWS',60);
 
-        return view('posts/listing')->render(compact('postAll','cateogryChildren','idCate'));    
+        $data = model('categories/get_by_id')->load([
+            'id'=>$idCate
+        ]);
+		$titlePage = $data['vars']['name'];
+		$descPage = $data['vars']['name'];
+
+        return view('posts/listing')->render(compact('postAll','cateogryChildren','idCate','titlePage','descPage'));    
     }
 }

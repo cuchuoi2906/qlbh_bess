@@ -22,11 +22,11 @@ if (input('admin_id')) {
 $product = \App\Models\Product::findByID(input('product_id'));
 if ($product) {
     $is_add_more = input('is_add_more') ?? 1;
-
-    if (!$is_add_more && !input('quantity')) {
+    if ($is_add_more == 2) { // trường hợp xóa
         $model::where('usc_user_id', input('user_id'))
             ->where('usc_product_id', input('product_id'))
             ->delete();
+		$affected = true;
     } else {
         if ($is_add_more) {
             $update_data = [
@@ -40,7 +40,7 @@ if ($product) {
         $affected = $model::insertUpdate([
             'usc_user_id' => (int)input('user_id'),
             'usc_product_id' => (int)input('product_id'),
-            'usc_quantity' => (int)input('quantity')
+            'usc_quantity' => (!$is_add_more) ?  (int)input('quantity') : 0
         ], $update_data);
     }
 }

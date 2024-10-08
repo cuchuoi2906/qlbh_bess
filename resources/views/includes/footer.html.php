@@ -36,10 +36,9 @@
                                 </div>-->
                             </div>
                             <div class="ft-content d-flex" style="height: 40px;">
-                                <!-- <img src="./images/bct.png" alt="bo cong thuong" height="60" />  -->
-                                <!--<div><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></div>-->
+                                <div><a target="_blank" href="http://online.gov.vn/Home/WebDetails/123101" title="Đã đăng ký với bộ công thương" ><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></a></div>
 								<div style="    background-color: #ffff;margin-left: 10px;height: 31px;margin-top: 5px;border-radius: 7px;">
-                                    <a href="//www.dmca.com/Protection/Status.aspx?ID=8fc375bc-32e3-48f6-8986-42e896931d4f" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+                                    <span class="dmca-badge" target="_blank"> <img src ="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></span>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
                                 </div>
                                 
 							</div>
@@ -114,7 +113,8 @@
 						</svg>
 						<span>Sản phẩm</span>
 					</a>
-					<a href="/cart" class="menu-item">
+					<a href="/cart" class="menu-item position-relative">
+						<span id="cartCountM" class="position-absolute position-absolute top-0 end-0 badge rounded-pill bg-warning text-dark"> <?php echo isset($_SESSION['cartTotalProduct']) ? intval($_SESSION['cartTotalProduct']) : 0; ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
 							<path d="M8.64995 17.3002C9.31269 17.3002 9.84995 17.8375 9.84995 18.5002C9.84995 19.1629 9.31269 19.7002 8.64995 19.7002C7.98721 19.7002 7.44995 19.1629 7.44995 18.5002C7.44995 17.8375 7.98721 17.3002 8.64995 17.3002Z" stroke="#8EBCBC" stroke-width="1.5"></path>
 							<path d="M15.8499 17.3003C16.5126 17.3003 17.0499 17.8375 17.0499 18.5003C17.0499 19.163 16.5126 19.7003 15.8499 19.7003C15.1872 19.7003 14.6499 19.163 14.6499 18.5003C14.6499 17.8375 15.1872 17.3003 15.8499 17.3003Z" stroke="#8EBCBC" stroke-width="1.5"></path>
@@ -122,17 +122,61 @@
 						</svg>
 						<span>Giỏ hàng</span>
 					</a>
-					<a href="/" class="menu-item">
-						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
-							<circle cx="12.7501" cy="9.60019" r="2.4" stroke="#8EBCBC" stroke-width="1.5"></circle>
-							<circle cx="12.75" cy="12" r="8" stroke="#8EBCBC" stroke-width="1.5"></circle>
-							<path d="M17.5253 18.4004C17.398 16.0872 16.6898 14.4004 12.75 14.4004C8.81017 14.4004 8.10193 16.0872 7.97461 18.4004" stroke="#8EBCBC" stroke-width="1.5" stroke-linecap="round"></path>
-						</svg>
-						<span>Tài khoản</span>
-					</a>
+					<?php
+					if(checkLoginFe()){
+						?>
+						<div class="dropup">
+							<div class="" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
+								<a href="/" class="menu-item" style="width: 100%;">
+									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+										<circle cx="12.7501" cy="9.60019" r="2.4" stroke="#8EBCBC" stroke-width="1.5"></circle>
+										<circle cx="12.75" cy="12" r="8" stroke="#8EBCBC" stroke-width="1.5"></circle>
+										<path d="M17.5253 18.4004C17.398 16.0872 16.6898 14.4004 12.75 14.4004C8.81017 14.4004 8.10193 16.0872 7.97461 18.4004" stroke="#8EBCBC" stroke-width="1.5" stroke-linecap="round"></path>
+									</svg>
+									<span>Tài khoản</span>
+								<a>
+							</div>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/logout" style="padding-left: 40px;">Thoát</a></li>
+							</ul>
+						</div>
+					<?php
+					}else{
+					?>
+						<a href="/" class="menu-item">
+							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+								<circle cx="12.7501" cy="9.60019" r="2.4" stroke="#8EBCBC" stroke-width="1.5"></circle>
+								<circle cx="12.75" cy="12" r="8" stroke="#8EBCBC" stroke-width="1.5"></circle>
+								<path d="M17.5253 18.4004C17.398 16.0872 16.6898 14.4004 12.75 14.4004C8.81017 14.4004 8.10193 16.0872 7.97461 18.4004" stroke="#8EBCBC" stroke-width="1.5" stroke-linecap="round"></path>
+							</svg>
+							<span>Tài khoản</span>
+						</a>
+					<?php 
+					}?>
 				</div>
 			</div>
         </footer>
+		<div class="fixed-bottom-bar whiteBackground" id="fixed-bottom-bar">
+		   <div class="wrapper d-flex container">
+			  <div class="logo-bottom me-3"><img src="/assets//images/logo.png?v=2027" alt="Viblo"></div>
+			  <div class="content d-flex flex-column">
+				 <div class="text">
+					<span class="text-register">
+						Website thương mại điện tử vuaduoc.com ( gọi tắt là website ) được xây dựng để các thành viên tham gia mua bán buôn các sản phẩm dược phẩm, vật tư y tế, mỹ phẩm được phép lưu hành tại Việt Nam. Thành viên tham gia website là các công ty, tổ chức, nhà thuốc, quầy thuốc, phòng khám được cấp phép bán lẻ dược phẩm, vật tư y tế và các sản phẩm khác; và phải có người phụ trách chuyên môn theo quy định của pháp luật. Các thông tin về giá, thông tin sản phẩm được đăng tải lên website nhằm cung cấp thông tin cho thành viên có thể xác định các đặc tính của hàng hóa để đưa ra quyết định. Việc sử dụng thuốc kê đơn hay chữa bệnh phải tuyệt đối tuân thủ theo sự hướng dẫn của người có chuyên môn về y dược. Website vuaduoc.com không chịu trách nhiệm cho bất cứ hậu quả nào xảy ra do tự ý dùng thuốc dựa trên các thông tin trên và các trường hợp thành viên mua thuốc cho mục đích tiêu dùng.
+					</span>
+				 </div>
+				 <div class="button d-flex mt-1 justify-content-center">
+					<button class="btn-custom" id="acceptRule">
+						Tôi đồng ý
+					</button>
+					<button class="btn btn-warning ms-3" id="noAcceptRule" style="border-radius: 50px;">
+						Tôi không đồng ý
+					</button>
+				 </div>
+			  </div>
+			  <div class="icon-close" style="cursor: pointer;"><i class="icon fa fa-close"></i></div>
+		   </div>
+		</div>
         <div id="back-to-top">
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="27" viewBox="0 0 26 27" fill="none">
                 <path d="M13 26V1M13 1L1 12.7347M13 1L25 12.7347" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

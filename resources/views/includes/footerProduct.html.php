@@ -10,7 +10,7 @@
                             <div class="ft-content mb-3">
                                 <div class="ft-ct-item mb-3">
                                     <strong>Văn phòng:</strong><br />
-                                    <span>Tầng 9, Tòa nhà Five Season, 47 Nguyễn Tuân, Thanh Xuân, Hà Nội</span>
+                                    <span>Số 4, ngõ 136/6/35 Phố Triều Khúc , Xã Tân Triều, Huyện Thanh Trì, Thành phố Hà Nội, Việt Nam</span>
                                 </div>
 
                                 <div class="ft-ct-item">
@@ -37,9 +37,9 @@
                             </div>
                             <div class="ft-content d-flex" style="height: 40px;">
                                 <!-- <img src="./images/bct.png" alt="bo cong thuong" height="60" />  -->
-                                <!--<div><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></div>-->
+                                <div><a target="_blank" href="http://online.gov.vn/Home/WebDetails/123101" title="Đã đăng ký với bộ công thương" ><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></a></div>
 								<div style="    background-color: #ffff;margin-left: 10px;height: 31px;margin-top: 5px;border-radius: 7px;">
-                                    <a href="//www.dmca.com/Protection/Status.aspx?ID=8fc375bc-32e3-48f6-8986-42e896931d4f" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+                                    <span class="dmca-badge"> <img src ="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></span>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
                                 </div>
                                 
 							</div>
@@ -64,12 +64,12 @@
                             <h2 class="ft-title">ĐIỀU KHOẢN VÀ CHÍNH SÁCH</h2>
                             <div class="ft-content">
                                 <ul>
-                                    <!--<li><a href="/dieu-khoan-su-dung">Điều Khoản Sử Dụng</a></li>
-                                    <li><a href="/chinh-sach-bao-mat">Chính Sách Bảo Mật</a></li>
-                                    <li><a href="/chinh-sach-van-chuyen">Chính Sách Vận Chuyển</a></li>
-                                    <li><a href="/chinh-sach-giai-quyet-khieu-nai">Chính Sách Giải Quyết Khiếu Nại</a></li>
-                                    <li><a href="/chinh-sach-kiem-hang-va-doi-tra">Chính Sách Kiểm Hàng Và Đổi Trả</a></li>
-                                    <li><a href="/loyal-client">Chính Sách Khách Hàng Thân Thiết</a></li>-->
+                                    <li><a href="/chinh_sach_thanh_toan">Chính sách thanh toán</a></li>
+                                    <li><a href="/van_chuyen_va_giao_nhan">Chính sách vận chuyển</a></li>
+                                    <li><a href="/chinh_sach_bao_mat_thong_tin">Chính sách bảo mật thông tin</a></li>
+                                    <li><a href="/xu_ly_khieu_nai">Chính sách xử lý khiếu nại</a></li>
+                                    <li><a href="/chinh_sach_kiem_hang">Chính sách kiểm hàng</a></li>
+                                    <li><a href="/chinh_sach_doi_tra">Chính sách đổi trả</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -114,7 +114,8 @@
 						</svg>
 						<span>Sản phẩm</span>
 					</a>
-					<a href="/cart" class="menu-item">
+					<a href="/cart" class="menu-item position-relative">
+						<span id="cartCountM" class="position-absolute position-absolute top-0 end-0 badge rounded-pill bg-warning text-dark"> <?php echo isset($_SESSION['cartTotalProduct']) ? intval($_SESSION['cartTotalProduct']) : 0; ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
 							<path d="M8.64995 17.3002C9.31269 17.3002 9.84995 17.8375 9.84995 18.5002C9.84995 19.1629 9.31269 19.7002 8.64995 19.7002C7.98721 19.7002 7.44995 19.1629 7.44995 18.5002C7.44995 17.8375 7.98721 17.3002 8.64995 17.3002Z" stroke="#8EBCBC" stroke-width="1.5"></path>
 							<path d="M15.8499 17.3003C16.5126 17.3003 17.0499 17.8375 17.0499 18.5003C17.0499 19.163 16.5126 19.7003 15.8499 19.7003C15.1872 19.7003 14.6499 19.163 14.6499 18.5003C14.6499 17.8375 15.1872 17.3003 15.8499 17.3003Z" stroke="#8EBCBC" stroke-width="1.5"></path>

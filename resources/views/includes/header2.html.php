@@ -4,7 +4,8 @@
         <link rel="SHORTCUT ICON" href="<?= asset('/images/logo-shortcut.jpg') ?>" type="image/x-icon" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="index,follow,noodp" />
+		<meta name="robots" content="noarchive">
         <link rel="stylesheet" href="<?php echo asset('libs/bootstrap/css/bootstrap.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('/libs/swiper/swiper-bundle.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/font.css') ?>" />
@@ -28,8 +29,13 @@
             referrerpolicy="no-referrer"
         ></script>
         <script src="<?php echo asset('js/script.js') ?>"></script>
-        <script src="<?php echo asset('/libs/bootstrap/js/bootstrap.min.js') ?>"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="<?php echo asset('/libs/swiper/swiper-bundle.min.js') ?>"></script>
+		<style>
+			.user-btn {
+				cursor: pointer;
+			}
+		</style>
     </head>
     <body>
         <header class="header-2">
@@ -64,14 +70,19 @@
                     <?php 
                     if(checkLoginFe()){
                     ?>
-                        <div class="user-btn d-flex align-items-center justify-content-center gap-2 rounded-pill">
-                            <div class="avatar">
-                                <img width="37" height="37" class="rounded-circle" src="<?= asset('/images/avatar.png') ?>" alt="avatar">
-                            </div>
-                            <div class="name"><?php echo isset($_SESSION["userNameFe"]) ? $_SESSION["userNameFe"] : ""; ?></div>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.6 9.60001L12 14.4L6.40002 9.60001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
+                        <div class="user-btn align-items-center justify-content-center gap-2 rounded-pill">
+							<div id="dropdownMenuButton1" class="d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+								<div class="avatar">
+									<img width="37" height="37" class="rounded-circle" src="<?= asset('/images/avatar.png') ?>" alt="avatar">
+								</div>
+								<div class="name"><?php echo isset($_SESSION["userNameFe"]) ? $_SESSION["userNameFe"] : ""; ?></div>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M17.6 9.60001L12 14.4L6.40002 9.60001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+								</svg>
+							</div>
+							<ul id="dropdownMenu" class="dropdown-menu position-absolute bg-light mt-3 shadow" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="/logout">Thoát</a></li>
+							</ul>
                         </div>
                     <?php 
                     }?>
@@ -120,15 +131,36 @@
                             </button>
                         </div>
                         <div class="user-cta py-4 px-3">
-                            <div class="desc mb-2">Đăng nhập để hưởng đặc quyền cho thành viên</div>
-                            <div class="cta d-flex gap-2">
-                                <button>
-                                    <a href="/login">Đăng nhập</a>
-                                </button>
-                                <button>
-                                    <a href="/register">Đăng ký</a>
-                                </button>
-                            </div>
+                            <?php
+                            if(checkLoginFe()){
+                                ?>
+                                <div class="user-btn align-items-center justify-content-center gap-2 rounded-pill">
+                                    <div id="dropdownMenuButton1" class="d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+										<div class="avatar">
+											<img width="37" height="37" class="rounded-circle" src="<?= asset('/images/avatar.png') ?>" alt="avatar">
+										</div>
+										<div class="name"><?php echo isset($_SESSION["userNameFe"]) ? $_SESSION["userNameFe"] : ""; ?></div>
+										<svg id="dropdownIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17.6 9.60001L12 14.4L6.40002 9.60001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</div>
+									<ul id="dropdownMenu" class="dropdown-menu position-absolute bg-light mt-3 shadow" aria-labelledby="dropdownMenuButton1">
+										<li><a class="dropdown-item" href="/logout">Thoát</a></li>
+									</ul>
+                                </div>
+                                <?php
+                            }else{?>
+                                <div class="desc mb-2">Đăng nhập để hưởng đặc quyền cho thành viên</div>
+                                <div class="cta d-flex gap-2">
+                                    <button>
+                                        <a href="/login">Đăng nhập</a>
+                                    </button>
+                                    <button>
+                                        <a href="/?1#formdangky">Đăng ký</a>
+                                    </button>
+                                </div>
+                            <?php 
+                            }?>
                         </div>
                         <div class="sidebar-menu py-4 px-3">
                             <ul class="d-flex flex-column gap-3">

@@ -13,14 +13,14 @@
         <link rel="stylesheet" href="<?php echo asset('css/thuc-pham-chuc-nang.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/cart.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/flash-sale.css') ?>" />
-        <title>Vua Dược đồng hành cùng sự phát triển của Nhà Thuốc -  Vuaduoc.com</title>
+        <!--<title>Vua Dược đồng hành cùng sự phát triển của Nhà Thuốc -  Vuaduoc.com</title>
         <meta name="keywords" content="Nhà thuốc An Khang, Dược An Khang, Tiệm thuốc An Khang, nhà thuốc, An Khang" />
         <meta name="description" content="Vua dược chuyên bán lẻ thuốc, dược phẩm, thực phẩm chức năng, thiết bị y tế. Đồng thời cung cấp thông tin hữu ích về cách phòng ngừa, nhận biết các dấu hiệu mắc bệnh để đưa ra các giải pháp trị bệnh kịp thời." />
 
         <meta content="<?= asset('/images/og-img-header.jpg') ?>" property="og:image" itemprop="thumbnailUrl" />
         <meta property="og:title" itemprop="name" content="Vua Dược đồng hành cùng sự phát triển của Nhà Thuốc -  Vuaduoc.com" />
         <meta property="og:description" content="Vua dược chuyên bán lẻ thuốc, dược phẩm, thực phẩm chức năng, thiết bị y tế. Đồng thời cung cấp thông tin hữu ích về cách phòng ngừa, nhận biết các dấu hiệu mắc bệnh để đưa ra các giải pháp trị bệnh kịp thời." />
-
+		-->
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -51,7 +51,7 @@
                             </span>
                         </div>
                     </div>
-                    <!--<div class="cart">
+                    <div class="cart">
                         <a href="/cart" type="button" class="position-relative">
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16.8 33.6C18.1255 33.6 19.2 34.6745 19.2 36C19.2 37.3255 18.1255 38.4 16.8 38.4C15.4745 38.4 14.4 37.3255 14.4 36C14.4 34.6745 15.4745 33.6 16.8 33.6Z" stroke="white" stroke-width="2"></path>
@@ -60,7 +60,7 @@
                             </svg>
                             <span id="cartCount" class="position-absolute position-absolute top-0 end-0 badge rounded-pill bg-warning text-dark"> <?php echo isset($_SESSION['cartTotalProduct']) ? intval($_SESSION['cartTotalProduct']) : 0; ?></span>
                         </a>
-                    </div>-->
+                    </div>
                     <?php 
                     if(1 != 1){
                     ?>
