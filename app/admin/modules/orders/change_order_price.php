@@ -14,7 +14,12 @@ if (
         $productArr = [];
         foreach ($products as $product) {
             $productId = $product->product_id;
-            $productArr[$productId]['price'] =  getValue('ord_price'.$productId, 'int', 'POST', 0);
+            $price = getValue('ord_price'.$productId, 'str', 'POST', 0);
+            $price = intval(str_replace(",","",$price));
+            if($price == 0){
+                die('Giá nhập không đúng');
+            }
+            $productArr[$productId]['price'] =  $price;
         }
         // Tính lại đơn hàng
         \App\Manager\Order\OrderManager::commissions($order->id,$productArr);

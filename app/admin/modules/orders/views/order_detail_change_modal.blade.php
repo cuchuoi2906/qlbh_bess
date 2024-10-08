@@ -185,7 +185,7 @@
                                         {{--<td>SKU</td>--}}
                                         <th>Số lượng</th>
                                         <th>Giá</th>
-                                        <th>Chiết khấu</th>
+                                        <!--<th>Chiết khấu</th>-->
                                         <th>
                                             Tổng tiền thanh toán
                                         </th>
@@ -202,16 +202,16 @@
                                                 {{--<td>--}}
                                                 {{--{{$product->info->sku}}--}}
                                                 {{--</td>--}}
-                                                <td>
+                                                <td style="width: 20px">
                                                     {{$product->quantity}}
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
+                                                    <input oninput="loadInputValueformatCurrency(this,{{ $product->price }})" class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
                                                    value="{{ number_format($product->price) }}">
                                                 </td>
-                                                <td>
+                                                <!--<td>
                                                     {{ number_format($product->price - $product->sale_price) }}
-                                                </td>
+                                                </td>-->
                                                 <td>
                                                     {{ number_format($product->quantity * $product->sale_price)}}
                                                 </td>
@@ -222,11 +222,13 @@
                                             <td style="text-align: right" colspan="4">Tổng tiền</td>
                                             <td><span style="color: red;">{{ number_format($row->amount) }} VND</span></td>
                                         </tr>
+                                        @if($row->status_code == \App\Models\Order::NEW)
                                         <tr>
                                             <td colspan="2">
                                                 <input type="submit" value="Cập nhật giá đơn hàng">
                                             </td>
                                         </tr>
+                                        @endif
                                 </table>
                             </form>
                         </div>

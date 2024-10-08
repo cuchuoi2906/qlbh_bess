@@ -403,6 +403,27 @@
             setCookie('order_focus_id', order_id, 1);
             location.reload();
         }
+        function formatCurrencyVND(number) {
+            // Định dạng số theo tiền tệ Việt Nam
+            let formatted = new Intl.NumberFormat('vi-VN', {
+                style: 'decimal',
+                currency: 'VND'
+            }).format(number);
+
+            // Thay thế dấu . bằng dấu ,
+            return formatted.replace(/\./g, ',');
+        }
+        function loadInputValueformatCurrency(inputElement,price){
+            let value = inputElement.value;
+            value = value.replace(/\,/g, '');
+            value = parseInt(value);
+            if(isNaN(value)){
+                alert("Giá bán phải là số nguyên dương > 0");
+                inputElement.value = formatCurrencyVND(price);
+                return;
+            }
+            inputElement.value = formatCurrencyVND(value);
+        }
         var order_focus_id = getCookie('order_focus_id');
         $('#contact_detail_' + order_focus_id).modal('show');
         deleteCookie('order_focus_id');
