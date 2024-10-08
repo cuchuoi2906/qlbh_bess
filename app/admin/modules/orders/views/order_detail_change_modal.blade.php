@@ -176,59 +176,59 @@
 
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Mã sản phẩm</th>
-                                    <th>Sản phẩm</th>
-                                    {{--<td>SKU</td>--}}
-                                    <th>Số lượng</th>
-                                    <th>Giá</th>
-                                    <th>Chiết khấu</th>
-                                    <th>
-                                        Tổng tiền thanh toán
-                                    </th>
-                                </tr>
+                            <form action="change_order_price.php?ord_id={{$row->id}}" id="order_price_{{$row->id}}"
+                              class="ship_info table-responsive" method="post">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Mã sản phẩm</th>
+                                        <th>Sản phẩm</th>
+                                        {{--<td>SKU</td>--}}
+                                        <th>Số lượng</th>
+                                        <th>Giá</th>
+                                        <th>Chiết khấu</th>
+                                        <th>
+                                            Tổng tiền thanh toán
+                                        </th>
+                                    </tr>
+                                        @foreach ($row->products as $product)
 
-                                <form>
-                                    @foreach ($row->products as $product)
-
-                                        <tr>
-                                            <td>
-                                                {{$product->info->pro_code}}
-                                            </td>
-                                            <td>
-                                                {{$product->info->name}}
-                                            </td>
-                                            {{--<td>--}}
-                                            {{--{{$product->info->sku}}--}}
-                                            {{--</td>--}}
-                                            <td>
-
-                                                
+                                            <tr>
+                                                <td>
+                                                    {{$product->info->pro_code}}
+                                                </td>
+                                                <td>
+                                                    {{$product->info->name}}
+                                                </td>
+                                                {{--<td>--}}
+                                                {{--{{$product->info->sku}}--}}
+                                                {{--</td>--}}
+                                                <td>
                                                     {{$product->quantity}}
-                                                
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
+                                                   value="{{ number_format($product->price) }}">
+                                                </td>
+                                                <td>
+                                                    {{ number_format($product->price - $product->sale_price) }}
+                                                </td>
+                                                <td>
+                                                    {{ number_format($product->quantity * $product->sale_price)}}
+                                                </td>
+                                            </tr>
 
-
-                                            </td>
-                                            <td>
-                                                {{ number_format($product->price) }}
-                                            </td>
-                                            <td>
-                                                {{ number_format($product->price - $product->sale_price) }}
-                                            </td>
-                                            <td>
-                                                {{ number_format($product->quantity * $product->sale_price)}}
+                                        @endforeach
+                                        <tr>
+                                            <td style="text-align: right" colspan="4">Tổng tiền</td>
+                                            <td><span style="color: red;">{{ number_format($row->amount) }} VND</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <input type="submit" value="Cập nhật giá đơn hàng">
                                             </td>
                                         </tr>
-
-                                    @endforeach
-                                </form>
-                                <tr>
-                                    <td style="text-align: right" colspan="4">Tổng tiền</td>
-                                    <td><span style="color: red;">{{ number_format($row->amount) }} VND</span></td>
-                                </tr>
-
-                            </table>
+                                </table>
+                            </form>
                         </div>
 
                         <div class="table-responsive">
@@ -371,7 +371,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" onclick="renew({{$row->id}}, {{$row->user->id}})">
-                    Tạo lại đơn
+                    Xóa và tạo lại đơn
                 </button>
 
                 <button class="btn btn-secondary" onclick="dialog_note({{$row->id}})">

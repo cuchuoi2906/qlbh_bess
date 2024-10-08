@@ -71,7 +71,7 @@ class OrderManager
         return Order::findByID($order->id);
     }
 
-    public static function commissions($order_id)
+    public static function commissions($order_id,$productPrice = [])
     {
         $order = Order::findByID($order_id);
         if (!$order) {
@@ -94,11 +94,11 @@ class OrderManager
             $product->info->buy_quantity = $product->quantity;
             $product = transformer_item($product->info, new \App\Transformers\ProductTransformer());
             $product = collect_recursive($product);
-
-
+            if(check_array($productPrice) && isset($productPrice[$product->id])){
+                $product->price =intval($productPrice[$product->id]['price']);
+            }
             $total_product += $quantity;
             $price = $product->discount_price ? $product->discount_price : $product->price;
-
             $total_money += $price * $quantity;
 
             $direct_commission = 0;
@@ -132,7 +132,9 @@ class OrderManager
         //Update tổng số tiền vào đơn hàng
         $order->amount = (int)$total_money;
         $order->update();
-
+        if(check_array($productPrice)){
+            return;
+        }
         /**
          * Lưu commission
          */

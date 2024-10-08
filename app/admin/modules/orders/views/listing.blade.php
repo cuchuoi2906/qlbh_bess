@@ -403,7 +403,6 @@
             setCookie('order_focus_id', order_id, 1);
             location.reload();
         }
-
         var order_focus_id = getCookie('order_focus_id');
         $('#contact_detail_' + order_focus_id).modal('show');
         deleteCookie('order_focus_id');
