@@ -14,7 +14,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body section-to-print" id="print_content_{{$row->id}}">
+            <div class="modal-body section-to-print">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -32,21 +32,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Người nhận:</td>
-                                    <td>{{ $row->ship_name }}</td>
-                                </tr>
-                                <tr>
                                     <td>Số điện thoại người nhận:</td>
                                     <td>{{ $row->ship_phone }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Email:</td>
-                                    <td>{{ $row->ship_email }}</td>
-                                </tr>
-                                <tr>
                                     <td>Địa chỉ:</td>
                                     <td>
-                                        {{ $row->ship_address . ' / ' . ($row->ward->name ?? '') . ' / ' . ($row->district->name ?? '') . ' / ' . ($row->province->name ?? '') }}
+                                        {{ $row->ship_address }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -113,17 +105,25 @@
                         </div>
                     </div>
 
-
+                    @if($row->status_code != \App\Models\Order::PENDING)
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
-                                    <td>Hãng vận chuyển:</td>
-                                    <td>{{ $row->ord_shipping_carrier }}</td>
+                                    <td>Nhà xe:</td>
+                                    <td>{{ $row->shipping_car }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Mã vận chuyển</td>
-                                    <td>{{ $row->ord_shipping_code }}</td>
+                                    <td>Giờ khởi hành</td>
+                                    <td>{{ $row->shipping_car_start }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Biển số xe</td>
+                                    <td>{{ $row->shipping_number_car }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Số ĐT nhà xe</td>
+                                    <td>{{ $row->shipping_car_phone }}</td>
                                 </tr>
                                 <tr>
                                     <td>Phí vận chuyển</td>
@@ -132,18 +132,18 @@
                             </table>
                         </div>
                     </div>
+                    @endif;
 
 
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>Mã sản phẩm</th>
+                                    <th>STT</th>
                                     <th>Sản phẩm</th>
                                     {{--<td>SKU</td>--}}
                                     <th>Số lượng</th>
                                     <th>Giá</th>
-                                    <th>Chiết khấu</th>
                                     <th>
                                         Tổng tiền thanh toán
                                     </th>
@@ -151,10 +151,9 @@
 
                                 <form>
                                     @foreach ($row->products as $product)
-
                                         <tr>
                                             <td>
-                                                {{$product->info->pro_code}}
+                                                {{$loop->iteration}}
                                             </td>
                                             <td>
                                                 {{$product->info->name}}
@@ -178,9 +177,6 @@
                                             </td>
                                             <td>
                                                 {{ number_format($product->price) }}
-                                            </td>
-                                            <td>
-                                                {{ number_format($product->price - $product->sale_price) }}
                                             </td>
                                             <td>
                                                 {{ number_format($product->quantity * $product->sale_price)}}
@@ -333,13 +329,81 @@
                     </div>
                 </div>
             </div>
+            <div class="modal-body section-to-print" id="print_content_{{$row->id}}" style="display:none;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Khách hàng</td>
+                                    <td>{{$row->user->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại</td>
+                                    <td>{{$row->ship_phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Địa chỉ</td>
+                                    <td>{{$row->ship_address}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ghi chú</td>
+                                    <td>{{$row->note}}</td>
+                                </tr>
+                            </table>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>Mã đơn hàng:</td>
+                                        <td>{{$row->code}}</td>
+                                    <tr>
+                                    <tr>
+                                        <td>Trạng thái chuyển khoản</td>
+                                        <td>
+                                            {{ \App\Models\Order::paymentStatus()[$row->payment_status] }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tiền thu hộ</td>
+                                        <td>
+                                            {{ number_format($product->quantity * $product->sale_price + $row->ord_shipping_fee)}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cước vận chuyển: Người gửi trả</td>
+                                        <td>
+                                            Phí ship: Người gửi trả
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Nhà xe:</td>
+                                    <td>{{ $row->shipping_car }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Giờ khởi hành</td>
+                                    <td>{{ $row->shipping_car_start }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Biển số xe</td>
+                                    <td>{{ $row->shipping_number_car }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Số ĐT nhà xe</td>
+                                    <td>{{ $row->shipping_car_phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ghi chú</td>
+                                    <td>{{ $row->shipping_note }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="dialog_note({{$row->id}})">
-                    Ghi chú
-                </button>
-                <button class="btn btn-secondary" onclick="dialog_change_shipping_fee({{$row->id}})">
-                    Thay đổi phí vận chuyển
-                </button>
                 <button class="btn btn-secondary" onclick="printDivId('print_content_{{$row->id}}')">
                     In
                 </button>
@@ -366,17 +430,30 @@
                         <form>
                             <div id="shipping_info_<?=$row->id?>" style="display: none">
                                 <div class="form-group">
-                                    <label>Đơn vị vận chuyển</label>
-                                    <input class="form-control" type="text" name="shipping_carrier_<?=$row->id?>"
-                                           id="shipping_carrier_<?=$row->id?>"
-                                           placeholder="Nhập đơn vị vận chuyển"/>
+                                    <label>Nhà xe</label>
+                                    <input class="form-control" type="text" name="shipping_car_<?=$row->id?>"
+                                           id="shipping_car_<?=$row->id?>"
+                                           placeholder="Nhà xe"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>Mã vận đơn</label>
-                                    <input class="form-control" type="text" name="shipping_code_<?=$row->id?>"
-                                           id="shipping_code_<?=$row->id?>"
-                                           placeholder="Mã vận đơn"/>
+                                    <label>Biển số xe</label>
+                                    <input class="form-control" type="text" name="shipping_number_car_<?=$row->id?>"
+                                           id="shipping_number_car_<?=$row->id?>"
+                                           placeholder="Biển số xe"/>
                                 </div>
+                                <div class="form-group">
+                                    <label>Giờ khởi hành</label>
+                                    <input value="<?=$row->shipping_car_start?>" class="form-control" type="text" name="shipping_car_start_<?=$row->id?>"
+                                           id="shipping_car_start_<?=$row->id?>"
+                                           placeholder="Giờ khởi hành"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số ĐT nhà xe</label>
+                                    <input value="<?=$row->shipping_car_phone; ?>" class="form-control" type="text" name="shipping_car_phone_<?=$row->id?>"
+                                           id="shipping_car_phone_<?=$row->id?>"
+                                           placeholder="Số ĐT nhà xe"/>
+                                </div>
+                                
                                 <div class="form-group">
                                     <label>Phí vận chuyển</label>
                                     <input value="<?=$row->shipping_fee?>" class="form-control" type="number" name="shipping_fee_<?=$row->id?>"

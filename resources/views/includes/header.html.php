@@ -62,12 +62,14 @@
                         <div class="user-btn align-items-center justify-content-center gap-2 rounded-pill">
 							<div id="dropdownMenuButton1" class="d-flex" data-bs-toggle="dropdown" aria-expanded="false">
 								<div class="avatar">
-									<img width="37" height="37" class="rounded-circle" src="<?= asset('/images/avatar.png') ?>" alt="avatar">
+									<img width="37" height="37" class="rounded-circle" src="<?= asset('/images/anh_bsy.png') ?>" alt="avatar">
 								</div>
-								<div class="name"><?php echo isset($_SESSION["userNameFe"]) ? $_SESSION["userNameFe"] : ""; ?></div>
-								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M17.6 9.60001L12 14.4L6.40002 9.60001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-								</svg>
+								<div class="name" style="padding-top: 10px;">
+                                    <?php echo isset($_SESSION["userNameFe"]) ? $_SESSION["userNameFe"] : ""; ?>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.6 9.60001L12 14.4L6.40002 9.60001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
 							</div>
 							<ul id="dropdownMenu" class="dropdown-menu position-absolute bg-light mt-3 shadow" aria-labelledby="dropdownMenuButton1">
 								<li><a class="dropdown-item" href="/logout">Thoát</a></li>
@@ -122,7 +124,7 @@
                                 <div class="user-btn align-items-center justify-content-center gap-2 rounded-pill">
 									<div id="dropdownMenuButton1" class="d-flex" data-bs-toggle="dropdown" aria-expanded="false">
 										<div class="avatar">
-											<img width="37" height="37" class="rounded-circle" src="<?= asset('/images/avatar.png') ?>" alt="avatar">
+											<img width="37" height="37" class="rounded-circle" src="<?= asset('/images/anh_bsy.png') ?>" alt="avatar">
 										</div>
 										<div class="name"><?php echo isset($_SESSION["userNameFe"]) ? $_SESSION["userNameFe"] : ""; ?></div>
 										<svg id="dropdownIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

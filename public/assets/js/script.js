@@ -195,32 +195,43 @@ document.addEventListener('DOMContentLoaded', () => {
         // Redirect to the new URL
         window.location.href = fullUrl;
     }
-
-    const button = document.getElementById('main-search');
-    button.addEventListener('click', function(){
-		submitInputSearchProduct(2);
-	});
-
-    const buttonPc = document.getElementById('main-search-pc');
-    buttonPc.addEventListener('click', submitInputSearchProduct);
-
+	
+	if(document.getElementById('main-search')){
+		const button = document.getElementById('main-search');
+		button.addEventListener('click', function(){
+			submitInputSearchProduct(2);
+		});
+	}
+	
+	if(document.getElementById('main-search-pc')){
+		const buttonPc = document.getElementById('main-search-pc');
+		buttonPc.addEventListener('click', submitInputSearchProduct);
+	}
     // Event listener for the Enter key
-    const inputElement = document.getElementById('keyword');
-    inputElement.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent form submission if within a form
-            submitInputSearchProduct();
-        }
-    });
+	if(document.getElementById('keyword')){
+		const inputElement = document.getElementById('keyword');
+		inputElement.addEventListener('keypress', function(event) {
+			if (event.key === 'Enter') {
+				event.preventDefault(); // Prevent form submission if within a form
+				submitInputSearchProduct();
+			}
+		});
+	}
     // Event listener for the Enter key
-    let inputElementm = document.getElementById('keywordm');
-    inputElementm.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent form submission if within a form
-            submitInputSearchProduct(2);
-        }
-    });
+	if(document.getElementById('keywordm')){
+		let inputElementm = document.getElementById('keywordm');
+		inputElementm.addEventListener('keypress', function(event) {
+			if (event.key === 'Enter') {
+				event.preventDefault(); // Prevent form submission if within a form
+				submitInputSearchProduct(2);
+			}
+		});
+	}
+	
     $('.btn-increment, .btn-decrement').click(function() {
+		if(document.getElementById("btn-increment-cart")){
+			return;
+		}
         var productId = $(this).data('product-id');
         let productCount = $("#productCount"+productId).val();
         $.ajax({
@@ -229,7 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
             //contentType: 'application/json',
             data: {
                 product_id: productId,
-                quantity: productCount
+                quantity: productCount,
+                is_add_more: 3,
             },
             success: function(response) {
                 if(document.getElementById('pageCart')){
@@ -251,23 +263,152 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 totalProduct = parseInt(response.meta.total_product_cart);
                 $('#cartCount').text(totalProduct);
+                $('#cartCountM').text(totalProduct);
             },
             error: function(error) {
                 console.error('Error:', error);
             }
         });
     });
+	
+	$('.btn-increment-cart').click(function() {
+		var productId = $(this).data('product-id');
+		let productCount = $("#productCount"+productId).val();
+        $.ajax({
+            url: '/cart',
+            method: 'POST',
+            //contentType: 'application/json',
+            data: {
+                product_id: productId,
+                quantity: productCount,
+				is_add_more: 1
+            },
+            success: function(response) {
+				console.log(response);
+				totalProduct = parseInt(response.meta.total_product_cart);
+				if(totalProduct > 0){
+					location.reload();
+				}
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+	});
+	
+	$('.btn-increment-order').click(function() {
+        var productId = $(this).data('product-id');
+        let productCount = 1;
+        $.ajax({
+            url: '/cart',
+            method: 'POST',
+            //contentType: 'application/json',
+            data: {
+                product_id: productId,
+                quantity: productCount,
+				is_add_more: 1
+            },
+            success: function(response) {
+				totalProduct = parseInt(response.meta.total_product_cart);
+				if(totalProduct > 0){
+					window.location.href = '/cart';
+				}
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+	
+	$('.btn-product-delete, .btn-product-delete-m').click(function() {
+        var productId = $(this).data('product-id');
+		$.ajax({
+            url: '/cart/delete',
+            method: 'POST',
+            //contentType: 'application/json',
+            data: {
+                product_id: productId
+            },
+            success: function(response) {
+				console.log(response);
+				if(response){
+					alert("Xóa thành công sản phẩm.");
+					location.reload();
+				}
+			}
+		})
+	});
 
     $('#btnOrder').click(function() {
         var productId = $(this).data('product-id');
         let productCount = $("#productCount"+productId).val();
+        let noteValue = $("#exampleFormControlTextarea1").val();
+        if(noteValue == ""){
+            alert("Bạn phải nhập ghi chú.");
+            return;
+        }
         $.ajax({
             url: '/order',
             method: 'POST',
             //contentType: 'application/json',
             data: {
                 product_id: productId,
-                quantity: productCount
+                quantity: productCount,
+				note:noteValue
+            },
+            success: function(response) {
+                if(response.code == 200){
+                    alert("Đơn hàng đặt thành công. Bạn vui lòng chuyển khoản để Hoàn thành.");
+					orderId = response.data.vars.id;
+                    window.location.href = '/payment/'+orderId;
+                }else{
+                    alert(response.error);
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+	
+	$('#btnOrder2').click(function() {
+        var productId = $(this).data('product-id');
+        let productCount = $("#productCount"+productId).val();
+        let noteValue = $("#exampleFormControlTextarea1").val();
+		let username = $("#username").val();
+        let phone = $("#phone").val();
+        if(noteValue == ""){
+            alert("Bạn phải nhập ghi chú.");
+            return;
+        }
+		if(username == ''){
+			alert("Bạn phải nhập Họ và tên.");
+			return;
+		}
+		if(phone == ''){
+			alert("Bạn phải nhập Số điện thoại.");
+			return;
+		}
+		
+		if(noteValue == ''){
+			alert("Bạn phải nhập địa chỉ nhận hàng.");
+			return;
+		}
+		if (!validatePhoneNumber(phone)) {
+			alert("Số điện thoại không hợp lệ.");
+			return;
+		}
+		
+        $.ajax({
+            url: '/order',
+            method: 'POST',
+            //contentType: 'application/json',
+            data: {
+                product_id: productId,
+                quantity: productCount,
+				note:noteValue,
+				phone:phone,
+				username:username
             },
             success: function(response) {
                 if(response.code == 200){
@@ -301,4 +442,68 @@ function sortProductList(sort) {
     // Redirect to the new URL
     window.location.href = fullUrl;
 }
+$(document).ready(function(){
+	// Hàm tạo cookie
+	function setCookie(name, value, days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "") + expires + "; path=/";
+	}
 
+	// Hàm lấy giá trị của cookie
+	function getCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+
+	// Kiểm tra cookie, nếu chưa tồn tại thì hiển thị popup
+	if (getCookie('acceptedRule')) {
+		$('#fixed-bottom-bar').hide();
+	}
+
+	// Khi người dùng nhấn nút "Tôi đồng ý"
+	$('#acceptRule').click(function(){
+		console.log(1111111111111);
+		setCookie('acceptedRule', 'yes', 30); // Lưu cookie trong 30 ngày
+		$('#fixed-bottom-bar').hide(); // Ẩn popup
+	});
+	$('#noAcceptRule').click(function(){
+		$('#fixed-bottom-bar').hide(); // Ẩn popup
+	});
+});
+function validatePhoneNumber(phoneNumber) {
+	var regex = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+	return regex.test(phoneNumber);
+}
+// Thực hiện load lại trang
+function loadPagePagination(obj){
+	let page = parseInt(obj.getAttribute("data-page"));
+	const inputElement = document.getElementById('keyword');
+	let inputValue = inputElement.value;
+	if(inputValue == ''){
+		inputElementm = document.getElementById('keywordm');
+		inputValue = inputElementm.value;
+	}
+	const baseUrl = window.location.origin + window.location.pathname;
+	let fullUrl = "";
+	// Append the input value as a query parameter
+	if(inputValue != ""){
+		fullUrl = `${baseUrl}?page=${page}&keyword=${encodeURIComponent(inputValue)}`;
+	}else{
+		fullUrl = `${baseUrl}?page=${page}`;
+	}
+	console.log(fullUrl);
+
+	// Redirect to the new URL
+	window.location.href = fullUrl;
+}

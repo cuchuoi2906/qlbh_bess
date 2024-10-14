@@ -105,9 +105,13 @@ if ($status == \App\Models\Order::SUCCESS) {
         if ($status == 'BEING_TRANSPORTED') {
             $ord_shipping_code = getValue('shipping_code', 'str', 'POST', '');
             $ord_shipping_fee = getValue('shipping_fee', 'int', 'POST', '');
-            $ord_shipping_carrier = getValue('shipping_carrier', 'str', 'POST', '');
+            $ord_shipping_car = getValue('shipping_car', 'str', 'POST', '');
+            $ord_shipping_number_car = getValue('shipping_number_car', 'str', 'POST', '');
+            $ord_shipping_car_start = getValue('shipping_car_start', 'str', 'POST', '');
+            $ord_shipping_car_phone = getValue('shipping_car_phone', 'str', 'POST', '');
+            $ord_shipping_note = $note;
 
-            if (!$ord_shipping_carrier) {
+            if (!$ord_shipping_car) {
                 die('Bạn phải nhập đơn vị vận chuyển');
             }
 //            if (!$ord_shipping_fee) {
@@ -118,7 +122,11 @@ if ($status == \App\Models\Order::SUCCESS) {
             }
             $order->ord_shipping_code = $ord_shipping_code;
             $order->ord_shipping_fee = $ord_shipping_fee;
-            $order->ord_shipping_carrier = $ord_shipping_carrier;
+            $order->ord_shipping_car = $ord_shipping_car;
+            $order->ord_shipping_number_car = $ord_shipping_number_car;
+            $order->ord_shipping_car_start = $ord_shipping_car_start;
+            $order->ord_shipping_car_phone = $ord_shipping_car_phone;
+            $order->ord_shipping_note = $ord_shipping_note;
             $order->ord_shipping_at = date('Y-m-d H:i:s');
         }
         if ($status == 'PENDING') {

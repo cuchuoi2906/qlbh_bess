@@ -127,8 +127,8 @@ function status_list($status)
 }
 
 $array_date_type = [
-    1 => 'Thời gian xử lý đơn',
-    2 => 'Thơi gian đặt đơn',
+    1 => 'Thơi gian đặt đơn',
+    2 => 'Thời gian xử lý đơn',
 ];
 
 //Check user login...

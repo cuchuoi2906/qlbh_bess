@@ -135,8 +135,8 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
 							class="form-control"
 							id="exampleFormControlTextarea1"
 							name="note"
-							rows="3"
-							placeholder="Thêm ghi chú về đơn hàng để được hỗ trợ. Vd: Hãy gọi điện trước khi giao hàng"
+							rows="4"
+							placeholder="Thêm ghi chú về đơn hàng để được hỗ trợ. Vd: Hãy gọi điện trước khi giao hàng. Thay đổi địa chỉ nhận hàng ( nếu có)"
 						></textarea>
 					</div>
                 </div>

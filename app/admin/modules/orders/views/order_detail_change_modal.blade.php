@@ -33,24 +33,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Người nhận:</td>
-                                    <td>
-                                        <input class="form-control" name="ord_ship_name" id="ord_ship_name"
-                                               value="{{ $row->ship_name }}">
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td>Số điện thoại:</td>
                                     <td>
                                         <input class="form-control" name="ord_ship_phone" id="ord_ship_phone"
                                                value="{{ $row->ship_phone }}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Email:</td>
-                                    <td>
-                                        <input class="form-control" name="ord_ship_email" id="ord_ship_email"
-                                               value="{{ $row->ship_email }}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -60,7 +46,7 @@
                                                value="{{$row->ship_address}}">
                                     </td>
                                 </tr>
-                                <tr>
+                                <!--<tr>
                                     <td></td>
                                     <td>
                                         <select class="form-control" name="ord_province_id"
@@ -102,7 +88,7 @@
                                         </select>
 
                                     </td>
-                                </tr>
+                                </tr>-->
                                 <tr>
                                     <td>Tổng số sản phẩm:</td>
                                     <td>{{ $total }}</td>
@@ -206,7 +192,7 @@
                                                     {{$product->quantity}}
                                                 </td>
                                                 <td>
-                                                    <input oninput="loadInputValueformatCurrency(this,{{ $product->price }})" class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
+                                                    <input style="width: 90px;text-align: center;" oninput="loadInputValueformatCurrency(this,{{ $product->price }})" class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
                                                    value="{{ number_format($product->price) }}">
                                                 </td>
                                                 <!--<td>

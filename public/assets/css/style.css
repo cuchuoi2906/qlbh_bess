@@ -324,27 +324,26 @@ header .logo {
     transform: translateX(5px);
 }
 
-footer .phone_calling a {
+footer .phone_calling span {
     background-color: #6fa29e;
     color: #fff;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
-    width: 222px;
+    width: 170px;
     border-radius: 50px;
-    height: 48px;
+    height: 38px;
     padding: 5px;
 }
 
-footer .phone_calling a img {
+footer .phone_calling span img {
     background-color: var(--main-color);
     height: 38px;
-    width: 38px;
     padding: 7px;
     border-radius: 50%;
-    margin-right: 19px;
+    margin-right: 13px;
 }
 
 .header-2 {
@@ -357,7 +356,7 @@ footer .phone_calling a img {
 }
 
 .header-2 .main-search-pc {
-    width: calc(100% - 450px);
+    width: calc(100% - 550px);
 }
 
 .header-2 .main-search-pc .input-group {
@@ -442,7 +441,7 @@ footer .phone_calling a img {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 25px 10px;
+    padding: 0px 0px 10px;
 }
 
 .prod-item .input-group.number-input {
@@ -823,8 +822,15 @@ footer {
         padding: 0 16px;
     }
 }
-
+@media (min-width: 1024px) {
+	.width-mobile-50{
+		float:left;
+	}
+}
 @media (max-width: 640px) {
+	.fixed-bottom-bar{
+		display:none;
+	}
 	footer {
 		background-image: none;
 	}
@@ -933,6 +939,9 @@ footer {
             }
         }
     }
+	.width-mobile-50{
+		width:50% !important;
+	}
 }
 .header-1 .user-btn {
     background: #349b94;
@@ -963,4 +972,49 @@ footer {
 }
 .breadcrumb-container a {
     color: #0d6efd;
+}
+.password-input-control{
+	border: 1px #bbc3dd solid;
+    border-radius: 12px;
+	margin-bottom:20px;
+}
+.password-input-control .input-group > input.form-control{
+    font-size: 16px;
+	height: 48px;
+}
+.password-input-control .input-group > div.input-group-append{
+	padding-top: 10px;
+}
+.fixed-bottom-bar {
+    position: fixed;
+    height: 140px;
+    width: 100%;
+    bottom: 0;
+    z-index: 80;
+    background-color: #39609e;
+    padding: .5rem 0;
+    box-shadow: 0 -1px 5px 1px rgba(0,0,0,.15)
+}
+.whiteBackground {
+    background-color: #fff;
+    bottom: 0;
+}
+.fixed-bottom-bar .wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    height: 100%
+}
+
+.fixed-bottom-bar .wrapper .logo-bottom {
+    width: 100%;
+}
+
+.fixed-bottom-bar .wrapper .logo-bottom img {
+    width: 100%;
+    height: 100%
+}
+.fixed-bottom-bar .wrapper .content .text{
+	height: 70px;
+    overflow-y: scroll;
 }

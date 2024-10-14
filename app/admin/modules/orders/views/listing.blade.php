@@ -174,6 +174,11 @@
                 data.shipping_carrier = $('#shipping_carrier_' + id).val();
                 data.shipping_fee = $('#shipping_fee_' + id).val();
                 data.shipping_code = $('#shipping_code_' + id).val();
+                data.shipping_car = $('#shipping_car_' + id).val();
+                data.shipping_number_car = $('#shipping_number_car_' + id).val();
+                data.shipping_car_start = $('#shipping_car_start_' + id).val();
+                data.shipping_car_phone = $('#shipping_car_phone_' + id).val();
+                
                 if(data.shipping_carrier.length <= 0 || data.shipping_fee.length <= 0 || data.shipping_code.length <= 0)
                 {
                     $.toast({

@@ -2,7 +2,7 @@
             <div class="ft-top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <h2 class="ft-title">
                                 CÔNG TY CỔ PHẦN DỊCH VỤ THƯƠNG MẠI <br />
                                 VÀ CÔNG NGHỆ DAK (DƯỢC AN KHANG)
@@ -52,11 +52,12 @@
                                     <li><a href="/dong-hanh-vua-duoc">Đồng Hành Nhà Thuốc</a></li>
                                 </ul>
                             </div>
-                            <h2 class="ft-title">LIÊN HỆ NHANH</h2>
-                            <div class="ft-content">
-                                <button class="phone_calling">
-                                    <a href="tel:0342342366"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0342.342.366</a>
-                                </button>
+							<h2 class="ft-title">HỖ TRỢ KHÁCH HÀNG</h2>
+                            <div class="ft-content mb-3">
+                                <ul>
+                                    <li><a href="/huong-dan-dat-hang">Hướng Dẫn Đặt Hàng</a></li>
+                                    <li><a href="">Câu Hỏi Thường Gặp</a></li>
+                                </ul>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -72,23 +73,81 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <h2 class="ft-title">HỖ TRỢ KHÁCH HÀNG</h2>
-                            <div class="ft-content mb-3">
-                                <ul>
-                                    <li><a href="/huong-dan-dat-hang">Hướng Dẫn Đặt Hàng</a></li>
-                                    <li><a href="">Câu Hỏi Thường Gặp</a></li>
-                                </ul>
-                            </div>
-                            <h2 class="ft-title">KẾT NỐI VỚI CHÚNG TÔI</h2>
+                        <div class="col-md-3">
+							<h2 class="ft-title">TỔNG ĐÀI CSKH</h2>
                             <div class="ft-content">
-                                <div class="d-flex gap-3 align-items-center">
-                                    <a href="https://fb.com">
-                                        <img src="<?= asset('/images/icons/ic-facebook.svg') ?>" alt="facebook" />
-                                    </a>
-                                    <a href="https://zalo.me/0342342366" target="_blank">
-                                        <img src="<?= asset('/images/icons/ic-zalo.svg') ?>" alt="zalo" />
-                                    </a>
+								<span class="ft-title">Hỗ trợ đặt hàng 1:</span>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <span class="phone_calling">
+                                            <span href="tel:0865411466"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0865.411.466</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-5 ps-0">
+                                        <a href="https://zalo.me/0865411466" target="_blank">
+                                            <img src="https://vuaduoc.com/assets//images/icons/ic-zalo.svg" alt="zalo" width="33px">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="ft-content">
+								<span class="ft-title">Hỗ trợ đặt hàng 2:</span>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <span class="phone_calling">
+                                            <span href="tel:0342342366"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0862.411.466</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-5 ps-0">
+                                        <a href="https://zalo.me/0862411466" target="_blank">
+                                            <img src="https://vuaduoc.com/assets//images/icons/ic-zalo.svg" alt="zalo" width="33px">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="ft-content">
+								<span class="ft-title">Hỗ trợ đặt hàng 3:</span>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <span class="phone_calling">
+                                            <span href="tel:0911565885"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0911.565.885</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-5 ps-0">
+                                        <a href="https://zalo.me/0911565885" target="_blank">
+                                            <img src="https://vuaduoc.com/assets//images/icons/ic-zalo.svg" alt="zalo" width="33px">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ft-content">
+								<span class="ft-title">Hỗ trợ đặt hàng 4:</span>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <span class="phone_calling">
+                                            <span href="tel:0912649993"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0912.649.993</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-5 ps-0">
+                                        <a href="https://zalo.me/0912649993" target="_blank">
+                                            <img src="https://vuaduoc.com/assets//images/icons/ic-zalo.svg" alt="zalo" width="33px">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ft-content mb-3">
+								<span class="ft-title">Hỗ trợ đặt hàng 5:</span>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <span class="phone_calling">
+                                            <span href="tel:0342342366"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0342.342.366</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-5 ps-0">
+                                        <a href="https://zalo.me/0342342366" target="_blank">
+                                            <img src="https://vuaduoc.com/assets//images/icons/ic-zalo.svg" alt="zalo" width="33px">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -13,20 +13,22 @@ $j=0;
 $inserdata =array();
 $dataerr =array();
 foreach ($allDataInSheet as $value) {
-	if(empty($value['B']) || !intval($value['D'])){
+	if(empty($value['B']) || !intval($value['E'])){
 		continue;
 	}
 	$inserdata[$i]['name'] 	= $value['A'];
-        $inserdata[$i]['addres'] = $value['B'];
-	$inserdata[$i]['provice'] = $value['C'];
-        $inserdata[$i]['phone'] = $value['D'];
+    $inserdata[$i]['addres'] = $value['B'];
+	$inserdata[$i]['district'] = $value['C'];
+    $inserdata[$i]['provice'] = $value['D'];
+    $inserdata[$i]['phone'] = $value['E'];
 	$i++;
 }
 
-$use_name = getValue('money_file_name', 'str', 'POST', '');
 for($j=0;$j<count($inserdata);$j++){
     $phone = $inserdata[$j]['phone'];
     $name = $inserdata[$j]['name'];
+    $provice = $inserdata[$j]['provice'];
+    $district = $inserdata[$j]['district'];
     $name = explode("-",$name)[0];
     $addres = $inserdata[$j]['addres']." ( ".$inserdata[$j]['provice']." )";
     $check_user = \App\Models\Users\Users::where('use_login=\'' . $phone . '\' AND use_active != -99')->find();
@@ -53,6 +55,8 @@ for($j=0;$j<count($inserdata);$j++){
         'use_district_id' => 0,
         'use_ward_id' => 0,
         'use_address_register' => $addres,
+        'use_province_registry' => $provice,
+        'use_district_registry' => $district,
         'use_job_code' => 1,
         'use_referer_code'=>'',
         'use_partner_note'=>'',

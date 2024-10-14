@@ -31,7 +31,7 @@ if ($range_date) {
     $star_date = new \DateTime(str_replace('/', '-', $dates[0]));
     $end_date = new \DateTime(str_replace('/', '-', $dates[1]));
     $date_type = getValue('date_type', 'int', 'GET', 1);
-    if ($date_type == 2) {
+    if ($date_type == 1) {
         $date_field = 'ord_created_at';
     } else {
         $date_field = 'ord_pending_at';
