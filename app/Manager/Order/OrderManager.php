@@ -96,6 +96,7 @@ class OrderManager
             $product = collect_recursive($product);
             if(check_array($productPrice) && isset($productPrice[$product->id])){
                 $product->price =intval($productPrice[$product->id]['price']);
+                $quantity =intval($productPrice[$product->id]['quantity']);
             }
             $total_product += $quantity;
             $price = $product->discount_price ? $product->discount_price : $product->price;
@@ -119,6 +120,7 @@ class OrderManager
             OrderProduct::where('orp_ord_id', $order->id)->where('orp_product_id', $product->id)
                 ->update([
                     'orp_price' => $product->price,
+                    'orp_quantity' => $quantity,
                     'orp_sale_price' => ($order->commission_type == 2) ? $product->price : $price,
                     'orp_commit_current' => $commission_sale_price
                 ]);

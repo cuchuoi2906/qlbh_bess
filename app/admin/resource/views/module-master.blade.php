@@ -86,12 +86,15 @@ echo admin_lte_footer();
     function printDivId(elem)
     {
         var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-        mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+        let title = '';
+        if(document.getElementById("title_print")){
+            title = document.getElementById("title_print").value;
+        }
+        mywindow.document.write('<html><head><title>'+title+'</title>');
         mywindow.document.write(document.getElementsByTagName('head')[0].innerHTML);
 
         mywindow.document.write('</head><body >');
-        mywindow.document.write('<h1>' + document.title  + '</h1>');
+        //mywindow.document.write('<h1>' + document.title  + '</h1>');
         mywindow.document.write(document.getElementById(elem).innerHTML);
         mywindow.document.write('</body></html>');
 

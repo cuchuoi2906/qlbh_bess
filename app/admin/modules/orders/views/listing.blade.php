@@ -432,5 +432,22 @@
         var order_focus_id = getCookie('order_focus_id');
         $('#contact_detail_' + order_focus_id).modal('show');
         deleteCookie('order_focus_id');
+        function delete_product_order(orderId,id) {
+            if (confirm('Bạn có muốn xóa sản phẩm này khỏi đơn hàng?')) {
+                $.ajax({
+                    url: 'delete_product_order.php',
+                    type: 'GET',
+                    data: {
+                        orderId: orderId,
+                        id: id,
+                        user_id: $('#ord_user_id').val()
+                    },
+                    success: function (response) {
+                        setCookie('order_focus_id', orderId, 1);
+                        location.reload();
+                    }
+                });
+            }
+        }
     </script>
 @stop

@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                     $('#totalMoney').text(formatCurrencyVND(total_money));
-                    $('#totalProduct').text(formatCurrencyVND(total_product));
+                    $('#totalProduct').text(total_product);
                     
                 }
                 totalProduct = parseInt(response.meta.total_product_cart);

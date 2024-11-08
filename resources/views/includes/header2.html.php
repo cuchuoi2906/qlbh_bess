@@ -105,17 +105,6 @@
                         </div>
                         <div class="" style="width: 32px"></div>
                     </div>
-                    <div class="main-search">
-                        <div class="input-group">
-                            <input type="text" id="keywordm" name="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Bạn đang muốn tìm sản phẩm gì?" aria-label="basic-search" aria-describedby="basic-search">
-                            <span class="input-group-text" id="main-search">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
-                                    <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round"></path>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="menu-mb">
@@ -167,7 +156,7 @@
                         <div class="sidebar-menu py-4 px-3">
                             <ul class="d-flex flex-column gap-3">
                                 <li><a href="">Trang chủ</a></li>
-                                <li><a href="/products">Sản phẩm</a></li>
+                                <li><a href="/products/ORDERFAST-0">Sản phẩm</a></li>
                                 <li><a href="<?php echo url('post.listing', ['news',0]) ?>">Tin tức</a></li>
                                 <li><a href="">Khách hàng thân thiết</a></li>
                                 <li><a href="">Hướng dẫn đặt hàng</a></li>

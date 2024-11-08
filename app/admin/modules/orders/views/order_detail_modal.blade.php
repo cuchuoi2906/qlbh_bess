@@ -14,6 +14,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <input type="hidden" id="title_print" name="title_print" value="{{$row->user->name.'_'.$row->code}}" />
             <div class="modal-body section-to-print">
                 <div class="row">
                     <div class="col-md-12">
@@ -335,6 +336,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
+                                    <td colspan="2" align="right">
+                                        <img width="100px" src="https://vuaduoc.com/assets//images/logo.png" alt="logo"><br />
+                                        website: vuaduoc.com
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Khách hàng</td>
                                     <td>{{$row->user->name}}</td>
                                 </tr>
@@ -364,20 +371,26 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Tiền thu hộ</td>
+                                        <td>Tổng đơn hàng</td>
                                         <td>
-                                            {{ number_format($product->quantity * $product->sale_price + $row->ord_shipping_fee)}}
+                                            {{ number_format($row->amount)}}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Cước vận chuyển: Người gửi trả</td>
+                                        <td>Cước vận chuyển: {{number_format($row->ord_shipping_fee)}}</td>
                                         <td>
                                             Phí ship: Người gửi trả
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>Tiền thu hộ</td>
+                                        <td>
+                                            {{ number_format($row->amount + $row->ord_shipping_fee)}}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" bgcolor="#00ff00">
                                 <tr>
                                     <td>Nhà xe:</td>
                                     <td>{{ $row->shipping_car }}</td>
@@ -427,45 +440,57 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <form class="form-horizontal">
                             <div id="shipping_info_<?=$row->id?>" style="display: none">
                                 <div class="form-group">
-                                    <label>Nhà xe</label>
-                                    <input class="form-control" type="text" name="shipping_car_<?=$row->id?>"
-                                           id="shipping_car_<?=$row->id?>"
-                                           placeholder="Nhà xe"/>
+                                    <label class="col-sm-3">Nhà xe</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="shipping_car_<?=$row->id?>"
+                                               id="shipping_car_<?=$row->id?>"
+                                               placeholder="Nhà xe"/>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Biển số xe</label>
-                                    <input class="form-control" type="text" name="shipping_number_car_<?=$row->id?>"
+                                    <label class="col-sm-3">Biển số xe</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" name="shipping_number_car_<?=$row->id?>"
                                            id="shipping_number_car_<?=$row->id?>"
                                            placeholder="Biển số xe"/>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Giờ khởi hành</label>
-                                    <input value="<?=$row->shipping_car_start?>" class="form-control" type="text" name="shipping_car_start_<?=$row->id?>"
-                                           id="shipping_car_start_<?=$row->id?>"
-                                           placeholder="Giờ khởi hành"/>
+                                    <label class="col-sm-3">Giờ khởi hành</label>
+                                    <div class="col-sm-9">
+                                        <input value="<?=$row->shipping_car_start?>" class="form-control" type="text" name="shipping_car_start_<?=$row->id?>"
+                                               id="shipping_car_start_<?=$row->id?>"
+                                               placeholder="Giờ khởi hành"/>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Số ĐT nhà xe</label>
-                                    <input value="<?=$row->shipping_car_phone; ?>" class="form-control" type="text" name="shipping_car_phone_<?=$row->id?>"
+                                    <label class="col-sm-3">Số ĐT nhà xe</label>
+                                    <div class="col-sm-9">
+                                        <input value="<?=$row->shipping_car_phone; ?>" class="form-control" type="text" name="shipping_car_phone_<?=$row->id?>"
                                            id="shipping_car_phone_<?=$row->id?>"
                                            placeholder="Số ĐT nhà xe"/>
+                                    </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label>Phí vận chuyển</label>
-                                    <input value="<?=$row->shipping_fee?>" class="form-control" type="number" name="shipping_fee_<?=$row->id?>"
+                                    <label class="col-sm-3">Cước vận chuyển</label>
+                                    <div class="col-sm-9">
+                                        <input value="<?=$row->shipping_fee?>" class="form-control" name="shipping_fee_<?=$row->id?>"
                                            id="shipping_fee_<?=$row->id?>"
-                                           placeholder="Phí vận chuyển"/>
+                                           placeholder="Phí vận chuyển" oninput="loadInputValueformatCurrency(this,0)" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Ghi chú</label>
-                                <textarea class="form-control" name="note_<?=$row->id?>"
+                                <label class="col-sm-2">Ghi chú</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="note_<?=$row->id?>"
                                           id="note_<?=$row->id?>" rows="3"
                                           placeholder="Nhập nội dung ghi chú ..."></textarea>
+                                </div>
                             </div>
                         </form>
                     </div>

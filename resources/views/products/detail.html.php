@@ -50,7 +50,12 @@ if($type == 'ORDERFAST'){
         <div class="menu-prod">
             <div class="d-flex align-items-center gap-2">
                 <button <?php echo ($type == '') ? 'class="active"' : ''; ?>><a href="/products">FLASH SALE</a></button>
-                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Đặt hàng nhanh</a></button>
+                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>>
+                    <a href="/products/ORDERFAST-0">
+                        Đặt hàng nhanh
+                        <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
+                    </a>
+                </button>
                 <button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
                 <button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
                 <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>

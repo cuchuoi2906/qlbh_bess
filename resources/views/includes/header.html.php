@@ -50,7 +50,7 @@
                     <div class="main-menu d-flex align-items-center">
                         <ul class="d-flex align-items-center m-0 p-0">
                             <li><a class="active" href="/">Trang chủ</a></li>
-                            <li><a href="/products">Sản phẩm</a></li>
+                            <li><a href="/products/ORDERFAST-0">Sản phẩm</a></li>
                             <li><a href="<?php echo url('post.listing', ['news',0]) ?>">Tin tức</a></li>
                             <li><a href="/loyal-client">Khách hàng thân thiết</a></li>
                             <li><a href="/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>
@@ -152,7 +152,7 @@
                         <div class="sidebar-menu py-4 px-3">
                             <ul class="d-flex flex-column gap-3">
                                 <li><a href="/">Trang chủ</a></li>
-                                <li><a href="/products">Sản phẩm</a></li>
+                                <li><a href="/products/ORDERFAST-0">Sản phẩm</a></li>
                                 <li><a href="<?php echo url('post.listing', ['news',82]) ?>">Tin tức</a></li>
                                 <li><a href="/loyal-client">Khách hàng thân thiết</a></li>
                                 <li><a href="/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>

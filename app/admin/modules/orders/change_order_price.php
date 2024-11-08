@@ -17,6 +17,8 @@ if (
             $price = getValue('ord_price'.$productId, 'str', 'POST', 0);
             $price = intval(str_replace(",","",$price));
             $productArr[$productId]['price'] =  $price;
+            $quantity = getValue('ord_quantity'.$productId, 'int', 'POST', 0);
+            $productArr[$productId]['quantity'] =  $quantity;
         }
         // Tính lại đơn hàng
         \App\Manager\Order\OrderManager::commissions($order->id,$productArr);

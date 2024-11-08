@@ -104,13 +104,14 @@ if ($status == \App\Models\Order::SUCCESS) {
         $order->status_code = $status;
         if ($status == 'BEING_TRANSPORTED') {
             $ord_shipping_code = getValue('shipping_code', 'str', 'POST', '');
-            $ord_shipping_fee = getValue('shipping_fee', 'int', 'POST', '');
+            $ord_shipping_fee = getValue('shipping_fee', 'str', 'POST', '');
             $ord_shipping_car = getValue('shipping_car', 'str', 'POST', '');
             $ord_shipping_number_car = getValue('shipping_number_car', 'str', 'POST', '');
             $ord_shipping_car_start = getValue('shipping_car_start', 'str', 'POST', '');
             $ord_shipping_car_phone = getValue('shipping_car_phone', 'str', 'POST', '');
             $ord_shipping_note = $note;
-
+            
+            $ord_shipping_fee = intval(str_replace(",","",$ord_shipping_fee));
             if (!$ord_shipping_car) {
                 die('Bạn phải nhập đơn vị vận chuyển');
             }

@@ -6,13 +6,142 @@
 <!-- Modal -->
 <div class="modal fade" id="contact_detail_{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 700px;">
         <div class="modal-content">
             <div class="modal-header">
                 {{--<h5 class="modal-title" id="exampleModalLabel">Chi tiết đơn hàng</h5>--}}
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+            </div>
+            <div class="modal-body" id="print_content_send_partner_{{$row->id}}" style="display: none;">
+                <div class="row">
+                    <input type="hidden" id="title_print" name="title_print" value="{{$row->user->name.'_'.$row->code}}" />
+                    <div class="col-md-12">
+                        <table class="table table-striped">
+                            <tr>
+                                <td colspan="2" align="right">
+                                    <img width="100px" src="https://vuaduoc.com/assets//images/logo.png" alt="logo"><br />
+                                    website: vuaduoc.com
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mã đơn:</td>
+                                <td>
+                                    {{ $row->code }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Người đặt:</td>
+                                <td>
+                                    {{($row->user->phone ? $row->user->phone : $row->user->email). ' / ' .  $row->user->name .' / '.($row->user->id)}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Số điện thoại:</td>
+                                <td>
+                                    {{ $row->ship_phone }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Địa chỉ:</td>
+                                <td>
+                                    {{$row->ship_address}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tổng số sản phẩm:</td>
+                                <td>{{ $total }}</td>
+                            </tr>
+                            <tr>
+                                <td>Tổng tiền:</td>
+                                <td>{{ number_format($row->amount) }} VND</td>
+                            </tr>
+                            <tr>
+                                <td>Cách nhận hoa hồng trực tiếp:</td>
+                                <td>{{ $row->commission_type == 2 ? 'Cộng vào ví hoa hồng':'Trừ trực tiếp vào giá tiền' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Hình thức thanh toán:</td>
+                                <td>{{ \App\Models\Order::paymentTypes()[$row->payment_type] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Trạng thái thanh toán:</td>
+                                <td>
+                                    @if($row->payment_type == \App\Models\Order::PAYMENT_TYPE_BANKING && $row->status_code == \App\Models\Order::NEW && $row->payment_status != \App\Models\Order::PAYMENT_STATUS_SUCCESS)
+                                        <select id="{{$row->id}}" class="change_order_payment_status"
+                                                current-value="{{$row->payment_status}}">
+                                            @foreach(\App\Models\Order::paymentStatus() as $status => $label)
+                                                <option {{ $row->payment_status == $status ? 'selected': '' }} value="{{$status}}">
+                                                    {{$label}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @else
+                                        {{ \App\Models\Order::paymentStatus()[$row->payment_status] }}
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ghi chú:</td>
+                                <td colspan="2">
+                                    {{$row->note}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <form action="change_order_price.php?ord_id={{$row->id}}" id="order_price_{{$row->id}}"
+                              class="ship_info table-responsive" method="post">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Sản phẩm</th>
+                                        {{--<td>SKU</td>--}}
+                                        <th>Số lượng</th>
+                                        <th>Giá</th>
+                                        <!--<th>Chiết khấu</th>-->
+                                        <th>
+                                            Tổng tiền thanh toán
+                                        </th>
+                                    </tr>
+                                    @foreach ($row->products as $product)
+
+                                        <tr>
+                                            <td>
+                                                {{$loop->iteration}}
+                                            </td>
+                                            <td>
+                                                {{$product->info->name}}
+                                            </td>
+                                            {{--<td>--}}
+                                            {{--{{$product->info->sku}}--}}
+                                            {{--</td>--}}
+                                            <td style="width: 20px">
+                                                {{$product->quantity}}
+                                            </td>
+                                            <td>
+                                                {{ number_format($product->price) }}
+                                            </td>
+                                            <!--<td>
+                                                {{ number_format($product->price - $product->sale_price) }}
+                                            </td>-->
+                                            <td>
+                                                {{ number_format($product->quantity * $product->sale_price)}}
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
+                                    <tr>
+                                        <td style="text-align: right" colspan="4">Tổng tiền</td>
+                                        <td><span style="color: red;">{{ number_format($row->amount) }} VND</span></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-body" id="print_content_{{$row->id}}">
                 <div class="row">
@@ -166,7 +295,7 @@
                               class="ship_info table-responsive" method="post">
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>Mã sản phẩm</th>
+                                        <th>STT</th>
                                         <th>Sản phẩm</th>
                                         {{--<td>SKU</td>--}}
                                         <th>Số lượng</th>
@@ -180,7 +309,7 @@
 
                                             <tr>
                                                 <td>
-                                                    {{$product->info->pro_code}}
+                                                    {{$loop->iteration}}
                                                 </td>
                                                 <td>
                                                     {{$product->info->name}}
@@ -189,7 +318,8 @@
                                                 {{--{{$product->info->sku}}--}}
                                                 {{--</td>--}}
                                                 <td style="width: 20px">
-                                                    {{$product->quantity}}
+                                                    <input style="width: 50px;text-align: center;" class="form-control" name="ord_quantity{{$product->info->id}}" id="ord_quantity{{$product->info->id}}"
+                                                   value="{{$product->quantity}}">
                                                 </td>
                                                 <td>
                                                     <input style="width: 90px;text-align: center;" oninput="loadInputValueformatCurrency(this,{{ $product->price }})" class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
@@ -201,6 +331,9 @@
                                                 <td>
                                                     {{ number_format($product->quantity * $product->sale_price)}}
                                                 </td>
+                                                <td style="width: 20px">
+                                                    <a href="javascript:void(null);" onclick="delete_product_order({{$row->id}},{{$product->id}})">Xóa</button>
+                                                </td>
                                             </tr>
 
                                         @endforeach
@@ -210,8 +343,10 @@
                                         </tr>
                                         @if($row->status_code == \App\Models\Order::NEW)
                                         <tr>
-                                            <td colspan="2">
-                                                <input type="submit" value="Cập nhật giá đơn hàng">
+                                            <td colspan="4">
+                                                <!--<input type="submit" value="Cập nhật giá đơn hàng">-->
+                                                <button class="btn btn-default" type="submit" value="Submit">Cập nhật giá đơn hàng</button>
+                                                <a class="btn btn-default" href="add_product.php?ord_id={{$row->id}}" >Thêm mới sản phẩm</a>
                                             </td>
                                         </tr>
                                         @endif
@@ -310,48 +445,50 @@
 
                             </table>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Thời gian</th>
-                                    <th>Trạng thái đơn hàng</th>
-                                    <th>Trạng thái thanh toán</th>
-                                    <th>Người xử lý</th>
-                                    <th>Ghi chú</th>
-                                </tr>
-
-                                @foreach ($row->logs as $log)
-
+                        <div class="table-responsive" style>
+                            <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            {{$log->updated_at??$row->created_at}}
-                                        </td>
-                                        <td>
-                                            @if($log->old_status_code == $log->new_status_code)
-                                                {{\App\Models\Order::$status[$log->old_status_code] ?? ''}}
-                                            @else
-                                                {{\App\Models\Order::$status[$log->old_status_code] ?? ''}}
-                                                => {{\App\Models\Order::$status[$log->new_status_code] ?? ''}}
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($log->old_payment_status == $log->new_payment_status)
-                                                {{\App\Models\Order::paymentStatus()[$log->old_payment_status] ?? ''}}
-                                            @else
-                                                {{\App\Models\Order::paymentStatus()[$log->old_payment_status] ?? ''}}
-                                                => {{\App\Models\Order::paymentStatus()[$log->new_payment_status] ?? ''}}
-                                            @endif
-                                        </td>
-                                        <td>
-                                            {{$log->admin ? $log->admin->name : 'Hệ thống'}}
-                                        </td>
-                                        <td>
-                                            {{$log->note}}
-                                        </td>
+                                        <th>Thời gian</th>
+                                        <th>Trạng thái đơn hàng</th>
+                                        <th>Trạng thái thanh toán</th>
+                                        <th>Người xử lý</th>
+                                        <th>Ghi chú</th>
                                     </tr>
+                                </thead>
+                                <tbody style="display: block; max-height: 250px; overflow-y: auto; width: 668px;">
+                                    @foreach ($row->logs as $log)
 
-                                @endforeach
+                                        <tr>
+                                            <td>
+                                                {{$log->updated_at??$row->created_at}}
+                                            </td>
+                                            <td>
+                                                @if($log->old_status_code == $log->new_status_code)
+                                                    {{\App\Models\Order::$status[$log->old_status_code] ?? ''}}
+                                                @else
+                                                    {{\App\Models\Order::$status[$log->old_status_code] ?? ''}}
+                                                    => {{\App\Models\Order::$status[$log->new_status_code] ?? ''}}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($log->old_payment_status == $log->new_payment_status)
+                                                    {{\App\Models\Order::paymentStatus()[$log->old_payment_status] ?? ''}}
+                                                @else
+                                                    {{\App\Models\Order::paymentStatus()[$log->old_payment_status] ?? ''}}
+                                                    => {{\App\Models\Order::paymentStatus()[$log->new_payment_status] ?? ''}}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{$log->admin ? $log->admin->name : 'Hệ thống'}}
+                                            </td>
+                                            <td>
+                                                {{$log->note}}
+                                            </td>
+                                        </tr>
 
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -365,7 +502,7 @@
                 <button class="btn btn-secondary" onclick="dialog_note({{$row->id}})">
                     Ghi chú
                 </button>
-                <button class="btn btn-secondary" onclick="printDivId('print_content_{{$row->id}}')">
+                <button class="btn btn-secondary" onclick="printDivId('print_content_send_partner_{{$row->id}}')">
                     In
                 </button>
                 <button type="button" class="btn btn-secondary" onclick="reload_modal({{$row->id}})">Tải lại</button>

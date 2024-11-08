@@ -24,16 +24,16 @@
                                     <span>Sở Kế hoạch và Đầu tư Thành phố Hà Nội</span>
                                 </div>
 								<br />
-                                <!--<div class="ft-ct-item">
-                                    <strong>Số giấy chứng nhận đủ điều kiện kinh doanh thuốc: </strong>
-                                    <span>01-0780/ĐKKĐ-HNO/ĐC</span>
+                                <div class="ft-ct-item">
+                                    <strong>Số giấy chứng nhận đủ điều kiện kinh doanh dược: </strong><br />
+                                    <span>Số 01-2615/ĐKKDD-HNO</span>
                                 </div>
                                 <div class="ft-ct-item">
                                     <strong>Ngày cấp:</strong>
-                                    <span>05/07/2024 - </span>
+                                    <span>22/10/2024 - </span>
 									<strong>Nơi cấp:</strong>
-									<span>Sở Y tế TP Hà Nội</span>
-                                </div>-->
+									<span>Sở y tế Hà Nội</span>
+                                </div>
                             </div>
                             <div class="ft-content d-flex" style="height: 40px;">
                                 <div><a target="_blank" href="http://online.gov.vn/Home/WebDetails/123101" title="Đã đăng ký với bộ công thương" ><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></a></div>
@@ -162,8 +162,8 @@
 							<path d="M12.25 14.8998L12.25 17.2998" stroke="white" stroke-width="1.5" stroke-linecap="round"></path>
 						</svg>
 						<span>Trang chủ</span>
-					</a>
-					<a href="/products" class="menu-item">
+                    </a>
+					<a href="/products/ORDERFAST-0" class="menu-item">
 						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
 							<path d="M5.1499 8.10039C5.1499 6.33308 6.58259 4.90039 8.3499 4.90039C10.1172 4.90039 11.5499 6.33308 11.5499 8.10039C11.5499 9.8677 10.1172 11.3004 8.3499 11.3004C6.58259 11.3004 5.1499 9.8677 5.1499 8.10039Z" stroke="#8EBCBC" stroke-width="1.5"></path>
 							<path d="M13.95 16.9002C13.95 15.1329 15.3826 13.7002 17.15 13.7002C18.9173 13.7002 20.35 15.1329 20.35 16.9002C20.35 18.6675 18.9173 20.1002 17.15 20.1002C15.3826 20.1002 13.95 18.6675 13.95 16.9002Z" stroke="#8EBCBC" stroke-width="1.5"></path>
@@ -187,11 +187,7 @@
 						<div class="dropup">
 							<div class="" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
 								<a href="/" class="menu-item" style="width: 100%;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
-										<circle cx="12.7501" cy="9.60019" r="2.4" stroke="#8EBCBC" stroke-width="1.5"></circle>
-										<circle cx="12.75" cy="12" r="8" stroke="#8EBCBC" stroke-width="1.5"></circle>
-										<path d="M17.5253 18.4004C17.398 16.0872 16.6898 14.4004 12.75 14.4004C8.81017 14.4004 8.10193 16.0872 7.97461 18.4004" stroke="#8EBCBC" stroke-width="1.5" stroke-linecap="round"></path>
-									</svg>
+									<img width="27" height="27" class="rounded-circle" src="https://vuaduoc.com/assets//images/anh_bsy.png" alt="avatar">
 									<span>Tài khoản</span>
 								<a>
 							</div>
@@ -202,13 +198,13 @@
 					<?php
 					}else{
 					?>
-						<a href="/" class="menu-item">
+						<a href="/login" class="menu-item">
 							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
 								<circle cx="12.7501" cy="9.60019" r="2.4" stroke="#8EBCBC" stroke-width="1.5"></circle>
 								<circle cx="12.75" cy="12" r="8" stroke="#8EBCBC" stroke-width="1.5"></circle>
 								<path d="M17.5253 18.4004C17.398 16.0872 16.6898 14.4004 12.75 14.4004C8.81017 14.4004 8.10193 16.0872 7.97461 18.4004" stroke="#8EBCBC" stroke-width="1.5" stroke-linecap="round"></path>
 							</svg>
-							<span>Tài khoản</span>
+							<span>Đăng nhập</span>
 						</a>
 					<?php 
 					}?>

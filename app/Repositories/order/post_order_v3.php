@@ -121,7 +121,7 @@ if ($total_money <= _setting('shipping_fee_thresshold', 100000)) {
 } else {
     $ship_fee = _setting('shipping_fee_retail_over_thresshold', 25000);
 }
-
+$ship_fee = 0; // Đặt phí ship = 0
 /**
  * Create order
  */
