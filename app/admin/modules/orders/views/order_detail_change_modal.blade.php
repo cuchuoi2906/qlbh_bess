@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body" id="print_content_send_partner_{{$row->id}}" style="display: none;">
                 <div class="row">
-                    <input type="hidden" id="title_print" name="title_print" value="{{$row->user->name.'_'.$row->code}}" />
+                    <input type="hidden" id="title_print{{$row->id}}" name="title_print{{$row->id}}" value="{{$row->user->name.'_'.$row->code}}" />
                     <div class="col-md-12">
                         <table class="table table-striped">
                             <tr>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <form action="change_order_price.php?ord_id={{$row->id}}" id="order_price_{{$row->id}}"
+                            <form action="change_order_price.php?ord_id={{$row->id}}&status=NEW" id="order_price_{{$row->id}}"
                               class="ship_info table-responsive" method="post">
                                 <table class="table table-bordered">
                                     <tr>
@@ -106,8 +106,11 @@
                                             Tổng tiền thanh toán
                                         </th>
                                     </tr>
+                                    <?php
+                                    $totalAmountAll = 0;
+                                    ?>
                                     @foreach ($row->products as $product)
-
+                                        <?php $totalAmountAll +=  $product->quantity * $product->sale_price; ?>
                                         <tr>
                                             <td>
                                                 {{$loop->iteration}}
@@ -122,7 +125,7 @@
                                                 {{$product->quantity}}
                                             </td>
                                             <td>
-                                                {{ number_format($product->price) }}
+                                                {{ number_format($product->sale_price) }}
                                             </td>
                                             <!--<td>
                                                 {{ number_format($product->price - $product->sale_price) }}
@@ -133,8 +136,18 @@
                                         </tr>
 
                                     @endforeach
+                                    @if($row->ord_discount_admin)
+                                        <tr>
+                                            <td style="text-align: right" colspan="4">Tổng tiền đơn hàng</td>
+                                            <td><span style="color: red;">{{ number_format($totalAmountAll) }} VND</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right" colspan="4">Khuyến mại từ Vuaduoc (Trừ thẳng vào tổng giá trị đơn hàng):</td>
+                                            <td>{{ number_format($row->ord_discount_admin) }} VND</td>
+                                        </tr>
+                                    @endif
                                     <tr>
-                                        <td style="text-align: right" colspan="4">Tổng tiền</td>
+                                        <td style="text-align: right" colspan="4">Tổng tiền Thanh toán</td>
                                         <td><span style="color: red;">{{ number_format($row->amount) }} VND</span></td>
                                     </tr>
                                 </table>
@@ -291,7 +304,7 @@
 
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <form action="change_order_price.php?ord_id={{$row->id}}" id="order_price_{{$row->id}}"
+                            <form action="change_order_price.php?ord_id={{$row->id}}&status=NEW" id="order_price_{{$row->id}}"
                               class="ship_info table-responsive" method="post">
                                 <table class="table table-bordered">
                                     <tr>
@@ -318,17 +331,17 @@
                                                 {{--{{$product->info->sku}}--}}
                                                 {{--</td>--}}
                                                 <td style="width: 20px">
-                                                    <input style="width: 50px;text-align: center;" class="form-control" name="ord_quantity{{$product->info->id}}" id="ord_quantity{{$product->info->id}}"
+                                                    <input style="width: 50px;text-align: center;" onchange="loadPriceProductByQuality(this)" class="form-control" name="ord_quantity{{$product->info->id}}" id="ord_quantity{{$product->info->id}}"
                                                    value="{{$product->quantity}}">
                                                 </td>
                                                 <td>
-                                                    <input style="width: 90px;text-align: center;" oninput="loadInputValueformatCurrency(this,{{ $product->price }})" class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
-                                                   value="{{ number_format($product->price) }}">
+                                                    <input style="width: 90px;text-align: center;" oninput="loadInputValueformatCurrency(this,{{ $product->sale_price }})" class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
+                                                   value="{{ number_format($product->sale_price) }}">
                                                 </td>
                                                 <!--<td>
                                                     {{ number_format($product->price - $product->sale_price) }}
                                                 </td>-->
-                                                <td>
+                                                <td id="ord_price_product_total{{$product->info->id}}">
                                                     {{ number_format($product->quantity * $product->sale_price)}}
                                                 </td>
                                                 <td style="width: 20px">
@@ -338,6 +351,13 @@
 
                                         @endforeach
                                         <tr>
+                                            <td style="text-align: right" colspan="4">Khuyến mại từ Vuaduoc (Trừ thẳng vào giá trị đơn hàng)</td>
+                                            <td>
+                                                <input style="width: 90px;text-align: center;" oninput="loadInputValueformatCurrency(this,{{ $row->ord_discount_admin }})" class="form-control" name="ord_discount_admin" id="ord_discount_admin"
+                                                   value="{{ number_format($row->ord_discount_admin)}}">
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td style="text-align: right" colspan="4">Tổng tiền</td>
                                             <td><span style="color: red;">{{ number_format($row->amount) }} VND</span></td>
                                         </tr>
@@ -346,7 +366,8 @@
                                             <td colspan="4">
                                                 <!--<input type="submit" value="Cập nhật giá đơn hàng">-->
                                                 <button class="btn btn-default" type="submit" value="Submit">Cập nhật giá đơn hàng</button>
-                                                <a class="btn btn-default" href="add_product.php?ord_id={{$row->id}}" >Thêm mới sản phẩm</a>
+                                                <a class="btn btn-default" href="add_product.php?status=NEW&ord_id={{$row->id}}" >Thêm mới sản phẩm</a>
+                                                <a class="btn btn-default" href="javascript:void(null)" onclick="exportProductOrder({{$row->id}})" >In sản phẩm</a>
                                             </td>
                                         </tr>
                                         @endif
@@ -502,7 +523,7 @@
                 <button class="btn btn-secondary" onclick="dialog_note({{$row->id}})">
                     Ghi chú
                 </button>
-                <button class="btn btn-secondary" onclick="printDivId('print_content_send_partner_{{$row->id}}')">
+                <button class="btn btn-secondary" onclick="printDivId('print_content_send_partner_{{$row->id}}',{{$row->id}})">
                     In
                 </button>
                 <button type="button" class="btn btn-secondary" onclick="reload_modal({{$row->id}})">Tải lại</button>

@@ -449,5 +449,36 @@
                 });
             }
         }
+        function loadPriceProductByQuality(obj){
+            let quality= parseInt(obj.value);
+            let idProduc = parseInt(obj.id.replace("ord_quantity",""));
+            console.log(quality);
+            console.log(idProduc);
+            $.ajax({
+                url: 'get_product_by_id.php',
+                type: 'GET',
+                data: {
+                    quality: quality,
+                    product_id: idProduc
+                },
+                success: function (response) {
+                    response = JSON.parse(response);
+                    if(response.price > 0){
+                        $('#ord_price'+idProduc).val(formatCurrencyVND(parseInt(response.price)));
+                        $('#ord_price_product_total'+idProduc).text(formatCurrencyVND(parseInt(response.total_price)));
+                    }
+                    
+                    //setCookie('order_focus_id', orderId, 1);
+                    //location.reload();
+                }
+            });
+        }
+        function exportProductOrder(orderId){
+            const link = document.createElement('a');
+            link.href = 'export_order_product.php?ord_id='+orderId;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 @stop

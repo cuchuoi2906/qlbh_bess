@@ -21,6 +21,7 @@ $atrrProd = [
     'orp_commission_buy' => $product->commission,
 ];
 $orderProd = \App\Models\OrderProduct::insert($atrrProd);
+
 //Tính lại hoa hồng
 \App\Manager\Order\OrderManager::commissions($ord_id);
 

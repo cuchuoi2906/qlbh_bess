@@ -139,7 +139,7 @@ h3.title-news {
 }
 
 header {
-    padding: 10px 0;
+    padding: 0px 0;
 }
 
 header .logo {
@@ -435,6 +435,9 @@ footer .phone_calling span img {
     font-weight: 600;
     color: var(--main-color);
     margin-bottom: 5px;
+}
+.color-gray{
+    color:gray !important;
 }
 
 .prod-item .thumb {
@@ -884,9 +887,9 @@ footer {
         display: none !important;
     }
 	#chat-bot {
-		width: 50px;
-        height: 50px;
-        bottom: 70px;
+            width: 50px;
+            height: 50px;
+            bottom: 80px;
 	}
 
     .page-title {
@@ -897,7 +900,7 @@ footer {
         padding-bottom: 70px;
         .ft-menu-mb {
             position: fixed;
-            width: 100vw;
+            width: 102vw;
             height: 70px;
             bottom: 0;
             left: 0;
@@ -912,7 +915,7 @@ footer {
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
-                width: 25%;
+                width: 20%;
                 span {
                     color: rgba(142, 188, 188, 1);
                     font-size: 14px;
@@ -965,7 +968,7 @@ footer {
 }
 .breadcrumb-container {
     background-color: #f1f3f9;
-    border-radius: 24px;
+    /*border-radius: 24px;*/
     padding: 12px 22px 1px;
     margin-bottom: 30px;
     height: 100%;
@@ -1017,4 +1020,20 @@ footer {
 .fixed-bottom-bar .wrapper .content .text{
 	height: 70px;
     overflow-y: scroll;
+}
+.price-sl {
+    background: #f1f3f9;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-radius: 50px;
+    color: #0b9444;
+    font-size: 13px;
+    margin-bottom:5px;
+    width: fit-content;
+}
+.input-group-search-mobile{
+    border-radius: 999px;
+    border-color: #00ab4a8a !important;
+    border: 3px solid #00ab4a8a;
 }

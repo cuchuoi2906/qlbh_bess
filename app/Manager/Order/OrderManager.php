@@ -71,7 +71,7 @@ class OrderManager
         return Order::findByID($order->id);
     }
 
-    public static function commissions($order_id,$productPrice = [])
+    public static function commissions($order_id,$productPrice = [],$ord_discount_admin = 0)
     {
         $order = Order::findByID($order_id);
         if (!$order) {
@@ -81,30 +81,33 @@ class OrderManager
         $user = $order->user;
 
         $products = $order->products;
+        $ord_discount_admin = $ord_discount_admin ? $ord_discount_admin : $order->ord_discount_admin;
 
         $total_product = 0;
         $total_money = 0;
         $total_direct_commission = 0;
         $total_commission = 0;
         $total_point = 0;
-
         foreach ($products as $product) {
 
             $quantity = $product->quantity;
+            $sale_price = $product->orp_sale_price;
             $product->info->buy_quantity = $product->quantity;
             $product = transformer_item($product->info, new \App\Transformers\ProductTransformer());
             $product = collect_recursive($product);
             if(check_array($productPrice) && isset($productPrice[$product->id])){
-                $product->price =intval($productPrice[$product->id]['price']);
+                $price =intval($productPrice[$product->id]['price']);
                 $quantity =intval($productPrice[$product->id]['quantity']);
+            }else{
+                $price = $product->discount_price ? $product->discount_price : $product->price;
+                $price = $sale_price ? $sale_price : $price;
             }
             $total_product += $quantity;
-            $price = $product->discount_price ? $product->discount_price : $product->price;
             $total_money += $price * $quantity;
 
             $direct_commission = 0;
             $min_price_policy = 0;
-            if ($product->discount_price) {
+            if ($product->discount_price && !check_array($productPrice)) {
                 $direct_commission = ($product->price - $product->discount_price) * $quantity;
                 $total_direct_commission += $direct_commission;
                 $min_price_policy = (int)$product->min_price_policy->price * $quantity;
@@ -121,7 +124,7 @@ class OrderManager
                 ->update([
                     'orp_price' => $product->price,
                     'orp_quantity' => $quantity,
-                    'orp_sale_price' => ($order->commission_type == 2) ? $product->price : $price,
+                    'orp_sale_price' => $price,
                     'orp_commit_current' => $commission_sale_price
                 ]);
 
@@ -132,7 +135,8 @@ class OrderManager
         }
 
         //Update tổng số tiền vào đơn hàng
-        $order->amount = (int)$total_money;
+        $order->amount = (int)($total_money - $ord_discount_admin);
+        $order->discount_admin = (int)$ord_discount_admin;
         $order->update();
         if(check_array($productPrice)){
             return;
@@ -195,68 +199,6 @@ class OrderManager
 
         $commission_ratio = (int)setting('commission_ratio', 2);
         $commission_ratio = 1 / $commission_ratio;
-
-        //Commission hệ thống
-        $parent = $user;
-
-        while ($parent && $total_commission > 0) {
-            $user_commission_percent = setting('user_level_' . $parent->level . '_commission');
-            if (!$user_commission_percent || $user_commission_percent >= 100) {
-                $parent = $parent->parent;
-                continue;
-            }
-            $user_commission = intval($user_commission_percent / 100 * $total_commission / 100) * 100;
-            if ($user_commission >= 100) {
-
-                $add_user_vat = $user_commission / 10;
-                $add_user_vat = (int)($add_user_vat / 100) * 100;
-                $add_user_commission = $user_commission - $add_user_vat;
-                //Lưu user commssion
-                \App\Models\OrderCommission::insert([
-                    'orc_order_id' => $order_id,
-                    'orc_user_id' => $parent->id,
-                    'orc_status_code' => \App\Models\OrderCommission::STATUS_NEW,
-                    'orc_amount' => $add_user_commission,
-                    'orc_vat' => $add_user_vat,
-                    'orc_is_owner' => ($parent->id == $user->id) ? 1 : 0,
-                    'orc_point' => ($parent->id == $user->id) ? $total_point : 0,
-                ]);
-
-                if ($parent->id == $user->id) {
-                    if ($event_direct_commission_ratio > 1) {
-                        $user_commission = ($event_direct_commission_ratio * $user_commission) - $user_commission;
-                        \App\Models\OrderCommission::insert([
-                            'orc_order_id' => $order_id,
-                            'orc_user_id' => $user->id,
-                            'orc_status_code' => \App\Models\OrderCommission::STATUS_SUCCESS,
-                            'orc_amount' => $user_commission,
-                            'orc_is_owner' => 1,
-                            'orc_type' => 1,
-                            'orc_point' => $total_point * $event_direct_commission_ratio,
-                            'orc_event_id' => (int)$event->id
-                        ]);
-                    }
-                } else {
-                    if ($event_parent_commission_ratio > 1) {
-                        $event_parent_commission = ($event_parent_commission_ratio * $user_commission) - $user_commission;
-                        \App\Models\OrderCommission::insert([
-                            'orc_order_id' => $order_id,
-                            'orc_user_id' => $parent->id,
-                            'orc_status_code' => \App\Models\OrderCommission::STATUS_SUCCESS,
-                            'orc_amount' => $event_parent_commission,
-                            'orc_is_owner' => 0,
-                            'orc_type' => 1,
-                            'orc_point' => 0,
-                            'orc_event_id' => (int)$event->id
-                        ]);
-                    }
-                }
-
-
-                $total_commission -= $user_commission;
-            }
-            $parent = $parent->parent;
-        }
 
         \VatGia\Queue\Facade\Queue::pushOn(\App\Workers\OrderProductCommissionDetailWorker::$name, \App\Workers\OrderProductCommissionDetailWorker::class, [
             'order_id' => $order_id

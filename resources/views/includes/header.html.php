@@ -40,6 +40,8 @@
     </head>
     <body>
         <header id="header" class="header-1">
+            <img src="https://vuaduoc.com/assets/images/bg_header.jpg" width="100%" class="d-xl-flex d-none" />
+            <img src="https://vuaduoc.com/assets/images/bg_header_m.jpg" width="100%" class="d-xl-none flex-column" />
             <div class="container">
                 <div class="main-header align-items-center justify-content-between d-xl-flex d-none">
                     <div class="logo">

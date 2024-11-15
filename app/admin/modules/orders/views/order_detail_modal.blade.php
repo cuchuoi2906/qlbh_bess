@@ -14,7 +14,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <input type="hidden" id="title_print" name="title_print" value="{{$row->user->name.'_'.$row->code}}" />
+            <input type="hidden" id="title_print{{$row->id}}" name="title_print{{$row->id}}" value="{{$row->user->name.'_'.$row->code}}" />
             <div class="modal-body section-to-print">
                 <div class="row">
                     <div class="col-md-12">
@@ -177,7 +177,7 @@
 
                                             </td>
                                             <td>
-                                                {{ number_format($product->price) }}
+                                                {{ number_format(($product->orp_sale_price ? $product->orp_sale_price : $product->price)) }}
                                             </td>
                                             <td>
                                                 {{ number_format($product->quantity * $product->sale_price)}}
@@ -330,7 +330,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-body section-to-print" id="print_content_{{$row->id}}" style="display:none;">
+            <div class="modal-body section-to-print" id="print_content_{{$row->id}}" style="display:none">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -411,13 +411,34 @@
                                     <td>Ghi chú</td>
                                     <td>{{ $row->shipping_note }}</td>
                                 </tr>
+                                <tr>
+                                    <td align="center">
+                                        <div class="col-md-7">
+                                            <div class="item">
+                                                <img src="https://vuaduoc.com/assets/images/qr_chuyen_khoan_new.jpg" alt="qr-code" width="200px">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-5" style="font-size: 18px">
+                                            <div class="item">
+                                                <label for="">Người nhận:</label>
+                                                <div class="value fw-bold">Dương Việt Hùng</div>
+                                            </div>
+                                            <div class="item">
+                                                <label for="">Số tài khoản:</label>
+                                                <div class="value fw-bold">19020234693028</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="printDivId('print_content_{{$row->id}}')">
+                <button class="btn btn-secondary" onclick="printDivId('print_content_{{$row->id}}',{{$row->id}})">
                     In
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng lại</button>

@@ -163,6 +163,13 @@ if($type == 'ORDERFAST'){
                         <div class="swiper-wrapper" id="swiper-wrapper-863ad8227b1e233f" aria-live="polite">
                             <?php 
                             foreach($productList10items as $items){ 
+                                $pricePolicies = $items['pricePolicies'];
+                                $htmlPriceSl = "";
+                                if(check_array($pricePolicies)){
+                                    foreach($pricePolicies as $price){
+                                        $htmlPriceSl .= '<div class="price-sl">Mua số lượng từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
+                                    }
+                                }
                             ?>
                                 <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 6" style="width: 212px; margin-right: 24px;">
                                     <div class="prod-item">
@@ -172,19 +179,25 @@ if($type == 'ORDERFAST'){
                                             </a>
                                         </div>
                                         <h3 class="prod-title"><a href="<?php echo '/san-pham/'.$items['rewrite'].'-'.$items['id']; ?>"><?php echo $items['name']; ?></a></h3>
-										<?php 
-										if(intval($items['price'])>0){
-										?>
-											<div>
+                                        <?php 
+                                        if(intval($items['price'])>0){
+                                            if(intval($items['db_discount_price'])>0){ ?>
+                                            <div>
                                                 <span class="price"><?php echo formatCurrencyVND($items['db_discount_price']); ?></span>
-                                                <span class="text-decoration-line-through price float-end fw-normal"><?php echo formatCurrencyVND($items['db_price']); ?></span>
+                                                <span class="text-decoration-line-through price float-end fw-normal color-gray"><?php echo formatCurrencyVND($items['db_price']); ?></span>
                                             </div>
-										<?php 
-										}else{
-											?>
-											<span class="badge badge-success">Giá ưu đãi</span>
-											<?php
-										}?>
+                                            <?php 
+                                            }else{ ?>
+                                                <div class="price text-end"><?php echo formatCurrencyVND($items['db_price']); ?></div>
+                                                <?php
+                                            }
+                                        }else{
+                                            ?>
+                                            <span class="badge badge-success">Tạm hết hàng</span>
+                                            <?php
+                                        }
+                                        echo $htmlPriceSl;
+                                        ?>                              
                                         <div class="input-group number-input">
                                             <div class="input-group-prepend">
                                                 <button data-product-id="<?php echo $items['id']; ?>" class="btn btn-decrement" type="button" disabled="">
@@ -393,8 +406,16 @@ if($type == 'ORDERFAST'){
                         <?php
                         //pre($productList);
                         foreach($productList as $items){
+                            $pricePolicies = $items['pricePolicies'];
+                            $htmlPriceSl = "";
+                            if(check_array($pricePolicies)){
+                                foreach($pricePolicies as $price){
+                                    $htmlPriceSl .= '<div class="price-sl">Mua số lượng từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
+                                }
+                            }
+                            
                         ?>
-                            <div class="col-xl-2 col-6 col-md-4 mb-4">
+                            <div class="col-xl-2 col-6 col-md-4 mb-4" style="padding-left: 4px !important;padding-right: 4px !important;">
                                 <div class="prod-item">
                                     <div class="thumb">
                                         <a href="<?php echo '/san-pham/'.$items['rewrite'].'-'.$items['id']; ?>">
@@ -404,26 +425,27 @@ if($type == 'ORDERFAST'){
                                     <h3 class="prod-title">
                                         <a href="<?php echo '/san-pham/'.$items['rewrite'].'-'.$items['id']; ?>"><?php echo $items['name']; ?></a>
                                     </h3>
-									<?php 
-									if(intval($items['price'])>0){
-                                        if(intval($items['db_discount_price'])>0){
-									?>
+                                    <?php 
+                                    if(intval($items['price'])>0){
+                                        if(intval($items['db_discount_price'])>0){ ?>
                                         <div>
                                             <span class="price"><?php echo formatCurrencyVND($items['db_discount_price']); ?></span>
-                                            <span class="text-decoration-line-through price float-end fw-normal"><?php echo formatCurrencyVND($items['db_price']); ?></span>
+                                            <span class="text-decoration-line-through price float-end fw-normal color-gray"><?php echo formatCurrencyVND($items['db_price']); ?></span>
                                         </div>
-									<?php 
-                                        }else{
-                                            ?>
+                                        <?php 
+                                        }else{ ?>
                                             <div class="price text-end"><?php echo formatCurrencyVND($items['db_price']); ?></div>
                                             <?php
                                         }
-									}else{
-										?>
-										<span class="badge rounded-pill bg-success text-end">GIÁ ƯU ĐÃI</span>
-										<?php
-									}
-									?>
+                                    }else{
+                                        ?>
+                                        <span class="badge rounded-pill bg-success text-end mb-3">Tạm hết hàng</span>
+                                        <?php
+                                    }
+                                    ?>
+                                    <?php 
+                                    echo $htmlPriceSl;
+                                    ?>    
                                     <div class="input-group number-input">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-decrement" type="button" data-product-id="<?php echo $items['id']; ?>" disabled>

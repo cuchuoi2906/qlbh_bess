@@ -83,12 +83,14 @@ echo admin_lte_footer();
         $('ul.nav.nav-tabs').hide();
     }
 
-    function printDivId(elem)
+    function printDivId(elem,orderID)
     {
         var mywindow = window.open('', 'PRINT', 'height=400,width=600');
         let title = '';
-        if(document.getElementById("title_print")){
-            title = document.getElementById("title_print").value;
+        if (typeof(orderID) != "undefined"){
+            if(document.getElementById("title_print"+orderID)){
+                title = document.getElementById("title_print"+orderID).value;
+            }
         }
         mywindow.document.write('<html><head><title>'+title+'</title>');
         mywindow.document.write(document.getElementsByTagName('head')[0].innerHTML);

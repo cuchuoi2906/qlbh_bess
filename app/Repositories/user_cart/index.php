@@ -101,6 +101,7 @@ if ($items->count()) {
         $product = transformer_item($product_temp, new \App\Transformers\ProductTransformer());
 
         $price = $product['is_discount'] ? $product['discount_price'] : $product['price'];
+        $price = $product['price_policy'] ? $product['price_policy'] : $price;
         $v_discount_price_arr[]= $price;
         $v_quantity_old[]= $item->quantity;
         $total_product += (int)$item->quantity;
@@ -109,7 +110,7 @@ if ($items->count()) {
         $total_money_origin += $product['price'] * $item->quantity;
         $total_discount += ($product['price'] * $item->quantity - $price * $item->quantity);
 
-        $price = $product['is_discount'] ? $product['discount_price'] : $product['price'];
+        //$price = $product['is_discount'] ? $product['discount_price'] : $product['price'];
         $productTmp = collect_recursive($product);
 
         $direct_commission = 0;
@@ -138,89 +139,6 @@ if ($items->count()) {
         $total_commission += $commission_sale_price;
         $total_point += $productTmp->point * $item->quantity;
 
-    }
-    $reprice = false;
-    /*if($leverPrice > 0){
-        $i=0;
-        foreach ($items as $key => &$item) {
-            //pre($item);die;
-            $pro_id = intval($item->product->pro_id);
-            $price = intval($item->product->pro_price);
-            $quantity = intval($item->quantity);
-            if($pro_id <= 0){
-                break;
-            }
-            $querryString = '
-                SELECT a.ppp_price,a.ppp_quantity
-                FROM product_price_policies a 
-                    WHERE a.ppp_product_id = '.$pro_id.'
-                    ORDER BY ppp_price ASC LIMIT '.$leverPrice;   
-            $db_price_policies = new db_query($querryString);
-            $row_querry = $db_price_policies->fetch();
-            $ppp_price = intval($row_querry[count($row_querry)-1]['ppp_price']);
-            if(!$ppp_price){
-                break;
-            }
-            $price_discount  = $price-$ppp_price;
-            if($price_discount < $v_discount_price_arr[$i]){
-                $item->quantity = intval($row_querry[count($row_querry)-1]['ppp_quantity']);
-                $reprice =true;
-            }
-            $i++;
-        }
-    }*/
-    if($reprice){
-		$total_money = 0;
-		$total_money_origin = 0;
-		$total_discount = 0;
-		$total_commission = 0;
-		$total_direct_commission = 0;
-		$total_point = 0;
-		$i=0;
-        foreach ($items as $key => &$item) {
-
-			$item->product->buy_quantity = $item->quantity;
-			$item->product->is_wholesale = $is_wholesale;
-			$product_temp = $item->product;
-
-			$product = transformer_item($product_temp, new \App\Transformers\ProductTransformer());
-			$price = $product['is_discount'] ? $product['discount_price'] : $product['price'];
-			//$item->product->buy_quantity = $v_quantity_old[$i];
-			$item->quantity = $v_quantity_old[$i];
-			$total_money += $price * $item->quantity;
-			$total_money_origin += $product['price'] * $item->quantity;
-			$total_discount += ($product['price'] * $item->quantity - $price * $item->quantity);
-
-			$price = $product['is_discount'] ? $product['discount_price'] : $product['price'];
-			$productTmp = collect_recursive($product);
-
-			$direct_commission = 0;
-			$min_price_policy = 0;
-			//Tính hoa hồng
-			if ($productTmp->discount_price) {
-
-				// $price = $productTmp['db_discount_price'] ?: $productTmp['db_price'];
-
-				$direct_commission = ($productTmp->price - $productTmp->discount_price) * $item->quantity;
-				$total_direct_commission += $direct_commission;
-				$min_price_policy = (int)$productTmp->min_price_policy->price * $item->quantity;
-			}
-
-			$commission = $productTmp->paid_commission * $item->quantity;
-
-			// $commission_sale_price = $commission - $direct_commission + $min_price_policy;
-			// $commission_sale_price = $commission_sale_price > 0 ? $commission_sale_price : 0;
-
-			if ($is_wholesale) {
-				$commission_sale_price = ($productTmp->discount_price + $productTmp->paid_commission - $productTmp->min_price_policy->real_price) * $item->quantity;
-			} else {
-				$commission_sale_price = $productTmp->paid_commission * $item->quantity;
-			}
-
-			$total_commission += $commission_sale_price;
-			$total_point += $productTmp->point * $item->quantity;
-			$i++;
-		}
     }
     //Tính tiền ship
     if ($is_wholesale) {
@@ -269,7 +187,7 @@ if ($items->count()) {
     $commissionReturn = (int)($commissionReturn / 100) * 100;
     $commissionWithoutDirect = (int)($commissionWithoutDirect / 100) * 100;
 
-    $vars = transformer_collection($items, new \App\Transformers\UserCartTransformer(), ['product.avatar'], [
+    $vars = transformer_collection($items, new \App\Transformers\UserCartTransformer(), ['product.avatar','product.pricePolicies'], [
         'total_product' => $total_product ?? 0,
         'total_money' => $total_money ?? 0,
         'total_money_origin' => $total_money_origin ?? 0,

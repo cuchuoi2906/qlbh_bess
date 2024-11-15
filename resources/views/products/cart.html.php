@@ -6,7 +6,12 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
         <div class="menu-prod">
             <div class="d-flex align-items-center gap-2">
                 <button><a href="/products">FLASH SALE</a></button>
-                <button><a href="/products/ORDERFAST-0">Đặt hàng nhanh</a></button>
+                <button>
+                    <a href="/products/ORDERFAST-0">
+                        Đặt hàng nhanh
+                        <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
+                    </a>
+                </button>
                 <button><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
                 <button><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
                 <button><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
@@ -23,6 +28,13 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                     $meta = $productsList['meta'];
                     unset($productsList['meta']);
                     foreach($productsList as $items){
+                        $htmlPriceSl = "";
+                        if(isset($items['product']['pricePolicies']) && check_array($items['product']['pricePolicies'])){
+                            $pricePolicies = $items['product']['pricePolicies'];
+                            foreach($pricePolicies as $price){
+                                $htmlPriceSl .= '<div class="price-sl mb-2">Mua số lượng từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
+                            }
+                        }
                         $product = $items['product'];
                         $quantity = $items['quantity'];
                 ?>
@@ -34,7 +46,14 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                 </div>
                                 <div class="info d-flex flex-column">
                                     <h3 class="cart-item-title"><?php echo $product['name']; ?></h3>
-                                    <div class="price"><?php echo formatCurrencyVND($product['price']); ?></div>
+                                    <?php 
+                                    $price = $product['db_discount_price'] ? $product['db_discount_price'] : $product['price'];
+                                    $price = $product['price_policy'] ? $product['price_policy'] : $price;
+                                    ?>
+                                    <div class="price" id="priceDetail<?php echo $product['id']; ?>"><?php echo formatCurrencyVND($price); ?></div>
+                                    <?php 
+                                    echo $htmlPriceSl;
+                                    ?>
                                     <div class="input-group number-input">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-decrement" type="button" data-product-id="<?php echo $product['id']; ?>">
@@ -75,7 +94,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                             </div>
                             <div class="right h-100">
                                 <div class="cta d-flex justify-content-start flex-column text-end h-100 align-items-end h-100">
-                                    <div class="total-price" id="total-price-product<?php echo intval($product['id']); ?>"><?php echo formatCurrencyVND($product['price']*$quantity); ?></div>
+                                    <div class="total-price" id="total-price-product<?php echo intval($product['id']); ?>"><?php echo formatCurrencyVND($price*$quantity); ?></div>
 									<div class="d-sm-flex d-none align-items-center btn-product-delete" data-product-id="<?php echo intval($product['id']); ?>"> 
 										<button><img src="<?= asset('/images/icons/Delete.svg') ?>" alt="heart">Xóa</button>
 									</div>
@@ -172,8 +191,12 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                             <div class="value fw-bold" id="totalProduct"><?php echo isset($meta['total_product']) ? $meta['total_product'] : 0; ?></div>
                         </li>
                         <li class="d-flex justify-content-between align-items-center">
+                            <div class="label">Tổng tiền hàng</div>
+                            <div class="value fw-bold" id="totalMoneyOrigin"><?php echo isset($meta['total_money_origin']) ? formatCurrencyVND($meta['total_money_origin']) : 0; ?></div>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center">
                             <div class="label">Giảm giá trực tiếp</div>
-                            <div class="value fw-bold"><?php echo isset($meta['total_discount']) ? formatCurrencyVND($meta['total_discount']) : 0; ?></div>
+                            <div class="value fw-bold" id="salePriceTotal"><?php echo isset($meta['total_discount']) ? formatCurrencyVND($meta['total_discount']) : 0; ?></div>
                         </li>
                         <!--<li class="d-flex justify-content-between align-items-center">
                             <div class="label">Giảm giá Voucher</div>
@@ -184,7 +207,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                             <div class="value fw-bold">0 đ</div>
                         </li>-->
                         <li class="d-flex justify-content-between align-items-center">
-                            <div class="label">Tổng tiền</div>
+                            <div class="label">Tổng tiền thanh toán</div>
                             <div class="value fw-bold total" id="totalMoney"><?php echo isset($meta['total_money']) ? formatCurrencyVND($meta['total_money']) : 0; ?></div>
                         </li>
                     </ul>

@@ -1,4 +1,6 @@
 <?php
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 /**
  * Created by PhpStorm.
  * User: justin
@@ -71,5 +73,44 @@ if( ! function_exists('get_client_ip') ) {
         }
 
         return $ip;
+    }
+}
+if( ! function_exists('export_custom') ) {
+    function export_custom($datas = [],$nameFile = 'export')
+    {
+		ini_set("memory_limit","500M");
+        disable_debug_bar();
+        if(!check_array($datas)){
+            return;
+        }
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $i = 1;
+        $columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF'];
+        foreach ($datas as $data) {
+            $j = 0;
+            foreach ($data as $value) {
+                $sheet->setCellValue($columns[$j] . $i, (string)html_entity_decode(strip_tags($value)));
+                
+                $j++;
+            }
+            $i++;
+        }
+        //pre($sheet);die;
+
+        $writer = new Xlsx($spreadsheet);
+        // We'll be outputting an excel file
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+        // It will be called file.xls
+        header('Content-Disposition: attachment; filename="'.$nameFile.'.xlsx"');
+        if (ob_get_contents()) {
+            ob_end_clean();
+        }
+        $writer->save('php://output');
+        
+
+        die();
+
     }
 }

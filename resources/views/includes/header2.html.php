@@ -28,7 +28,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         ></script>
-        <script src="<?php echo asset('js/script.js') ?>"></script>
+        <script src="<?php echo asset('js/script.js?11') ?>"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="<?php echo asset('/libs/swiper/swiper-bundle.min.js') ?>"></script>
 		<style>
@@ -39,6 +39,8 @@
     </head>
     <body>
         <header class="header-2">
+            <img src="https://vuaduoc.com/assets/images/bg_header.jpg" width="100%" class="d-xl-flex d-none" />
+            <img src="https://vuaduoc.com/assets/images/bg_header_m.jpg" width="100%" class="d-xl-none flex-column" />
             <div class="container">
                 <div class="main-header-2 align-items-center justify-content-between ga-3 d-xl-flex d-none">
                     <div class="logo">
@@ -48,7 +50,7 @@
                     </div>
                     <div class="main-search-pc">
                         <div class="input-group rounded-pill">
-                            <input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Bạn đang muốn tìm sản phẩm gì?" aria-label="basic-search" aria-describedby="basic-search">
+                            <input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Nhập tên thuốc, hoạt chất cần tìm..." aria-label="basic-search" aria-describedby="basic-search">
                             <span class="input-group-text" id="main-search-pc">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>

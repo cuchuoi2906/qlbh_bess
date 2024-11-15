@@ -246,20 +246,31 @@ document.addEventListener('DOMContentLoaded', () => {
             success: function(response) {
                 if(document.getElementById('pageCart')){
                     let total_money = parseInt(response.meta.total_money);
+                    let total_money_origin = parseInt(response.meta.total_money_origin);
                     let total_product = parseInt(response.meta.total_product);
+                    let total_discount = parseInt(response.meta.total_discount);
                     if(response.data.length > 0){
                         for(i=0;i<response.data.length;i++){
                             let id = response.data[i].product.id;
                             let quantity = parseInt(response.data[i].quantity);
                             let price = parseInt(response.data[i].product.price);
+                            let discount_price = parseInt(response.data[i].product.discount_price);
+                            let price_policy = parseInt(response.data[i].product.price_policy);
+                            price = discount_price ? discount_price : price;
+                            price = price_policy ? price_policy : price;
+                            if(document.getElementById('priceDetail'+id)){
+                                $('#priceDetail'+id).text(formatCurrencyVND(price));
+                            }
                             if(document.getElementById('total-price-product'+id)){
                                 $('#total-price-product'+id).text(formatCurrencyVND(quantity*price));
                             }
+                            
                         }
                     }
+                    $('#totalMoneyOrigin').text(formatCurrencyVND(total_money_origin));
                     $('#totalMoney').text(formatCurrencyVND(total_money));
                     $('#totalProduct').text(total_product);
-                    
+                    $('#salePriceTotal').text(formatCurrencyVND(total_discount));
                 }
                 totalProduct = parseInt(response.meta.total_product_cart);
                 $('#cartCount').text(totalProduct);

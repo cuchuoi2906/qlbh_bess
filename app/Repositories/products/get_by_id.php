@@ -6,6 +6,8 @@ use App\Transformers\ProductTransformer;
 $vars = null;
 
 $product_id = input('id') ?? 0;
+$buy_quantity = input('buy_quantity') ?? 0;
+
 
 $with = input('with') ? explode(',', input('with')) : [];
 
