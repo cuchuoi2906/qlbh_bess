@@ -14,7 +14,9 @@ class ProductController extends ApiController
     public function getProducts()
     {
         $page = getValue('page', 'int', 'GET', 1, 0);
+        $page_size = getValue('page_size', 'int', 'GET', 5, 0);
         $keyword = getValue('keyword', 'str', 'GET', '', 0);
+        $type = getValue('type', 'str', 'GET', '', 0);
         $is_hot = getValue('is_hot', 'int', 'GET', -1);
         if ($page < 1) {
             $page = 1;
@@ -27,14 +29,14 @@ class ProductController extends ApiController
             'sort_by' => getValue('sort_by', 'str', 'GET', '', 2),
             'sort_type' => getValue('sort_type', 'str', 'GET', 'DESC', 2),
             'category_id' => getValue('category_id', 'int', 'GET', 0, 0),
-            'page_size' => 10,
+            'page_size' => $page_size,
             'keyword' => $keyword,
-            'is_hot' => $is_hot
+            'is_hot' => $is_hot,
+            'type'=>$type
         ];
 
         $data = model('products/index')->load($params);
-
-        return $data['vars'];
+        return json_encode($data['vars']);
     }
 
     public function getProductDetail($pro_id)

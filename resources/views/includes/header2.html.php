@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="<?php echo asset('libs/bootstrap/css/bootstrap.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('/libs/swiper/swiper-bundle.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/font.css') ?>" />
-        <link rel="stylesheet" href="<?php echo asset('css/style.css') ?>" />
+        <link rel="stylesheet" href="<?php echo asset('css/style.css?1') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/home.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/thuc-pham-chuc-nang.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/cart.css') ?>" />
@@ -28,7 +28,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         ></script>
-        <script src="<?php echo asset('js/script.js?11') ?>"></script>
+        <script src="<?php echo asset('js/script.js?'.time()) ?>"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="<?php echo asset('/libs/swiper/swiper-bundle.min.js') ?>"></script>
 		<style>
@@ -39,8 +39,8 @@
     </head>
     <body>
         <header class="header-2">
-            <img src="https://vuaduoc.com/assets/images/bg_header.jpg" width="100%" class="d-xl-flex d-none" />
-            <img src="https://vuaduoc.com/assets/images/bg_header_m.jpg" width="100%" class="d-xl-none flex-column" />
+            <img src="<?= asset('/images/bg_header.jpg') ?>" width="100%" class="d-xl-flex d-none" />
+            <img src="<?= asset('/images/bg_header_m.jpg') ?>" width="100%" class="d-xl-none flex-column" />
             <div class="container">
                 <div class="main-header-2 align-items-center justify-content-between ga-3 d-xl-flex d-none">
                     <div class="logo">
@@ -58,6 +58,7 @@
                                 </svg>
                             </span>
                         </div>
+                        <div id="dropdown-list-suggest" class="position-relative"></div>
                     </div>
                     <div class="cart">
                         <a href="/cart" type="button" class="position-relative">
@@ -157,11 +158,11 @@
                         </div>
                         <div class="sidebar-menu py-4 px-3">
                             <ul class="d-flex flex-column gap-3">
-                                <li><a href="">Trang chủ</a></li>
+                                <li><a href="/">Trang chủ</a></li>
                                 <li><a href="/products/ORDERFAST-0">Sản phẩm</a></li>
                                 <li><a href="<?php echo url('post.listing', ['news',0]) ?>">Tin tức</a></li>
-                                <li><a href="">Khách hàng thân thiết</a></li>
-                                <li><a href="">Hướng dẫn đặt hàng</a></li>
+                                <li><a href="/loyal-client">Khách hàng thân thiết</a></li>
+                                <li><a href="/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>
                             </ul>
                         </div>
                     </div>

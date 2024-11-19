@@ -23,7 +23,7 @@ if($type == 'MEDICALDEVICES'){
 	$v_link_cate = '/products/MEDICALDEVICES-0';
 }
 if($type == 'ORDERFAST'){
-	$v_text_cate = 'Đặt hàng nhanh';
+	$v_text_cate = 'Tất cả sản phẩm';
 	$v_link_cate = '/products/ORDERFAST-0';
 }
 ?>
@@ -49,42 +49,54 @@ if($type == 'ORDERFAST'){
     <div class="container">
         <div class="menu-prod">
             <div class="d-flex align-items-center gap-2">
-                <button <?php echo ($type == '') ? 'class="active"' : ''; ?>><a href="/products">FLASH SALE</a></button>
-                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>>
-                    <a href="/products/ORDERFAST-0">
+                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Tất cả sản phẩm</a></button>
+                <button <?php echo ($type == '') ? 'class="active"' : ''; ?>>
+                    <a href="/order-fast">
                         Đặt hàng nhanh
                         <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
                     </a>
                 </button>
-                <button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
+                <!--<button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
                 <button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
                 <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
                 <button <?php echo ($type == 'PRODUCTCOMPANY') ? 'class="active"' : ''; ?>><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
-                <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
+                <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
             </div>
         </div>
 		<?php 
 		if(!empty($type)){
 		?>
-			<nav aria-label="breadcrumb" class="breadcrumb-container">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item active"><a href="/">Trang chủ</a></li>
-					<li class="breadcrumb-item"><a href="<?php echo $v_link_cate; ?>"><?php echo $v_text_cate; ?></a></li>
-					<?php 
-					if($categoryByParentId){
-					?>
-						<li class="breadcrumb-item"><a href="<?php echo '/products/'.$categoryByParentId->rewrite.'-'.$categoryByParentId->id; ?>"><?php echo $categoryByParentId->name ?></a></li>
-					<?php 
-					}
-					if($categoryById){
-						?>
-							<li class="breadcrumb-item active" aria-current="page"><?php echo $categoryById->name ?></li>
-						<?php
-					}?>
-				</ol>
-			</nav>
+            <nav aria-label="breadcrumb" class="breadcrumb-container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo $v_link_cate; ?>"><?php echo $v_text_cate; ?></a></li>
+                    <!--<?php 
+                    if($categoryByParentId){
+                    ?>
+                            <li class="breadcrumb-item"><a href="<?php echo '/products/'.$categoryByParentId->rewrite.'-'.$categoryByParentId->id; ?>"><?php echo $categoryByParentId->name ?></a></li>
+                    <?php 
+                    }
+                    if($categoryById){
+                            ?>
+                                    <li class="breadcrumb-item active" aria-current="page"><?php echo $categoryById->name ?></li>
+                            <?php
+                    }?>-->
+                </ol>
+            </nav>
         <?php 
 		}?>
+        <div class="main-search mb-3 d-xl-none">
+            <div class="input-group input-group-search-mobile">
+                <input type="text" id="keywordm" name="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Nhập tên thuốc, hoạt chất cần tìm..." aria-label="basic-search" aria-describedby="basic-search">
+                <span class="input-group-text" id="main-search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
+                        <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </div>
+            <div id="dropdown-list-suggest-mobile" class="position-relative"></div>
+        </div>
         <div class="row menu-prod">
             <div class="col-md-5">
                 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
@@ -104,11 +116,25 @@ if($type == 'ORDERFAST'){
 					<h2><?php echo $product['name'] ?></h2>
 					<p><?php echo $product['teaser'] ?></p>
 					<?php 
+                    $pricePolicies = $product['pricePolicies'];
+                    $htmlPriceSl = "";
+                    if(check_array($pricePolicies)){
+                        foreach($pricePolicies as $price){
+                            $htmlPriceSl .= '<div class="price-sl">Mua số lượng từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
+                        }
+                    }
 					if(intval($product['price'])>0){
 					?>
-					<div class="price">Giá: <?php echo formatCurrencyVND($product['price']); ?></div>
+                        <div class="price text-decoration-line-through color-gray">Giá: <?php echo formatCurrencyVND($product['price']); ?></div>
+                        <?php 
+                        if($product['db_discount_price']){
+                        ?>
+                            <div class="price">Giá khuyến mại: <?php echo formatCurrencyVND($product['db_discount_price']); ?></div>
 					<?php
-					}?>
+                        }
+                        echo $htmlPriceSl;
+					}
+                    ?>
 					<p><i style="--text-color: #018279;">(Liên hệ để được giá tốt nhất)</i></p>
 					<div class="input-group number-input width-mobile-50 me-2" style="width: 124px;">
 						<div class="input-group-prepend">

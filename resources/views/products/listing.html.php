@@ -23,7 +23,7 @@ if($type == 'MEDICALDEVICES'){
 	$v_link_cate = '/products/MEDICALDEVICES-0';
 }
 if($type == 'ORDERFAST'){
-	$v_text_cate = 'Đặt hàng nhanh';
+	$v_text_cate = 'Tất cả sản phẩm';
 	$v_link_cate = '/products/ORDERFAST-0';
 }
 ?>
@@ -31,18 +31,18 @@ if($type == 'ORDERFAST'){
     <div class="container">
         <div class="menu-prod">
             <div class="d-flex align-items-center gap-2">
-                <button <?php echo ($type == '') ? 'class="active"' : ''; ?>><a href="/products">FLASH SALE</a></button>
-                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>>
-                    <a href="/products/ORDERFAST-0">
+                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Tất cả sản phẩm</a></button>
+                <button <?php echo ($type == '') ? 'class="active"' : ''; ?>>
+                    <a href="/order-fast">
                         Đặt hàng nhanh
                         <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
                     </a>
                 </button>
-                <button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
+                <!--<button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
                 <button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
                 <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
                 <button <?php echo ($type == 'PRODUCTCOMPANY') ? 'class="active"' : ''; ?>><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
-                <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>
+                <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
             </div>
         </div>
 		<?php 
@@ -67,9 +67,9 @@ if($type == 'ORDERFAST'){
 			</nav>
         <?php 
 		}?>
-        <div class="main-search mb-3">
-            <div class="input-group">
-                <input type="text" id="keywordm" name="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Bạn đang muốn tìm sản phẩm gì?" aria-label="basic-search" aria-describedby="basic-search">
+        <div class="main-search mb-3 d-xl-none">
+            <div class="input-group input-group-search-mobile">
+                <input type="text" id="keywordm" name="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Nhập tên thuốc, hoạt chất cần tìm..." aria-label="basic-search" aria-describedby="basic-search">
                 <span class="input-group-text" id="main-search">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
@@ -77,6 +77,7 @@ if($type == 'ORDERFAST'){
                     </svg>
                 </span>
             </div>
+            <div id="dropdown-list-suggest-mobile" class="position-relative"></div>
         </div>
         <?php
         if(intval($is_hot) > 0 && $productList){
@@ -193,11 +194,15 @@ if($type == 'ORDERFAST'){
                                             }
                                         }else{
                                             ?>
-                                            <span class="badge badge-success">Tạm hết hàng</span>
+                                            <span class="badge rounded-pill badge-succes text-end mb-3">Liên hệ để có giá tốt</span>
                                             <?php
                                         }
                                         echo $htmlPriceSl;
-                                        ?>                              
+                                        if(intval($items['price'])>0){
+                                        ?>
+                                            <span class="badge rounded-pill btn-warning text-end mb-3">Giá tốt nhất thị trường</span>
+                                        <?php 
+                                        }?>
                                         <div class="input-group number-input">
                                             <div class="input-group-prepend">
                                                 <button data-product-id="<?php echo $items['id']; ?>" class="btn btn-decrement" type="button" disabled="">
@@ -439,13 +444,17 @@ if($type == 'ORDERFAST'){
                                         }
                                     }else{
                                         ?>
-                                        <span class="badge rounded-pill bg-success text-end mb-3">Tạm hết hàng</span>
+                                        <span class="badge rounded-pill bg-success text-end mb-3">Liên hệ để có giá tốt</span>
                                         <?php
                                     }
                                     ?>
                                     <?php 
                                     echo $htmlPriceSl;
+                                    if(intval($items['price'])>0){
                                     ?>    
+                                        <span class="badge rounded-pill btn-warning text-end mb-2">Giá tốt nhất thị trường</span>
+                                    <?php 
+                                    }?>
                                     <div class="input-group number-input">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-decrement" type="button" data-product-id="<?php echo $items['id']; ?>" disabled>

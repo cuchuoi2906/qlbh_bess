@@ -184,7 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputElement = document.getElementById('keyword');
         let inputValue = inputElement.value;
         if(inputValue == '' || type == 2){
-            inputElementm = document.getElementById('keywordm');
+            if(document.getElementById('keywordm')){
+                
+            }else{
+                inputElementm = document.getElementById('keywordSearchFast');
+            }
             inputValue = inputElementm.value;
         }
         const baseUrl = window.location.origin + window.location.pathname;
@@ -266,15 +270,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                             
                         }
+                        $('#totalMoneyOrigin').text(formatCurrencyVND(total_money_origin));
+                        $('#totalMoney').text(formatCurrencyVND(total_money));
+                        $('#totalProduct').text(total_product);
+                        $('#salePriceTotal').text(formatCurrencyVND(total_discount));
                     }
-                    $('#totalMoneyOrigin').text(formatCurrencyVND(total_money_origin));
-                    $('#totalMoney').text(formatCurrencyVND(total_money));
-                    $('#totalProduct').text(total_product);
-                    $('#salePriceTotal').text(formatCurrencyVND(total_discount));
                 }
-                totalProduct = parseInt(response.meta.total_product_cart);
-                $('#cartCount').text(totalProduct);
-                $('#cartCountM').text(totalProduct);
+                if(response.data.length > 0){
+                    totalProduct = parseInt(response.meta.total_product_cart);
+                    $('#cartCount').text(totalProduct);
+                    $('#cartCountM').text(totalProduct);
+                }
             },
             error: function(error) {
                 console.error('Error:', error);
@@ -484,13 +490,124 @@ $(document).ready(function(){
 
 	// Khi người dùng nhấn nút "Tôi đồng ý"
 	$('#acceptRule').click(function(){
-		console.log(1111111111111);
 		setCookie('acceptedRule', 'yes', 30); // Lưu cookie trong 30 ngày
 		$('#fixed-bottom-bar').hide(); // Ẩn popup
 	});
 	$('#noAcceptRule').click(function(){
 		$('#fixed-bottom-bar').hide(); // Ẩn popup
 	});
+    // Hàm xử lý khi người dùng nhập vào textbox
+    $('#keyword').on('keyup', function() {
+        let query = $(this).val().trim();
+        console.log(query);
+        if (query.length > 0) {
+            $.ajax({
+                url: '/api/products/search', // Thay thế bằng URL trả về JSON
+                type: 'GET',
+                data: { keyword: query,type:"ORDERFAST"},
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+                    if(response.data){
+                        let products = response.data;
+                        let htmlContent = '<div class="dropdown-list-suggest d-block"><ul class="list-unstyled">';
+                        products.forEach(function(product) {
+                            let htmlPrice = '';
+                            if(product.discount_price){
+                                htmlPrice = `<span class="price text-decoration-line-through color-gray px-1">${formatCurrencyVND(product.price)}</span>
+                                            <span class="price px-4">${formatCurrencyVND(product.discount_price)}</span>`;
+                            }else{
+                                htmlPrice = `<span class="price px-4">${formatCurrencyVND(product.price)}</span>`;
+                            }
+                            let htmlPricePolicies = '';
+                            if(typeof product.pricePolicies[0].price !== 'undefine' && product.pricePolicies[0].price){
+                                htmlPricePolicies = `<div class="price-sl">Mua số lượng từ 5 giá ${formatCurrencyVND(product.pricePolicies[0].price)}</div>`;
+                            }
+                            htmlContent += `
+                                <li>
+                                    <div style="display: flex;align-items: center;">
+                                        <div>
+                                            <img src="${product.avatar.url}" alt="${product.name}" style="height: 70px;">
+                                        </div>
+                                        <div>
+                                            <a class="w-100" href="/san-pham/${product.rewrite}-${product.id}">${product.name}</a>
+                                            <div>
+                                                ${htmlPrice}
+                                            </div>
+                                            ${htmlPricePolicies}
+                                        </div>
+                                    </div>
+                                </li>`;
+                        });                                    
+                        htmlContent += '</ul></div>';
+                        console.log(htmlContent);
+                        // Hiển thị dữ liệu với hiệu ứng mượt mà
+                        $('#dropdown-list-suggest').html(htmlContent).fadeIn('fast');
+                    }
+                },
+                error: function() {
+                    console.error('Error fetching data');
+                }
+            });
+        } else {
+            // Ẩn dropdown khi textbox trống
+            $('#dropdown-list-suggest').fadeOut('fast');
+        }
+    });
+    $('#keywordm').on('keyup', function() {
+        let query = $(this).val().trim();
+        if (query.length > 0) {
+            $.ajax({
+                url: '/api/products/search', // Thay thế bằng URL trả về JSON
+                type: 'GET',
+                data: { keyword: query,type:"ORDERFAST"},
+                dataType: 'json',
+                success: function(response) {
+                    if(response.data){
+                        let products = response.data;
+                        let htmlContent = '<div class="dropdown-list-suggest d-block"><ul class="list-unstyled">';
+                        products.forEach(function(product) {
+                            let htmlPrice = '';
+                            if(product.discount_price){
+                                htmlPrice = `<span class="price text-decoration-line-through color-gray px-1">${formatCurrencyVND(product.price)}</span>
+                                            <span class="price px-4">${formatCurrencyVND(product.discount_price)}</span>`;
+                            }else{
+                                htmlPrice = `<span class="price px-4">${formatCurrencyVND(product.price)}</span>`;
+                            }
+                            let htmlPricePolicies = '';
+                            if(typeof product.pricePolicies[0].price !== 'undefine' && product.pricePolicies[0].price){
+                                htmlPricePolicies = `<div class="price-sl">Mua số lượng từ 5 giá ${formatCurrencyVND(product.pricePolicies[0].price)}</div>`;
+                            }
+                            htmlContent += `
+                                <li>
+                                    <div style="display: flex;align-items: center;">
+                                        <div>
+                                            <img src="${product.avatar.url}" alt="${product.name}" style="height: 70px;">
+                                        </div>
+                                        <div>
+                                            <a class="w-100" href="/san-pham/${product.rewrite}-${product.id}">${product.name}</a>
+                                            <div>
+                                                ${htmlPrice}
+                                            </div>
+                                            ${htmlPricePolicies}
+                                        </div>
+                                    </div>
+                                </li>`;
+                        });
+                        htmlContent += '</ul></div>';
+                        // Hiển thị dữ liệu với hiệu ứng mượt mà
+                        $('#dropdown-list-suggest-mobile').html(htmlContent).fadeIn('fast');
+                    }
+                },
+                error: function() {
+                    console.error('Error fetching data');
+                }
+            });
+        } else {
+            // Ẩn dropdown khi textbox trống
+            $('#dropdown-list-suggest').fadeOut('fast');
+        }
+    });
 });
 function validatePhoneNumber(phoneNumber) {
 	var regex = /^(0[3|5|7|8|9])+([0-9]{8})$/;
@@ -517,4 +634,275 @@ function loadPagePagination(obj){
 
 	// Redirect to the new URL
 	window.location.href = fullUrl;
+}
+$(document).ready(function(){
+    // Hàm xử lý khi người dùng nhập vào textbox
+    $('#keywordSearchFast').on('keyup', function() {
+        let query = $(this).val().trim();
+        if (query.length > 0) {
+            loadProductFast(query);
+            $('#titleFastOrder').hide();
+        } else {
+            // Ẩn dropdown khi textbox trống
+            loadProductFast("");
+            $('#titleFastOrder').show();
+        }
+    });
+    loadProductCartOrderfast();
+    loadProductFast("");
+    $('#clearSearchIconFast').click(function() {
+        $('#keywordSearchFast').val('').trigger('keyup');
+    });
+});
+function loadProductFast(query){
+    $.ajax({
+        url: '/api/products/search', // Thay thế bằng URL trả về JSON
+        type: 'GET',
+        data: { keyword: query,type:"ORDERFAST",page_size:30},
+        dataType: 'json',
+        success: function(response) {
+            if(response.data){
+                let products = response.data;
+                let htmlContent = '';
+                $('#dropdown-list-suggest-fast').empty();
+                products.forEach(function(product) {
+                let htmlPrice = '<div><span class="badge rounded-pill bg-success text-end mb-3">Liên hệ để có giá tốt</span></div>';
+                let htmlPriceRight = '';
+                if(product.price){
+                    htmlPrice = `<div class="price"><span class="text-decoration-line-through price fw-normal color-gray">${formatCurrencyVND(product.price)}</span></div><div class="badge rounded-pill btn-warning text-end mb-2" style="width: fit-content;">Giá tốt nhất thị trường</div>`;
+                    htmlPriceRight = `<div class="price-fast text-center">${formatCurrencyVND(product.db_discount_price)}</div>`;
+                }
+                let buy_quality = 0;
+                if(document.getElementById('productCountCart'+product.id)){
+                    buy_quality = $('#productCountCart'+product.id).val();
+                }
+                htmlContent += `
+                    <div class="content-box mb-3">
+                        <div class="cart-item d-flex align-items-start justify-content-between">
+                            <div class="left d-flex align-items-center gap-3">
+                                <div class="thumb">
+                                    <img width="100" height="100" src="${product.avatar.url}" alt="${product.name}" />
+                                </div>
+                                <div class="info d-flex flex-column">
+                                    <h3 class="cart-item-title">${product.name}</h3>
+                                    ${htmlPrice}
+                                    ${product.pricePolicies.map(price => `<div class="price-sl mb-2">Mua số lượng từ ${price.quantity} giá ${formatCurrencyVND(price.price)}</div>`).join('')}
+                                </div>
+                            </div>
+                            <div class="right h-100">
+                                ${htmlPriceRight}
+                                <div class="input-group number-input">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-decrement-fast" type="button" onclick="incrementDecrementCartFast(${product.id},1,1)" data-product-id="${product.id}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path d="M5 10H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <input type="number" id="productCount${product.id}" class="form-control inputNumber" value="${buy_quality}" min="0">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-increment-fast" onclick="incrementDecrementCartFast(${product.id},2,1)" type="button" data-product-id="${product.id}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path d="M5 10H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M10 15V5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                // Hiển thị dữ liệu với hiệu ứng mượt mà
+                $('#dropdown-list-suggest-fast').append(htmlContent).fadeIn('fast');
+            }
+        },
+        error: function() {
+            console.error('Error fetching data');
+        }
+    });
+}
+function loadProductCartOrderfast(){
+    $.ajax({
+        url: '/api/cart', // Thay thế bằng URL trả về JSON
+        type: 'GET',
+        data: {},
+        dataType: 'json',
+        success: function(response) {
+            // Xóa nội dung cũ trước khi thêm mới
+            $('#content-box-order-fast-scroll').empty();
+            if(response.data.length <=0){
+                return;
+            }
+            // Lặp qua danh sách sản phẩm từ kết quả trả về
+            response.data.forEach(function(productData) {
+                let product = productData.product;
+                let price = product.db_discount_price ? product.db_discount_price : product.price;
+                price = product.price_policy ? product.price_policy : price;
+                let productHTML = `
+                    <div class="content-box-order-fast mb-2">
+                        <div class="cart-item d-flex align-items-start justify-content-between mb-2">
+                            <div class="left d-flex align-items-center gap-3">
+                                <div class="thumb">
+                                    <img width="100" height="100" src="${product.avatar.url}" alt="prod-item">
+                                </div>
+                                <div class="info d-flex flex-column">
+                                    <h3 class="cart-item-title">${product.name}</h3>
+                                    <div class="price-fast" id="priceDetail${product.id}">${formatCurrencyVND(price)}</div>
+                                    <div class="input-group number-input">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-decrement-fast-cart" type="button" onclick="incrementDecrementCartFast(${product.id},1,2)" data-product-id="${product.id}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M5 10H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <input type="number" id="productCountCart${product.id}" class="form-control inputNumber" value="${product.buy_quantity}" min="0">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-increment-fast-cart" onclick="incrementDecrementCartFast(${product.id},2,2)" type="button" data-product-id="${product.id}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M5 10H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    <path d="M10 15V5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right h-100">
+                                <div class="cta d-flex justify-content-start flex-column text-end h-100 align-items-end h-100">
+                                    <div class="d-sm-flex d-none align-items-center btn-product-delete" onclick="deleteProductCartFast(${product.id})" data-product-id="${product.id}"> 
+                                        <button><img src="https://vuaduoc.com/assets//images/icons/Delete.svg" alt="heart">Xóa</button>
+                                    </div>
+                                    <div class="close d-sm-none d-block" data-product-id="${product.id}" onclick="deleteProductCartFast(${product.id})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5299 6.21195C16.7252 6.01678 16.7252 5.7002 16.5299 5.50502C16.3347 5.30985 16.0182 5.30985 15.823 5.50502L11.5 9.82801L7.17695 5.50502C6.98177 5.30985 6.6652 5.30985 6.47002 5.50502C6.27485 5.7002 6.27485 6.01678 6.47002 6.21195L10.793 10.535L6.47002 14.858C6.27485 15.0532 6.27485 15.3698 6.47002 15.5649C6.6652 15.7601 6.98177 15.7601 7.17695 15.5649L11.5 11.2419L15.823 15.5649C16.0182 15.7601 16.3347 15.7601 16.5299 15.5649C16.7252 15.3698 16.7252 15.0532 16.5299 14.858L12.2069 10.535L16.5299 6.21195Z" fill="#C4C4C4"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+                // Thêm HTML vào danh sách sản phẩm
+                $('#content-box-order-fast-scroll').append(productHTML);
+            });
+            $("#totalMoney").text(formatCurrencyVND(response.meta.total_money));
+            $("#totalProduct").text(response.meta.total_product);
+            $("#cartCount").text(response.meta.total_product_cart);
+        },
+        error: function() {
+            console.log('Error fetching data');
+        }
+    });
+}
+function deleteProductCartFast(productId){
+    $.ajax({
+        url: '/cart/delete',
+        method: 'POST',
+        //contentType: 'application/json',
+        data: {
+            product_id: productId
+        },
+        success: function(response) {
+            if(response){
+                alert("Xóa thành công sản phẩm.");
+                loadProductCartOrderfast();
+            }
+        }
+    })
+}
+function incrementDecrementCartFast(productId,typeinde,typeCart){
+    let productCount = 0;
+    if(typeCart == 1){
+        productCount = parseInt($("#productCount"+productId).val());
+    }else{
+        productCount = parseInt($("#productCountCart"+productId).val());
+    }
+    if(document.getElementById('content-box-order-fast-scroll')){
+        if(typeinde == 1){
+            productCount = productCount-1;
+        }else{
+            productCount = productCount+1;
+        }
+        
+        if(!productCount){
+            return;
+        }
+        
+        let is_add_more = 3;
+        $.ajax({
+            url: '/cart',
+            method: 'POST',
+            //contentType: 'application/json',
+            data: {
+                product_id: productId,
+                quantity: productCount,
+                is_add_more: is_add_more,
+            },
+            success: function(response) {
+                loadProductCartOrderfast();
+            }
+        });
+        if(typeCart == 1){
+            $("#productCount"+productId).val(productCount);
+        }
+    }
+}
+$(document).ready(function(){
+    setTimeout(function(){
+        if(isDesktopScreen){
+            let fixPosRight = findYPos(document.getElementById('container_cart_fast'));
+            window.onscroll = function() {
+                doScroll('container_cart_fast',fixPosRight,'left-cart-fast');
+            }
+        }
+    },1500);
+    
+});
+
+function f_filterResults(e, t, n) {
+    e = e || 0;
+    return t && (!e || t < e) && (e = t), n && 300 < n && (!e || n < e) ? n : e;
+}
+function f_scrollTop() {
+    return f_filterResults(window.pageYOffset || 0, document.documentElement ? document.documentElement.scrollTop : 0, document.body ? document.body.scrollTop : 0);
+}
+function f_clientHeight() {
+    return f_filterResults(window.innerHeight || 0, document.documentElement ? document.documentElement.clientHeight : 0, document.body ? document.body.clientHeight : 0);
+}
+function findPos(e) {
+    if ("" != e && void 0 !== e && null != e) {
+        for (var t = e.offsetLeft, n = e.offsetTop; e.offsetParent && e != document.getElementsByTagName("body")[0]; ) (t += e.offsetParent.offsetLeft), (n += e.offsetParent.offsetTop), (e = e.offsetParent);
+        return [t, n];
+    }
+}
+function findYPos(e) {
+    e = findPos(e);
+    return "" != e && void 0 !== e && null != e ? e[1] : "";
+}
+// Hàm Scroll tôi lấy từ 24h
+function doScroll(divID, fixPos, parentID) {
+    var obj= document.getElementById(divID);
+    var objParent= document.getElementById(parentID);
+    var parentPos = findYPos(objParent);
+    var floorPos = parentPos+objParent.offsetHeight;
+    
+    if (  f_scrollTop()>fixPos && fixPos+obj.offsetHeight!=floorPos) {
+        if (f_scrollTop()+obj.offsetHeight >= floorPos) {
+            obj.style.position = 'absolute';
+            obj.style.top = (floorPos-obj.offsetHeight)+'px';
+        }
+        else {
+            obj.style.position = 'fixed';
+            var heightTop = 0;
+            obj.style.top = heightTop+'px';
+        }
+    }
+    else {
+        obj.removeAttribute("style");
+    }
+}
+function isDesktopScreen() {
+    return window.innerWidth >= 1024;
 }

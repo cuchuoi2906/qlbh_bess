@@ -136,6 +136,8 @@
                                         </tr>
 
                                     @endforeach
+                                    
+                                    
                                     @if($row->ord_discount_admin)
                                         <tr>
                                             <td style="text-align: right" colspan="4">Tổng tiền đơn hàng</td>
@@ -144,6 +146,13 @@
                                         <tr>
                                             <td style="text-align: right" colspan="4">Khuyến mại từ Vuaduoc (Trừ thẳng vào tổng giá trị đơn hàng):</td>
                                             <td>{{ number_format($row->ord_discount_admin) }} VND</td>
+                                        </tr>
+                                    @endif
+                                    
+                                    @if($row->ord_vat)
+                                        <tr>
+                                            <td style="text-align: right" colspan="4">VAT(10% trong tổng đơn hàng)</td>
+                                            <td><span style="color: red;">{{ number_format($totalAmountAll*0.1) }} VND</span></td>
                                         </tr>
                                     @endif
                                     <tr>
@@ -351,6 +360,13 @@
 
                                         @endforeach
                                         <tr>
+                                            <td style="text-align: right" colspan="4">VAT(10% trong tổng đơn hàng)</td>
+                                            <td>
+                                                <input type="checkbox" value="1" name="ord_vat" id="ord_vat" <?php echo $row->ord_vat ? 'checked' : ''; ?> />
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
                                             <td style="text-align: right" colspan="4">Khuyến mại từ Vuaduoc (Trừ thẳng vào giá trị đơn hàng)</td>
                                             <td>
                                                 <input style="width: 90px;text-align: center;" oninput="loadInputValueformatCurrency(this,{{ $row->ord_discount_admin }})" class="form-control" name="ord_discount_admin" id="ord_discount_admin"
@@ -367,7 +383,7 @@
                                                 <!--<input type="submit" value="Cập nhật giá đơn hàng">-->
                                                 <button class="btn btn-default" type="submit" value="Submit">Cập nhật giá đơn hàng</button>
                                                 <a class="btn btn-default" href="add_product.php?status=NEW&ord_id={{$row->id}}" >Thêm mới sản phẩm</a>
-                                                <a class="btn btn-default" href="javascript:void(null)" onclick="exportProductOrder({{$row->id}})" >In sản phẩm</a>
+                                                <a class="btn btn-default" href="javascript:void(null)" onclick="exportProductOrder({{$row->id}})" >In sản phẩm excel</a>
                                             </td>
                                         </tr>
                                         @endif

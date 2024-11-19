@@ -156,12 +156,12 @@
             </div>
 			<div class="footer-mb">
 				<div class="ft-menu-mb">
-					<a href="/" class="menu-item active">
+                    <a href="/" class="menu-item" style="width: 19%;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-							<path d="M4.25 12.6631C4.25 10.8324 4.25 9.91702 4.66536 9.15819C5.08072 8.39937 5.83956 7.92841 7.35723 6.9865L8.95723 5.9935C10.5615 4.99783 11.3637 4.5 12.25 4.5C13.1363 4.5 13.9385 4.99783 15.5428 5.9935L17.1428 6.9865C18.6604 7.92841 19.4193 8.39937 19.8346 9.15819C20.25 9.91702 20.25 10.8324 20.25 12.6631V13.88C20.25 17.0007 20.25 18.561 19.3127 19.5305C18.3755 20.5 16.867 20.5 13.85 20.5H10.65C7.63301 20.5 6.12452 20.5 5.18726 19.5305C4.25 18.561 4.25 17.0007 4.25 13.88V12.6631Z" stroke="white" stroke-width="1.5"></path>
-							<path d="M12.25 14.8998L12.25 17.2998" stroke="white" stroke-width="1.5" stroke-linecap="round"></path>
-						</svg>
-						<span>Trang chủ</span>
+                            <path d="M4.25 12.6631C4.25 10.8324 4.25 9.91702 4.66536 9.15819C5.08072 8.39937 5.83956 7.92841 7.35723 6.9865L8.95723 5.9935C10.5615 4.99783 11.3637 4.5 12.25 4.5C13.1363 4.5 13.9385 4.99783 15.5428 5.9935L17.1428 6.9865C18.6604 7.92841 19.4193 8.39937 19.8346 9.15819C20.25 9.91702 20.25 10.8324 20.25 12.6631V13.88C20.25 17.0007 20.25 18.561 19.3127 19.5305C18.3755 20.5 16.867 20.5 13.85 20.5H10.65C7.63301 20.5 6.12452 20.5 5.18726 19.5305C4.25 18.561 4.25 17.0007 4.25 13.88V12.6631Z" stroke="#8A909F" stroke-width="1.5"></path>
+                            <path d="M12.25 14.8998L12.25 17.2998" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round"></path>
+                        </svg>
+                        <span>Trang chủ</span>
                     </a>
 					<a href="/products/ORDERFAST-0" class="menu-item">
 						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
@@ -171,6 +171,13 @@
 							<path d="M11.5499 16.9004C11.5499 15.3919 11.5499 14.6376 11.0813 14.169C10.6126 13.7004 9.8584 13.7004 8.3499 13.7004C6.84141 13.7004 6.08716 13.7004 5.61853 14.169C5.1499 14.6376 5.1499 15.3919 5.1499 16.9004C5.1499 18.4089 5.1499 19.1631 5.61853 19.6318C6.08716 20.1004 6.84141 20.1004 8.3499 20.1004C9.8584 20.1004 10.6126 20.1004 11.0813 19.6318C11.5499 19.1631 11.5499 18.4089 11.5499 16.9004Z" stroke="#8EBCBC" stroke-width="1.5"></path>
 						</svg>
 						<span>Sản phẩm</span>
+					</a>
+                    <a href="/order-fast" class="menu-item <?php echo (checkLoginFe() ? "active" : ""); ?>">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
+                            <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round"></path>
+                        </svg>
+						<span>Tìm kiếm</span>
 					</a>
 					<a href="/cart" class="menu-item position-relative">
 						<span id="cartCountM" class="position-absolute position-absolute top-0 end-0 badge rounded-pill bg-warning text-dark"> <?php echo isset($_SESSION['cartTotalProduct']) ? intval($_SESSION['cartTotalProduct']) : 0; ?></span>
@@ -184,12 +191,12 @@
 					<?php
 					if(checkLoginFe()){
 						?>
-						<div class="dropup">
+						<div class="dropup" style="width: 21%;">
 							<div class="" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
 								<a href="/" class="menu-item" style="width: 100%;">
 									<img width="27" height="27" class="rounded-circle" src="https://vuaduoc.com/assets//images/anh_bsy.png" alt="avatar">
 									<span>Tài khoản</span>
-								<a>
+								</a>
 							</div>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="/logout" style="padding-left: 40px;">Thoát</a></li>
@@ -198,7 +205,7 @@
 					<?php
 					}else{
 					?>
-						<a href="/login" class="menu-item">
+						<a href="/login" class="menu-item active" style="width: 21%;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
 								<circle cx="12.7501" cy="9.60019" r="2.4" stroke="#8EBCBC" stroke-width="1.5"></circle>
 								<circle cx="12.75" cy="12" r="8" stroke="#8EBCBC" stroke-width="1.5"></circle>

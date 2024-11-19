@@ -124,10 +124,8 @@ if(isset($_GET['hungdv']) || isset($_SESSION["productHungdv"]) || 1==1){
 
 		Route::post('/', [\AppView\Controllers\Api\UserCartController::class, 'add']);
 		Route::post('/delete', [\AppView\Controllers\Api\UserCartController::class, 'postDelete']);
-
 	});
 }
-
 Route::get(
 	['/logout', 'logout'],
 	[\AppView\Controllers\Auth\AuthController::class, 'logout']
@@ -139,3 +137,4 @@ Route::get('/xu_ly_khieu_nai', [\AppView\Controllers\Auth\AuthController::class,
 Route::get('/chinh_sach_kiem_hang', [\AppView\Controllers\Auth\AuthController::class, 'chinh_sach_kiem_hang']);
 Route::get('/chinh_sach_doi_tra', [\AppView\Controllers\Auth\AuthController::class, 'chinh_sach_doi_tra']);
 Route::get('/chinh_sach_thanh_toan', [\AppView\Controllers\Auth\AuthController::class, 'chinh_sach_thanh_toan']);
+Route::get('/order-fast', [\AppView\Controllers\UserCartController::class, 'indexProductOrderFast']);

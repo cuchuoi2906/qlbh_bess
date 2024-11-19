@@ -143,7 +143,7 @@ class AuthController extends ControllerBase
                 $_SESSION["userIdFe"] = $user->u_id;
                 $_SESSION["userNameFe"] = $user->use_name;
                 $_SESSION["userLoginFe"] = $user->login_name;
-                return FlashMessage::error('Đăng nhập thành công', '/products/ORDERFAST-0');
+                return FlashMessage::error('Đăng nhập thành công', '/order-fast');
                 //$_SESSION["password"] = md5($password);
             }else{
                 return FlashMessage::error('Bạn nhập sai tên đăng nhập hoặc mật khẩu', url_back());

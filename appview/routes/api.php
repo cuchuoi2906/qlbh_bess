@@ -15,7 +15,7 @@ Route::group([
     ]
 ], function () {
 
-    //Đăng nhập
+    //Đăng nhậph
     Route::post('/login', [\AppView\Controllers\Api\AuthController::class, 'login']);
     //Đăng ký
     Route::post('/register', [\AppView\Controllers\Api\AuthController::class, 'register']);
@@ -120,7 +120,7 @@ Route::group([
 
         Route::get('/all', [\AppView\Controllers\Api\ReportController::class, 'all']);
 
-    });
+    }); 
 
     Route::group([
         'prefix' => 'products'
@@ -129,6 +129,7 @@ Route::group([
         Route::post('/{id:i}/like', [\AppView\Controllers\Api\ProductController::class, 'like']);
         Route::post('/{id:i}/unlike', [\AppView\Controllers\Api\ProductController::class, 'unlike']);
         Route::get('/liked', [\AppView\Controllers\Api\ProductController::class, 'liked']);
+        Route::get('/search', [\AppView\Controllers\Api\ProductController::class, 'getProducts']);
 
     });
 
