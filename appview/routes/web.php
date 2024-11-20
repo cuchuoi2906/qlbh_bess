@@ -110,7 +110,7 @@ if(isset($_GET['hungdv']) || isset($_SESSION["productHungdv"]) || 1==1){
 
 		Route::post('/', [\AppView\Controllers\Api\UserCartController::class, 'add']);
 		Route::post('/delete', [\AppView\Controllers\Api\UserCartController::class, 'postDelete']);
-
+        Route::post('/deleteall', [\AppView\Controllers\Api\UserCartController::class, 'postDeleteAll']);
 	});
 }else{
 	Route::get('/san-pham/{rewrite}-{pro_id}', [\AppView\Controllers\ProductController::class, 'getProductDetail2']);

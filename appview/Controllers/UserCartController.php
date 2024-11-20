@@ -58,4 +58,19 @@ class UserCartController extends FrontEndController
             'user'=>$user
         ]);
     }
+    public function indexProductOrderFast(){
+        if (!checkLoginFe()) {
+            return redirect(url('login'));
+        }
+        $result = model('user_cart/index')->load([
+            'user_id' => $_SESSION['userIdFe']
+        ]);
+
+        $user = $this->userRepository->getById(intval($_SESSION['userIdFe']));
+
+        return view('products/orderFast')->render([
+            'result'=>$result,
+            'user'=>$user
+        ]);
+    }
 }

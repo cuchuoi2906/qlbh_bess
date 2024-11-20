@@ -49,16 +49,33 @@
                         </a>
                     </div>
                     <div class="main-search-pc">
-                        <div class="input-group rounded-pill">
-                            <input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Nhập tên thuốc, hoạt chất cần tìm..." aria-label="basic-search" aria-describedby="basic-search">
-                            <span class="input-group-text" id="main-search-pc">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
-                                    <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round"></path>
-                                </svg>
-                            </span>
-                        </div>
-                        <div id="dropdown-list-suggest" class="position-relative"></div>
+                        <?php 
+                        if(isset($pageProductAdd) && intval($pageProductAdd)){
+                        ?>
+                            <div class="input-group rounded-pill">
+                                <input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Nhập tên thuốc, hoạt chất cần tìm..." aria-label="basic-search" aria-describedby="basic-search">
+                                <span class="input-group-text" id="main-search-pc">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
+                                        <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div id="dropdown-list-suggest" class="position-relative"></div>
+                        <?php 
+                        }else{?>
+                            <div class="swiper slide-banner">
+                                <div class="swiper-wrapper">
+                                    <?php for($i=1;$i<4;$i++){ ?>
+                                        <div class="swiper-slide">
+                                            <img src="<?= asset('images/KM'.$i.'.png') ?>" alt="" height="45" width="100%" style="border-radius: 8px;"/>
+                                        </div>
+                                    <?php 
+                                    }?>
+                                </div>
+                            </div>
+                        <?php 
+                        }?>
                     </div>
                     <div class="cart">
                         <a href="/cart" type="button" class="position-relative">

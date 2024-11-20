@@ -1,4 +1,5 @@
 <?php
+$pageProductAdd = 1;
 include dirname(__FILE__) . '/../includes/header2.html.php';
 $v_text_cate = '';
 $v_link_cate = '';

@@ -330,19 +330,21 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-body section-to-print" id="print_content_{{$row->id}}" style="display:none">
+            <div class="modal-body section-to-print" id="print_content_{{$row->id}}" style="display:none;">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" style="font-size: 12px;margin-bottom: 0px;">
                                 <tr>
-                                    <td colspan="2" align="right">
-                                        <img width="100px" src="https://vuaduoc.com/assets//images/logo.png" alt="logo"><br />
-                                        website: vuaduoc.com
+                                    <td colspan="2">
+                                        <span>website: vuaduoc.com</span> 
+                                        <span style="float: right;">
+                                            <img width="100px" src="https://vuaduoc.com/assets//images/logo.png" alt="logo">
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Khách hàng</td>
+                                    <td style="width: 100px;">Khách hàng</td>
                                     <td>{{$row->user->name}}</td>
                                 </tr>
                                 <tr>
@@ -358,7 +360,7 @@
                                     <td>{{$row->note}}</td>
                                 </tr>
                             </table>
-                            <table class="table table-striped">
+                            <table class="table table-striped" style="font-size: 13px;margin-bottom: 0px;">
                                 <tbody>
                                     <tr>
                                         <td>Mã đơn hàng:</td>
@@ -385,27 +387,23 @@
                                     <tr>
                                         <td>Tiền thu hộ</td>
                                         <td>
-                                            {{ number_format($row->amount + $row->ord_shipping_fee)}}
+                                            <label>{{ number_format($row->amount + $row->ord_shipping_fee)}}</label>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <table class="table table-bordered" bgcolor="#00ff00">
+                            <table class="table table-bordered" bgcolor="#00ff00" style="font-size: 13px;margin-bottom: 0px;">
                                 <tr>
                                     <td>Nhà xe:</td>
-                                    <td>{{ $row->shipping_car }}</td>
+                                    <td><label>{{ $row->shipping_car }}</label></td>
                                 </tr>
                                 <tr>
-                                    <td>Giờ khởi hành</td>
-                                    <td>{{ $row->shipping_car_start }}</td>
+                                    <td>Giờ khởi hành: <label>{{ $row->shipping_car_start }}</label></td>
+                                    <td>Số ĐT nhà xe: <label>{{ $row->shipping_car_phone }}</label></td>
                                 </tr>
                                 <tr>
                                     <td>Biển số xe</td>
                                     <td>{{ $row->shipping_number_car }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Số ĐT nhà xe</td>
-                                    <td>{{ $row->shipping_car_phone }}</td>
                                 </tr>
                                 <tr>
                                     <td>Ghi chú</td>
@@ -415,12 +413,12 @@
                                     <td align="center">
                                         <div class="col-md-7">
                                             <div class="item">
-                                                <img src="https://vuaduoc.com/assets/images/qr_chuyen_khoan_new.jpg" alt="qr-code" width="200px">
+                                                <img src="https://vuaduoc.com/assets/images/qr_chuyen_khoan_new.jpg?2" alt="qr-code" height="130px">
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="col-md-5" style="font-size: 18px">
+                                        <div class="col-md-5" style="font-size: 16px">
                                             <div class="item">
                                                 <label for="">Người nhận:</label>
                                                 <div class="value fw-bold">Dương Việt Hùng</div>

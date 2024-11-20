@@ -40,7 +40,12 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
             </div>
             <div class="col-xl-5 mb-4">
                 <div class="content-box container_cart_fast" id="container_cart_fast">
-                    <h2 class="content-title">Giỏ hàng</h2>
+                    <h2 class="content-title">Giỏ hàng 
+                        <button class="float-end" onclick="deleteProductCartFastAll()">
+                            <img src="https://vuaduoc.com/assets//images/icons/Delete.svg" alt="heart">
+                            <span class="price-fast">Xóa tất cả</span>
+                        </button>
+                    </h2>
                     <div class="content-box-order-fast-scroll" id="content-box-order-fast-scroll">
                         <?php 
                         if(check_array($result['vars'])){

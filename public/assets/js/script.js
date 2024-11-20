@@ -812,6 +812,20 @@ function deleteProductCartFast(productId){
         }
     })
 }
+function deleteProductCartFastAll(){
+    $.ajax({
+        url: '/cart/deleteall',
+        method: 'POST',
+        //contentType: 'application/json',
+        data: {},
+        success: function(response) {
+            if(response){
+                alert("Xóa thành công giỏ hàng.");
+                loadProductCartOrderfast();
+            }
+        }
+    })
+}
 function incrementDecrementCartFast(productId,typeinde,typeCart){
     let productCount = 0;
     if(typeCart == 1){
@@ -904,5 +918,5 @@ function doScroll(divID, fixPos, parentID) {
     }
 }
 function isDesktopScreen() {
-    return window.innerWidth >= 1024;
+    return window.innerWidth >= 760;
 }

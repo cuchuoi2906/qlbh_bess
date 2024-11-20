@@ -79,5 +79,19 @@ class UserCartController extends ApiController
 		
         return $result['vars'];
     }
+    function postDeleteAll(){
+        if (!checkLoginFe()) {
+            return redirect(url('login'));
+        }
+
+        $result = model('user_cart/add')->load([
+            'user_id' => $_SESSION['userIdFe'],
+            'product_id'=>1,
+            'is_add_more'=>4
+        ] + $this->input);
+		$this->getIndex();
+		
+        return $result['vars'];
+    }
 
 }
