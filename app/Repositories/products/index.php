@@ -59,8 +59,8 @@ $itemsModel = Product::with(['images', 'category', 'pricePolicies'])
 if (input('sort_by')) {
 	$itemsModel->order_by('pro_' . input('sort_by'), input('sort_type'));
 } else {
-	$itemsModel->order_by('pro_order', 'DESC')
-		->order_by('pro_id', 'DESC');
+	$itemsModel->order_by('pro_id', 'DESC');
+		//->order_by('pro_id', 'DESC');
 }
 
 $items = $itemsModel->all();

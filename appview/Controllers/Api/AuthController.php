@@ -226,4 +226,11 @@ class AuthController extends ApiController {
 
         return $result['vars'];
     }
+    
+    public function changeAddress(){
+        $response = model('users/update_address_registry')->load([
+            'id' => intval($_SESSION["userIdFe"])
+        ] + $this->input);
+        return $this->response($response);
+    }
 }

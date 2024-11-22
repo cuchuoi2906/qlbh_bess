@@ -384,5 +384,13 @@ return [
             ]
         ]
     ],
-
+    'users/update_address_registry' => [
+        'title' => 'Thay đổi địa chỉ',
+        'input' => [
+            'id' => [
+                'title' => 'User id',
+                'rule' => 'required|integer'
+            ]
+        ]
+    ],
 ];

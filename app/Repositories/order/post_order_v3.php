@@ -59,53 +59,32 @@ foreach ($user_carts as $user_cart) {
     $product = collect_recursive($product);
 
     $total_product += $user_cart->quantity;
-	if ($discount_type == 2) {
-		$price = $product->price;
-	}else{
-		$price = $product->discount_price ? $product->discount_price : $product->price;
-	}
-    //$price = $product->discount_price ? $product->discount_price : $product->price;
+    
+    $price = $product->discount_price ? $product->discount_price : $product->price;
+    $price = $product->price_policy ? $product->price_policy : $price;
 
     $total_money += $price * $user_cart->quantity;
     $total_money_percent += $product->price * $user_cart->quantity;
 
     $direct_commission = 0;
     $min_price_policy = 0;
-    //Tính hoa hồng khi khách mua buôn
-    if ($is_wholesale) {
-        $price = $productTmp['db_discount_price'] ?: $productTmp['db_price'];
-        $direct_commission = ($product->price - $product->discount_price) * $user_cart->quantity;
-        $total_direct_commission += $direct_commission;
-        $min_price_policy = (int)$product->min_price_policy->price * $user_cart->quantity;
-    }
 
     $commission = $product->paid_commission * $user_cart->quantity;
 
-    $commission_sale_price = $commission - $direct_commission + $min_price_policy;
-    $commission_sale_price = $commission_sale_price > 0 ? $commission_sale_price : 0;
     //
-    if ($is_wholesale) {
-        $commission_sale_price = ($product->discount_price + $product->paid_commission - $product->min_price_policy->real_price) * $user_cart->quantity;
-    } else {
-        $commission_sale_price = $product->paid_commission * $user_cart->quantity;
-    }
+    $commission_sale_price = ($product->price - $price) * $user_cart->quantity;
     $data_commission_products[$product->id] = $commission_sale_price;
 
 
     $total_commission += $commission_sale_price;
-
-    if($userType == 1){ // Tính hoa hông moi
-        // Hoa hồng mới = (Chiết khấu mức 2 - Chiết khấu mức 1) * Số lượng
-        $pricePoliciesArr = $product->pricePolicies->toArray();
-        $totalCommissionNew += ($pricePoliciesArr[1] - $pricePoliciesArr[0]) * $user_cart->quantity;
-    }
+    
     $total_point += $product->point * $user_cart->quantity;
 
     $atrrProd = [
         'orp_product_id' => $product->id,
         'orp_quantity' => $user_cart->quantity,
         'orp_price' => $product->price,
-        'orp_sale_price' => $product->discount_price ? $product->discount_price : $product->price,
+        'orp_sale_price' => $price,
         'orp_commit_current' => $commission_sale_price,
         'orp_commission_buy' => $product->commission,
     ];
@@ -130,8 +109,8 @@ $order_id = Order::insert([
     'ord_status_code' => Order::NEW,
     'ord_amount' => $total_money,
     'ord_user_id' => $user->id,
-    'ord_ship_name' => isset($_REQUEST['username']) ? $_REQUEST['username'] : 'ver3',
-    'ord_ship_address' => $user->use_address_register,
+    'ord_ship_name' => isset($_REQUEST['ship_name']) ? $_REQUEST['ship_name'] : $_REQUEST['username'],
+    'ord_ship_address' => isset($_REQUEST['ship_address']) ? $_REQUEST['ship_address'] : $user->use_address_register,
     'ord_ship_phone' => (isset($_REQUEST['phone']) && $_REQUEST['phone'] != '') ? $_REQUEST['phone'] : $user->login,
     'ord_ship_email' => input('email'),
     'ord_note' => $_REQUEST['note'] ?? '',
@@ -159,9 +138,6 @@ if ($order_id) {
      */
     foreach ($data_order_products as $dataOrderProduct) {
         $dataOrderProduct['orp_ord_id'] = $order_id;
-        if ($discount_type == 2) {
-            $dataOrderProduct['orp_sale_price'] = $dataOrderProduct['orp_price'];
-        }
         $orderProd = \App\Models\OrderProduct::insert($dataOrderProduct);
     }
     /**

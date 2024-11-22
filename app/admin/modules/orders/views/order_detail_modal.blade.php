@@ -345,7 +345,7 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 100px;">Khách hàng</td>
-                                    <td>{{$row->user->name}}</td>
+                                    <td>{{$row->ship_name}}</td>
                                 </tr>
                                 <tr>
                                     <td>Số điện thoại</td>

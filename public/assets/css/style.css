@@ -829,8 +829,16 @@ footer {
 	.width-mobile-50{
 		float:left;
 	}
+    .imgCartNoProduct{
+        width: 40%;
+        margin: 0 auto;
+    }
 }
 @media (max-width: 640px) {
+    .imgCartNoProduct{
+        width: 100%;
+        margin: 0 auto;
+    }
 	.fixed-bottom-bar{
 		display:none;
 	}
@@ -838,7 +846,7 @@ footer {
 		background-image: none;
 	}
     .menu-prod {
-        margin: 20px 0;
+        margin: 10px 0;
     }
     .menu-prod button {
         height: 37px;
@@ -1085,6 +1093,10 @@ footer {
 @media screen and (min-width: 992px) {
     .container_cart_fast{
         width: 526px;
+    }
+    .imgCartNoProduct{
+        width: 40%;
+        margin:0 auto;
     }
 }
 .price-fast{

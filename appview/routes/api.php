@@ -51,6 +51,8 @@ Route::group([
         Route::post('/me/confirm-change-phone', [\AppView\Controllers\Api\AuthController::class, 'confirmChangePhone']);
 
         Route::put('/me/referer-code', [\AppView\Controllers\Api\AuthController::class, 'changeRefCode']);
+        
+        Route::post('/update-address', [\AppView\Controllers\Api\AuthController::class, 'changeAddress']);
 
     });
 

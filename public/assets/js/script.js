@@ -360,6 +360,8 @@ document.addEventListener('DOMContentLoaded', () => {
         var productId = $(this).data('product-id');
         let productCount = $("#productCount"+productId).val();
         let noteValue = $("#exampleFormControlTextarea1").val();
+        let ship_name = $("#ship_name").val();
+        let ship_address = $("#ship_address").val();
         if(noteValue == ""){
             alert("Bạn phải nhập ghi chú.");
             return;
@@ -371,7 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
             data: {
                 product_id: productId,
                 quantity: productCount,
-				note:noteValue
+				note:noteValue,
+				ship_name:ship_name,
+				ship_address:ship_address,
             },
             success: function(response) {
                 if(response.code == 200){
@@ -493,7 +497,7 @@ $(document).ready(function(){
 		setCookie('acceptedRule', 'yes', 30); // Lưu cookie trong 30 ngày
 		$('#fixed-bottom-bar').hide(); // Ẩn popup
 	});
-	$('#noAcceptRule').click(function(){
+	$('#iconUpdateShip').click(function(){
 		$('#fixed-bottom-bar').hide(); // Ẩn popup
 	});
     // Hàm xử lý khi người dùng nhập vào textbox
@@ -821,7 +825,7 @@ function deleteProductCartFastAll(){
         success: function(response) {
             if(response){
                 alert("Xóa thành công giỏ hàng.");
-                loadProductCartOrderfast();
+                location.reload();
             }
         }
     })
@@ -873,6 +877,40 @@ $(document).ready(function(){
         }
     },1500);
     
+    $('#iconUpdateShip').click(function(){
+        let ship_name = $("#ship_name").val();
+        let ship_address = $("#ship_address").val();
+        if(ship_address == ""){
+            alert("Bạn phải nhập địa chỉ.");
+            return;
+        }
+        if(ship_name == ""){
+            alert("Bạn phải tên.");
+            return;
+        }
+        $.ajax({
+            url: '/api/auth/update-address',
+            method: 'POST',
+            //contentType: 'application/json',
+            data: {
+				ship_name:ship_name,
+				ship_address:ship_address,
+            },
+            success: function(response) {
+                console.log(response);
+                if(response.code == 200){
+                    alert("Sửa thông tin người Nhận hàng thành công.");
+					location.reload();
+                }else{
+                    alert(response.error);
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+	});
+    
 });
 
 function f_filterResults(e, t, n) {
@@ -919,4 +957,37 @@ function doScroll(divID, fixPos, parentID) {
 }
 function isDesktopScreen() {
     return window.innerWidth >= 760;
+}
+function onOffEditShip(){
+    let infoShipDefau = document.getElementsByClassName('infoShipDefau');
+    if(infoShipDefau.length >0){
+        let v_fag_on_off_button_edit = true;
+        for(let i = 0;i<infoShipDefau.length;i++){
+            let objShipDefau = infoShipDefau[i];
+            if(objShipDefau.style.display == 'none'){
+                objShipDefau.style.display = "block";
+            }else{
+                objShipDefau.style.display = "none";
+                v_fag_on_off_button_edit = false;
+            }
+        }
+        let infoShipEdit = document.getElementsByClassName('infoShipEdit');
+        if(infoShipEdit.length >0){
+            for(let j = 0;j<infoShipEdit.length;j++){
+                let objShipEdit = infoShipEdit[j];
+                if(objShipEdit.style.display == 'block'){
+                    objShipEdit.style.display = "none";
+                }else{
+                    objShipEdit.style.display = "block";
+                }
+            }
+        }
+        if(v_fag_on_off_button_edit){
+            document.getElementById("iconEditShip").style.display = "block";
+            document.getElementById("iconUpdateShip").style.display = "none";
+        }else{
+            document.getElementById("iconUpdateShip").style.display = "block";
+            document.getElementById("iconEditShip").style.display = "none";
+        }
+    }
 }
