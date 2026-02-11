@@ -24,6 +24,7 @@ $userType = intval($user->use_type); // 1: tai khoan tieu dung. 2: tai khoan kin
 
 $user_carts = $user->cart ?? false;
 
+$product_list_id = input('product_list_id');
 
 $total_money = 0;
 $total_money_percent = 0;
@@ -40,6 +41,9 @@ foreach ($user_carts as $user_cart) {
     if (!($user_cart->product ?? false)) {
         continue;
     }
+    if(!in_array($user_cart->product->id,$product_list_id)){
+        continue;
+    }
     // nếu có 1 sản phẩm nằm trong sản phẩm hết hàng thì thông báo lỗi luôn
     if(intval($user_cart->product->pro_active_inventory) == 2){
         throw new RuntimeException("Tồn tại sản phẩm hết hàng!", 400);
@@ -47,10 +51,12 @@ foreach ($user_carts as $user_cart) {
     $total_money_percent_wholesale += $user_cart->product->price * $user_cart->quantity;
 }
 
-
 $totalCommissionNew = 0;
 foreach ($user_carts as $user_cart) {
     if (!($user_cart->product ?? false)) {
+        continue;
+    }
+    if(!in_array($user_cart->product->id,$product_list_id)){
         continue;
     }
     $user_cart->product->buy_quantity = $user_cart->quantity;
@@ -174,11 +180,12 @@ if ($order_id) {
         /**
      * Order Code
      */
-
+     date_default_timezone_set('Asia/Ho_Chi_Minh');
      $total_order_today = Order::withTrash()->where('DATE(ord_created_at) = \'' . date('Y-m-d') . '\'')->count();
      $total_order_today = $total_order_today + 1;
      $length = strlen($total_order_today);
      $zero_length = 5 - $length;
+     
      $order_code = 'HD' . date('ymd');
      for ($i = 1; $i <= $zero_length; $i++) {
          $order_code = $order_code . '0';
@@ -206,7 +213,9 @@ if ($order_id) {
     unset($_SESSION['cartTotalProduct']);
     
     // Xóa sản phẩm ở giỏ hàng
-    UserCart::where('usc_user_id', $user->id)->delete();
+    for($i=0;$i<count($product_list_id);$i++){
+        UserCart::where('usc_user_id', $user->id)->where('usc_product_id','=', intval($product_list_id[$i]))->delete();
+    }
     //throw new RuntimeException("Đặt hàng thành công quản trị viên sẽ liên hệ với bạn sớm nhất", 200);
     //\AppView\Helpers\Notification::to($user->id, 'Đặt hàng thành công', 'Chúc mừng bạn đã đặt hàng thành công. Chúng tôi sẽ xử lý đơn hàng sớm nhất.');
     $current_order = \App\Models\Order::findByID($order_id);

@@ -40,5 +40,18 @@ return [
                 'title' => 'Thêm từ admin'
             ]
         ]
+    ],
+    'user_cart/add_by_order_id' => [
+        'title' => 'Thêm mới sản phẩm vào giỏ theo đơn hàng',
+        'input' => [
+            'user_id' => [
+                'title' => 'User id',
+                'rule' => 'required|integer'
+            ],
+            'order_id' => [
+                'title' => 'order id',
+                'rule' => 'required|integer'
+            ]
+        ]
     ]
 ];

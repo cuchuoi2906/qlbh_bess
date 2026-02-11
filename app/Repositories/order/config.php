@@ -111,6 +111,10 @@ return [
             'user_id' => [
                 'title' => 'ID user đang đăng nhập',
                 'rule' => 'required|integer'
+            ],
+            'product_list_id' => [
+                'title' => 'Danh sách id sản phẩm',
+                'rule' => 'required'
             ]
         ],
     ],
@@ -184,5 +188,59 @@ return [
                 'rule' => 'required|integer'
             ],
         ]
-    ]
+    ],
+    'order/get_order_new_by_user_id' => [
+        'title' => 'Disable 1 đơn hàng',
+        'input' => [
+            'user_id' => [
+                'title' => 'User id',
+                'rule' => 'required|integer'
+            ]
+        ]
+    ],
+    'order/get_order_new_by_user_admin_id' => [
+        'title' => 'Lấy đơn hàng mới theo user phân công',
+        'input' => [
+            'adm_id' => [
+                'title' => 'User id',
+                'rule' => 'required|integer'
+            ]
+        ]
+    ],
+    'order/post_oder_price_hapu' => [
+        'title' => 'Cập nhật giá hapu cho đơn hàng',
+        'input' => [
+            'order_id' => [
+                'title' => 'oder id',
+                'rule' => 'required|integer'
+            ]
+        ]
+    ],
+    'order/update_stock_status' => [
+        'title' => 'Cập nhật trạng thái soát hàng hapu cho đơn hàng',
+        'input' => [
+            'order_id' => [
+                'title' => 'oder id',
+                'rule' => 'required|integer'
+            ]
+        ]
+    ],
+    'order/update-check-product-order' => [
+        'title' => 'Cập nhật trạng thái soát hàng hapu cho đơn hàng',
+        'input' => [
+            'order_product_id' => [
+                'title' => 'oder product id',
+                'rule' => 'required|integer'
+            ]
+        ]
+    ],
+    'order/update-status-pick-product-order' => [
+        'title' => 'Cập nhật trạng thái soát hàng hapu cho đơn hàng',
+        'input' => [
+            'order_product_id' => [
+                'title' => 'oder product id',
+                'rule' => 'required|integer'
+            ]
+        ]
+    ],
 ];

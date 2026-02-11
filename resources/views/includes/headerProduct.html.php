@@ -49,6 +49,9 @@
                         }else{?>
                             <div class="input-group rounded-pill">
                                 <input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Nhập tên thuốc, hoạt chất cần tìm..." aria-label="basic-search" aria-describedby="basic-search">
+                                <div style="align-content: center;" id="clearSearchKeyword">
+                                    <img src="https://vuaduoc.com/assets//images/delete-img.png" height="20px">
+                                </div>
                                 <span class="input-group-text" id="main-search-pc">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>

@@ -21,29 +21,49 @@ $ord_note = getValue('ord_note', 'str', 'POST', $order->ord_note);
 $ord_province_id = getValue('ord_province_id', 'int', 'POST', $order->ord_province_id);
 $ord_district_id = getValue('ord_district_id', 'int', 'POST', $order->ord_district_id);
 $ord_ward_id = getValue('ord_ward_id', 'int', 'POST', $order->ord_ward_id);
+$change_shipping_car_cod = getValue('change_shipping_car_cod', 'int', 'POST', $order->change_shipping_car_cod);
+$ord_admin_user_id = getValue('ord_admin_user_id', 'int', 'POST', $order->ord_admin_user_id);
+$ord_admin_userprice_id = getValue('ord_admin_userprice_id', 'int', 'POST', $order->ord_admin_userprice_id);
+$ord_admin_group_user_id = getValue('ord_admin_group_user_id', 'int', 'POST', $order->ord_admin_group_user_id);
+$ord_shipping_fee_car = getValue('ord_shipping_fee_car', 'str', 'POST', $order->ord_shipping_fee_car);
+$ord_shipping_car = getValue('shipping_car', 'str', 'POST', '');
+$ord_shipping_car_start = getValue('shipping_car_start', 'str', 'POST', '');
+$ord_shipping_fee_car = intval(str_replace(",","",$ord_shipping_fee_car));      
+$ord_shipping_car_phone = getValue('shipping_car_phone', 'str', 'POST', '');
 
 $old_value = [
     'ord_ship_name' => 'Người nhận : ' . $order->ord_ship_name,
-    'ord_ship_phone' => $order->ord_ship_phone,
+    'ord_ship_phone' => preg_replace('/\D/', '', $order->ord_ship_phone),
     'ord_ship_email' => $order->ord_ship_email,
     'ord_ship_address' => $order->ord_ship_address,
     'ord_note' => $order->ord_note,
     'ord_province_id' => $order->ord_province_id,
     'ord_district_id' => $order->ord_district_id,
-    'ord_ward_id' => $order->ord_ward_id
+    'ord_ward_id' => $order->ord_ward_id,
 ];
 
 $change = $order->update([
     'ord_ship_name' => $ord_ship_name,
-    'ord_ship_phone' => $ord_ship_phone,
+    'ord_ship_phone' => preg_replace('/\D/', '', $ord_ship_phone),
     'ord_ship_email' => $ord_ship_email,
     'ord_ship_address' => $ord_ship_address,
     'ord_note' => $ord_note,
     'ord_province_id' => $ord_province_id,
     'ord_district_id' => $ord_district_id,
-    'ord_ward_id' => $ord_ward_id
+    'ord_ward_id' => $ord_ward_id,
+    'ord_admin_user_id' => $ord_admin_user_id,
+    'ord_admin_userprice_id' => $ord_admin_userprice_id,
+    'ord_shipping_car' => $ord_shipping_car,
+    'ord_shipping_car_start' => $ord_shipping_car_start,
+    'ord_shipping_fee_car' => $ord_shipping_fee_car,
+    'ord_shipping_car_phone' => $ord_shipping_car_phone,
+    'ord_admin_group_user_id' => $ord_admin_group_user_id,
+    'ord_shipping_car_cod' => $change_shipping_car_cod,
 ]);
-
+$v_note = "";
+if($ord_shipping_car != ''){
+    $v_note = 'Thay đổi thông tin nhận hàng';
+}
 //Log
 if ($change) {
     \App\Models\OrderLog::insert([

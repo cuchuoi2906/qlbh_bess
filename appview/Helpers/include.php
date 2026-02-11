@@ -602,7 +602,7 @@ if (!function_exists('renderPagination')) {
         }
     
         // Always show first page
-        $html .= '<li class="page-item"><a class="page-link' . ($current_page == 1 ? ' active' : '') . '" href="javascript:void(null)" onclick="loadPagePagination(this);">1</a></li>';
+        $html .= '<li class="page-item"><a data-page="1" class="page-link' . ($current_page == 1 ? ' active' : '') . '" href="javascript:void(null)" onclick="loadPagePagination(this);">1</a></li>';
     
         // Add ellipsis if needed
         if ($current_page > 3) {
@@ -643,7 +643,6 @@ if (!function_exists('renderPagination')) {
         $html .= '</ul>';
         $html .= '</nav>';
         $html .= '</div>';
-    
         return $html;
     }    
 }
@@ -672,4 +671,50 @@ if (!function_exists('formatCurrencyVND')) {
         // Append the currency symbol for Vietnamese Dong
         return $formattedNumber . ' đ';
     }
+}
+if (!function_exists('checkLoginHapu')) {
+    function checkLoginHapu($username, $password)
+    {
+        $username = replaceMQ($username);
+        $password = replaceMQ($password);
+        $adm_id = 0;
+        $db_check = new db_query("SELECT adm_id
+                                             FROM admin_user
+                                             WHERE adm_loginname = '" . $username . "' AND adm_password = '" . md5($password) . "' AND adm_active = 1 AND adm_delete = 0 AND adm_type = 1");
+        $check = $db_check->fetch(true);
+        if ($check) {
+            $adm_id = $check["adm_id"];
+            $db_check->close();
+            unset($db_check);
+
+            return $adm_id;
+        } else {
+            $db_check->close();
+            unset($db_check);
+
+            return 0;
+        }
+    }
+}
+if (!function_exists('checkLoginFeHapu')) {
+    function checkLoginFeHapu(){
+        if(isset($_SESSION["loggedHapu"]) && intval($_SESSION["loggedHapu"]) ==1){
+            return true;
+        }
+        return false;
+    }
+}
+function isMobileDevice() {
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+    $mobileKeywords = [
+        'iPhone', 'Android', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone', 
+        'Opera Mini', 'Mobile', 'Silk', 'Kindle', 'Samsung', 'Nokia', 'Sony'
+    ];
+
+    foreach ($mobileKeywords as $keyword) {
+        if (stripos($userAgent, $keyword) !== false) {
+            return true;
+        }
+    }
+    return false;
 }

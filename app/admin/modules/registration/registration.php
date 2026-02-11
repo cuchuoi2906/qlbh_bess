@@ -25,9 +25,9 @@ $dataGrid->deleteLabel = 'hủy';
 $dataGrid->column('re_id', 'ID', 'number', [], false)->addExport();
 $dataGrid->column('re_name', 'Họ và tên', ['string', 'trim'], [], false)->addExport();
 $dataGrid->column('re_phone', 'Số điện thoại', ['string', 'trim'], [], true)->addExport();
-$dataGrid->column('re_email', 'Email', ['string', 'trim'], [], false)->addExport();
-$dataGrid->column('re_address', 'Địa chỉ', ['string', 'trim'], [], false)->addExport();
-$dataGrid->column('re_comment', 'Thắc mắc', ['string', 'trim'], [], false)->addExport();
+$dataGrid->column('re_email', 'Email', ['string', 'trim'], [], true)->addExport();
+$dataGrid->column('re_comment', 'Nội dung', ['string', 'trim'], [], false)->addExport();
+$dataGrid->column(uniqid(), 'Xóa', 'delete|center');
 
 echo $blade->view()->make('listing', [
     'data_table' => $dataGrid->render()

@@ -78,7 +78,8 @@
                         <?= $form->number("Số lượng", "pro_quantity", "pro_quantity", $pro_quantity??1, "Số lượng", 0, "", "", 255, "", "", "") ?>
                         <?= $form->select("Trạng thái", "pro_active", "pro_active", [1 => 'Hiển thị', 0 => 'Ẩn'], $pro_active, "") ?>
                         <?= $form->select("Tình trạng tồn kho", "pro_active_inventory", "pro_active_inventory", [1 => 'Còn hàng', 2 => 'Hết hàng'], $pro_active_inventory, "") ?>
-                        <?= $form->select("Sản phẩm hot?", "pro_is_hot", "pro_is_hot", [1 => 'Hot', 0 => 'Không'], $pro_is_hot, "") ?>
+                        <?= $form->select("Sản phẩm chống mua buôn?", "pro_is_hot", "pro_is_hot", [1 => 'Có', 0 => 'Không'], $pro_is_hot, "") ?>
+                        <?= $form->number("Trọng số ưu tiên", "pro_order_by", "pro_order_by", $pro_order_by??9999, "Trọng số", 0, "", "", 255, "", "", "") ?>
                     </div>
                 </div>
             </div>

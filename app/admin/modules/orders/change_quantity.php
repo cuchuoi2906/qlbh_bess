@@ -13,18 +13,30 @@ $product_id = getValue('product_id', 'int', 'POST', 0);
 $quantity = getValue('quantity', 'int', 'POST', 0);
 
 $order = \App\Models\Order::findByID($order_id);
+$productOrigin = \App\Models\Product::findByID($product_id);
 if (
     $order
     && $order->status_code == \App\Models\Order::NEW
     && (int)$order->payment_status == \App\Models\Order::PAYMENT_STATUS_NEW
 ) {
+    $price = $productOrigin->pro_discount_price;
+    if($productOrigin->pricePolicies){
+        foreach($productOrigin->pricePolicies as $items){
+            if($quantity >= $items->ppp_quantity){
+                $price = intval($items->ppp_price);
+                break;
+            }
+        }
+    }
     $product = \App\Models\OrderProduct::where('orp_ord_id', $order_id)
         ->where('orp_product_id', $product_id)
         ->first();
 
     if ($product) {
+        
         $old_quantity = $product->quantity;
         $product->quantity = (int)$quantity;
+        $product->sale_price = (int)$price;
         $product->update();
 
         //Tính lại hoa hồng

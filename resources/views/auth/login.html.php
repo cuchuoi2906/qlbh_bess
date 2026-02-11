@@ -5,7 +5,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
     <div class="container">
 		<div class="row">
 			<div class="col-xl-7">
-				<img class="w-100 mobile-login d-none" src="<?= asset('/images/banner_top1.png') ?>" alt="login" />
+				<img class="w-100 mobile-login d-none" src="<?= asset('/images/banner_top2.png') ?>" alt="login" />
 			</div>
 		</div>
         <div class="login-page">

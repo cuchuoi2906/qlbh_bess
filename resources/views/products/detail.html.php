@@ -47,21 +47,29 @@ if($type == 'ORDERFAST'){
 </style>
 <div class="main-content">
     <div class="container">
-        <div class="menu-prod">
-            <div class="d-flex align-items-center gap-2">
-                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Tất cả sản phẩm</a></button>
-                <button <?php echo ($type == '') ? 'class="active"' : ''; ?>>
-                    <a href="/order-fast">
-                        Đặt hàng nhanh
-                        <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
-                    </a>
-                </button>
-                <!--<button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
-                <button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
-                <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
-                <button <?php echo ($type == 'PRODUCTCOMPANY') ? 'class="active"' : ''; ?>><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
-                <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
-            </div>
+        <div id="section-5" class="pb-0">
+            <ul class="nav nav-pills mb-3 menu-prod" id="pills-tab" role="tablist">
+                <li class="nav-item-menu" role="presentation">
+                    <button  class="btn-menu-link <?php echo ($type == 'ORDERFAST') ? 'active' : ''; ?>"><a href="/products/ORDERFAST-0">Sản phẩm</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link <?php echo ($type == '') ? 'active' : ''; ?>">
+                        <a href="/order-fast">
+                            Đặt hàng nhanh
+                            <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
+                        </a>
+                    </button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link"><a href="/products/ORDERFAST-0/244">Sản phẩm độc quyền</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link"><a href="/qua-tang-thang">Quà tặng tháng</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link"><a href="/doanh-so-tich-luy">Doanh số tích lũy</a></button>
+                </li>
+            </ul>
         </div>
 		<?php 
 		if(!empty($type)){
@@ -104,6 +112,9 @@ if($type == 'ORDERFAST'){
                         <div class="swiper-container main-slider">
                             <div class="swiper-wrapper">
                                     <div class="square-image mx-auto">
+                                        <span class="position-absolute top-0 end-0" >
+                                            <img src="/assets/images/maxresdefault.jpg" class="thumbnail-image" alt="Thumbnail Image">
+                                        </span>
                                         <img src="<?php echo $product['avatar']['url'] ?>" class="thumbnail-image" alt="Thumbnail Image">
                                     </div>
                             </div>  
@@ -120,7 +131,7 @@ if($type == 'ORDERFAST'){
                     $htmlPriceSl = "";
                     if(check_array($pricePolicies)){
                         foreach($pricePolicies as $price){
-                            $htmlPriceSl .= '<div class="price-sl">Mua số lượng từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
+                            $htmlPriceSl .= '<div class="price-sl">Mua từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
                         }
                     }
 					if(intval($product['price'])>0){
@@ -134,7 +145,11 @@ if($type == 'ORDERFAST'){
                         }
                         echo $htmlPriceSl;
 					}
+                    if(!empty($product['date'])){
                     ?>
+                        <span class="badge rounded-pill text-end" style="background-color: #FF6600;"><?php echo $product['date']; ?></span>    
+                    <?php 
+                    }?>
 					<p><i style="--text-color: #018279;">(Liên hệ để được giá tốt nhất)</i></p>
 					<div class="input-group number-input width-mobile-50 me-2" style="width: 124px;">
 						<div class="input-group-prepend">
@@ -145,7 +160,7 @@ if($type == 'ORDERFAST'){
 								</svg>
 							</button>
 						</div>
-						<input type="number" id="productCount<?php echo $product['id']; ?>" class="form-control inputNumber" value="0" min="0" />
+						<input type="number" id="productCount<?php echo $product['id']; ?>" <?php echo ($product['is_hot'] ? 'max="5"' : '');  ?> class="form-control inputNumber" value="0" min="0" />
 						<div class="input-group-append">
 							<button class="btn btn-increment" data-product-id="<?php echo $product['id']; ?>" type="button">
 								<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

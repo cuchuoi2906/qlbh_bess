@@ -30,6 +30,7 @@
                         <?= $form->password("Pasword", "adm_password", "adm_password", $adm_password, "Password", 1, "", "", 255, "", "", "") ?>
                         <?= $form->password("Confirm password", "adm_re_password", "adm_re_password", $adm_re_password ?? '', "Password", 1, "", "", 255, "", "", "") ?>
                         <?= $form->text("Email", "adm_email", "adm_email", $adm_email ?? '', "Email", 1, "", "", 255, "", "", "") ?>
+                        <?=$form->select('Loại tài khoản', 'adm_type', 'adm_type', $admin_type, $adm_type,"",1)?>
                     </div>
                 </div>
             </div>

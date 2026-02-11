@@ -84,7 +84,12 @@ class UserTransformer extends TransformerAbstract
             'referer_link' => url('invite', ['base64' => base64_encode($user->id)]),
             'f' => compare_user($user->all_level, app('auth')->u_id ?? 0, $user->id),
             'total_ord_amount' => (int)$user->total_ord_amount,
-            'address_register'=>$user->address_register
+            'address_register'=>$user->address_register,
+            'cccd_img'=>$user->cccd_img,
+            'business_license_img'=>$user->business_license_img,
+            'pharma_license_img'=>$user->pharma_license_img,
+            'gpp_cert_img'=>$user->gpp_cert_img,
+            'tax_code'=>$user->tax_code,
         ];
 
         return $data;

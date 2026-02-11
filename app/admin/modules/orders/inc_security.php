@@ -35,7 +35,7 @@ switch ($status) {
             \App\Models\Order::BEING_TRANSPORTED => 'Đang vận chuyển',
             \App\Models\Order::RECEIVED => 'Đã nhận hàng',
             \App\Models\Order::SUCCESS => 'Thành công',
-            \App\Models\Order::REFUND => 'Đã hoàn',
+            //\App\Models\Order::REFUND => 'Đã hoàn',
             \App\Models\Order::CANCEL => 'Đã hủy'
         ];
         break;
@@ -91,7 +91,7 @@ function status_list($status)
                 \App\Models\Order::BEING_TRANSPORTED => 'Đang vận chuyển',
                 \App\Models\Order::RECEIVED => 'Đã nhận hàng',
                 \App\Models\Order::SUCCESS => 'Thành công',
-                \App\Models\Order::REFUND => 'Đã hoàn',
+                //\App\Models\Order::REFUND => 'Đã hoàn',
                 \App\Models\Order::CANCEL => 'Đã hủy'
             ];
             break;
@@ -131,6 +131,18 @@ $array_date_type = [
     2 => 'Thời gian xử lý đơn',
 ];
 
+$array_status_hapu = [
+    0 => 'Chưa xử lý',
+    1 => 'Xin duyệt giá',
+    2 => 'Xác nhận và Nhặt'
+];
+$array_status_check_hapu = [
+    0 => 'Chưa soát hàng',
+    1 => 'Đang soát hàng',
+    2 => '<span style="color:red;">Hàng sai/thiếu</span>',
+    3 => 'Đóng hàng',
+];
+                
 //Check user login...
 checkLogged();
 

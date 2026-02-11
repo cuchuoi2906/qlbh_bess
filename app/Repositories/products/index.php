@@ -16,6 +16,7 @@ $vars = [];
 $page = input('page') ?? getValue('page', 'int', 'GET', 1);
 $page_size = input('page_size') ?? 10;
 $category_id = input('category_id') ?? 0;
+$brandId = input('brandId') ?? 0;
 $type = input('type') ?? getValue('type', 'int', 'GET', '');
 $arrIdsCate = input('arrIdsCate') ?? [];
 
@@ -50,19 +51,22 @@ if ($is_hot >= 0) {
 if($type != ''){
     $conditions .= ' AND pro_type = "' . $type.'"';
 }
+if($brandId > 0){
+    $conditions .= ' AND pro_brand_id = "' . $brandId.'"';
+}
 
 
 $itemsModel = Product::with(['images', 'category', 'pricePolicies'])
     ->where($conditions)
     ->pagination($page, $page_size);
 
+
 if (input('sort_by')) {
 	$itemsModel->order_by('pro_' . input('sort_by'), input('sort_type'));
 } else {
-	$itemsModel->order_by('pro_id', 'DESC');
+	$itemsModel->order_by('pro_order_by', 'ASC');
 		//->order_by('pro_id', 'DESC');
 }
-
 $items = $itemsModel->all();
 $total = Product::where($conditions)->count();
 

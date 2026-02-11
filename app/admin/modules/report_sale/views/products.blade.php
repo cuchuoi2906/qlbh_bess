@@ -48,7 +48,7 @@
         // var start = moment().startOf('month');
         // var end = moment().endOf('month');
 
-        var start = moment();
+        var start = '01/01/2018';
         var end = moment();
 
         $('input[name="ord_successed_at"]').daterangepicker({

@@ -26,7 +26,7 @@ class ProductController extends FrontEndController
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function getProducts($type = '',$id = '')
+    public function getProducts($type = '',$id = '',$brand = 0)
     {
         if (!checkLoginFe()) {
             return redirect(url('login'));
@@ -47,7 +47,7 @@ class ProductController extends FrontEndController
             $is_hot = -1;
             $page_size = 36;
         }
-
+        
 		$categoryByType = [];
         if($type != ''){
             $categoryByType = $this->categoryRepository->getCategoryByType($type);
@@ -83,6 +83,7 @@ class ProductController extends FrontEndController
             'keyword' => $keyword,
             'is_hot' => $is_hot,
             'arrIdsCate' => $arrIdsCate,
+            'brandId' => $brand,
         ];
 
         $data = model('products/index')->load($params);
@@ -92,7 +93,6 @@ class ProductController extends FrontEndController
             $productList  = $data['vars']['data'];
             $pagination  = collect_recursive($data['vars']['meta']['pagination']);
         }
-		
         return view('products/listing')->render([
             'productList' => $productList,
             'pagination'=>$pagination,
@@ -101,6 +101,7 @@ class ProductController extends FrontEndController
             'type'=>$type,
             'sort_type'=>$sort_type,
             'is_hot'=>$is_hot,
+            'brand'=>$brand,
 			'categoryById' => $categoryById,
             'categoryByParentId' => $categoryByParentId
         ]);

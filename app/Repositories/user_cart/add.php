@@ -29,6 +29,11 @@ if($is_add_more == 4) { // trường hợp xóa theo user
 //Check sản phẩm tồn tại
 $product = \App\Models\Product::findByID(input('product_id'));
 if ($product) {
+    $quantity = input('quantity');
+    if($product->pro_is_hot && $is_add_more !=2){
+        $is_add_more = 0;
+        $quantity = $quantity >= 5 ? 5: $quantity;
+    }
     if ($is_add_more == 2) { // trường hợp xóa
         $model::where('usc_user_id', input('user_id'))
             ->where('usc_product_id', input('product_id'))
@@ -37,11 +42,11 @@ if ($product) {
     }else {
         if ($is_add_more) {
             $update_data = [
-                'usc_quantity' => ['usc_quantity + %d', (int)input('quantity')]
+                'usc_quantity' => ['usc_quantity + %d', (int)$quantity]
             ];
         } else {
             $update_data = [
-                'usc_quantity' => input('quantity')
+                'usc_quantity' => $quantity
             ];
         }
         $affected = $model::insertUpdate([

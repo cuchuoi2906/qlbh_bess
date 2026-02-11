@@ -9,7 +9,7 @@ include dirname(__FILE__) . '/../includes/header.html.php';
                 Với mong muốn đem lại nhiều quyền lợi thiết thực dành cho khách hàng khi đặt hàng tại website vuaduoc.com. Vua dược hân hạnh giới
                 thiệu chương trình Khách hàng thân thiết.
             </p>
-            <h4>Thời gian áp dụng : Từ 01/01/2024</h4>
+            <h4>Thời gian áp dụng : Từ 01/01/2024 - 31/12/2024</h4>
             <p style="font-weight: 500">Chương trình khách hàng thân thiết dành riêng cho khách hàng thuộc các hạng:</p>
             <h4>BẠC - VÀNG - BẠCH KIM - KIM CƯƠNG -NGỌC LỤC BẢO</h3>
             <h5 class="mt-3">Quyền lợi khi trở thành khách hàng thân thiết của Vuaduoc.com</h5>

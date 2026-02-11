@@ -1,4 +1,4 @@
-<?
+<?php
 
 require_once("../../bootstrap.php");
 require_once 'inc_security.php';
@@ -36,6 +36,8 @@ $myform->add("adm_all_website", "adm_all_website", 1, 0, 0, 0, "", 0, "");
 //$myform->add("adm_access_category","adm_access_category",0,1,"",0,"",0,"");
 $myform->add("adm_edit_all", "adm_edit_all", 1, 0, 0, 0, "", 0, "");
 $myform->add("admin_id", "admin_id", 1, 1, 0, 0, "", 0, "");
+$adm_type = getValue('adm_type', 'int', 'POST', 0);
+$myform->add('adm_type', 'adm_type', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $adm_type);
 $myform->addTable("admin_user");
 //get vaule from POST
 $adm_loginname = getValue("adm_loginname", "str", "POST", "", 1);
@@ -51,7 +53,6 @@ $arelate_select = getValue("arelate_select", "arr", "POST", "");
 
 if ($action == 'execute') {
     $fs_errorMsg .= $myform->checkdata();
-
     foreach ($modules as $module) {
         $add = getValue("adu_add" . $module->id, "int", "POST");
         $edit = getValue("adu_edit" . $module->id, "int", "POST");

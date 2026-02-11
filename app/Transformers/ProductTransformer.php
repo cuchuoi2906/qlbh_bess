@@ -68,6 +68,8 @@ class ProductTransformer extends TransformerAbstract {
             'db_price' => (int)$product->price,
             'db_discount_price' => (int)$product->discount_price,
             'active_inventory' => (int)$product->active_inventory,
+            //'date' => $product->pro_date,
+            'date' => '',
             'video_url' => ($product->pro_video_file_name != '') ? url() . '/upload/products/' . $product->pro_video_file_name : '',
         ];
         $price_policy = transformer_item($product->minPricePolicy, new ProductPricePolicyTransformer($product));

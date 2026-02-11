@@ -58,7 +58,8 @@ class UserCartController extends ApiController
             'user_id' => $_SESSION['userIdFe'],
             'product_id'=>$product_id,
             'quantity'=>$quantity,
-            'is_add_more'=>$is_add_more
+            'is_add_more'=>$is_add_more,
+            'product_list_id'=>$product_list_id
         ] + $this->input);
 
         return $this->getIndex();
@@ -93,5 +94,16 @@ class UserCartController extends ApiController
 		
         return $result['vars'];
     }
-
+    function addByOrder(){
+        if (!checkLoginFe()) {
+            return redirect(url('login'));
+        }
+        $order_id = getValue('order_id', 'int', 'POST', 0, 0);
+        $result = model('user_cart/add_by_order_id')->load([
+            'user_id' => $_SESSION['userIdFe'],
+            'order_id'=>$order_id
+        ]);
+		$this->getIndex();
+        return $result['vars'];
+    }
 }

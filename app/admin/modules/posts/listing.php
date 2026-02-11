@@ -20,11 +20,13 @@ if ($category_id) {
     $sqlWhere .= ' AND pos_category_id = ' . $category_id;
 }
 
+$items = Post::withTrash()->where($sqlWhere)
+    ->pagination(getValue('page', 'int', 'GET', 1), $per_page);
+	
+//var_dump($items->toSelectQueryString());
 
-$items = Post::where($sqlWhere)
-    ->pagination(getValue('page', 'int', 'GET', 1), $per_page)
-    ->order_by('pos_id', 'DESC')
-    ->all();
+$items = $items->all();
+
 
 $total = Post::withTrash()->where($sqlWhere)->count();
 
@@ -32,7 +34,7 @@ $total = Post::withTrash()->where($sqlWhere)->count();
 $dataGrid = new DataGrid($items, $total, 'pos_id');
 
 if ($categories_arr ?? false):
-    $dataGrid->column(['pos_category_id', $categories_arr], 'Danh mục', 'select');
+    $dataGrid->column(['pos_category_id', $categories_arr], 'Danh mục', 'select',[],true);
 endif;
 
 $dataGrid->column('pos_image', 'Ảnh', function ($row) {

@@ -1,11 +1,9 @@
 <?php
-
 require_once 'inc_security.php';
-
 $order_id = getValue('ord_id', 'int', 'GET', 0);
+$ord_vat = getValue('ord_vat', 'int', 'POST', 0);
 $ord_discount_admin = getValue('ord_discount_admin', 'str', 'POST', 0);
 $ord_discount_admin = intval(str_replace(",","",$ord_discount_admin));
-
 $order = \App\Models\Order::findByID($order_id);
 if (
     $order
@@ -23,7 +21,7 @@ if (
             $productArr[$productId]['quantity'] =  $quantity;
         }
         // Tính lại đơn hàng
-        \App\Manager\Order\OrderManager::commissions($order->id,$productArr,$ord_discount_admin);
+        \App\Manager\Order\OrderManager::commissions($order->id,$productArr,$ord_discount_admin,$ord_vat);
         
         //Log
         \App\Models\OrderLog::insert([

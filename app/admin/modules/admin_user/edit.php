@@ -1,4 +1,4 @@
-<?
+<?php
 require_once("../../bootstrap.php");
 require_once 'inc_security.php';
 //check quyền them sua xoa
@@ -31,6 +31,9 @@ $myform->add("adm_all_website", "adm_all_website", 1, 0, 0, 0, "", 0, "");
 $myform->add("adm_access_category", "adm_access_category", 0, 1, "", 0, "", 0, "");
 $myform->add("adm_edit_all", "adm_edit_all", 1, 0, 0, 0, "", 0, "");
 $myform->add("admin_id", "admin_id", 1, 1, 0, 0, "", 0, "");
+
+$adm_type = getValue('adm_type', 'int', 'POST', 0);
+$myform->add("adm_type", "adm_type", 1, 1, $adm_type);
 
 $myform->addTable($fs_table);
 

@@ -66,8 +66,7 @@ $myform->add('pro_active', 'pro_active', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_
 $pro_active_inventory = getValue('pro_active_inventory', 'str', 'POST', 1);
 $myform->add('pro_active_inventory', 'pro_active_inventory', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $pro_active_inventory,1);
 $myform->add('pro_is_hot', 'pro_is_hot', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, 1);
-//$myform->add('pro_updated_at', 'pro_created_at', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, '');
-
+//$myform->add('pro_updated_at', 'pro_updated_at', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, '');
 $pro_commission_plan_id = getValue('pro_commission_plan_id', 'int', 'POST', 0);
 $myform->add('pro_commission_plan_id', 'pro_commission_plan_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, 1);
 
@@ -79,6 +78,11 @@ $myform->add('pro_brand_id', 'pro_brand_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_F
 
 $pro_point = getValue('pro_point', 'int', 'POST', 0);
 $myform->add('pro_point', 'pro_point', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $pro_point);
+
+$pro_order_by = getValue('pro_order_by', 'int', 'POST', 0);
+$myform->add('pro_order_by', 'pro_order_by', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $pro_order_by);
+
+
 //Sort
 if ($record->order == 0) {
     $max = \App\Models\Product::fields('MAX(pro_order) AS max_order')->first();
@@ -116,13 +120,12 @@ if ($action == "execute") {
             //_debug($sqlUpdate);die;
             $db_excute = new db_execute($sqlUpdate);
             unset($db_excute);
-
-            admin_log($admin_id, ADMIN_LOG_ACTION_EDIT, $record_id, 'Đã sửa thông tin của sản phẩm ' . $pro_name_vn);
-
+            //admin_log($admin_id, ADMIN_LOG_ACTION_EDIT, $record_id, 'Đã sửa thông tin của sản phẩm ' . $pro_name_vn);
             //$upload = new upload('images', $fs_filepath, $fs_extension, $fs_filesize);
             $upload = new upload('images', $fs_filepath, $fs_extension, $fs_filesize,0,"",0,[375,375]);
-            if ($upload->common_error == '') {
-
+            //var_dump($upload);die;
+            //if ($upload->common_error == '' && 1 == 2) {
+            if($upload->common_error == ''){
                 $product = Product::findByID($record_id);
                 $images = $product->images;
 
@@ -147,6 +150,9 @@ if ($action == "execute") {
                 }
             } else {
                $fs_errorMsg = $upload->common_error;
+            }
+            if($_FILES[$upload_name]['name'] == ''){
+                $fs_errorMsg = '';
             }
             # upload file video
              

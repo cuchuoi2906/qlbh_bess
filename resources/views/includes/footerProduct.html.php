@@ -114,6 +114,13 @@
 						</svg>
 						<span>Sản phẩm</span>
 					</a>
+                    <a href="javascript:void(null)" class="menu-item">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
+                            <path d="M17.2 17.2L20 20" stroke="#8A909F" stroke-width="1.5" stroke-linecap="round"></path>
+                        </svg>
+						<span>Tìm kiếm</span>
+					</a>
 					<a href="/cart" class="menu-item position-relative">
 						<span id="cartCountM" class="position-absolute position-absolute top-0 end-0 badge rounded-pill bg-warning text-dark"> <?php echo isset($_SESSION['cartTotalProduct']) ? intval($_SESSION['cartTotalProduct']) : 0; ?></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">

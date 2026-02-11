@@ -13,6 +13,7 @@ use VatGia\Helpers\Transformer\TransformerPaginatorAdapter;
 $vars = [];
 $page = input('page') ?? getValue('page', 'int', 'GET', 1);
 $page_size = input('page_size') ?? 10;
+$status_code = input('ord_status_code') ?? getValue('ord_status_code', 'str', 'GET', "");
 
 $conditions = ['user_id', input('user_id')];
 
@@ -26,16 +27,21 @@ if (input('start_date')) {
     $sql .= ' AND DATE(ord_created_at) >= \'' . input('start_date') . '\'';
 }
 
-$items = Order::where('ord_user_id', input('user_id'))
+$order_item = Order::where('ord_user_id', input('user_id'))
     ->where('ord_active', 1)
     ->where('ord_status_code', '<>', Order::CANCEL)
     ->where($sql)
     ->with(['products'])
-    ->order_by('ord_id', 'DESC')
-    ->pagination($page, $page_size)
-    ->all();
+    ->order_by('ord_id', 'DESC');
 
-$total = Order::where('ord_user_id', input('user_id'))->count();
+if($status_code != ''){
+    $order_item->where('ord_status_code', '=', $status_code);
+}
+$total = $order_item->count();
+
+$items = $order_item->pagination($page, $page_size)->all();
+
+
 
 $paginator = new TransformerPaginatorAdapter($total, $page, $page_size);
 

@@ -110,7 +110,7 @@
             $('#pro_id').change(function () {
                 //Gọi API add vào giỏ hàng
                 $.ajax({
-                    url: 'add_order_product.php',
+                    url: 'add_order_product.php?status=NEW',
                     type: 'POST',
                     data: {
                         id: $(this).val(),

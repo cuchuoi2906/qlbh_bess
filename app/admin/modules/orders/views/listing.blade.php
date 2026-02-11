@@ -32,7 +32,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
     <script>
-
         function getCookie(name) {
             var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
             return v ? v[2] : null;
@@ -423,8 +422,8 @@
             value = value.replace(/\,/g, '');
             value = parseInt(value);
             if(isNaN(value)){
-                alert("Giá bán phải là số nguyên dương > 0");
-                inputElement.value = formatCurrencyVND(price);
+                alert("Giá bán phải là số nguyên dương >= 0");
+                inputElement.value = 0;
                 return;
             }
             inputElement.value = formatCurrencyVND(value);
@@ -435,7 +434,7 @@
         function delete_product_order(orderId,id) {
             if (confirm('Bạn có muốn xóa sản phẩm này khỏi đơn hàng?')) {
                 $.ajax({
-                    url: 'delete_product_order.php',
+                    url: 'delete_product_order.php?status=NEW',
                     type: 'GET',
                     data: {
                         orderId: orderId,
@@ -449,7 +448,7 @@
                 });
             }
         }
-        function loadPriceProductByQuality(obj){
+        function loadPriceProductByQuality(obj,order_id){
             let quality= parseInt(obj.value);
             let idProduc = parseInt(obj.id.replace("ord_quantity",""));
             console.log(quality);
@@ -459,6 +458,7 @@
                 type: 'GET',
                 data: {
                     quality: quality,
+                    status:"NEW",
                     product_id: idProduc
                 },
                 success: function (response) {
@@ -472,13 +472,89 @@
                     //location.reload();
                 }
             });
+            $.ajax({
+                url: 'change_quantity.php',
+                type: 'POST',
+                data: {
+                    order_id: order_id,
+                    product_id: idProduc,
+                    quantity: quality
+                },
+                success: function (response) {
+                    reload_modal(order_id)
+                }
+            });
         }
-        function exportProductOrder(orderId){
+        
+        function updatePriceProduct(obj,order_id){
+            let priceOrder= obj.value;
+            let idProduc = parseInt(obj.id.replace("ord_price",""));
+            $.ajax({
+                url: 'change_price_product_order.php',
+                type: 'POST',
+                data: {
+                    order_id: order_id,
+                    product_id: idProduc,
+                    price: priceOrder
+                },
+                success: function (response) {
+                    reload_modal(order_id)
+                }
+            });
+        }
+        function exportProductOrder(orderId,type){
             const link = document.createElement('a');
-            link.href = 'export_order_product.php?ord_id='+orderId;
+            link.href = 'export_order_product.php?status=NEW&ord_id='+orderId+'&type='+type;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+        function split_two_order(id) {
+            if (!confirm("Bạn có chắc chắn muốn tách đơn ?")) return false;
+            $.ajax({
+                type: 'POST',
+                url: 'split_two_order.php',
+                data: {
+                    id: id
+                },
+                success: function (response) {
+                    if(response != ""){
+                        alert(response);
+                    }else{
+                        $.toast({
+                            // heading: '',
+                            text: 'Tách đơn thành công',
+                            position: 'bottom-right',
+                            stack: false,
+                            icon: 'success'
+                        });
+                    }
+                }
+            });
+        }
+        function change_order_status_hapu(id) {
+
+            var status = $('select#' + id + '.change_status_order').val();
+            var note = $('textarea#note_' + id).val();
+
+            var data = {
+                order_id: id,
+                status: status,
+                note: note
+            };
+            if (!confirm("Bạn có chắc chắn muốn thay đổi trạng thái ?")) return false;
+            $.ajax({
+                type: 'POST',
+                url: 'change_status_code_hapu.php',
+                data: data,
+                success: function (response) {
+                    response = response.trim();
+                    if (response.length > 0) {
+                        alert(response);
+                    }
+                    location.reload();
+                }
+            });
         }
     </script>
 @stop

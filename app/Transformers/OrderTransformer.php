@@ -19,7 +19,8 @@ class OrderTransformer extends TransformerAbstract
         'logs',
         'products',
         'user',
-        'address'
+        'address',
+        'useradminhapu'
     ];
 
     public $defaultIncludes = [
@@ -43,48 +44,12 @@ class OrderTransformer extends TransformerAbstract
             Order::CANCEL => 'Thất bại',
             Order::RECEIVED => 'Đã nhận hàng'
         ];
-        $products = $item->products;
         $leverPrice = 0;
-        /*
-        // lặp giỏ hảng tính mix giá
-        foreach ($products as $product) {
-            $product->leverPrice = 0;
-            $total_money_percent_wholesale += $product->price * $product->quantity;
-        }
-        $configData = Setting::where('swe_key', 'LIKE', 'tong_gia_tri_don_hang_huong_uu_dai_%')->select_all();
-        $arrconfigData = array();
-        foreach($configData as $item1){
-            $arrconfigData[] = $item1->swe_value_vn;
-        }
-        /*if($total_money_percent_wholesale > 0 && $total_money_percent_wholesale >= $arrconfigData[count($arrconfigData)-1]){
-            $leverPrice = count($arrconfigData);
-        }else{
-            for($i=0;$i<count($arrconfigData);$i++){
-                if($total_money_percent_wholesale > 0 && $total_money_percent_wholesale >= $arrconfigData[$i] && $total_money_percent_wholesale < $arrconfigData[$i+1]){
-                    $leverPrice = $i+1;
-                }
-            }
-        }*/
         $total_point = 0;
         $total_product = 0;
         $total_money = 0;
         $total_money_origin = 0;
         $total_discount = 0;
-        foreach ($products as $product) {
-            $total_product += $product->quantity;
-            $product->info->buy_quantity = $product->quantity;
-            $product->info->leverPrice = $leverPrice;
-            $product->info->use_order_id = intval($item->user->use_id); // User ID theo Đơn hàng
-            $product->info->use_is_seller = intval($item->user->use_is_seller); // User ID theo Đơn hàng
-            $productInfo = transformer_item($product->info, new ProductTransformer());
-            $total_point += $productInfo['point'] * $product->quantity;
-            
-            $price = $productInfo['is_discount'] ? $productInfo['discount_price'] : $productInfo['price'];
-            $total_money += $price * $product->quantity;
-            $total_money_origin += $productInfo['price'] * $product->quantity;
-            //echo $productInfo['price'].'__'.$price;
-            $total_discount += ($productInfo['price'] * $product->quantity - $price * $product->quantity);
-        }
 
         return [
             'id' => (int)$item->id,
@@ -93,21 +58,27 @@ class OrderTransformer extends TransformerAbstract
             'amount' => $item->amount,
             'amount_formatted' => number_format($item->amount),
             'status' => $status[$item->status_code],
+            'status_code' => $item->status_code,
             'payment_type' => Order::paymentTypes()[$item->payment_type] ?? 'COD',
             'commission_type' => $item->commission_type == 2 ? 2 : 1,
             'created_at' => new \DateTime($item->created_at),
+            'updated_at' => new \DateTime($item->updated_at),
             'commission' => $item->getCommission(),
             'shipping_fee' => (int)$item->auto_shipping_fee,
             'shipping_fee_display' => number_format($item->auto_shipping_fee),
             'total_product' => number_format((int)$total_product),
             'total_point' => $total_point,
             'note' => $item->note,
-            'total_money' => $total_money,
-            'total_money_origin' => $total_money_origin,
-            'total_discount' => $total_discount,
-			'note' => $item->note,
-			'ship_name' => $item->ord_ship_name,
-			'ship_phone' => $item->ord_ship_phone,
+            'total_money' => 0,
+            'total_money_origin' => 0,
+            'total_discount' => 0,
+            'note' => $item->note,
+            'ship_name' => $item->ord_ship_name,
+            'ship_phone' => $item->ord_ship_phone,
+            'shipping_car' => $item->ord_shipping_car,
+            'shipping_car_start' => $item->ord_shipping_car_start,
+            'status_process' => $item->ord_status_process,
+            'stock_check_status' => $item->ord_stock_check_status,
         ];
     }
 
@@ -132,5 +103,9 @@ class OrderTransformer extends TransformerAbstract
     {
         return $this->item($item->address ?? collect([]), new UserAddressTransformer());
     }
-
+    
+    public function includeUserAdminHapu($item)
+    {
+        return $this->item($item->userAdminHapu ?? collect([]), new UserAdminHapuTransformer());
+    }
 }

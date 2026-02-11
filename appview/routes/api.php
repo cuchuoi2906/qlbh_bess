@@ -92,6 +92,8 @@ Route::group([
         Route::get('/', [\AppView\Controllers\Api\UserCartController::class, 'index']);
 
         Route::post('/', [\AppView\Controllers\Api\UserCartController::class, 'add']);
+        
+        Route::post('/add_product_cart_by_order', [\AppView\Controllers\Api\UserCartController::class, 'addByOrder']);
 
     });
 

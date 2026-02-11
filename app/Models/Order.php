@@ -12,6 +12,7 @@ namespace App\Models;
 use App\Models\Users\UserAddress;
 use App\Models\Users\Users;
 use VatGia\Model\Model;
+use App\Models\AdminUser;
 
 class Order extends Model
 {
@@ -62,6 +63,14 @@ class Order extends Model
         return [
             self::PAYMENT_STATUS_SUCCESS => "Đã thanh toán",
             self::PAYMENT_STATUS_NEW => "Chưa thanh toán",
+        ];
+
+    }
+    public static function shippingCarStatus()
+    {
+        return [
+            0 => "Nhà xe không thu hộ",
+            1 => "Nhà xe có thu hộ",
         ];
 
     }
@@ -199,5 +208,31 @@ class Order extends Model
         return $total_commisson;
 
     }
-
+    public function userAdmin()
+    {
+        $this->hasOne(
+            __FUNCTION__,
+            AdminUser::class,
+            'adm_id',
+            'ord_admin_user_id'
+        );
+    }
+    public function userAdminHapu()
+    {
+        $this->hasOne(
+            __FUNCTION__,
+            AdminUser::class,
+            'adm_id',
+            'ord_admin_userprice_id'
+        );
+    }
+    public function userAdminGroup()
+    {
+        $this->hasOne(
+            __FUNCTION__,
+            AdminUser::class,
+            'adm_id',
+            'ord_admin_group_user_id'
+        );
+    }
 }

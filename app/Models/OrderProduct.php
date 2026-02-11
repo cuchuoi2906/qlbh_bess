@@ -56,4 +56,13 @@ class OrderProduct extends Model
             'orp_ord_id'
         );
     }
+    public function productHapu(){
+        
+        return $this->hasOne(
+            __FUNCTION__,
+            ProductHapu::class,
+            'pro_ha_product_id',
+            'orp_product_id'
+        );
+    }
 }

@@ -8,7 +8,7 @@ include 'includes/header.html.php';
                     <div class="col-xl-7 mb-3 mb-xl-0">
                         <div class="swiper slide-banner">
                             <div class="swiper-wrapper">
-                                <?php for($i=1;$i<7;$i++){ ?>
+                                <?php for($i=2;$i<8;$i++){ ?>
                                     <div class="swiper-slide">
                                         <img src="<?= asset('/images/banner_top'.$i.'.png') ?>" alt="" />
                                     </div>
@@ -244,10 +244,10 @@ include 'includes/header.html.php';
                                 </div>
                             </div>
                         </div>
-                        <div class="video d-xl-none d-block">
+                        <div class="video d-xl-none d-block" style="aspect-ratio: 15 / 10;">
                             <!-- <img src="./images/section-3-5.png" alt="section-3-5.png" /> -->
-                            <video controls>
-                                <source src="<?= asset('/video/Intro.mp4') ?>" />
+                            <video controls name="media" poster="<?= asset('/images/poster_video.jpg') ?>">
+                                <source src="<?= asset('video/intro_new_2.mp4') ?>" type="video/mp4" />
                             </video>
                         </div>
                     </div>
@@ -261,10 +261,10 @@ include 'includes/header.html.php';
                         <button class="btn-custom">
                             <a href="/gioi-thieu-vua-duoc">Xem thêm</a>
                         </button>
-                        <div class="video d-none d-xl-block">
+                        <div class="video d-none d-xl-block" style="height: 300px;">
                             <!-- <img src="./images/section-3-5.png" alt="section-3-5.png" />  -->
-                            <video controls>
-                                <source src="<?= asset('/video/Intro.mp4') ?>" />
+                            <video controls autoplay="false" name="media">
+                                <source src="<?= asset('video/Intro.mp4') ?>" type="video/mp4" />
                             </video>
                         </div>
                     </div>
@@ -283,10 +283,10 @@ include 'includes/header.html.php';
                             <img src="<?= asset('/images/section-4-2.png') ?>" alt="" />
                         </div>
                         <div class="swiper-slide">
-                            <img src="<?= asset('/images/section-4-1.png') ?>" alt="" />
+                            <img src="<?= asset('/images/section-4-1-1.png') ?>" alt="" />
                         </div>
                         <div class="swiper-slide">
-                            <img src="<?= asset('/images/section-4-2.png') ?>" alt="" />
+                            <img src="<?= asset('/images/section-4-2-1.png') ?>" alt="" />
                         </div>
                     </div>
                 </div>
@@ -299,10 +299,10 @@ include 'includes/header.html.php';
                             <img src="<?= asset('/images/section-4-4.png') ?>" alt="" />
                         </div>
                         <div class="swiper-slide">
-                            <img src="<?= asset('/images/section-4-3.png') ?>" alt="" />
+                            <img src="<?= asset('/images/section-4-1-2.png') ?>" alt="" />
                         </div>
                         <div class="swiper-slide">
-                            <img src="<?= asset('/images/section-4-4.png') ?>" alt="" />
+                            <img src="<?= asset('/images/section-4-2-2.png') ?>" alt="" />
                         </div>
                     </div>
                 </div>

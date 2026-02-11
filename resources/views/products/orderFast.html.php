@@ -3,21 +3,29 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
 ?>
 <div class="main-content">
     <div class="container">
-        <div class="menu-prod">
-            <div class="d-flex align-items-center gap-2">
-                <button><a href="/products/ORDERFAST-0">Tất cả sản phẩm</a></button>
-                <button class="active">
-                    <a href="/order-fast">
-                        Đặt hàng nhanh
-                        <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
-                    </a>
-                </button>
-                <!--<button><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
-                <button><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
-                <button><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
-                <button><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
-                <button><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
-            </div>
+        <div id="section-5" class="pb-0">
+            <ul class="nav nav-pills mb-3 menu-prod" id="pills-tab" role="tablist">
+                <li class="nav-item-menu" role="presentation">
+                    <button  class="btn-menu-link"><a href="/products/ORDERFAST-0">Sản phẩm</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link active">
+                        <a href="/order-fast">
+                            Đặt hàng nhanh
+                            <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
+                        </a>
+                    </button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link"><a href="/products/ORDERFAST-0/244">Sản phẩm độc quyền</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link"><a href="/qua-tang-thang">Quà tặng tháng</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link"><a href="/doanh-so-tich-luy">Doanh số tích lũy</a></button>
+                </li>
+            </ul>
         </div>
         <div class="row">
             <div class="col-xl-7" id="left-cart-fast">
@@ -57,7 +65,7 @@ include dirname(__FILE__) . '/../includes/header2.html.php';
                                 if(isset($items['product']['pricePolicies']) && check_array($items['product']['pricePolicies'])){
                                     $pricePolicies = $items['product']['pricePolicies'];
                                     foreach($pricePolicies as $price){
-                                        $htmlPriceSl .= '<div class="price-sl mb-2">Mua số lượng từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
+                                        $htmlPriceSl .= '<div class="price-sl mb-2">Mua từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
                                     }
                                 }
                                 $product = $items['product'];

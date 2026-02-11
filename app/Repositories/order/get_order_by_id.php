@@ -10,7 +10,7 @@ if ($order_id) {
     $order = Order::findByID($order_id);
 
     if ($order) {
-        $vars = transformer_item($order, new OrderTransformer(),['user']);
+        $vars = transformer_item($order, new OrderTransformer(),['user','products','useradminhapu']);
     }
 }
 

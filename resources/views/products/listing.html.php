@@ -30,21 +30,29 @@ if($type == 'ORDERFAST'){
 ?>
 <div class="main-content">
     <div class="container">
-        <div class="menu-prod">
-            <div class="d-flex align-items-center gap-2">
-                <button <?php echo ($type == 'ORDERFAST') ? 'class="active"' : ''; ?>><a href="/products/ORDERFAST-0">Tất cả sản phẩm</a></button>
-                <button <?php echo ($type == '') ? 'class="active"' : ''; ?>>
-                    <a href="/order-fast">
-                        Đặt hàng nhanh
-                        <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
-                    </a>
-                </button>
-                <!--<button <?php echo ($type == 'FUNCTIONIAL') ? 'class="active"' : ''; ?>><a href="/products/FUNCTIONIAL-0">Thực Phẩm Chức Năng</a></button>
-                <button <?php echo ($type == 'COSMECEUTICALS') ? 'class="active"' : ''; ?>><a href="/products/COSMECEUTICALS-0">Hóa Mỹ phẩm</a></button>
-                <button <?php echo ($type == 'PERSONALCARE') ? 'class="active"' : ''; ?>><a href="/products/PERSONALCARE-0">Chăm Sóc Cá Nhân</a></button>
-                <button <?php echo ($type == 'PRODUCTCOMPANY') ? 'class="active"' : ''; ?>><a href="/products/PRODUCTCOMPANY-0">TPCN NichieiAsia</a></button>
-                <button <?php echo ($type == 'MEDICALDEVICES') ? 'class="active"' : ''; ?>><a href="/products/MEDICALDEVICES-0">Thiết Bị Y Tế</a></button>-->
-            </div>
+        <div id="section-5" class="pb-0">
+            <ul class="nav nav-pills mb-3 menu-prod" id="pills-tab" role="tablist">
+                <li class="nav-item-menu" role="presentation">
+                    <button  class="btn-menu-link <?php echo ($type == 'ORDERFAST' && $brand == 0) ? 'active' : ''; ?>"><a href="/products/ORDERFAST-0">Sản phẩm</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link <?php echo ($type == '') ? 'active' : ''; ?>">
+                        <a href="/order-fast">
+                            Đặt hàng nhanh
+                            <img src="<?= asset('/images/icon_new.gif') ?>" width="40" style="padding-left:3px" />
+                        </a>
+                    </button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link <?php echo ($brand > 0) ? 'active' : ''; ?>"><a href="/products/ORDERFAST-0/244">Sản phẩm độc quyền</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link"><a href="/qua-tang-thang">Quà tặng tháng</a></button>
+                </li>
+                <li class="nav-item-menu" role="presentation">
+                    <button class="btn-menu-link"><a href="/doanh-so-tich-luy">Doanh số tích lũy</a></button>
+                </li>
+            </ul>
         </div>
 		<?php 
 		if(!empty($type)){
@@ -71,6 +79,9 @@ if($type == 'ORDERFAST'){
         <div class="main-search mb-3 d-xl-none">
             <div class="input-group input-group-search-mobile">
                 <input type="text" id="keywordm" name="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Nhập tên thuốc, hoạt chất cần tìm..." aria-label="basic-search" aria-describedby="basic-search">
+                <div style="align-content: center;" id="clearSearchKeywordmobile">
+                    <img src="https://vuaduoc.com/assets//images/delete-img.png" height="20px">
+                </div>
                 <span class="input-group-text" id="main-search">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
@@ -163,13 +174,13 @@ if($type == 'ORDERFAST'){
                 <div class="bottom-flash-sale">
                     <div class="swiper flash-sale-slide swiper-initialized swiper-horizontal swiper-backface-hidden">
                         <div class="swiper-wrapper" id="swiper-wrapper-863ad8227b1e233f" aria-live="polite">
-                            <?php 
+                            <?php
                             foreach($productList10items as $items){ 
                                 $pricePolicies = $items['pricePolicies'];
                                 $htmlPriceSl = "";
                                 if(check_array($pricePolicies)){
                                     foreach($pricePolicies as $price){
-                                        $htmlPriceSl .= '<div class="price-sl">Mua số lượng từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
+                                        $htmlPriceSl .= '<div class="price-sl">Mua từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
                                     }
                                 }
                             ?>
@@ -198,6 +209,7 @@ if($type == 'ORDERFAST'){
                                             <span class="badge rounded-pill badge-succes text-end mb-3">Liên hệ để có giá tốt</span>
                                             <?php
                                         }
+                                        
                                         echo $htmlPriceSl;
                                         if(intval($items['price'])>0){
                                         ?>
@@ -213,7 +225,7 @@ if($type == 'ORDERFAST'){
                                                     </svg>
                                                 </button>
                                             </div>
-                                            <input id="productCount<?php echo $items['id']; ?>" type="number" class="form-control inputNumber" value="0" min="0">
+                                            <input id="productCount<?php echo $items['id']; ?>" <?php echo ($items['is_hot'] ? 'max="5"' : '');  ?> type="number" class="form-control inputNumber" value="0" min="0">
                                             <div class="input-group-append">
                                                 <button data-product-id="<?php echo $items['id']; ?>" class="btn btn-increment" type="button">
                                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -416,12 +428,12 @@ if($type == 'ORDERFAST'){
                             $htmlPriceSl = "";
                             if(check_array($pricePolicies)){
                                 foreach($pricePolicies as $price){
-                                    $htmlPriceSl .= '<div class="price-sl">Mua số lượng từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
+                                    $htmlPriceSl .= '<div class="price-sl">Mua từ '.$price['quantity'].' giá '.formatCurrencyVND($price['price']).'</div>';
                                 }
                             }
                             
                         ?>
-                            <div class="col-xl-2 col-6 col-md-4 mb-4" style="padding-left: 4px !important;padding-right: 4px !important;">
+                            <div class="col-xl-2 col-6 col-md-4 mb-4 d-flex" style="padding-left: 4px !important;padding-right: 4px !important;">
                                 <div class="prod-item">
                                     <div class="thumb">
                                         <a href="<?php echo '/san-pham/'.$items['rewrite'].'-'.$items['id']; ?>">
@@ -444,6 +456,11 @@ if($type == 'ORDERFAST'){
                                             <?php
                                         }
                                     }else{
+                                        if(!empty($items['date'])){
+                                            ?>
+                                            <span class="badge rounded-pill text-end mb-1" style="background-color: #FF6600;"><?php echo $items['date']; ?></span>
+                                            <?php
+                                        }
                                         ?>
                                         <span class="badge rounded-pill bg-success text-end mb-3">Liên hệ để có giá tốt</span>
                                         <?php
@@ -452,10 +469,16 @@ if($type == 'ORDERFAST'){
                                     <?php 
                                     echo $htmlPriceSl;
                                     if(intval($items['price'])>0){
+                                        if(!empty($items['date'])){
+                                            ?>
+                                            <span class="badge rounded-pill text-end mb-1" style="background-color: #FF6600;"><?php echo $items['date']; ?></span>
+                                            <?php
+                                        }
                                     ?>    
                                         <span class="badge rounded-pill btn-warning text-end mb-2">Giá tốt nhất thị trường</span>
                                     <?php 
-                                    }?>
+                                    }
+                                    ?>
                                     <div class="input-group number-input">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-decrement" type="button" data-product-id="<?php echo $items['id']; ?>" disabled>
@@ -465,7 +488,7 @@ if($type == 'ORDERFAST'){
                                                 </svg>
                                             </button>
                                         </div>
-                                        <input type="number" id="productCount<?php echo $items['id']; ?>" class="form-control inputNumber" value="0" min="0" />
+                                        <input type="number" id="productCount<?php echo $items['id']; ?>" <?php echo ($items['is_hot'] ? 'max="5"' : '');  ?> class="form-control inputNumber" value="0" min="0" />
                                         <div class="input-group-append">
                                             <button class="btn btn-increment" data-product-id="<?php echo $items['id']; ?>" type="button">
                                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -489,11 +512,17 @@ if($type == 'ORDERFAST'){
             <?php 
             }?>
             <div class="grid-bottom d-flex justify-content-center align-items-center">
-                <?php
-                if($pagination){
-                    echo renderPagination($pagination);
-                }
-                ?>
+                <?php if($pagination){ ?>
+                    <div class="mx-auto">
+                    <?php
+                        echo renderPagination($pagination);
+                    ?>
+                    </div>
+                    <div class="ms-auto">Đến trang 
+                        <input style="width:55px" class="form-control d-inline-block" name="number" id="pageNumberPagination" value="<?php echo $pagination->current_page; ?>" />
+                    </div>
+                <?php 
+                } ?>
             </div>
         </div>
     </div>

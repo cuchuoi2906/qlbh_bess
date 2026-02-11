@@ -80,6 +80,7 @@ Route::get(['/bai-viet/{type}-{id}', 'post.listing'], [\AppView\Controllers\Post
 Route::post(['web/login', 'post.login'], [\AppView\Controllers\Auth\AuthController::class, 'postLogin']);
 //Route::get('/products', [\AppView\Controllers\ProductController::class, 'getProducts']);
 Route::get('/products/{type}-{id}', [\AppView\Controllers\ProductController::class, 'getProducts']);
+Route::get('/products/{type}-{id:i}/{brand:i}', [\AppView\Controllers\ProductController::class, 'getProducts']);
 Route::post('/increment_product', [\AppView\Controllers\Api\ProductController::class, 'incrementProduct']);
 Route::get('/loyal-client', [\AppView\Controllers\Auth\AuthController::class, 'loyalClient']);
 //Route::get('/cart', [\AppView\Controllers\ProductController::class, 'getProductsCart']);
@@ -138,3 +139,10 @@ Route::get('/chinh_sach_kiem_hang', [\AppView\Controllers\Auth\AuthController::c
 Route::get('/chinh_sach_doi_tra', [\AppView\Controllers\Auth\AuthController::class, 'chinh_sach_doi_tra']);
 Route::get('/chinh_sach_thanh_toan', [\AppView\Controllers\Auth\AuthController::class, 'chinh_sach_thanh_toan']);
 Route::get('/order-fast', [\AppView\Controllers\UserCartController::class, 'indexProductOrderFast']);
+Route::get('/order-review', [\AppView\Controllers\UserCartController::class, 'orderReview']);
+Route::get('/doanh-so-tich-luy', [\AppView\Controllers\Auth\AuthController::class, 'cumulativeSales']);
+Route::get('/qua-tang-thang', [\AppView\Controllers\Auth\AuthController::class, 'giveaway']);
+Route::get('/my-order', [\AppView\Controllers\UserCartController::class, 'myOrder']);
+Route::get('/my-order-detail/{id}', [\AppView\Controllers\UserCartController::class, 'myOrderDetail']);
+Route::get('/my-profile-business', [\AppView\Controllers\UserCartController::class, 'myProfileBusiness']);
+Route::post('/my-profile-business', [\AppView\Controllers\UserCartController::class, 'postMyProfileBusiness']);

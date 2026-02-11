@@ -8,23 +8,25 @@
                                 VÀ CÔNG NGHỆ DAK (DƯỢC AN KHANG)
                             </h2>
                             <div class="ft-content mb-3">
-                                <div class="ft-ct-item mb-3">
-                                    <strong>Văn phòng:</strong><br />
+                                <div class="ft-ct-item mb-1">
+                                    <strong>Văn phòng:</strong>
                                     <span>Tầng 9, Tòa nhà Five Season, 47 Nguyễn Tuân, Thanh Xuân, Hà Nội</span>
                                 </div>
-
-                                <div class="ft-ct-item">
+                                <div class="ft-ct-item mb-1">
+                                    <strong>Quầy chợ Hapulico:</strong> Quầy 416, số 85 Vũ Trọng Phụng, Thanh Xuân, Hà Nội<br />
+                                    <span><strong>Tên nguời đại diện</strong>: Bà Nguyễn Thị Minh Đức</span>
+                                </div>
+                                <div class="ft-ct-item mb-1">
                                     <strong>Số giấy chứng nhận đăng ký kinh doanh: </strong>
                                     <span>0108253503</span>
                                 </div>
-                                <div class="ft-ct-item">
+                                <div class="ft-ct-item mb-1">
                                     <strong>Ngày cấp:</strong>
                                     <span>07/05/2018 - </span>
 									<strong>Nơi cấp:</strong>
                                     <span>Sở Kế hoạch và Đầu tư Thành phố Hà Nội</span>
                                 </div>
-								<br />
-                                <div class="ft-ct-item">
+                                <div class="ft-ct-item mb-1">
                                     <strong>Số giấy chứng nhận đủ điều kiện kinh doanh dược: </strong><br />
                                     <span>Số 01-2615/ĐKKDD-HNO</span>
                                 </div>
@@ -125,11 +127,11 @@
                                 <div class="row">
                                     <div class="col-sm-7">
                                         <span class="phone_calling">
-                                            <span href="tel:0912649993"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0912.649.993</span>
+                                            <span href="tel:0342342566"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0342.342.566</span>
                                         </span>
                                     </div>
                                     <div class="col-sm-5 ps-0">
-                                        <a href="https://zalo.me/0912649993" target="_blank">
+                                        <a href="https://zalo.me/0342342566" target="_blank">
                                             <img src="https://vuaduoc.com/assets//images/icons/ic-zalo.svg" alt="zalo" width="33px">
                                         </a>
                                     </div>
@@ -154,7 +156,50 @@
                     </div>
                 </div>
             </div>
-			<div class="footer-mb">
+			<div class="footer-mb d-xl-none">
+                <div class="container" style="background-color: #018279;border-radius: 5px;margin-bottom: 1px;">
+                    <div class="row">
+                        <div class="col mt-2">
+                            <h2 class="ft-title">
+                                CÔNG TY CỔ PHẦN DỊCH VỤ THƯƠNG MẠI <br />
+                                VÀ CÔNG NGHỆ DAK (DƯỢC AN KHANG)
+                            </h2>
+                            <div class="ft-content mb-1">
+                                <div class="ft-ct-item mb-1">
+                                    <strong>Quầy chợ Hapulico:</strong> Quầy 416, số 85 Vũ Trọng Phụng, Thanh Xuân, Hà Nội<br />
+                                    <span><strong>Tên nguời đại diện</strong>: Bà Nguyễn Thị Minh Đức</span>
+                                </div>
+                                <div class="ft-ct-item mb-1">
+                                    <strong>Giấy chứng nhận đăng ký kinh doanh:</strong>
+                                    <span>0108253503</span>
+                                </div>
+                                <div class="ft-ct-item mb-1">
+                                    <strong>Ngày cấp:</strong>
+                                    <span>07/05/2018 - </span>
+									<strong>Nơi cấp:</strong>
+                                    <span>Sở Kế hoạch và Đầu tư Thành phố Hà Nội</span>
+                                </div>
+                                <div class="ft-ct-item mb-1">
+                                    <strong>Số giấy chứng nhận đủ điều kiện kinh doanh dược: </strong><br />
+                                    <span>Số 01-2615/ĐKKDD-HNO</span>
+                                </div>
+                                <div class="ft-ct-item">
+                                    <strong>Ngày cấp:</strong>
+                                    <span>22/10/2024 - </span>
+									<strong>Nơi cấp:</strong>
+									<span>Sở y tế Hà Nội</span>
+                                </div>
+                            </div>
+                            <div class="ft-content d-flex" style="height: 40px;">
+                                <div><a target="_blank" href="http://online.gov.vn/Home/WebDetails/123101" title="Đã đăng ký với bộ công thương" ><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></a></div>
+								<div style="    background-color: #ffff;margin-left: 10px;height: 31px;margin-top: 5px;border-radius: 7px;">
+                                    <span class="dmca-badge" target="_blank"> <img src ="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></span>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+                                </div>
+                                
+							</div>
+                        </div>
+                    </div>
+                </div>
 				<div class="ft-menu-mb">
                     <a href="/" class="menu-item" style="width: 19%;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
@@ -199,7 +244,24 @@
 								</a>
 							</div>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="/logout" style="padding-left: 40px;">Thoát</a></li>
+								<li class="d-flex">
+                                    <img src="<?= asset('/images/logout.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: 6px;margin-left: 11px;" />
+                                    <a class="dropdown-item" href="/logout" style="padding-left: 40px;">
+                                        Thoát
+                                    </a>
+                                </li>
+                                <li class="d-flex">
+                                    <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: 6px;margin-left: 11px;" />
+                                    <a class="dropdown-item" href="/my-order" style="padding-left: 60px;">
+                                        Đơn của tôi
+                                    </a>
+                                </li>
+                                <li class="d-flex">
+                                    <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: 6px;margin-left: 11px;" />
+                                    <a class="dropdown-item" href="/my-profile-business" style="padding-left: 70px;">
+                                        HS kinh doanh
+                                    </a>
+                                </li>
 							</ul>
 						</div>
 					<?php

@@ -1,4 +1,4 @@
-<?
+<?php
 require_once 'inc_security.php';
 checkAddEdit("add");
 
@@ -26,6 +26,10 @@ endforeach;
 
 $cat_parent_id = getValue('cat_parent_id', 'int', 'POST', 0);
 $cat_type = getValue('cat_type', 'str', 'POST', '');
+if($type == 'BRAND')
+{
+    $cat_type = "BRAND";
+}
 $cat_rewrite = getValue('cat_rewrite', 'str', 'POST', '');
 $cat_rewrite = $cat_rewrite ? $cat_rewrite : removeTitle($cat_name_vn);
 $cat_rewrite = removeTitle($cat_name_vn);

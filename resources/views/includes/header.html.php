@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="<?php echo asset('libs/bootstrap/css/bootstrap.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('/libs/swiper/swiper-bundle.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/font.css') ?>" />
-        <link rel="stylesheet" href="<?php echo asset('css/style.css') ?>" />
+        <link rel="stylesheet" href="<?php echo asset('css/style.css') ?>?221" />
         <link rel="stylesheet" href="<?php echo asset('css/home.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/news.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/login.css') ?>" />
@@ -29,7 +29,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         ></script>
-        <script src="<?php echo asset('js/script.js') ?>"></script>
+        <script src="<?php echo asset('js/script.js?112') ?>"></script>
         <script src="<?php echo asset('/libs/swiper/swiper-bundle.min.js') ?>"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 		<style>
@@ -74,7 +74,24 @@
                                 </div>
 							</div>
 							<ul id="dropdownMenu" class="dropdown-menu position-absolute bg-light mt-3 shadow" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="/logout">Thoát</a></li>
+								<li>
+                                    <a class="dropdown-item" href="/logout">
+                                        <img src="<?= asset('/images/logout.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                        Thoát
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/my-order">
+                                        <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                        Đơn hàng của tôi
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/my-profile-business">
+                                        <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                        Hồ sơ kinh doanh
+                                    </a>
+                                </li>
 							</ul>
                         </div>
                         <?php
@@ -87,7 +104,7 @@
                     }
                     ?>
                 </div>
-                <div class="main-header-mb d-flex d-xl-none flex-column">
+                <div class="main-header-mb d-flex d-xl-none flex-column mt-2 mb-2">
                     <div class="justify-content-between align-items-center d-flex d-xl-none">
                         <button id="toggle-menu">
                             <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -134,7 +151,24 @@
 										</svg>
 									</div>
 									<ul id="dropdownMenu" class="dropdown-menu position-absolute bg-light mt-3 shadow" aria-labelledby="dropdownMenuButton1">
-										<li><a class="dropdown-item" href="/logout">Thoát</a></li>
+										<li>
+                                            <a class="dropdown-item" href="/logout">
+                                                <img src="<?= asset('/images/logout.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                                Thoát
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="/my-order">
+                                                <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                                Đơn hàng của tôi
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="/my-profile-business">
+                                                <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                                Hồ sơ kinh doanh
+                                            </a>
+                                        </li>
 									</ul>
                                 </div>
                                 <?php

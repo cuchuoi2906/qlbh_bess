@@ -9,10 +9,11 @@
         <link rel="stylesheet" href="<?php echo asset('libs/bootstrap/css/bootstrap.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('/libs/swiper/swiper-bundle.min.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/font.css') ?>" />
-        <link rel="stylesheet" href="<?php echo asset('css/style.css?1') ?>" />
+        <link rel="stylesheet" href="<?php echo asset('css/style.css?122211212') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/home.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/thuc-pham-chuc-nang.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/cart.css') ?>" />
+        <link rel="stylesheet" href="<?php echo asset('css/login.css') ?>" />
         <link rel="stylesheet" href="<?php echo asset('css/flash-sale.css') ?>" />
         <title>Vua Dược đồng hành cùng sự phát triển của Nhà Thuốc -  Vuaduoc.com</title>
         <meta name="keywords" content="Nhà thuốc An Khang, Dược An Khang, Tiệm thuốc An Khang, nhà thuốc, An Khang" />
@@ -54,6 +55,9 @@
                         ?>
                             <div class="input-group rounded-pill">
                                 <input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" class="form-control" placeholder="Nhập tên thuốc, hoạt chất cần tìm..." aria-label="basic-search" aria-describedby="basic-search">
+                                <div style="align-content: center;" id="clearSearchKeyword">
+                                    <img src="https://vuaduoc.com/assets//images/delete-img.png" height="20px">
+                                </div>
                                 <span class="input-group-text" id="main-search-pc">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="11.6" cy="11.6" r="7.6" stroke="#8A909F" stroke-width="1.5"></circle>
@@ -103,14 +107,31 @@
                                 </div>
 							</div>
 							<ul id="dropdownMenu" class="dropdown-menu position-absolute bg-light mt-3 shadow" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="/logout">Thoát</a></li>
+								<li>
+                                    <a class="dropdown-item" href="/logout">
+                                        <img src="<?= asset('/images/logout.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                        Thoát
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/my-order">
+                                        <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                        Đơn hàng của tôi
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/my-profile-business">
+                                        <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                        Hồ sơ kinh doanh
+                                    </a>
+                                </li>
 							</ul>
                         </div>
                     <?php 
                     }?>
                 </div>
                 <div class="main-header-mb d-flex d-xl-none flex-column">
-                    <div class="justify-content-between align-items-center d-flex d-xl-none mb-3">
+                    <div class="justify-content-between align-items-center d-flex d-xl-none mb-2 mt-2">
                         <button id="toggle-menu">
                             <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M27 9.1416L5 9.1416" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
@@ -156,7 +177,23 @@
 										</svg>
 									</div>
 									<ul id="dropdownMenu" class="dropdown-menu position-absolute bg-light mt-3 shadow" aria-labelledby="dropdownMenuButton1">
-										<li><a class="dropdown-item" href="/logout">Thoát</a></li>
+										<li>
+                                            <a class="dropdown-item" href="/logout">
+                                                <img src="<?= asset('/images/logout.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                                Thoát
+                                            </a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/my-order">
+                                                <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                                Đơn hàng của tôi
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="/my-profile-business">
+                                                <img src="<?= asset('/images/list.png') ?>" alt="bo cong thuong" style="height: 20px;margin-top: -3px;" />
+                                                Hồ sơ kinh doanh
+                                            </a>
+                                        </li>
 									</ul>
                                 </div>
                                 <?php

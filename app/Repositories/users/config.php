@@ -393,4 +393,13 @@ return [
             ]
         ]
     ],
+    'users/my-license-business' => [
+        'title' => 'Thay đổi địa chỉ',
+        'input' => [
+            'id' => [
+                'title' => 'User id',
+                'rule' => 'required|integer'
+            ]
+        ]
+    ],
 ];

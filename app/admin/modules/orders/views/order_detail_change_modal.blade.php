@@ -6,7 +6,7 @@
 <!-- Modal -->
 <div class="modal fade" id="contact_detail_{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog" role="document" style="width: 700px;">
+    <div class="modal-dialog" role="document" style="width: 900px;">
         <div class="modal-content">
             <div class="modal-header">
                 {{--<h5 class="modal-title" id="exampleModalLabel">Chi tiết đơn hàng</h5>--}}
@@ -21,8 +21,8 @@
                         <table class="table table-striped">
                             <tr>
                                 <td colspan="2" align="right">
-                                    <img width="100px" src="https://vuaduoc.com/assets//images/logo.png" alt="logo"><br />
-                                    website: vuaduoc.com
+                                    <img width="100px" src="<?php echo env("URL_WEB"); ?>/assets//images/logo.png" alt="logo"><br />
+                                    website: <?php echo env("DOMAIN"); ?>
                                 </td>
                             </tr>
                             <tr>
@@ -108,35 +108,71 @@
                                     </tr>
                                     <?php
                                     $totalAmountAll = 0;
+                                    $arrProduct = [];
+                                    $i=0;
                                     ?>
                                     @foreach ($row->products as $product)
+                                        <?php
+                                        $arrProduct[$i]['stt'] = $i+1;
+                                        $arrProduct[$i]['name'] = $product->info->name;
+                                        $arrProduct[$i]['quantity'] = $product->quantity;
+                                        $arrProduct[$i]['sale_price'] = $product->sale_price;
+                                        $i++;
+                                        ?>
                                         <?php $totalAmountAll +=  $product->quantity * $product->sale_price; ?>
+                                    @endforeach
+                                    <?php 
+                                    usort($arrProduct, function ($a, $b) {
+                                        return strcmp($a['name'], $b['name']); // So sánh theo tên (tăng dần)
+                                    });
+                                    $i=1;
+                                    ?>
+                                    @foreach ($arrProduct as $items)
                                         <tr>
                                             <td>
-                                                {{$loop->iteration}}
+                                                @if(!$items['sale_price'] || !intval($items['quantity']))
+                                                <s><?php echo $i; ?></s>
+                                                @else
+                                                <?php echo $i; ?>
+                                                @endif
                                             </td>
                                             <td>
-                                                {{$product->info->name}}
+                                                @if(!$items['sale_price'] || !intval($items['quantity']))
+                                                    <s><?php echo $items['name']; ?></s>
+                                                @else
+                                                    <?php echo $items['name']; ?>
+                                                @endif
                                             </td>
                                             {{--<td>--}}
                                             {{--{{$product->info->sku}}--}}
                                             {{--</td>--}}
-                                            <td style="width: 20px">
-                                                {{$product->quantity}}
+                                            <td style="width: 20px;background-color: gray;">
+                                                @if(!$items['sale_price'] || !intval($items['quantity']))
+                                                <s><?php echo $items['quantity']; ?></s>
+                                                @else
+                                                <?php echo $items['quantity']; ?>
+                                                @endif
                                             </td>
                                             <td>
-                                                {{ number_format($product->sale_price) }}
+                                                @if(!$items['sale_price'] || !intval($items['quantity']))
+                                                <s><?php echo $items['sale_price']; ?></s>
+                                                @else
+                                                <?php echo number_format($items['sale_price']); ?>
+                                                @endif
                                             </td>
                                             <!--<td>
                                                 {{ number_format($product->price - $product->sale_price) }}
                                             </td>-->
                                             <td>
-                                                {{ number_format($product->quantity * $product->sale_price)}}
+                                                @if(!$items['sale_price'] || !intval($items['quantity']))
+                                                    <s><?php echo number_format($items['quantity'] * $items['sale_price']);$i++; ?></s>
+                                                @else
+                                                    <?php echo number_format($items['quantity'] * $items['sale_price']);$i++; ?>
+                                                @endif
+                                                
                                             </td>
                                         </tr>
-
                                     @endforeach
-                                    
                                     
                                     @if($row->ord_discount_admin)
                                         <tr>
@@ -144,7 +180,7 @@
                                             <td><span style="color: red;">{{ number_format($totalAmountAll) }} VND</span></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right" colspan="4">Khuyến mại từ Vuaduoc (Trừ thẳng vào tổng giá trị đơn hàng):</td>
+                                            <td style="text-align: right" colspan="4">Khuyến mại từ vuaduoc (Trừ thẳng vào tổng giá trị đơn hàng):</td>
                                             <td>{{ number_format($row->ord_discount_admin) }} VND</td>
                                         </tr>
                                     @endif
@@ -279,6 +315,23 @@
                                     <td>{{ \App\Models\Order::paymentTypes()[$row->payment_type] }}</td>
                                 </tr>
                                 <tr>
+                                    <td style="color:red;">Thu hộ tiền mặt:</td>
+                                        <td>
+                                        @if($row->status_code == \App\Models\Order::NEW)
+                                            <select style="color: red;" id="change_order_shipping_car_cod{{$row->id}}" class="change_order_shipping_car_cod"
+                                                    current-value="{{$row->ord_shipping_car_cod}}" name="change_shipping_car_cod">
+                                                @foreach(\App\Models\Order::shippingCarStatus() as $status => $label)
+                                                    <option {{ $row->ord_shipping_car_cod == $status ? 'selected': '' }} value="{{$status}}">
+                                                        {{$label}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            {{ \App\Models\Order::shippingCarStatus()[$row->ord_shipping_car_cod] }}
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Trạng thái thanh toán:</td>
                                     <td>
                                         @if($row->payment_type == \App\Models\Order::PAYMENT_TYPE_BANKING && $row->status_code == \App\Models\Order::NEW && $row->payment_status != \App\Models\Order::PAYMENT_STATUS_SUCCESS)
@@ -301,6 +354,114 @@
                                                   name="ord_note">{{$row->note}}</textarea>
                                     </td>
                                 </tr>
+                                @if($row->status_code == \App\Models\Order::NEW)
+                                    <tr>
+                                        <td>Nhân viên bán hàng: </td>
+                                        <td>
+                                            <select id="user_admin_{{$row->id}}" current_value="{{$row->status_code}}"
+                                                    class="change_status_order"
+                                                    name="ord_admin_user_id">
+                                                @foreach($adminUser as $admin)
+                                                    @if($admin->adm_id != $row->admin_user_id)
+                                                        <option value="{{$admin->adm_id}}">{{$admin->adm_loginname}}</option>
+                                                    @else
+                                                        <option disabled value="{{$admin->adm_id}}"
+                                                                selected="selected">{{$admin->adm_loginname}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nhân viên nhặt thuốc: </td>
+                                        <td>
+                                            <select id="ord_admin_userprice_{{$row->id}}" current_value="{{$row->status_code}}"
+                                                    class="change_status_order"
+                                                    name="ord_admin_userprice_id">
+                                                <option value="0">Chọn user Nhặt</option>
+                                                @foreach($adminUserPrice as $admin)
+                                                    @if($admin->adm_id != $row->ord_admin_userprice_id)
+                                                        <option value="{{$admin->adm_id}}">{{$admin->adm_loginname}}</option>
+                                                    @else
+                                                        <option disabled value="{{$admin->adm_id}}"
+                                                                selected="selected">{{$admin->adm_loginname}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trưởng nhóm: </td>
+                                        <td>
+                                            <select id="ord_admin_group_user_id_{{$row->id}}" current_value="{{$row->status_code}}"
+                                                    class="change_status_order"
+                                                    name="ord_admin_group_user_id">
+                                                <option value="0">Chọn trưởng nhóm</option>
+                                                @foreach($adminUser as $admin)
+                                                    @if($admin->adm_id != $row->ord_admin_group_user_id)
+                                                        <option value="{{$admin->adm_id}}">{{$admin->adm_loginname}}</option>
+                                                    @else
+                                                        <option disabled value="{{$admin->adm_id}}"
+                                                                selected="selected">{{$admin->adm_loginname}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <?php 
+                                    $flagUpdateInfoCar = false;
+                                    if($row->ord_shipping_car == "" || $row->ord_shipping_car_start == ""){
+                                        $flagUpdateInfoCar = true;
+                                    }
+                                    if($orderByPhone){
+                                        $row->ord_shipping_car = $row->ord_shipping_car == "" ? $orderByPhone->ord_shipping_car : $row->ord_shipping_car;
+                                        $row->ord_shipping_car_start = $row->ord_shipping_car_start == "" ? $orderByPhone->ord_shipping_car_start : $row->ord_shipping_car_start;
+                                        $row->ord_shipping_fee_car = $row->ord_shipping_fee_car == 0 ? $orderByPhone->ord_shipping_fee_car : $row->ord_shipping_fee_car;
+                                        $row->ord_shipping_car_phone = $row->ord_shipping_car_phone == 0 ? $orderByPhone->ord_shipping_car_phone : $row->ord_shipping_car_phone;
+                                        $noteInfoCar = "";
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td>Nhà xe: </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="shipping_car"
+                                               id="shipping_car_<?=$row->id?>"
+                                               placeholder="Nhà xe" value="<?=$row->ord_shipping_car?>"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Số ĐT nhà xe: </td>
+                                        <td>
+                                            <input value="<?=$row->ord_shipping_car_phone; ?>" class="form-control" type="text" name="shipping_car_phone"
+                                                id="shipping_car_phone_<?=$row->id?>"
+                                                placeholder="Số ĐT nhà xe"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Giờ khởi hành: </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="shipping_car_start"
+                                               id="shipping_car_start"
+                                               placeholder="Giờ khởi hành" value="<?=$row->ord_shipping_car_start?>"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phí ship: </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="ord_shipping_fee_car"
+                                               id="ord_shipping_fee_car"
+                                               placeholder="Phí ship" value="<?= number_format($row->ord_shipping_fee_car)?>"/>
+                                        </td>
+                                    </tr>
+                                    <?php 
+                                    if($flagUpdateInfoCar){
+                                    ?>
+                                        <tr>
+                                            <td colspan="2" style="color: red;">Click button [Thay đổi thông tin] để lưu lại thông tin nhà xe và tiền ship</td>
+                                        </tr>
+                                    <?php 
+                                    }?>
+                                @endif
                                 <tr>
                                     <td colspan="2">
                                         <input type="submit" value="Thay đổi thông tin">
@@ -309,10 +470,24 @@
                                 </tr>
                             </table>
                         </form>
+                        <form action="mapping_order.php?ord_id={{$row->id}}&status=<?=($status ?? 'NEW')?>" id="mapping_order_{{$row->id}}"
+                              class="ship_info table-responsive" method="post">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><input class="form-control" type="text" name="ord_code_mapping"
+                                               id="ord_code_mapping<?=$row->id?>"
+                                               placeholder="Mã đơn hàng" value=""/></td>
+                                    <td>
+                                        <input type="submit" value="Gộp Đơn">
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
 
                     <div class="col-md-12">
                         <div class="table-responsive">
+                            
                             <form action="change_order_price.php?ord_id={{$row->id}}&status=NEW" id="order_price_{{$row->id}}"
                               class="ship_info table-responsive" method="post">
                                 <table class="table table-bordered">
@@ -326,38 +501,65 @@
                                         <th>
                                             Tổng tiền thanh toán
                                         </th>
+                                        <th>Ghi chú</th>
                                     </tr>
+                                        <?php 
+                                        $arrProduct = [];
+                                        ?>
                                         @foreach ($row->products as $product)
-
+                                            <?php
+                                            $arrProduct[$i]['stt'] = $i+1;
+                                            $arrProduct[$i]['name'] = $product->info->name;
+                                            $arrProduct[$i]['product_id'] = $product->info->id;
+                                            $arrProduct[$i]['id'] = $product->id;
+                                            $arrProduct[$i]['quantity'] = $product->quantity;
+                                            $arrProduct[$i]['sale_price'] = $product->sale_price;
+                                            $arrProduct[$i]['orp_note_hapu'] = $product->orp_note_hapu;
+                                            $i++;
+                                            ?>
+                                            <?php $totalAmountAll +=  $product->quantity * $product->sale_price; ?>
+                                        @endforeach
+                                        <?php 
+                                        usort($arrProduct, function ($a, $b) {
+                                            return strcmp($a['name'], $b['name']); // So sánh theo tên (tăng dần)
+                                        });
+                                        $i=1;
+                                        ?>
+                                        @foreach ($arrProduct as $items)
                                             <tr>
                                                 <td>
-                                                    {{$loop->iteration}}
+                                                    <?php echo $i; ?>
                                                 </td>
                                                 <td>
-                                                    {{$product->info->name}}
+                                                    <?php echo $items['name']; ?>
                                                 </td>
                                                 {{--<td>--}}
                                                 {{--{{$product->info->sku}}--}}
                                                 {{--</td>--}}
                                                 <td style="width: 20px">
-                                                    <input style="width: 50px;text-align: center;" onchange="loadPriceProductByQuality(this)" class="form-control" name="ord_quantity{{$product->info->id}}" id="ord_quantity{{$product->info->id}}"
-                                                   value="{{$product->quantity}}">
+                                                    <input style="width: 50px;text-align: center;" onchange="loadPriceProductByQuality(this,{{$row->id}})" class="form-control" name="ord_quantity<?php echo $items['product_id']; ?>" id="ord_quantity<?php echo $items['product_id']; ?>"
+                                                   value="<?php echo $items['quantity']; ?>">
                                                 </td>
                                                 <td>
-                                                    <input style="width: 90px;text-align: center;" oninput="loadInputValueformatCurrency(this,{{ $product->sale_price }})" class="form-control" name="ord_price{{$product->info->id}}" id="ord_price{{$product->info->id}}"
-                                                   value="{{ number_format($product->sale_price) }}">
+                                                    <input style="width: 90px;text-align: center;" onchange="updatePriceProduct(this,{{$row->id}})" oninput="loadInputValueformatCurrency(this,<?php echo $items['sale_price']; ?>)" class="form-control" name="ord_price<?php echo $items['product_id']; ?>" id="ord_price<?php echo $items['product_id']; ?>"
+                                                   value="<?php echo number_format($items['sale_price']); ?>">
                                                 </td>
                                                 <!--<td>
                                                     {{ number_format($product->price - $product->sale_price) }}
                                                 </td>-->
-                                                <td id="ord_price_product_total{{$product->info->id}}">
-                                                    {{ number_format($product->quantity * $product->sale_price)}}
+                                                <td id="ord_price_product_total<?php echo $items['product_id']; ?>">
+                                                    <?php echo number_format($items['quantity'] * $items['sale_price']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $items['orp_note_hapu']; ?>
                                                 </td>
                                                 <td style="width: 20px">
-                                                    <a href="javascript:void(null);" onclick="delete_product_order({{$row->id}},{{$product->id}})">Xóa</button>
+                                                    <a href="javascript:void(null);" onclick="delete_product_order({{$row->id}},<?php echo $items['id']; ?>)">Xóa</button>
                                                 </td>
                                             </tr>
-
+                                            <?php 
+                                            $i++;
+                                            ?>
                                         @endforeach
                                         <tr>
                                             <td style="text-align: right" colspan="4">VAT(10% trong tổng đơn hàng)</td>
@@ -367,7 +569,7 @@
                                         </tr>
                                         
                                         <tr>
-                                            <td style="text-align: right" colspan="4">Khuyến mại từ Vuaduoc (Trừ thẳng vào giá trị đơn hàng)</td>
+                                            <td style="text-align: right" colspan="4">Khuyến mại từ vuaduoc (Trừ thẳng vào giá trị đơn hàng)</td>
                                             <td>
                                                 <input style="width: 90px;text-align: center;" oninput="loadInputValueformatCurrency(this,{{ $row->ord_discount_admin }})" class="form-control" name="ord_discount_admin" id="ord_discount_admin"
                                                    value="{{ number_format($row->ord_discount_admin)}}">
@@ -383,7 +585,7 @@
                                                 <!--<input type="submit" value="Cập nhật giá đơn hàng">-->
                                                 <button class="btn btn-default" type="submit" value="Submit">Cập nhật giá đơn hàng</button>
                                                 <a class="btn btn-default" href="add_product.php?status=NEW&ord_id={{$row->id}}" >Thêm mới sản phẩm</a>
-                                                <a class="btn btn-default" href="javascript:void(null)" onclick="exportProductOrder({{$row->id}})" >In sản phẩm excel</a>
+                                                <a class="btn btn-default" href="javascript:void(null)" onclick="exportProductOrder({{$row->id}},0)" >In sản phẩm excel</a>
                                             </td>
                                         </tr>
                                         @endif

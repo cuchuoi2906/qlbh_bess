@@ -1,5 +1,5 @@
 @extends('module-master')
-
+<script type="text/javascript" src="../../resource/ckeditor/ckeditor.js?t=D03G5XL"></script>
 @section('content')
     <div class="container-fluid">
         <?php
@@ -36,7 +36,7 @@
                     <?= $form->text("Tên", "use_name", "use_name", $use_name ?? '', "Tên", 1, "", "", 255, "", "", "") ?>
                     <?=$form->select('Loại tài khoản', 'use_type', 'use_type', $typeAccountUser, $use_type,"",0)?>
                     <?= $form->select("Giới tính", "use_gender", "use_gender", $genders, $use_gender ?? 0, "") ?>
-                    <?= $form->text("Địa chỉ", "use_address", "use_address", $use_address ?? '', "Địa chỉ", 1, "", "", 255, "", "", "") ?>
+                    <?= $form->text("Địa chỉ", "use_address_register", "use_address_register", $use_address_register ?? '', "Địa chỉ", 1, "", "", 255, "", "", "") ?>
 
                     <?= $form->password("Mật khẩu", "use_password", "use_password", '', "Mật khẩu", 1, "", "", 255, "", "", "") ?>
                     <?= $form->password("Nhập lại mật khẩu", "use_password_retype", "use_password_retype", $use_password_retype ?? '', "Nhập lại mật khẩu", 1, "", "", 255, "", "", "") ?>
@@ -82,9 +82,14 @@
                                        aria-expanded="true"></a>
                                 </li>
                             </ul>
+                             <div class="tab-content">
+                                <div class="tab-pane active" id="tab_content">
+                                    <?= $form->wysiwyg("Ghi chú quầy thuốc", "use_note", html_entity_decode(${'use_note'}), '../../resource/ckeditor/', "Ghi chú quầy thuốc", 0, "", 100) ?>
+                                </div>
+                            </div>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_content">
-                                    <?= $form->wysiwyg("Nội dung", "use_content", ${'use_content'}, '../../resource/ckeditor/', "Nội dung", 0, "", 100) ?>
+                                    <?= $form->wysiwyg("Nội dung cần tìm", "use_content", html_entity_decode(${'use_content'}), '../../resource/ckeditor/', "Nội dung cần tìm", 0, "", 100) ?>
                                 </div>
                             </div>
                             <!-- /.tab-content -->

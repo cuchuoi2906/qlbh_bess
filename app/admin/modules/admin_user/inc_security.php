@@ -1,4 +1,4 @@
-<?
+<?php
 $module_id = 1;
 //check security...
 require_once("../../bootstrap.php");
@@ -62,6 +62,10 @@ function ping($host, $port = 80, $timeout = 2, $retry = 0)
         return TRUE;
     }
 }
+$admin_type = [
+  0=>'Quản trị' 
+  ,1=>'Nhặt thuốc'
+];
 
 $views = [
     dirname(__FILE__) . '/views',

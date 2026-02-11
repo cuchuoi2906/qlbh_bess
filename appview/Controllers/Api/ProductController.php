@@ -34,7 +34,6 @@ class ProductController extends ApiController
             'is_hot' => $is_hot,
             'type'=>$type
         ];
-
         $data = model('products/index')->load($params);
         return json_encode($data['vars']);
     }
@@ -96,5 +95,17 @@ class ProductController extends ApiController
         $data['vars'] = count($_SESSION['cart']);
 
         return $data['vars'];
+    }
+    public function postOrderProductHapu(){
+        if (!checkLoginFeHapu()) {
+            return redirect(url('/'));
+        }
+        $order_id = getValue('order_id', 'int', 'POST', 0, 0);
+        $result = repository('order/post_oder_price_hapu')->post([
+                'user_id' => $_SESSION['userIdFe'],
+                'order_id' => $order_id
+            ]
+            + $this->input);
+        return json_encode($result['vars']);
     }
 }

@@ -26,7 +26,7 @@ $name_field = "pro_name";
 $break_page = "{---break---}";
 $fs_filepath = ROOT . "/public/upload/products/";
 
-$per_page = 100;
+$per_page = 20;
 
 //$fs_fieldupload = "cat_picture";
 $fs_extension = "gif,jpg,jpe,jpeg,png";

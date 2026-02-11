@@ -14,7 +14,7 @@ class OrderController extends ApiController
     {
         $data = model('order/post_order_v3')->load(
             ['user_id' => $_SESSION['userIdFe']]
-            + $this->input
+            + $this->input + ['product_list_id'=>$_REQUEST['product_list_id']]
         );
 
         return $data;
@@ -62,13 +62,36 @@ class OrderController extends ApiController
 
     public function getUserOrders($id)
     {
-
         $response = repository('order/get_order_by_user_id')->get([
                 'user_id' => (int)$id
             ] + $this->input);
-
         return $response['vars'];
     }
-
-
+    public function updateStockStatus(){
+        $data = model('order/update_stock_status')->load(
+            $this->input
+        );
+        return json_encode([
+            'code' => 200,
+            'message' => 'Cập nhật trạng thái soát hàng thành công.'
+        ]);
+    }
+    public function updateCheckProductOrder(){
+        $data = model('order/update-check-product-order')->load(
+            $this->input
+        );
+        return json_encode([
+            'code' => 200,
+            'message' => 'Cập nhật thành công.'
+        ]);
+    }
+    public function updateStatusPickProductOrder(){
+        $data = model('order/update-status-pick-product-order')->load(
+            $this->input
+        );
+        return json_encode([
+            'code' => 200,
+            'message' => 'Cập nhật thành công.'
+        ]);
+    }
 }

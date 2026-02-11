@@ -21,8 +21,9 @@ $myform->add('use_active', 'use_active', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_
 $use_name = getValue('use_name', 'str', 'POST', '');
 $myform->add('use_name', 'use_name', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $use_name, 1, 'Bạn chưa nhập tên người dùng');
 
-$use_address = getValue('use_address', 'str', 'POST', '');
-$myform->add('use_address', 'use_address', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, '');
+$use_address_register = getValue('use_address_register', 'str', 'POST', '');
+$myform->add('use_address_register', 'use_address_register', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, '');
+
 
 $use_gender = getValue('use_gender', 'int', 'POST', 0);
 $myform->add('use_gender', 'use_gender', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $use_gender);
@@ -48,6 +49,10 @@ if ($use_password) {
 
 $use_content = getValue('use_content', 'str', 'POST', '');
 $myform->add('use_content', 'use_content', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $use_content);
+
+$REQUEST['use_note'] = strip_tags($REQUEST['use_note']);
+$use_note = getValue('use_note', 'str', 'POST', '');
+$myform->add('use_note', 'use_note', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, strip_tags($use_note));
 
 $use_sale = getValue('use_sale', 'int', 'POST', 0);
 $myform->add('use_sale', 'use_sale', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $use_sale);
@@ -101,10 +106,13 @@ if ($action == "execute") {
 
 }//End if($action == "insert")
 $sale_user = [];
+/*
 $sale_user_model = \App\Models\Users\Users::where('use_sale', 1)->all();
+var_dump($sale_user_model);die;
 foreach ($sale_user_model as $items) {
     $sale_user[$items->id] = $items->id.' - '.$items->name . ' - ' . $items->phone;
-}
+}*/
+
 $sale_user[0] = 'Chọn sale phụ trách';
 
 //lay du lieu cua record can sua doi

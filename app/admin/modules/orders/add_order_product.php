@@ -4,7 +4,6 @@ require_once 'inc_security.php';
 use App\Models\Product;
 use App\Models\Order;
 
-checkAddEdit("add");
 $product_id = getValue('id', 'int', 'POST');
 $ord_id = getValue('ord_id', 'int', 'POST');
 $product = Product::findByID($product_id);
@@ -21,7 +20,6 @@ $atrrProd = [
     'orp_commission_buy' => $product->commission,
 ];
 $orderProd = \App\Models\OrderProduct::insert($atrrProd);
-
 //Tính lại hoa hồng
 \App\Manager\Order\OrderManager::commissions($ord_id);
 
