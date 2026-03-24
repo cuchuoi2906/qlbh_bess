@@ -43,7 +43,6 @@ class AppViewServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
         $this->loadRoutes();
         $this->userFromAccessToken();
     }
@@ -63,13 +62,16 @@ class AppViewServiceProvider extends ServiceProvider
     {
 
         $this->routeFilter();
-
         Route::group([
             'before' => [
                 UserAuthFromCookie::class
             ]
         ], function () {
-            $this->loadRoutesFrom(base_path('appview/routes/web.php'));
+            if(strpos($_SERVER['HTTP_HOST'],'hapu.') !== false){
+                $this->loadRoutesFrom(base_path('appview/routes/web_hapu.php'));
+            }else{
+                $this->loadRoutesFrom(base_path('appview/routes/web.php'));
+            }
         });
     }
 
