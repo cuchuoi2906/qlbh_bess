@@ -16,10 +16,6 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group" style="margin-right:10px;">
-                <input type="text" name="search" class="form-control input-sm"
-                       placeholder="Tìm sản phẩm..." value="{{ $search }}">
-            </div>
             <button type="submit" class="btn btn-sm btn-primary">Tìm kiếm</button>
         </form>
 

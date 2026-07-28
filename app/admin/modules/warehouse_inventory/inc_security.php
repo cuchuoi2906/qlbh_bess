@@ -2,7 +2,7 @@
 require_once("../../bootstrap.php");
 require_once("../../resource/security/security.php");
 
-$module_id = 53;
+$module_id = 109;
 $module_name = "Quản lý tồn kho";
 
 checkLogged();
@@ -24,6 +24,17 @@ $packaging_units = [
     2 => 'Hộp',
     3 => 'Gói',
 ];
+
+// Danh sách sản phẩm từ bảng products
+$products_list = [0 => '-- Chọn sản phẩm --'];
+$_products = \App\Models\Product::where('pro_category_id = 243')
+    ->order_by('pro_name_vn', 'ASC')
+    ->select_all();
+if ($_products) {
+    foreach ($_products as $_p) {
+        $products_list[$_p->id] = $_p->name_vn . ($_p->code ? ' [' . $_p->code . ']' : '');
+    }
+}
 
 $views = [
     dirname(__FILE__) . '/views',

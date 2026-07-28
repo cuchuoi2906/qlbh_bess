@@ -6,7 +6,7 @@ require_once("../../resource/security/security.php");
  * Module id.
  * Thay thế bằng id lấy từ mục 'Cấu hình module'
  */
-$module_id = 50;
+$module_id = 107;
 
 $module_name = "Quản lý nhập kho";
 

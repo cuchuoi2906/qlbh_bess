@@ -65,8 +65,8 @@
                         <h3 class="box-title">Thông tin giá</h3>
                     </div>
                     <div class="box-body">
-                        <?= $form->text("Giá nhập", "who_unit_price", "who_unit_price", $who_unit_price ?? 0, "0", 0, "", "", 20, "", 'id="who_unit_price"','' ) ?>
-                        <?= $form->text("CP Khác", "who_other_cost", "who_other_cost", $who_other_cost ?? 0, "0", 0, "", "", 20, "", 'id="who_other_cost"', "") ?>
+                        <?= $form->text("Giá nhập", "who_unit_price", "who_unit_price", $who_unit_price ?? "", "0", 0, "", "", 20, "", 'id="who_unit_price"','' ) ?>
+                        <?= $form->text("CP Khác", "who_other_cost", "who_other_cost", $who_other_cost ?? "", "0", 0, "", "", 20, "", 'id="who_other_cost"', "") ?>
                         <?= $form->text("Tổng nhập", "who_total_price", "who_total_price", $who_total_price ?? 0, "0", 0, "", "", 20, "", 'id="who_total_price" readonly style="background:#f5f5f5"', "") ?>
                     </div>
                 </div>
@@ -163,6 +163,43 @@
             $(this).daterangepicker(cfg);
         });
 
+        // --- Format tiền tệ ---
+        function formatMoney(n) {
+            n = String(n).replace(/[^\d]/g, '').replace(/^0+/, '') || '0';
+            return n.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+        function parseMoney(str) {
+            return parseFloat(String(str).replace(/,/g, '')) || 0;
+        }
+        var moneyFields = ['#who_unit_price', '#who_other_cost', '#who_total_price'];
+        moneyFields.forEach(function(sel) {
+            $(sel).on('input', function () {
+                var pos = this.selectionStart;
+                var oldLen = this.value.length;
+                this.value = formatMoney(this.value);
+                var newLen = this.value.length;
+                this.setSelectionRange(pos + newLen - oldLen, pos + newLen - oldLen);
+            });
+        });
+
+        // Format giá trị ban đầu khi load trang
+        $(function () {
+            moneyFields.forEach(function(sel) {
+                var el = $(sel);
+                if (el.val() && parseMoney(el.val()) > 0) {
+                    el.val(formatMoney(el.val()));
+                }
+            });
+        });
+
+        // Xóa dấu phẩy trước khi submit form
+        $('form').on('submit', function () {
+            moneyFields.forEach(function(sel) {
+                var el = $(sel);
+                el.val(String(parseMoney(el.val())));
+            });
+        });
+
         // Điền tên sản phẩm vào hidden field khi chọn
         var productNames = {!! json_encode($products_list) !!};
         $('#who_pro_id').on('change', function () {
@@ -170,11 +207,12 @@
             $('input[name="who_product_name"]').val(name);
         });
 
-        // Tính tổng nhập tự động
+        // Tính tổng nhập tự động: Tổng nhập = (SL nhập x Giá nhập) + CP Khác
         function calcTotal() {
-            var price = parseFloat($('#who_unit_price').val()) || 0;
-            var other = parseFloat($('#who_other_cost').val()) || 0;
-            $('#who_total_price').val((price + other).toFixed(2));
+            var qty   = parseFloat($('#who_quantity').val()) || 0;
+            var price = parseMoney($('#who_unit_price').val());
+            var other = parseMoney($('#who_other_cost').val());
+            $('#who_total_price').val(formatMoney(qty * price + other));
         }
 
         // Tính số lượng SP/Kiện tự động
@@ -185,7 +223,7 @@
         }
 
         $(function () {
-            $('#who_unit_price, #who_other_cost').on('input', calcTotal);
+            $('#who_quantity, #who_unit_price, #who_other_cost').on('input', calcTotal);
             $('#who_quantity, #who_quantity_packing').on('input', calcCarton);
         });
     </script>

@@ -108,6 +108,11 @@ if ($record) {
     $who_packaging_unit = (int)($record->who_packaging_unit ?? 0);
 }
 
+// Cast giá trị tiền về int (DB trả DECIMAL dạng "150000.000" gây lỗi JS format)
+$who_unit_price  = (int)($who_unit_price ?? 0);
+$who_other_cost  = (int)($who_other_cost ?? 0);
+$who_total_price = (int)($who_total_price ?? 0);
+
 // Giá trị hiển thị trên form (DD/MM/YYYY)
 $who_import_date_display = ($who_import_date ?? '') ? date('d/m/Y', strtotime($who_import_date)) : '';
 $who_mfg_date_display    = ($who_mfg_date    ?? '') ? date('d/m/Y', strtotime($who_mfg_date))    : '';

@@ -7,8 +7,11 @@
         {{-- Filter --}}
         <form method="GET" class="form-inline" style="margin-bottom:15px;">
             <div class="form-group" style="margin-right:8px;">
-                <input type="text" name="search" class="form-control input-sm"
-                       placeholder="Tìm SP / Khách hàng..." value="{{ $search }}" style="width:180px;">
+                <select name="who_pro_id" class="form-control input-sm select2" style="min-width:250px;">
+                    @foreach($products_list as $k => $v)
+                        <option value="{{ $k }}" {{ $who_pro_id_filter == $k ? 'selected' : '' }}>{{ $v }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group" style="margin-right:8px;">
                 <input type="text" name="date_from" id="date_from" class="form-control input-sm datepicker-single"
@@ -18,9 +21,28 @@
                 <input type="text" name="date_to" id="date_to" class="form-control input-sm datepicker-single"
                        placeholder="Đến ngày" value="{{ $date_to }}" autocomplete="off" readonly style="width:120px;">
             </div>
-            <button type="submit" class="btn btn-sm btn-primary" style="margin-right:8px;">Tìm kiếm</button>
-            <a href="listing.php?export=excel&search={{ urlencode($search) }}&date_from={{ urlencode($date_from) }}&date_to={{ urlencode($date_to) }}"
-               class="btn btn-sm btn-success">Export(excel)</a>
+            <div class="form-group" style="margin-right:8px;">
+                <select name="payment_status" class="form-control input-sm" style="width:180px;">
+                    <option value="">-- Tất cả trạng thái --</option>
+                    <?php foreach ($payment_statuses as $val => $label):
+                        $colors = [
+                            'Chưa thanh toán'     => '#e74c3c',
+                            'Thanh toán một phần' => '#f39c12',
+                            'Đã thanh toán'       => '#27ae60',
+                        ];
+                        $color = $colors[$val] ?? '#333';
+                    ?>
+                        <option value="{{ $val }}"
+                            {{ $payment_status === $val ? 'selected' : '' }}
+                            style="color:{{ $color }};font-weight:bold;">
+                            {{ $label }}
+                        </option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">Tìm kiếm</button>
+            <a href="listing.php" class="btn btn-sm btn-default" style="margin-left:4px;">Xóa lọc</a>
+            <button type="submit" name="export" value="Export" class="btn btn-sm btn-success" style="margin-left:4px;">Export</button>
         </form>
 
         {!! $data_table !!}

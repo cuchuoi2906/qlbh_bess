@@ -57,7 +57,7 @@ class OrderProductTransformer extends TransformerAbstract
             'price_formatted' => number_format($product->price),
             'sale_price_formatted' => number_format($product->sale_price),
             'total_price_formatted' => number_format($total),
-            'discount_percent' => round(100 - (($product->sale_price / $product->price) * 100), 2),
+            'discount_percent' => ($product->price > 0) ? round(100 - (($product->sale_price / $product->price) * 100), 2) : 0,
             'discount_price' => (int)$product->discount_price,
             'is_discount' => $product->discount_price ? 1 : 0,
             'supplier_hapu' => $product->orp_supplier_hapu,

@@ -32,6 +32,9 @@ $myform->add('sae_payment_status', 'sae_payment_status', FORM_ADD_TYPE_STRING, F
 $sae_payment_date = parseDate(getValue('sae_payment_date', 'str', 'POST', ''));
 $myform->add('sae_payment_date', 'sae_payment_date', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $sae_payment_date);
 
+$sae_payment_note = getValue('sae_payment_note', 'str', 'POST', '');
+$myform->add('sae_payment_note', 'sae_payment_note', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $sae_payment_note);
+
 $myform->addTable('sales_export');
 $myform->evaluate();
 

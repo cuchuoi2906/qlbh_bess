@@ -176,10 +176,11 @@ if($type == 'ORDERFAST'){
 						</div>
 					</div>
 					<div class="d-flex">
-						<a class="btn-custom d-flex gap-2 align-items-center mt-1 btn-increment-cart bg-warning" data-product-id="<?php echo $product['id']; ?>" href="javascript:void(0)" id="btn-increment-cart">
+						<!--<a class="btn-custom d-flex gap-2 align-items-center mt-1 btn-increment-cart bg-warning" data-product-id="<?php echo $product['id']; ?>" href="javascript:void(0)" id="btn-increment-cart">
 							<span class="text-white"> Thêm giỏ hàng</span>
-						</a>
-						<a class="btn-custom d-flex gap-2 align-items-center mt-1 btn-increment-order ms-2" data-product-id="<?php echo $product['id']; ?>" href="javascript:void(0)">
+						</a>-->
+                        <a class="btn-custom d-flex gap-2 align-items-center mt-1 ms-2" data-product-id="<?php echo $product['id']; ?>" href="/cart">
+						<!--<a class="btn-custom d-flex gap-2 align-items-center mt-1 btn-increment-order ms-2" data-product-id="<?php echo $product['id']; ?>" href="javascript:void(0)">-->
 							<!--<svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M16.8 33.6C18.1255 33.6 19.2 34.6745 19.2 36C19.2 37.3255 18.1255 38.4 16.8 38.4C15.4745 38.4 14.4 37.3255 14.4 36C14.4 34.6745 15.4745 33.6 16.8 33.6Z" stroke="white" stroke-width="2"></path>
 								<path d="M31.2 33.6001C32.5255 33.6001 33.6 34.6746 33.6 36.0001C33.6 37.3256 32.5255 38.4001 31.2 38.4001C29.8746 38.4001 28.8 37.3256 28.8 36.0001C28.8 34.6746 29.8746 33.6001 31.2 33.6001Z" stroke="white" stroke-width="2"></path>

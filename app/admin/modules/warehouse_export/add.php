@@ -15,8 +15,11 @@ function parseDate($str, $default = '') {
 
 $myform = new generate_form();
 
+$sae_who_id = getValue('sae_who_id', 'int', 'POST', 0);
+$myform->add('sae_who_id', 'sae_who_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $sae_who_id, 1, 'Chưa chọn phiếu nhập kho');
+
 $sae_pro_id = getValue('sae_pro_id', 'int', 'POST', 0);
-$myform->add('sae_pro_id', 'sae_pro_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $sae_pro_id, 1, 'Chưa chọn sản phẩm');
+$myform->add('sae_pro_id', 'sae_pro_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $sae_pro_id, 0, '');
 
 $sae_product_name = getValue('sae_product_name', 'str', 'POST', '');
 $myform->add('sae_product_name', 'sae_product_name', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $sae_product_name);

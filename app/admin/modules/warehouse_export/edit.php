@@ -25,8 +25,11 @@ function parseDate($str, $default = '') {
 $myform = new generate_form();
 $myform->addRecordID('sae_id', $record_id);
 
+$sae_who_id = getValue('sae_who_id', 'int', 'POST', 0);
+$myform->add('sae_who_id', 'sae_who_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $sae_who_id, 0, '');
+
 $sae_pro_id = getValue('sae_pro_id', 'int', 'POST', 0);
-$myform->add('sae_pro_id', 'sae_pro_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $sae_pro_id, 1, 'Chưa chọn sản phẩm');
+$myform->add('sae_pro_id', 'sae_pro_id', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $sae_pro_id, 0, '');
 
 $sae_product_name = getValue('sae_product_name', 'str', 'POST', '');
 $myform->add('sae_product_name', 'sae_product_name', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $sae_product_name);
@@ -76,6 +79,9 @@ $myform->add('sae_exp_date', 'sae_exp_date', FORM_ADD_TYPE_STRING, FORM_ADD_VALU
 $sae_note = getValue('sae_note', 'str', 'POST', '');
 $myform->add('sae_note', 'sae_note', FORM_ADD_TYPE_STRING, FORM_ADD_VALUE_FROM_GLOBAL, $sae_note);
 
+$sae_export_slip_status = getValue('sae_export_slip_status', 'int', 'POST', 0);
+$myform->add('sae_export_slip_status', 'sae_export_slip_status', FORM_ADD_TYPE_INT, FORM_ADD_VALUE_FROM_GLOBAL, $sae_export_slip_status);
+
 $myform->addTable('sales_export');
 $myform->evaluate();
 
@@ -101,6 +107,11 @@ if ($record) {
     }
     $sae_pro_id = (int)($record->sae_pro_id ?? 0);
 }
+
+// Cast giá trị tiền về int (DB trả DECIMAL dạng "150000.000" gây lỗi JS format)
+$sae_unit_price = (int)($sae_unit_price ?? 0);
+$sae_other_cost = (int)($sae_other_cost ?? 0);
+$sae_total_ban  = (int)($sae_total_ban ?? 0);
 
 // Giá trị hiển thị cho datepicker (DD/MM/YYYY)
 $sae_export_date_display = !empty($sae_export_date) ? date('d/m/Y', strtotime($sae_export_date)) : date('d/m/Y');

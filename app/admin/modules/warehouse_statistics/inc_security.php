@@ -6,7 +6,7 @@ require_once("../../resource/security/security.php");
  * Module id.
  * Thay thế bằng id lấy từ mục 'Cấu hình module'
  */
-$module_id = 52;
+$module_id = 108;
 
 $module_name = "Thống kê kho hàng";
 

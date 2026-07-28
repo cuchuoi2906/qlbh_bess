@@ -27,8 +27,9 @@
                         <h3 class="box-title">Thông tin sản phẩm</h3>
                     </div>
                     <div class="box-body">
-                        {{-- Select sản phẩm từ DB --}}
-                        <?= $form->select("Tên sản phẩm", "sae_pro_id", "sae_pro_id", $products_list, $sae_pro_id ?? 0, '', 1) ?>
+                        {{-- Select phiếu nhập kho --}}
+                        <?= $form->select("Phiếu nhập kho", "sae_who_id", "sae_who_id", $warehouse_imports_list, $sae_who_id ?? 0, '', 1) ?>
+                        <?= $form->hidden("sae_pro_id", "sae_pro_id", $sae_pro_id ?? 0) ?>
                         <?= $form->hidden("sae_product_name", "sae_product_name", $sae_product_name ?? '') ?>
 
                         {{-- Ngày xuất — daterangepicker single --}}
@@ -55,7 +56,7 @@
                     </div>
                     <div class="box-body">
                         <?= $form->text("Số lượng sp Bán", "sae_quantity_ban", "sae_quantity_ban", $sae_quantity_ban ?? 0, "0", 0, "", "", 20, "", 'id="sae_quantity_ban"', '') ?>
-                        <?= $form->text("Số lượng khả dụng", "sae_quantity_kha_dung", "sae_quantity_kha_dung", $sae_quantity_kha_dung ?? 0, "0", 0, "", "", 20, "", 'id="sae_quantity_kha_dung"', '') ?>
+                        <?= $form->text("Số lượng khả dụng (tồn kho)", "sae_quantity_kha_dung", "sae_quantity_kha_dung", $sae_quantity_kha_dung ?? 0, "0", 0, "", "", 20, "", 'id="sae_quantity_kha_dung" readonly style="background:#f5f5f5"', '') ?>
                         <?= $form->text("Số lượng còn lại", "sae_quantity_con_lai", "sae_quantity_con_lai", $sae_quantity_con_lai ?? 0, "0", 0, "", "", 20, "", 'id="sae_quantity_con_lai" readonly style="background:#f5f5f5"', '') ?>
                     </div>
                 </div>
@@ -90,15 +91,15 @@
                         <h3 class="box-title">Thông tin lô hàng</h3>
                     </div>
                     <div class="box-body">
-                        <?= $form->text("Số lô/LOT", "sae_lot_number", "sae_lot_number", $sae_lot_number ?? '', "Số lô/LOT", 0) ?>
+                        <?= $form->text("Số lô/LOT", "sae_lot_number", "sae_lot_number", $sae_lot_number ?? '', "Tự động từ phiếu nhập", 0, "", "", 20, "", 'id="sae_lot_number" readonly style="background:#f5f5f5"', '') ?>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Ngày SX (MFG)</label>
                             <div class="col-sm-9">
                                 <input type="text" name="sae_mfg_date" id="sae_mfg_date"
-                                       class="form-control datepicker-single"
+                                       class="form-control"
                                        value="{{ $sae_mfg_date_display ?? '' }}"
-                                       autocomplete="off" readonly placeholder="DD/MM/YYYY">
+                                       readonly style="background:#f5f5f5" placeholder="Tự động từ phiếu nhập">
                             </div>
                         </div>
 
@@ -106,9 +107,9 @@
                             <label class="col-sm-3 control-label">Hạn dùng EXP</label>
                             <div class="col-sm-9">
                                 <input type="text" name="sae_exp_date" id="sae_exp_date"
-                                       class="form-control datepicker-single"
+                                       class="form-control"
                                        value="{{ $sae_exp_date_display ?? '' }}"
-                                       autocomplete="off" readonly placeholder="DD/MM/YYYY">
+                                       readonly style="background:#f5f5f5" placeholder="Tự động từ phiếu nhập">
                             </div>
                         </div>
                     </div>
@@ -162,18 +163,73 @@
             $(this).daterangepicker(cfg);
         });
 
-        // Auto-fill tên sản phẩm khi đổi select
-        var productNames = {!! json_encode($products_list) !!};
-        $('#sae_pro_id').on('change', function () {
-            var name = (productNames[$(this).val()] || '').replace(/\s*\[.*?\]\s*$/, '').trim();
-            $('input[name="sae_product_name"]').val(name);
+        // --- Format tiền tệ ---
+        function formatMoney(n) {
+            n = String(n).replace(/[^\d]/g, '').replace(/^0+/, '') || '0';
+            return n.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+        function parseMoney(str) {
+            return parseFloat(String(str).replace(/,/g, '')) || 0;
+        }
+        var moneyFields = ['#sae_unit_price', '#sae_other_cost', '#sae_total_ban'];
+        moneyFields.forEach(function(sel) {
+            $(sel).on('input', function () {
+                var pos = this.selectionStart;
+                var oldLen = this.value.length;
+                this.value = formatMoney(this.value);
+                var newLen = this.value.length;
+                this.setSelectionRange(pos + newLen - oldLen, pos + newLen - oldLen);
+            });
+        });
+
+        // Format giá trị ban đầu khi load trang
+        $(function () {
+            moneyFields.forEach(function(sel) {
+                var el = $(sel);
+                if (el.val() && parseMoney(el.val()) > 0) {
+                    el.val(formatMoney(el.val()));
+                }
+            });
+        });
+
+        // Xóa dấu phẩy trước khi submit form
+        $('form').on('submit', function () {
+            moneyFields.forEach(function(sel) {
+                var el = $(sel);
+                el.val(String(parseMoney(el.val())));
+            });
+        });
+
+        // Auto-fill thông tin từ phiếu nhập kho khi đổi select
+        var warehouseData = {!! json_encode($warehouse_imports_data) !!};
+        $('#sae_who_id').on('change', function () {
+            var id   = parseInt($(this).val());
+            var data = warehouseData[id];
+            if (data) {
+                $('input[name="sae_pro_id"]').val(data.pro_id);
+                $('input[name="sae_product_name"]').val(data.name);
+                $('#sae_quantity_kha_dung').val(data.stock);
+                $('input[name="sae_lot_number"]').val(data.lot);
+                if (data.mfg) {
+                    $('#sae_mfg_date').val(data.mfg).trigger('change');
+                }
+                if (data.exp) {
+                    $('#sae_exp_date').val(data.exp).trigger('change');
+                }
+                calcConLai();
+            } else {
+                $('input[name="sae_pro_id"]').val(0);
+                $('input[name="sae_product_name"]').val('');
+                $('#sae_quantity_kha_dung').val(0);
+                calcConLai();
+            }
         });
 
         function calcTotalBan() {
             var qty   = parseFloat($('#sae_quantity_ban').val()) || 0;
-            var price = parseFloat($('#sae_unit_price').val()) || 0;
-            var other = parseFloat($('#sae_other_cost').val()) || 0;
-            $('#sae_total_ban').val(((qty * price) + other).toFixed(2));
+            var price = parseMoney($('#sae_unit_price').val());
+            var other = parseMoney($('#sae_other_cost').val());
+            $('#sae_total_ban').val(formatMoney((qty * price) + other));
         }
 
         function calcConLai() {

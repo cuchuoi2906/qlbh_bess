@@ -59,6 +59,15 @@
                                        autocomplete="off" readonly placeholder="DD/MM/YYYY">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Ghi chú</label>
+                            <div class="col-sm-9">
+                                <textarea name="sae_payment_note" id="sae_payment_note"
+                                          class="form-control" rows="3"
+                                          placeholder="Ghi chú thanh toán...">{{ $sae_payment_note ?? '' }}</textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
