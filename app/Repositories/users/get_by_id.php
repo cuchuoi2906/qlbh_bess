@@ -8,11 +8,13 @@
 
 $vars = [];
 
-$user = \App\Models\Users\Users::findByID((int)input('id'))->with(['provice']);
+$user = \App\Models\Users\Users::findByID((int)input('id'));
 
 if (!$user) {
     throw new RuntimeException('Người dùng không tồn tại', 404);
 }
+
+$user = $user->with(['provice']);
 if ($user) {
 
     $vars = transformer_item($user, new \App\Transformers\UserTransformer(), getValue('with', 'str') . ',parent,addresses', [

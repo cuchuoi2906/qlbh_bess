@@ -4,41 +4,17 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h2 class="ft-title">
-                                CÔNG TY CỔ PHẦN DỊCH VỤ THƯƠNG MẠI <br />
-                                VÀ CÔNG NGHỆ DAK (DƯỢC AN KHANG)
+                                TRUNG TÂM THUỐC HAPULICO
                             </h2>
                             <div class="ft-content mb-3">
                                 <div class="ft-ct-item mb-1">
-                                    <strong>Văn phòng:</strong>
-                                    <span>Tầng 9, Tòa nhà Five Season, 47 Nguyễn Tuân, Thanh Xuân, Hà Nội</span>
+                                    <strong>Quầy chợ Hapulico:</strong> Quầy 414<br />
                                 </div>
                                 <div class="ft-ct-item mb-1">
-                                    <strong>Quầy chợ Hapulico:</strong> Quầy 416, số 85 Vũ Trọng Phụng, Thanh Xuân, Hà Nội<br />
-                                    <span><strong>Tên nguời đại diện</strong>: Bà Nguyễn Thị Minh Đức</span>
-                                </div>
-                                <div class="ft-ct-item mb-1">
-                                    <strong>Số giấy chứng nhận đăng ký kinh doanh: </strong>
-                                    <span>0108253503</span>
-                                </div>
-                                <div class="ft-ct-item mb-1">
-                                    <strong>Ngày cấp:</strong>
-                                    <span>07/05/2018 - </span>
-									<strong>Nơi cấp:</strong>
-                                    <span>Sở Kế hoạch và Đầu tư Thành phố Hà Nội</span>
-                                </div>
-                                <div class="ft-ct-item mb-1">
-                                    <strong>Số giấy chứng nhận đủ điều kiện kinh doanh dược: </strong><br />
-                                    <span>Số 01-2615/ĐKKDD-HNO</span>
-                                </div>
-                                <div class="ft-ct-item">
-                                    <strong>Ngày cấp:</strong>
-                                    <span>22/10/2024 - </span>
-									<strong>Nơi cấp:</strong>
-									<span>Sở y tế Hà Nội</span>
+                                    <strong>Địa chỉ:</strong> 85 Vũ Trọng Phụng, Thanh Xuân Trung, Thanh Xuân, Hà Nội<br />
                                 </div>
                             </div>
                             <div class="ft-content d-flex" style="height: 40px;">
-                                <div><a target="_blank" href="http://online.gov.vn/Home/WebDetails/123101" title="Đã đăng ký với bộ công thương" ><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></a></div>
 								<div style="    background-color: #ffff;margin-left: 10px;height: 31px;margin-top: 5px;border-radius: 7px;">
                                     <span class="dmca-badge" target="_blank"> <img src ="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></span>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
                                 </div>
@@ -57,7 +33,7 @@
 							<h2 class="ft-title">HỖ TRỢ KHÁCH HÀNG</h2>
                             <div class="ft-content mb-3">
                                 <ul>
-                                    <li><a href="/huong-dan-dat-hang">Hướng Dẫn Đặt Hàng</a></li>
+                                    <li><a href="#">Hướng Dẫn Đặt Hàng</a></li>
                                     <li><a href="">Câu Hỏi Thường Gặp</a></li>
                                 </ul>
                             </div>
@@ -66,12 +42,12 @@
                             <h2 class="ft-title">ĐIỀU KHOẢN VÀ CHÍNH SÁCH</h2>
                             <div class="ft-content">
                                 <ul>
-                                    <li><a href="/dieu-khoan-su-dung">Điều Khoản Sử Dụng</a></li>
-                                    <li><a href="/chinh-sach-bao-mat">Chính Sách Bảo Mật</a></li>
-                                    <li><a href="/chinh-sach-van-chuyen">Chính Sách Vận Chuyển</a></li>
-                                    <li><a href="/chinh-sach-giai-quyet-khieu-nai">Chính Sách Giải Quyết Khiếu Nại</a></li>
-                                    <li><a href="/chinh-sach-kiem-hang-va-doi-tra">Chính Sách Kiểm Hàng Và Đổi Trả</a></li>
-                                    <li><a href="/loyal-client">Chính Sách Khách Hàng Thân Thiết</a></li>
+                                    <li><a href="#">Điều Khoản Sử Dụng</a></li>
+                                    <li><a href="#">Chính Sách Bảo Mật</a></li>
+                                    <li><a href="#">Chính Sách Vận Chuyển</a></li>
+                                    <li><a href="#">Chính Sách Giải Quyết Khiếu Nại</a></li>
+                                    <li><a href="#">Chính Sách Kiểm Hàng Và Đổi Trả</a></li>
+                                    <li><a href="#">Chính Sách Khách Hàng Thân Thiết</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -122,36 +98,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ft-content">
-								<span class="ft-title">Hỗ trợ đặt hàng 4:</span>
-                                <div class="row">
-                                    <div class="col-sm-7">
-                                        <span class="phone_calling">
-                                            <span href="tel:0342342566"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0342.342.566</span>
-                                        </span>
-                                    </div>
-                                    <div class="col-sm-5 ps-0">
-                                        <a href="https://zalo.me/0342342566" target="_blank">
-                                            <img src="https://vuaduoc.com/assets//images/icons/ic-zalo.svg" alt="zalo" width="33px">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ft-content mb-3">
-								<span class="ft-title">Hỗ trợ đặt hàng 5:</span>
-                                <div class="row">
-                                    <div class="col-sm-7">
-                                        <span class="phone_calling">
-                                            <span href="tel:0342342366"><img src="<?= asset('/images/icons/Phone_Calling_Rounded.svg') ?>" alt="phone" />0342.342.366</span>
-                                        </span>
-                                    </div>
-                                    <div class="col-sm-5 ps-0">
-                                        <a href="https://zalo.me/0342342366" target="_blank">
-                                            <img src="https://vuaduoc.com/assets//images/icons/ic-zalo.svg" alt="zalo" width="33px">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -161,37 +107,17 @@
                     <div class="row">
                         <div class="col mt-2">
                             <h2 class="ft-title">
-                                CÔNG TY CỔ PHẦN DỊCH VỤ THƯƠNG MẠI <br />
-                                VÀ CÔNG NGHỆ DAK (DƯỢC AN KHANG)
+                                TRUNG TÂM THUỐC HAPULICO
                             </h2>
                             <div class="ft-content mb-1">
                                 <div class="ft-ct-item mb-1">
-                                    <strong>Quầy chợ Hapulico:</strong> Quầy 416, số 85 Vũ Trọng Phụng, Thanh Xuân, Hà Nội<br />
-                                    <span><strong>Tên nguời đại diện</strong>: Bà Nguyễn Thị Minh Đức</span>
+                                    <strong>Quầy chợ Hapulico:</strong> Quầy 414<br />
                                 </div>
                                 <div class="ft-ct-item mb-1">
-                                    <strong>Giấy chứng nhận đăng ký kinh doanh:</strong>
-                                    <span>0108253503</span>
-                                </div>
-                                <div class="ft-ct-item mb-1">
-                                    <strong>Ngày cấp:</strong>
-                                    <span>07/05/2018 - </span>
-									<strong>Nơi cấp:</strong>
-                                    <span>Sở Kế hoạch và Đầu tư Thành phố Hà Nội</span>
-                                </div>
-                                <div class="ft-ct-item mb-1">
-                                    <strong>Số giấy chứng nhận đủ điều kiện kinh doanh dược: </strong><br />
-                                    <span>Số 01-2615/ĐKKDD-HNO</span>
-                                </div>
-                                <div class="ft-ct-item">
-                                    <strong>Ngày cấp:</strong>
-                                    <span>22/10/2024 - </span>
-									<strong>Nơi cấp:</strong>
-									<span>Sở y tế Hà Nội</span>
+                                    <strong>Địa chỉ:</strong> 85 Vũ Trọng Phụng, Thanh Xuân Trung, Thanh Xuân, Hà Nội<br />
                                 </div>
                             </div>
                             <div class="ft-content d-flex" style="height: 40px;">
-                                <div><a target="_blank" href="http://online.gov.vn/Home/WebDetails/123101" title="Đã đăng ký với bộ công thương" ><img src="<?= asset('/images/bct.png') ?>" alt="bo cong thuong" height="60" /></a></div>
 								<div style="    background-color: #ffff;margin-left: 10px;height: 31px;margin-top: 5px;border-radius: 7px;">
                                     <span class="dmca-badge" target="_blank"> <img src ="https://images.dmca.com/Badges/DMCA_logo-grn-btn100w.png?ID=8fc375bc-32e3-48f6-8986-42e896931d4f"  alt="DMCA.com Protection Status" /></span>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
                                 </div>

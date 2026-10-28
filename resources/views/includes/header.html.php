@@ -55,7 +55,7 @@
                             <li><a href="/products/ORDERFAST-0">Sản phẩm</a></li>
                             <li><a href="<?php echo url('post.listing', ['news',0]) ?>">Tin tức</a></li>
                             <li><a href="/loyal-client">Khách hàng thân thiết</a></li>
-                            <li><a href="/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>
+                            <li><a href="#">Hướng dẫn đặt hàng</a></li>
                         </ul>
                     </div>
                     <?php 
@@ -191,7 +191,7 @@
                                 <li><a href="/products/ORDERFAST-0">Sản phẩm</a></li>
                                 <li><a href="<?php echo url('post.listing', ['news',82]) ?>">Tin tức</a></li>
                                 <li><a href="/loyal-client">Khách hàng thân thiết</a></li>
-                                <li><a href="/huong-dan-dat-hang">Hướng dẫn đặt hàng</a></li>
+                                <li><a href="#">Hướng dẫn đặt hàng</a></li>
                             </ul>
                         </div>
                     </div>

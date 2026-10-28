@@ -59,7 +59,7 @@ class UserCartController extends FrontEndController
         ]);
     }
     public function indexProductOrderFast(){
-        if (!checkLoginFe()) {
+        if (!checkLoginFe() || empty($_SESSION['userIdFe'])) {
             return redirect(url('login'));
         }
         $result = model('user_cart/index')->load([

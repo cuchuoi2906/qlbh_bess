@@ -108,4 +108,3 @@ $app->bind('shutdown', function () use ($app) {
 register_shutdown_function(app('shutdown'));
 
 $app->boot();
-
